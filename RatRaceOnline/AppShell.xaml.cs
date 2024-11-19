@@ -5,6 +5,8 @@
         public AppShell()
         {
             Routing.RegisterRoute("MarketPage", typeof(MarketPage));
+            Routing.RegisterRoute("StoryModeView", typeof(StoryModeView));
+
 
             InitializeComponent();
         }

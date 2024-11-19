@@ -2,11 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RatRace3.MarketPage"
+           
+             xmlns:local="clr-namespace:RatRace3;assembly=RatRace3"
              Title="Market Page">
+    
+    <ContentPage.BindingContext>
+        <local:MarketViewModel/>
+    </ContentPage.BindingContext>
+    
     <VerticalStackLayout>
         <Label 
             Text="Welcome to Market..."
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+
+        
     </VerticalStackLayout>
 </ContentPage>

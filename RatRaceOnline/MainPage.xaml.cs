@@ -27,6 +27,11 @@
         {
             await Shell.Current.GoToAsync("MarketPage");
         }
+
+        private async void SinglePlayerBtn_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("StoryModeView");
+        }
     }
 
 }

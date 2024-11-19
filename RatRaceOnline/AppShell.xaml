@@ -14,11 +14,12 @@
       Route="MainPage" />
     
     <FlyoutItem Title="Market Page">
-        <ShellContent Title="Market Page" ContentTemplate="{DataTemplate local:MarketPage}"  
+        <ShellContent IsVisible="True" Title="Market Page" ContentTemplate="{DataTemplate local:MarketPage}"  
       Route="MarketPage"/>
+        
     </FlyoutItem>
 
-    <ShellContent Title="" ContentTemplate="{DataTemplate local:MarketPage}"  
-    Route="MarketPage"/>
+    <ShellContent Title="Single Player" ContentTemplate="{DataTemplate local:StoryModeView}"  
+    Route="StoryModeView"/>
 
 </Shell>

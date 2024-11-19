@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 
+
+
 namespace RatRace3
 {
     public static class MauiProgram
