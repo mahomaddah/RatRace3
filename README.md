@@ -1,0 +1,2 @@
+# RatRace3
+ RatRace3 by getValueHunter.com team will be a open Source free ad non porfit project aimed to reach pepole who are intrested to learn invesment and teach them in a gamification way they will enjoy and learn at the same time , Rat race 2 and 1 series was amazing move but they have some wrong education parts like when you buy by reading new you earn money which is harmful in real life so our goal is to make the game better and with a more realistic econommy. 
