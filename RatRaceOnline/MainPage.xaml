@@ -22,15 +22,7 @@
             />
       
 
-            <Button
-                x:Name="MarketPageBtn"
-                Text="Stock Market Page" 
-                SemanticProperties.Hint="Trade in stock market..."
-                Clicked="MarketPageBtn_Clicked"
-                WidthRequest="200"
-          
-                MaximumWidthRequest="300"
-                HorizontalOptions="CenterAndExpand" />
+      
             
             <Button
                  x:Name="SinglePlayerBtn"
@@ -41,11 +33,23 @@
                  WidthRequest="200"
                  MaximumWidthRequest="300"
                  HorizontalOptions="CenterAndExpand" 
-                />
-
+            />
+          
             <Button  Margin="4" Clicked="MultiplayerClicked"   WidthRequest="200" MaximumWidthRequest="300" Text="Multi Player (soon)"></Button>
+            
             <Button  Margin="4" Clicked="RealEconomyClicked"   WidthRequest="200" MaximumWidthRequest="300" Text="Real Economy (soon)"></Button>
 
+
+            <Button
+            x:Name="MarketPageBtn"
+            Text="Tournament (soon)"            
+            Clicked="MarketPageBtn_Clicked"
+            WidthRequest="200"
+    
+            MaximumWidthRequest="300"
+            HorizontalOptions="CenterAndExpand" />
+            
+            
             <VerticalStackLayout Margin="0,0,0,0">
 
                 <Label
