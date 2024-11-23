@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-        
+              xmlns:sfavatar="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              x:Class="RatRace3.MainPage">
 
     <ScrollView>
@@ -9,19 +9,18 @@
             Padding="30,0"
             Spacing="25">
 
-            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
 
-                <Image
-                   Source="ratrace3vector.png"
-                   HeightRequest="300"
-                   Aspect="AspectFit"
-                   SemanticProperties.Description="dot net bot in a hovercraft number nine" />
-
-               
-             
-
-            </HorizontalStackLayout>
-        
+            <sfavatar:SfAvatarView Margin="1" HorizontalOptions="CenterAndExpand" ContentType="Custom"
+                        ImageSource="ratrace3vector.png"
+                        VerticalOptions="Center"
+                       
+                        HeightRequest="210"
+                        CornerRadius="80"
+                        WidthRequest="210" 
+                        Stroke="#9072C9"
+                        StrokeThickness="3"
+            />
+      
 
             <Button
                 x:Name="MarketPageBtn"
@@ -29,12 +28,14 @@
                 SemanticProperties.Hint="Trade in stock market..."
                 Clicked="MarketPageBtn_Clicked"
                 WidthRequest="200"
+          
                 MaximumWidthRequest="300"
                 HorizontalOptions="CenterAndExpand" />
             
             <Button
                  x:Name="SinglePlayerBtn"
                  Text="Single Player" 
+                
                  SemanticProperties.Hint="Play Camping mode Offline..."
                  Clicked="SinglePlayerBtn_Clicked"
                  WidthRequest="200"
@@ -42,23 +43,22 @@
                  HorizontalOptions="CenterAndExpand" 
                 />
 
-            <Button  Margin="5" Clicked="MultiplayerClicked"   WidthRequest="200" MaximumWidthRequest="300" Text="Multi Player (soon)"></Button>
-            <Button  Margin="5" Clicked="RealEconomyClicked"   WidthRequest="200" MaximumWidthRequest="300" Text="Real Economy (soon)"></Button>
+            <Button  Margin="4" Clicked="MultiplayerClicked"   WidthRequest="200" MaximumWidthRequest="300" Text="Multi Player (soon)"></Button>
+            <Button  Margin="4" Clicked="RealEconomyClicked"   WidthRequest="200" MaximumWidthRequest="300" Text="Real Economy (soon)"></Button>
 
-            <VerticalStackLayout Margin="10,0,0,0">
+            <VerticalStackLayout Margin="0,0,0,0">
 
                 <Label
                 Text="RAT RACE 3"
-                Style="{StaticResource Headline}"
+                Style="{StaticResource Headline}" 
                 TextColor="#9072C9"
-                SemanticProperties.HeadingLevel="Level1" />
+                />
 
                 <Label
                  TextColor="#9072C9"
                 Text="Real Life Monopoly"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                Style="{StaticResource SubHeadline}"              
+                />
 
             </VerticalStackLayout>
 
