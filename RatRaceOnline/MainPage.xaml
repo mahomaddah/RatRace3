@@ -17,17 +17,8 @@
                    Aspect="AspectFit"
                    SemanticProperties.Description="dot net bot in a hovercraft number nine" />
 
-                <Label
-                Text="RAT RACE 3"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
-
-
-                <Label
-                Text="Real Life Monopoly"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+               
+             
 
             </HorizontalStackLayout>
         
@@ -54,6 +45,22 @@
             <Button  Margin="5" Clicked="MultiplayerClicked"   WidthRequest="200" MaximumWidthRequest="300" Text="Multi Player (soon)"></Button>
             <Button  Margin="5" Clicked="RealEconomyClicked"   WidthRequest="200" MaximumWidthRequest="300" Text="Real Economy (soon)"></Button>
 
+            <VerticalStackLayout Margin="10,0,0,0">
+
+                <Label
+                Text="RAT RACE 3"
+                Style="{StaticResource Headline}"
+                TextColor="#9072C9"
+                SemanticProperties.HeadingLevel="Level1" />
+
+                <Label
+                 TextColor="#9072C9"
+                Text="Real Life Monopoly"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
