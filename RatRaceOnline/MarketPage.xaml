@@ -2,21 +2,40 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RatRace3.MarketPage"
-           
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
              xmlns:local="clr-namespace:RatRace3;assembly=RatRace3"
              Title="Market Page">
     
-    <ContentPage.BindingContext>
-        <local:MarketViewModel/>
-    </ContentPage.BindingContext>
-    
     <VerticalStackLayout>
-        <Label 
+        <Label Margin="2,2,2,10" 
             Text="Welcome to Market..."
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-
-
         
+        <chart:SfCartesianChart>
+            <!-- Define X and Y axes -->
+
+            <chart:SfCartesianChart.XAxes>
+                <chart:DateTimeAxis />
+            </chart:SfCartesianChart.XAxes>
+            
+            <chart:SfCartesianChart.YAxes>
+                <chart:LogarithmicAxis />
+            </chart:SfCartesianChart.YAxes>
+
+            <!-- Add Data -->
+            <chart:SfCartesianChart.Series  
+                    EnableAnimation="True"
+                    AnimationDuration="10000" >
+                <chart:ColumnSeries ItemsSource="{Binding Data}"
+                                    
+                      XBindingPath="Category"
+                      YBindingPath="Value"/>
+                
+            </chart:SfCartesianChart.Series>
+
+        </chart:SfCartesianChart>
+
+
     </VerticalStackLayout>
 </ContentPage>

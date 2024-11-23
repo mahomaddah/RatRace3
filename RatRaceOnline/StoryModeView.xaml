@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+           
+   
              x:Class="RatRace3.StoryModeView"
              Title="Escape Rat Race:">
     <HorizontalStackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
         <VerticalStackLayout Margin="2">
 
-            <Image
+
+
+
+            <Image  Margin="1" Source="undraw_investing_re_bov.png" WidthRequest="180" Aspect="AspectFit" >
+
+            </Image>
+            <Image Margin="1" Source="account_cash_custom.png" WidthRequest="25" Aspect="AspectFit" >
+
+            </Image>
+
+            <Image  Margin="1" Source="undraw_transfer_money.png" WidthRequest="180" Aspect="AspectFit" >
+                
+            </Image>
+
+            <Image Margin="1" 
             Source="dotnet_bot.png"
             HeightRequest="100"
             Aspect="AspectFit"
@@ -26,7 +43,7 @@
 
                 <Button  WidthRequest="100" Margin="2" Text="Play"></Button>
                 <Button WidthRequest="100" Margin="2" Text="Restart"></Button>
-
+                
 
             </HorizontalStackLayout>
 

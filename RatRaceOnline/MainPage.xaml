@@ -1,41 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        
              x:Class="RatRace3.MainPage">
 
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a hovercraft number nine" />
 
-            
-     
-            
-            <Label
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+
+                <Image
+                   Source="ratrace3vector.png"
+                   HeightRequest="300"
+                   Aspect="AspectFit"
+                   SemanticProperties.Description="dot net bot in a hovercraft number nine" />
+
+                <Label
                 Text="RAT RACE 3"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" />
 
-            <Label
+
+                <Label
                 Text="Real Life Monopoly"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                WidthRequest="200"
-                MaximumWidthRequest="300"
-                HorizontalOptions="CenterAndExpand" />
+            </HorizontalStackLayout>
+        
 
             <Button
                 x:Name="MarketPageBtn"
@@ -53,10 +48,11 @@
                  Clicked="SinglePlayerBtn_Clicked"
                  WidthRequest="200"
                  MaximumWidthRequest="300"
-                 HorizontalOptions="CenterAndExpand" />
+                 HorizontalOptions="CenterAndExpand" 
+                />
 
-            <Button  Margin="5" Clicked="OnCounterClicked" MaximumWidthRequest="300" Text="Multi Player (soon)"></Button>
-            <Button  Margin="5" Clicked="OnCounterClicked" MaximumWidthRequest="300" Text="Real Economy (soon)"></Button>
+            <Button  Margin="5" Clicked="MultiplayerClicked"   WidthRequest="200" MaximumWidthRequest="300" Text="Multi Player (soon)"></Button>
+            <Button  Margin="5" Clicked="RealEconomyClicked"   WidthRequest="200" MaximumWidthRequest="300" Text="Real Economy (soon)"></Button>
 
 
         </VerticalStackLayout>
