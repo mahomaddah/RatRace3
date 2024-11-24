@@ -1,108 +1,35 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-           
-            xmlns:syncfusionCaro="clr-namespace:Syncfusion.Maui.Carousel;assembly=Syncfusion.Maui.Carousel"
-   
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"         
+             xmlns:syncfusionCaro="clr-namespace:Syncfusion.Maui.Carousel;assembly=Syncfusion.Maui.Carousel"
+             xmlns:local="clr-namespace:RatRace3"
+             Loaded="ContentPage_Loaded"
              x:Class="RatRace3.StoryModeView"
-             Title="Escape Rat Race:">
-    <HorizontalStackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <VerticalStackLayout Margin="2">
+             Title="Escape Rat Race: Story Mode :">
+    
+    <ContentPage.BindingContext>
+        <local:CarouselViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="itemTemplate">
+                <Image Source="{Binding Image}" 
+                        Aspect="AspectFit"/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <syncfusionCaro:SfCarousel
+                                   x:Name="storyLevelsCarousel" 
+                                   ItemTemplate="{StaticResource itemTemplate}"            
+                                   ItemsSource="{Binding ImageCollection}" 
+              SelectedIndex="2"  Duration="1000" RotationAngle="30"
+            >
+          
 
 
-
-
-            <Image Margin="1" 
-            Source="exams.png"
-            HeightRequest="100"
-            Aspect="AspectFit"
-           />
-
-            <Label Margin="2"   FontSize="Medium"
-              Text="LEVEL 1 the rich engineer"
-              VerticalOptions="Center" 
-              HorizontalOptions="Center" />
-
-            <Label Margin="2" FontSize="Small"
-            Text="High Score: 25 Months!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-
-            <HorizontalStackLayout HorizontalOptions="Center" Margin="2" >
-
-                <Button  WidthRequest="100" Margin="2" Text="Play"></Button>
-                <Button WidthRequest="100" Margin="2" Text="Restart"></Button>
-                
-
-            </HorizontalStackLayout>
-
-        </VerticalStackLayout>
-
-        <VerticalStackLayout Margin="2">
-
-            <Image
-              Source="interview.png"
-              HeightRequest="100"
-              Aspect="AspectFit"
-         />
-
-
-            <Label Margin="2"   FontSize="Medium"
-             Text="LEVEL 2 The Dentist"
-             VerticalOptions="Center" 
-             HorizontalOptions="Center" />
-            
-            <Label Margin="2" FontSize="Small"
-               Text="High Score: 25 Months!"
-               VerticalOptions="Center" 
-               HorizontalOptions="Center" />
-
-            <HorizontalStackLayout HorizontalOptions="Center" Margin="2" >
-                
-                <Button  WidthRequest="100" Margin="2" Text="Play"></Button>
-                <Button WidthRequest="100" Margin="2" Text="Restart"></Button>
-            
-
-            </HorizontalStackLayout>
-
-        </VerticalStackLayout>
-        <VerticalStackLayout Margin="2">
-
-            <Image
-              Source="dotnet_bot.png"
-              HeightRequest="100"
-              Aspect="AspectFit"
-             />
-
-                    
-            <Label Margin="2"
-                   FontSize="Medium"
-              Text="LEVEL 3 Comming soon..."
-              VerticalOptions="Center" 
-              HorizontalOptions="Center" />
-            <Label Margin="2" FontSize="Small"
-            Text="High Score: 25 Months!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-
-            <HorizontalStackLayout HorizontalOptions="Center" Margin="2" >
-
-                <Button  WidthRequest="100" Margin="2" Text="Play"></Button>
-                <Button WidthRequest="100" Margin="2" Text="Restart"></Button>
-
-
-            </HorizontalStackLayout>
-
-        </VerticalStackLayout>
-
-
-        <Image
-             Source="shared_goals.png"
-             HeightRequest="100"
-             Aspect="AspectFit"
-            />
-
-
-
-    </HorizontalStackLayout>
+        </syncfusionCaro:SfCarousel>
+    </ContentPage.Content>
+    
 </ContentPage>
