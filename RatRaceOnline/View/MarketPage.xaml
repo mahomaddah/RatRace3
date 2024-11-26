@@ -12,7 +12,7 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         
-        <chart:SfCartesianChart>
+        <chart:SfCartesianChart  >
             <!-- Define X and Y axes -->
 
             <chart:SfCartesianChart.XAxes>
@@ -26,9 +26,12 @@
             <!-- Add Data -->
             <chart:SfCartesianChart.Series  
                     EnableAnimation="True"
-                    AnimationDuration="10000" >
+                    AnimationDuration="10000" 
+                >
+                
                 <chart:ColumnSeries ItemsSource="{Binding Data}"
-                                    
+                             EnableAnimation="True"  
+                              
                       XBindingPath="Category"
                       YBindingPath="Value"/>
                 
