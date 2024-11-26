@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:RatRace3"
              Loaded="ContentPage_Loaded"
              x:Class="RatRace3.StoryModeView"
-             Title="Escape Rat Race: Story Mode :">
+             Title="Escape Rat Race:">
     
     <ContentPage.BindingContext>
         <local:CarouselViewModel/>
@@ -14,8 +14,57 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="itemTemplate">
-                <Image Source="{Binding Image}" 
-                        Aspect="AspectFit"/>
+                
+                <Border Margin="0" Padding="1" StrokeThickness="1" Stroke="#9072C9">
+
+                    <Border   Stroke="#9072C9"
+                        StrokeThickness="1">
+                     
+                        <VerticalStackLayout   Padding="5" BackgroundColor="#1A9072C9">
+                            <HorizontalStackLayout>
+                                <VerticalStackLayout>
+                                    <Label HorizontalOptions="Center" FontSize="Micro"                         
+                                     TextColor="#9072C9" FontAttributes="Bold"   Text="{Binding StoryLevelID}"></Label>
+                                    <Image Source="cardsclub.png" 
+                                    Aspect="AspectFit" VerticalOptions="Start"   Margin="1"/>
+                                </VerticalStackLayout>
+
+
+                                <Image Source="{Binding Image}" 
+                                  Aspect="AspectFit" WidthRequest="140" HorizontalOptions="Center" />
+
+                            </HorizontalStackLayout>
+
+
+                            <Label Margin="0,10,0,3" HorizontalOptions="Center" FontSize="Body"
+                           
+                           
+                              FontAttributes="Bold"   
+                             Text="{Binding Header}" HeightRequest="20"></Label>
+
+                            <Label HorizontalOptions="Center" FontSize="Micro"                         
+                             TextColor="#9072C9" 
+                                   Text="{Binding DetailStory}"
+                                   HeightRequest="75" ></Label>
+                            <HorizontalStackLayout  Margin="0,2,0,0" >
+                                <Label TextColor="Grey" HorizontalOptions="Start" FontSize="Micro"
+                                   Text="Your Highest Score:" ></Label>
+                                <Label TextColor="Grey"  HorizontalOptions="Start" FontSize="Micro"
+                                 Text="{Binding HighestMounthScore}" ></Label>
+                                <Label TextColor="Grey"  HorizontalOptions="Start" FontSize="Micro"
+                                 Text=" Months" ></Label>
+                            </HorizontalStackLayout>
+                        
+                            <HorizontalStackLayout Padding="0"   HorizontalOptions="Center" Margin="0,5,0,0">
+                                <Button  Padding="1" FontSize="Small"  BackgroundColor="#6600FFFF" BorderWidth="1" BorderColor="LimeGreen" TextColor="LimeGreen" Text="Play" HeightRequest="20" WidthRequest="70" Margin="0,0,10,0"></Button>
+                                <Button Padding="1" FontSize="Small"  BackgroundColor="#33808080"
+                                            BorderWidth="1" BorderColor="MediumVioletRed" TextColor="MediumVioletRed" Text="Restart" HeightRequest="20" WidthRequest="70" ></Button>
+                            </HorizontalStackLayout>
+
+
+                        </VerticalStackLayout>
+                    </Border>
+                </Border>
             </DataTemplate>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -24,7 +73,9 @@
                                    x:Name="storyLevelsCarousel" 
                                    ItemTemplate="{StaticResource itemTemplate}"            
                                    ItemsSource="{Binding ImageCollection}" 
-              SelectedIndex="2"  Duration="1000" RotationAngle="30"
+              SelectedIndex="2"  Duration="1000" RotationAngle="30" 
+              SelectedItemOffset="70" Offset="70"  ItemSpacing="5" 
+                    
             >
           
 

@@ -17,3 +17,4 @@ public partial class StoryModeView : ContentPage
         this.BindingContext = new CarouselViewModel();
     }
 }
+
