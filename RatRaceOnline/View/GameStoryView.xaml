@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RatRace3.View.GameStoryView"
+             Title="GameStoryView">
+    <VerticalStackLayout>
+        <Label 
+            Text="Alex is a good child he love playing lol all the time but need need to invest his 70 000 usd on a income asset to have his financal freedom for and his costum costs to keep playing lol..."
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

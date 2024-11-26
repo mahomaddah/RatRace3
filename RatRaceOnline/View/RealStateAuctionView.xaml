@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RatRace3.View.RealStateAuctionView"
+             Title="RealStateAuctionView">
+    <VerticalStackLayout>
+        <Label 
+            Text="tab view of map , Sunburst Chart as map of mall ( for sell mall ) auction details and list of auctions maybe ..."
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

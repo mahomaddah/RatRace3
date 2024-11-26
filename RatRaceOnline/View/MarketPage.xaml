@@ -31,14 +31,22 @@
                 
                 <chart:ColumnSeries ItemsSource="{Binding Data}"
                              EnableAnimation="True"  
-                              
+                             
                       XBindingPath="Category"
                       YBindingPath="Value"/>
                 
             </chart:SfCartesianChart.Series>
 
         </chart:SfCartesianChart>
-
+        <Label Text="Current Stock Price: $53.44"></Label>
+        <Label Text="Total Price: $641.32"></Label>
+        
+        <Label Text="there will be a buy and sell button and a select amounth picker ..."></Label>
+        <HorizontalStackLayout>
+              <Button Text="Buy"></Button>
+              <Button Text="Sell"></Button>
+        </HorizontalStackLayout>
+      
 
     </VerticalStackLayout>
 </ContentPage>
