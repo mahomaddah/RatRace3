@@ -16,5 +16,15 @@ public partial class StoryModeView : ContentPage
     {
         this.BindingContext = new CarouselViewModel();
     }
+
+    private async void StartGameClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("StoryDetailView");
+    }
+
+    private async void RestartGameClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("StoryDetailView");
+    }
 }
 

@@ -56,8 +56,8 @@
                             </HorizontalStackLayout>
                         
                             <HorizontalStackLayout Padding="0"   HorizontalOptions="Center" Margin="0,5,0,0">
-                                <Button  Padding="1" FontSize="Small"  BackgroundColor="#6600FFFF" BorderWidth="1" BorderColor="LimeGreen" TextColor="LimeGreen" Text="Play" HeightRequest="20" WidthRequest="70" Margin="0,0,10,0"></Button>
-                                <Button Padding="1" FontSize="Small"  BackgroundColor="#33808080"
+                                <Button Clicked="StartGameClicked" Padding="1" FontSize="Small"  BackgroundColor="#6600FFFF" BorderWidth="1" BorderColor="LimeGreen" TextColor="LimeGreen" Text="Play" HeightRequest="20" WidthRequest="70" Margin="0,0,10,0"></Button>
+                                <Button Clicked="RestartGameClicked" Padding="1" FontSize="Small"  BackgroundColor="#33808080"
                                             BorderWidth="1" BorderColor="MediumVioletRed" TextColor="MediumVioletRed" Text="Restart" HeightRequest="20" WidthRequest="70" ></Button>
                             </HorizontalStackLayout>
 

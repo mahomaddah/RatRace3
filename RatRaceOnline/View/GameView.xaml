@@ -2,17 +2,49 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RatRace3.View.GameView"
-             Title="GameView">
+           >
+    <ScrollView>
+        
+
     <VerticalStackLayout>
         
-            <Label 
-            Text="Month 1 / 24"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-            <Label 
-            Text="Balance $2,975.04"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        
+        <StackLayout  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Start">
+        
+       
+
+                <Label 
+                Text="Month 1 / 24"
+                VerticalOptions="Start" 
+                HorizontalOptions="Center" FontAttributes="Bold" TextColor="#9072C9" FontSize="Title" />
+           
+                <Label Margin="500,0,0,0"
+                Text="Balance  $2,975.04"
+                VerticalOptions="Start" 
+                HorizontalOptions="EndAndExpand" TextColor="#9072C9"  FontSize="Title" FontAttributes="Bold"  />
+                
+         
+        </StackLayout>
+
+        <StackLayout HorizontalOptions="CenterAndExpand" Padding="1" Orientation="Horizontal">
+            <Image Margin="10" Source="cardpayment.png" WidthRequest="80"  />
+            <Image Margin="10" Source="checkingfinansalstatment.png" WidthRequest="80"  />
+            <Image Margin="10" Source="buy_house.png" WidthRequest="80"  />
+                
+
+
+
+        </StackLayout>
+        <StackLayout HorizontalOptions="CenterAndExpand"  Orientation="Horizontal">
+            <Image Margin="10" Source="bankatransparent.png" WidthRequest="80" />
+            <Image Margin="10" Source="projections.png" WidthRequest="80"  />
+
+            <Image Margin="10" Source="mobilborsa.png" WidthRequest="80"  />
+        </StackLayout>
+        
         
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
+             
+    

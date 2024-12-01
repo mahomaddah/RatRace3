@@ -1,9 +1,9 @@
-﻿namespace RatRace3
+﻿
+namespace RatRace3
 {
     public partial class MainPage : ContentPage
     {
-     
-
+    
         public MainPage()
         {
             InitializeComponent();
@@ -22,11 +22,14 @@
         private void RealEconomyClicked(object sender, EventArgs e)
         {
             //print Wait for it ... :D 
+    
         }
         private void MultiplayerClicked(object sender, EventArgs e)
         {
+
             //print Wait for it ...
         }
     }
+
 
 }
