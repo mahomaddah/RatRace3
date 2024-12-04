@@ -126,8 +126,9 @@
                      WidthRequest="185"
                    HeightRequest="103"  BackgroundColor="#0b7b98"
                        CornerRadius="10"
+                                   Background="#0b7b98"
                   
-                       Stroke="#0b7b98"
+                          Stroke="#9072C9"
                        StrokeThickness="2"
            />
             <sfavatar:SfAvatarView Margin="10" HorizontalOptions="CenterAndExpand" ContentType="Custom"
@@ -136,8 +137,9 @@
           WidthRequest="185"
         HeightRequest="103"  BackgroundColor="#ff73ab"
             CornerRadius="10"
+                                   Background="#ff73ab"
        
-            Stroke="#ff73ab"
+                Stroke="#9072C9"
             StrokeThickness="2"
 />
 
@@ -145,6 +147,7 @@
             ImageSource="mobilborsa.png"
             VerticalOptions="Center"
           WidthRequest="185"
+                                   Background="#e1a9d4"
         HeightRequest="103"  BackgroundColor="#e1a9d4"
             CornerRadius="10"
        
@@ -159,18 +162,19 @@
                      WidthRequest="185"
                    HeightRequest="103"  BackgroundColor="#81b839"
                        CornerRadius="10"
-                  
-                       Stroke="#81b839"
+                  Background="#81b839"
+                             Stroke="#9072C9"
                        StrokeThickness="2"
            />
             <sfavatar:SfAvatarView Margin="10" HorizontalOptions="CenterAndExpand" ContentType="Custom"
             ImageSource="checkingfinansalstatment.png"
             VerticalOptions="Center"
           WidthRequest="185"
-        HeightRequest="103"  BackgroundColor="#0b7b98"
+        HeightRequest="103"  BackgroundColor="#62892d"
             CornerRadius="10"
+                                  Background="#62892d"
        
-            Stroke="#0b7b98"
+                Stroke="#9072C9"
             StrokeThickness="2"
 />
 
@@ -178,6 +182,7 @@
             ImageSource="cardpayment.png"
             VerticalOptions="Center"
           WidthRequest="185"
+                                   Background="Goldenrod"
         HeightRequest="103"  BackgroundColor="#0b7b98"
             CornerRadius="10"
        
