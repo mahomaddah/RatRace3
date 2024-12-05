@@ -45,10 +45,10 @@
                 Text="$2,975.04"
                 VerticalOptions="Start" 
                 HorizontalOptions="Center" TextColor="#9072C9"  FontSize="Subtitle" FontAttributes="Bold"  />
-        </VerticalStackLayout>        
-      
+        </VerticalStackLayout>
 
-        <cards:SfCardLayout VisibleIndex="2" x:Name="CardGamesLayout" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,10,0"  SwipeDirection="Right"  BackgroundColor="#339072C9">
+
+        <cards:SfCardLayout VisibleIndex="{Binding VisibleIndex}"  x:Name="CardGamesLayout" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,10,0"  SwipeDirection="Right"  BackgroundColor="#339072C9">
 
             <cards:SfCardView BorderColor="#9072C9" BorderWidth="10" CornerRadius="10"   BackgroundColor="#0b7b98">
                 <VerticalStackLayout>
@@ -144,7 +144,7 @@
 
             <ScrollView Orientation="Horizontal">
                 <HorizontalStackLayout>
-                    <Button x:Name="paymentPageNavBtn" Clicked="paymentPageNavBtn_Clicked" Margin="10" ImageSource="cardpayment.png" BorderWidth="2" BorderColor="#9072C9" BackgroundColor="#0b7b98" CornerRadius="10" HeightRequest="103"   WidthRequest="185" >
+                    <Button Command="{Binding ChangeCardIndexCommand}" CommandParameter="0" x:Name="paymentPageNavBtn" Clicked="paymentPageNavBtn_Clicked" Margin="10" ImageSource="cardpayment.png" BorderWidth="2" BorderColor="#9072C9" BackgroundColor="#0b7b98" CornerRadius="10">
                         
                     </Button>
                     
