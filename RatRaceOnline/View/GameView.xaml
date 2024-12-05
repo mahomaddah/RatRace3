@@ -2,34 +2,57 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RatRace3.View.GameView"
+             Title="1/24  $295.04"
+             Shell.NavBarIsVisible="False"
+            
              xmlns:cards="clr-namespace:Syncfusion.Maui.Cards;assembly=Syncfusion.Maui.Cards"
-            xmlns:sfavatar="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:sfavatar="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu">
 
 
-    <VerticalStackLayout>
-        
-        
-        <StackLayout  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Start">
-        
-                <Label 
-                Text="Month 1 / 24"
-                VerticalOptions="Start" 
-                HorizontalOptions="Center" FontAttributes="Bold" TextColor="#9072C9" FontSize="Title" />
-           
-                <Label Margin="500,0,0,0"
-                Text="Balance  $2,975.04"
-                VerticalOptions="Start" 
-                HorizontalOptions="EndAndExpand" TextColor="#9072C9"  FontSize="Title" FontAttributes="Bold"  />
-                
-         
-        </StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <VerticalStackLayout VerticalOptions="Start"  Grid.Column="0" Grid.Row="0">
+            <Label 
+                Margin="0,0,0,-5"
+               Text="Month:"
+               VerticalOptions="Start" 
+               HorizontalOptions="Center" FontAttributes="Italic" TextColor="#9072C9" FontSize="Caption" />
+            <Label 
+             Text="1 / 24"
+             VerticalOptions="Start" 
+             HorizontalOptions="Center" FontAttributes="Bold" TextColor="#9072C9" FontSize="Subtitle" />   
 
-        <cards:SfCardLayout SwipeDirection="Right" MinimumHeightRequest="500" BackgroundColor="Gray">
+        </VerticalStackLayout>
 
-            <cards:SfCardView  BorderColor="#9072C9" BorderWidth="10" CornerRadius="10"  BackgroundColor="#0b7b98">
+        <VerticalStackLayout  Margin="0,0,0,0"  VerticalOptions="Start" Grid.Row="0" Grid.Column="1">
+
+
+            <Label    Margin="0,0,0,-5"
+                Text="Balance:"
+                VerticalOptions="Start" 
+                HorizontalOptions="Center" TextColor="#9072C9"  FontSize="Caption"  FontAttributes="Italic" />
+
+            <Label 
+                Text="$2,975.04"
+                VerticalOptions="Start" 
+                HorizontalOptions="Center" TextColor="#9072C9"  FontSize="Subtitle" FontAttributes="Bold"  />
+        </VerticalStackLayout>        
+      
+
+        <cards:SfCardLayout VisibleIndex="2" x:Name="CardGamesLayout" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,10,0"  SwipeDirection="Right"  BackgroundColor="#339072C9">
+
+            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10" CornerRadius="10"   BackgroundColor="#0b7b98">
                 <VerticalStackLayout>
-                    <Label Margin="2,0,0,0" FontAttributes="Bold" FontSize="Title" TextColor="#9072C9"  Text="Payments" BackgroundColor="#0b7b98" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Label  x:Name="labelPaymentsPage" Margin="2,0,0,0" FontAttributes="Bold" FontSize="Title" TextColor="#9072C9"  Text="Payments" BackgroundColor="#0b7b98" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
                     <Image Margin="10" Source="cardpayment.png" MaximumHeightRequest="490" HorizontalOptions="Center"  BackgroundColor="#0b7b98" />
                     
                 </VerticalStackLayout>
@@ -64,10 +87,10 @@
                 </VerticalStackLayout>
             </cards:SfCardView>
 
-            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10"  CornerRadius="10">
+            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10" BackgroundColor="#ff73ab"   CornerRadius="10">
                 <VerticalStackLayout>
-                    <Label  Text="LightPink" BackgroundColor="#ff73ab" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                    <Image Margin="10" Source="projections.png" MaximumHeightRequest="490" BackgroundColor="#ff73ab" />
+                    <Label  Text="Financal Planing" FontAttributes="Bold" TextColor="#9072C9" BackgroundColor="#ff73ab" Margin="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Image HorizontalOptions="End" Margin="10" Source="projections.png" MaximumWidthRequest="400"/>
                 </VerticalStackLayout>
             </cards:SfCardView>
 
@@ -116,10 +139,15 @@
 
         </cards:SfCardLayout>
 
-      
-         <HorizontalStackLayout x:Name="navigationBar">
 
+        <Grid  Grid.Row="2" Grid.ColumnSpan="2" x:Name="navigationBar">
 
+            <ScrollView Orientation="Horizontal">
+                <HorizontalStackLayout>
+                    <Button x:Name="paymentPageNavBtn" Clicked="paymentPageNavBtn_Clicked" Margin="10" ImageSource="cardpayment.png" BorderWidth="2" BorderColor="#9072C9" BackgroundColor="#0b7b98" CornerRadius="10" HeightRequest="103"   WidthRequest="185" >
+                        
+                    </Button>
+                    
             <sfavatar:SfAvatarView Margin="10" HorizontalOptions="CenterAndExpand" ContentType="Custom"
                        ImageSource="cardpayment.png"
                        VerticalOptions="Center"
@@ -178,7 +206,7 @@
             StrokeThickness="2"
 />
 
-            <sfavatar:SfAvatarView Margin="10" HorizontalOptions="CenterAndExpand" ContentType="Custom"
+            <sfavatar:SfAvatarView Margin="10"  HorizontalOptions="CenterAndExpand" ContentType="Custom"
             ImageSource="cardpayment.png"
             VerticalOptions="Center"
           WidthRequest="185"
@@ -187,15 +215,27 @@
             CornerRadius="10"
        
             Stroke="#9072C9"
-            StrokeThickness="2"
-/>
+            StrokeThickness="2"/>
+                 
+                    <sfavatar:SfAvatarView Margin="10"  HorizontalOptions="CenterAndExpand" ContentType="Custom"
+                    ImageSource="cardpayment.png"
+                    VerticalOptions="Center"
+                  WidthRequest="185"
+                                         Background="Goldenrod"
+                HeightRequest="103"  BackgroundColor="#0b7b98"
+                    CornerRadius="10"
+       
+                    Stroke="#9072C9"
+                    StrokeThickness="2"/>
+
+                </HorizontalStackLayout>
+            </ScrollView>
+
+        </Grid>
 
 
-        </HorizontalStackLayout>
 
-
-
-    </VerticalStackLayout>
+    </Grid>
  
 </ContentPage>
              

@@ -6,7 +6,7 @@
     
         
 
-        <VerticalStackLayout>
+        <VerticalStackLayout Padding="5">
             <Label x:Name="StoryDetailLB"
                 FontSize="Micro"
                    Margin="5"
