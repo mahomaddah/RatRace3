@@ -48,7 +48,7 @@
         </VerticalStackLayout>
 
 
-        <cards:SfCardLayout VisibleIndex="{Binding VisibleIndex}"  x:Name="CardGamesLayout" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,10,0"  SwipeDirection="Right"  BackgroundColor="#339072C9">
+        <cards:SfCardLayout VisibleIndex="{Binding VisibleIndex, Mode=TwoWay}"  x:Name="CardGamesLayout" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,10,0"  SwipeDirection="Right"  BackgroundColor="#339072C9">
 
             <cards:SfCardView BorderColor="#9072C9" BorderWidth="10" CornerRadius="10"   BackgroundColor="#0b7b98">
                 <VerticalStackLayout>
@@ -127,7 +127,7 @@
                                     </radialMenu:SfRadialMenuItem.Items>
                                             </radialMenu:SfRadialMenuItem>
                                 <radialMenu:SfRadialMenuItem BackgroundColor="#e1a9d4" Text="Mutual fund"
-                 FontSize="8"/>
+                                                             FontSize="8"/>
 
                             </radialMenu:SfRadialMenu.Items>
                                     </radialMenu:SfRadialMenu>
@@ -140,95 +140,86 @@
         </cards:SfCardLayout>
 
 
-        <Grid  Grid.Row="2" Grid.ColumnSpan="2" x:Name="navigationBar">
+        <Grid            Grid.Row="2" Grid.ColumnSpan="2" x:Name="navigationBar">
 
-            <ScrollView Orientation="Horizontal">
-                <HorizontalStackLayout>
-                    <Button Command="{Binding ChangeCardIndexCommand}" CommandParameter="0" x:Name="paymentPageNavBtn" Clicked="paymentPageNavBtn_Clicked" Margin="10" ImageSource="cardpayment.png" BorderWidth="2" BorderColor="#9072C9" BackgroundColor="#0b7b98" CornerRadius="10">
-                        
+            <ScrollView  Orientation="Horizontal">
+
+                <StackLayout Orientation="Horizontal">
+
+                    <Button     
+                        VerticalOptions="Start"
+                 WidthRequest="120"                         
+                HeightRequest="108"
+                    Command="{Binding ChangeCardIndexCommand}"  CommandParameter="0" x:Name="paymentPageNavBtn" Clicked="paymentPageNavBtn_Clicked" Margin="10" ImageSource="cardpayment.png" BorderWidth="2" BorderColor="#9072C9" BackgroundColor="#0b7b98" CornerRadius="10">
+
                     </Button>
-                    
-            <sfavatar:SfAvatarView Margin="10" HorizontalOptions="CenterAndExpand" ContentType="Custom"
-                       ImageSource="cardpayment.png"
-                       VerticalOptions="Center"
-                     WidthRequest="185"
-                   HeightRequest="103"  BackgroundColor="#0b7b98"
-                       CornerRadius="10"
-                                   Background="#0b7b98"
-                  
-                          Stroke="#9072C9"
-                       StrokeThickness="2"
-           />
-            <sfavatar:SfAvatarView Margin="10" HorizontalOptions="CenterAndExpand" ContentType="Custom"
-            ImageSource="projections.png"
-            VerticalOptions="Center"
-          WidthRequest="185"
-        HeightRequest="103"  BackgroundColor="#ff73ab"
-            CornerRadius="10"
-                                   Background="#ff73ab"
+                    <Button Command="{Binding ChangeCardIndexCommand}" 
+                            CommandParameter="1"
+                             VerticalOptions="Start"
+                            WidthRequest="120"  HeightRequest="108"
+                            Margin="10" ImageSource="projections.png"
+                            BorderWidth="2" BorderColor="#9072C9"
+                       
+                            BackgroundColor="#ff73ab"
+            
+                             Background="#ff73ab"
+                            CornerRadius="10">
+                    </Button>
+                    <Button Command="{Binding ChangeCardIndexCommand}" 
+                    CommandParameter="2"
+                    WidthRequest="120"  HeightRequest="108"
+                                   
+                             VerticalOptions="Start"
+                    Margin="10" ImageSource="mobilborsa.png"
+                    BorderWidth="2" BorderColor="#9072C9"
        
-                Stroke="#9072C9"
-            StrokeThickness="2"
-/>
+                    BackgroundColor="#e1a9d4"
+            
+                     Background="#e1a9d4"
+                    CornerRadius="10">
+                    </Button>
 
-            <sfavatar:SfAvatarView Margin="10" HorizontalOptions="CenterAndExpand" ContentType="Custom"
-            ImageSource="mobilborsa.png"
-            VerticalOptions="Center"
-          WidthRequest="185"
-                                   Background="#e1a9d4"
-        HeightRequest="103"  BackgroundColor="#e1a9d4"
-            CornerRadius="10"
+                    <Button Command="{Binding ChangeCardIndexCommand}" 
+                     CommandParameter="3"
+                             VerticalOptions="Start"
+                           WidthRequest="120"  HeightRequest="108"
+                     Margin="10" ImageSource="buy_house.png"
+                     BorderWidth="2" BorderColor="#9072C9"
        
-            Stroke="#e1a9d4"
-            StrokeThickness="2"
-/>
+                     MaximumHeightRequest="108"
+                     BackgroundColor="#81b839"
+            
+                      Background="#81b839"
+                     CornerRadius="10">
+                    </Button>
+                    <Button Command="{Binding ChangeCardIndexCommand}" 
+                       CommandParameter="4"
+                             VerticalOptions="Start"
+                               WidthRequest="120"  HeightRequest="108"
+                       Margin="10" ImageSource="checkingfinansalstatment.png"
+                       BorderWidth="2" BorderColor="#9072C9"
+                        MaximumHeightRequest="108"
+                       BackgroundColor="Goldenrod"
+            
+                        Background="Goldenrod"
+                       CornerRadius="10">
+                    </Button>
+                    <Button Command="{Binding ChangeCardIndexCommand}" 
+                      CommandParameter="5"
+                             VerticalOptions="Start"
+                                WidthRequest="120"  HeightRequest="108"
+                      Margin="10" ImageSource="cardpayment.png"
+                      BorderWidth="2" BorderColor="#9072C9"
+                     MaximumHeightRequest="108"
+                      BackgroundColor="#62892d"
+           
+                       Background="#62892d"
+                      CornerRadius="10">
+                    </Button>
 
-
-            <sfavatar:SfAvatarView Margin="10" HorizontalOptions="CenterAndExpand" ContentType="Custom"
-                       ImageSource="buy_house.png"
-                       VerticalOptions="Center"
-                     WidthRequest="185"
-                   HeightRequest="103"  BackgroundColor="#81b839"
-                       CornerRadius="10"
-                  Background="#81b839"
-                             Stroke="#9072C9"
-                       StrokeThickness="2"
-           />
-            <sfavatar:SfAvatarView Margin="10" HorizontalOptions="CenterAndExpand" ContentType="Custom"
-            ImageSource="checkingfinansalstatment.png"
-            VerticalOptions="Center"
-          WidthRequest="185"
-        HeightRequest="103"  BackgroundColor="#62892d"
-            CornerRadius="10"
-                                  Background="#62892d"
-       
-                Stroke="#9072C9"
-            StrokeThickness="2"
-/>
-
-            <sfavatar:SfAvatarView Margin="10"  HorizontalOptions="CenterAndExpand" ContentType="Custom"
-            ImageSource="cardpayment.png"
-            VerticalOptions="Center"
-          WidthRequest="185"
-                                   Background="Goldenrod"
-        HeightRequest="103"  BackgroundColor="#0b7b98"
-            CornerRadius="10"
-       
-            Stroke="#9072C9"
-            StrokeThickness="2"/>
-                 
-                    <sfavatar:SfAvatarView Margin="10"  HorizontalOptions="CenterAndExpand" ContentType="Custom"
-                    ImageSource="cardpayment.png"
-                    VerticalOptions="Center"
-                  WidthRequest="185"
-                                         Background="Goldenrod"
-                HeightRequest="103"  BackgroundColor="#0b7b98"
-                    CornerRadius="10"
-       
-                    Stroke="#9072C9"
-                    StrokeThickness="2"/>
-
-                </HorizontalStackLayout>
+                </StackLayout>
+           
+           
             </ScrollView>
 
         </Grid>

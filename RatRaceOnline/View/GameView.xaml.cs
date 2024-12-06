@@ -24,7 +24,7 @@ public partial class GameView : ContentPage
     {
 		if(sender!=null)
 		{
-            await DisplayAlert("Alert", "Payments clicked...(GameView class)", "OK");
+           // await DisplayAlert("Alert", "Payments clicked...(GameView class)", "OK");
         }
     }
 }

@@ -45,7 +45,7 @@
                             <Label HorizontalOptions="Center" FontSize="Micro"                         
                              TextColor="#9072C9" 
                                    Text="{Binding DetailStory}"
-                                   HeightRequest="75" ></Label>
+                                   HeightRequest="130" ></Label>
                             <HorizontalStackLayout  Margin="0,2,0,0" >
                                 <Label TextColor="Grey" HorizontalOptions="Start" FontSize="Micro"
                                    Text="Your Highest Score:" ></Label>
