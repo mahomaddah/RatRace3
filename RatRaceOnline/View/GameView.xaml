@@ -4,11 +4,14 @@
              x:Class="RatRace3.View.GameView"
              Title="1/24  $295.04"
              Shell.NavBarIsVisible="False"
-            
+              xmlns:local="clr-namespace:RatRace3"
              xmlns:cards="clr-namespace:Syncfusion.Maui.Cards;assembly=Syncfusion.Maui.Cards"
              xmlns:sfavatar="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu">
 
+    <ContentPage.BindingContext>
+        <local:CardViewModel />
+    </ContentPage.BindingContext>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -150,11 +153,12 @@
                         VerticalOptions="Start"
                  WidthRequest="120"                         
                 HeightRequest="108"
-                    Command="{Binding ChangeCardIndexCommand}"  CommandParameter="0" x:Name="paymentPageNavBtn" Clicked="paymentPageNavBtn_Clicked" Margin="10" ImageSource="cardpayment.png" BorderWidth="2" BorderColor="#9072C9" BackgroundColor="#0b7b98" CornerRadius="10">
+                    Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}"  CommandParameter="0" Clicked="cardNavBtn_Clicked"  x:Name="paymentPageNavBtn" Margin="10" ImageSource="cardpayment.png" BorderWidth="2" BorderColor="#9072C9" BackgroundColor="#0b7b98" CornerRadius="10">
 
                     </Button>
-                    <Button Command="{Binding ChangeCardIndexCommand}" 
+                    <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
                             CommandParameter="1"
+                             Clicked="cardNavBtn_Clicked" 
                              VerticalOptions="Start"
                             WidthRequest="120"  HeightRequest="108"
                             Margin="10" ImageSource="projections.png"
@@ -165,7 +169,8 @@
                              Background="#ff73ab"
                             CornerRadius="10">
                     </Button>
-                    <Button Command="{Binding ChangeCardIndexCommand}" 
+                    <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
+                             Clicked="cardNavBtn_Clicked" 
                     CommandParameter="2"
                     WidthRequest="120"  HeightRequest="108"
                                    
@@ -179,7 +184,8 @@
                     CornerRadius="10">
                     </Button>
 
-                    <Button Command="{Binding ChangeCardIndexCommand}" 
+                    <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
+                             Clicked="cardNavBtn_Clicked" 
                      CommandParameter="3"
                              VerticalOptions="Start"
                            WidthRequest="120"  HeightRequest="108"
@@ -192,7 +198,8 @@
                       Background="#81b839"
                      CornerRadius="10">
                     </Button>
-                    <Button Command="{Binding ChangeCardIndexCommand}" 
+                    <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
+                             Clicked="cardNavBtn_Clicked" 
                        CommandParameter="4"
                              VerticalOptions="Start"
                                WidthRequest="120"  HeightRequest="108"
@@ -204,7 +211,8 @@
                         Background="Goldenrod"
                        CornerRadius="10">
                     </Button>
-                    <Button Command="{Binding ChangeCardIndexCommand}" 
+                    <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
+                             Clicked="cardNavBtn_Clicked" 
                       CommandParameter="5"
                              VerticalOptions="Start"
                                 WidthRequest="120"  HeightRequest="108"

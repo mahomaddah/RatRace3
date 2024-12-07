@@ -4,28 +4,28 @@ using Syncfusion.Maui.Cards;
 
 public partial class GameView : ContentPage
 {
-	public GameView()
+    public CardViewModel CardviewModel { get; set; } 
+    public GameView()
 	{
 		InitializeComponent();
-        var viewModel = new CardViewModel();
-        BindingContext = viewModel;
+        CardviewModel = new CardViewModel();
+        BindingContext = CardviewModel;
 
-        // Example: Set default index
-        viewModel.VisibleIndex = 2;
-
-        // Attach event handler for the navigation bar buttons
-        paymentPageNavBtn.Clicked += (s, e) =>
-        {
-            viewModel.VisibleIndex = 0; // Example: Set index for the first card
-        };
+        // Set default card index to open first 
+        CardviewModel.VisibleIndex = 2;
+       
     }
 
-    private async void paymentPageNavBtn_Clicked(object sender, EventArgs e)
+    private async void cardNavBtn_Clicked(object sender, EventArgs e)
     {
 		if(sender!=null)
-		{
-           // await DisplayAlert("Alert", "Payments clicked...(GameView class)", "OK");
+		{ 
+          CardviewModel.VisibleIndex = Convert.ToInt16(((Button)sender).CommandParameter);
+        // BindingContext = CardviewModel;
+        // await DisplayAlert("Alert", ((Button)sender).CommandParameter.ToString(), "OK");
         }
     }
+
+  
 }
 
