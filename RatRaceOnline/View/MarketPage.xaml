@@ -11,8 +11,8 @@
             Text="Welcome to Market..."
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        
-        <chart:SfCartesianChart  >
+
+        <chart:SfCartesianChart Margin="10" x:Name="Chart"  >
             <!-- Define X and Y axes -->
 
             <chart:SfCartesianChart.XAxes>
@@ -28,22 +28,23 @@
                     EnableAnimation="True"
                     AnimationDuration="10000" 
                 >
-                
-                <chart:ColumnSeries ItemsSource="{Binding Data}"
+
+                <chart:ColumnSeries ItemsSource="{Binding ChartData}"
                              EnableAnimation="True"  
-                             
-                      XBindingPath="Category"
+                    PaletteBrushes="{Binding PaletteBrushes}" 
+                      XBindingPath="Date"
                       YBindingPath="Value"/>
                 
             </chart:SfCartesianChart.Series>
 
         </chart:SfCartesianChart>
-        <Label Text="Current Stock Price: $53.44"></Label>
-        <Label Text="Total Price: $641.32"></Label>
+        <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" Text="Current Stock Price: $53.44"></Label>
+        <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" Text="Total Price: $641.32"></Label>
+        <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" Text="there will be a buy and sell button and a select amounth picker ..."></Label>
         
-        <Label Text="there will be a buy and sell button and a select amounth picker ..."></Label>
-        <HorizontalStackLayout>
-              <Button Text="Buy"></Button>
+        <HorizontalStackLayout Margin="10" HorizontalOptions="Center" VerticalOptions="Center">
+          
+            <Button Margin="0,0,10,0" Text="Buy"></Button>
               <Button Text="Sell"></Button>
         </HorizontalStackLayout>
       
