@@ -14,26 +14,43 @@
 
         <chart:SfCartesianChart Margin="10" x:Name="Chart"  >
             <!-- Define X and Y axes -->
-
+            <chart:SfCartesianChart.ZoomPanBehavior>
+                <chart:ChartZoomPanBehavior EnablePinchZooming="True"/>
+            </chart:SfCartesianChart.ZoomPanBehavior>
+            
             <chart:SfCartesianChart.XAxes>
-                <chart:DateTimeAxis />
+                <chart:CategoryAxis>
+              
+                        <chart:CategoryAxis.Title>
+                        <chart:ChartAxisTitle Text="(Monthly Candles)"/>
+                        </chart:CategoryAxis.Title>
+                 
+                </chart:CategoryAxis>
             </chart:SfCartesianChart.XAxes>
             
             <chart:SfCartesianChart.YAxes>
-                <chart:LogarithmicAxis />
+                <chart:LogarithmicAxis >
+                    <chart:LogarithmicAxis.Title>
+                        <chart:ChartAxisTitle Text="Stock Price (in USD)"/>
+                    </chart:LogarithmicAxis.Title>
+                </chart:LogarithmicAxis>
             </chart:SfCartesianChart.YAxes>
 
             <!-- Add Data -->
             <chart:SfCartesianChart.Series  
                     EnableAnimation="True"
-                    AnimationDuration="10000" 
-                >
+                    AnimationDuration="10000" >
 
                 <chart:ColumnSeries ItemsSource="{Binding ChartData}"
-                             EnableAnimation="True"  
-                    PaletteBrushes="{Binding PaletteBrushes}" 
-                      XBindingPath="Date"
-                      YBindingPath="Value"/>
+                        EnableAnimation="True"  
+                        Spacing="0.1"
+                                      Label="USD"
+                                    EnableTooltip="True"
+                        Width="4.6"
+                        ShowDataLabels="True"
+                        PaletteBrushes="{Binding PaletteBrushes}" 
+                        XBindingPath="Date"
+                        YBindingPath="Value"/>
                 
             </chart:SfCartesianChart.Series>
 

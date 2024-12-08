@@ -26,6 +26,14 @@ public partial class GameView : ContentPage
         }
     }
 
-  
+    private void GameProgressBtn_Clicked(object sender, EventArgs e)
+    {
+
+    }
+
+    private void GameNextTurnBtn_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }
 

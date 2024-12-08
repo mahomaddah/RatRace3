@@ -50,8 +50,6 @@ public partial class MarketPage : ContentPage
                 Color.FromArgb("#FF007C9C"),
                 Color.FromArgb("#FF019FCC"),
                 Color.FromArgb("#FF94652B"),
-                Color.FromArgb("#FFFAF3A0"),
-                Color.FromArgb("#FF94652B"),
                 Color.FromArgb("#FF89D9A8"),
                 Color.FromArgb("#FF71CBB1"),
                 Color.FromArgb("#FF4DB7BE"),
@@ -64,3 +62,9 @@ public partial class MarketPage : ContentPage
  
     }
 }
+//Note : ileride gradient e gecmek istersek ... chartlar icin ...
+//new GradientStopCollection()
+//{
+//    new GradientStop() { Offset = 1, Color = Color.FromRgb(255, 231, 199) },
+//    new GradientStop() { Offset = 0, Color = Color.FromRgb(252, 182, 159) }
+//},

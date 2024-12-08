@@ -153,10 +153,13 @@
                         VerticalOptions="Start"
                  WidthRequest="120"                         
                 HeightRequest="108"
-                    Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}"  CommandParameter="0" Clicked="cardNavBtn_Clicked"  x:Name="paymentPageNavBtn" Margin="10" ImageSource="cardpayment.png" BorderWidth="2" BorderColor="#9072C9" BackgroundColor="#0b7b98" CornerRadius="10">
+                ToolTipProperties.Text="Collect your income , manage your life expenses..."
+                    Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}"  CommandParameter="0" Clicked="cardNavBtn_Clicked"  x:Name="paymentPageNavBtn" Margin="10" ImageSource="cardpayment.png" BorderWidth="2" BorderColor="#9072C9"
+                        BackgroundColor="#CCCD3370" CornerRadius="10">
 
                     </Button>
-                    <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
+                    <Button    ToolTipProperties.Text="Financial Statements..."
+                        Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
                             CommandParameter="1"
                              Clicked="cardNavBtn_Clicked" 
                              VerticalOptions="Start"
@@ -178,9 +181,9 @@
                     Margin="10" ImageSource="mobilborsa.png"
                     BorderWidth="2" BorderColor="#9072C9"
        
-                    BackgroundColor="#e1a9d4"
+                    BackgroundColor="#FFE3AAD6"
             
-                     Background="#e1a9d4"
+                     Background="#FFE3AAD6"
                     CornerRadius="10">
                     </Button>
 
@@ -193,9 +196,9 @@
                      BorderWidth="2" BorderColor="#9072C9"
        
                      MaximumHeightRequest="108"
-                     BackgroundColor="#81b839"
+                     BackgroundColor="#FFFF7D7D"
             
-                      Background="#81b839"
+                      Background="#FFFF7D7D"
                      CornerRadius="10">
                     </Button>
                     <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
@@ -206,9 +209,9 @@
                        Margin="10" ImageSource="checkingfinansalstatment.png"
                        BorderWidth="2" BorderColor="#9072C9"
                         MaximumHeightRequest="108"
-                       BackgroundColor="Goldenrod"
+                       BackgroundColor="#FF007C9C"
             
-                        Background="Goldenrod"
+                        Background="#FF007C9C"
                        CornerRadius="10">
                     </Button>
                     <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
@@ -219,13 +222,44 @@
                       Margin="10" ImageSource="cardpayment.png"
                       BorderWidth="2" BorderColor="#9072C9"
                      MaximumHeightRequest="108"
-                      BackgroundColor="#62892d"
-           
-                       Background="#62892d"
+                      BackgroundColor="#FF007C9C"
+                       ToolTipProperties.Text="pay debt..."
+                       Background="#FF019FCC"
                       CornerRadius="10">
                     </Button>
-                    
-                    
+                    <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
+                    x:Name="GameNextTurnBtn"
+                  Clicked="GameNextTurnBtn_Clicked" 
+                  CommandParameter="6"
+                   VerticalOptions="Start"
+                   WidthRequest="120"  HeightRequest="108"
+                  Margin="10,10,10,10" ImageSource="next_turn.png"
+                  BorderWidth="3" BorderColor="White"
+                 MaximumHeightRequest="108"
+                  BackgroundColor="#FF71CBB1"
+                   Background="#FF71CBB1"
+                            Text="Next Turn"
+                            TextColor="#9072C9"
+                            ToolTipProperties.Text="Next Turn..."
+                  CornerRadius="10">
+                        
+                    </Button>
+                    <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
+                     x:Name="GameProgressBtn"
+                     Clicked="GameProgressBtn_Clicked" 
+                     ToolTipProperties.Text="check game goals or finish the game!"
+                     CommandParameter="7"
+                      VerticalOptions="Start"
+                      WidthRequest="120"  HeightRequest="108"
+                     Margin="10" ImageSource="game_win_invesment_data.png"
+                     BorderWidth="2" BorderColor="Goldenrod"
+                    MaximumHeightRequest="108"
+                     BackgroundColor="#FF89D9A8"
+                      Background="#FF89D9A8"
+                     CornerRadius="10">
+                    </Button>
+
+
 
                 </StackLayout>
            
