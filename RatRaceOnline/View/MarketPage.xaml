@@ -4,6 +4,7 @@
              x:Class="RatRace3.MarketPage"
              xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
              xmlns:local="clr-namespace:RatRace3;assembly=RatRace3"
+             xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
              Title="Market Page">
     
     <VerticalStackLayout>
@@ -58,6 +59,47 @@
         <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" Text="Current Stock Price: $53.44"></Label>
         <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" Text="Total Price: $641.32"></Label>
         <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" Text="there will be a buy and sell button and a select amounth picker ..."></Label>
+
+        <gauge:SfLinearGauge Interval="5" TickPosition="Outside" LabelPosition="Outside" Background="Transparent"  ShowLabels="True" UseRangeColorForAxis="True" Margin="1" WidthRequest="430">
+
+            <gauge:SfLinearGauge.LabelStyle>
+                <gauge:GaugeLabelStyle FontAttributes="Bold" FontSize="8" 
+                                           TextColor="#9072C9"/>
+            </gauge:SfLinearGauge.LabelStyle>
+
+            <gauge:SfLinearGauge.LineStyle>
+                <gauge:LinearLineStyle Thickness="10"  CornerStyle="BothCurve">
+                        <gauge:LinearLineStyle.GradientStops>
+                        <gauge:GaugeGradientStop Value="0" Color="#FF45B3C1"/>
+                        <gauge:GaugeGradientStop Value="50" Color="#FF6ECAB2"/>
+                        <gauge:GaugeGradientStop Value="100" Color="#FF84D6AA"/>
+                    </gauge:LinearLineStyle.GradientStops>
+                    </gauge:LinearLineStyle>
+                </gauge:SfLinearGauge.LineStyle>
+
+
+            <gauge:SfLinearGauge.MarkerPointers >
+
+
+
+                <gauge:LinearShapePointer IsInteractive="True" Fill="#FF6ECAB2" Value="70"/>
+
+                <gauge:LinearContentPointer EnableAnimation="True"
+                                            AnimationDuration="500" Value="75">
+                    <gauge:LinearContentPointer.Content>
+                        <Image Source="cash_bank.png" Margin="0,-30,0,0" HeightRequest="10" 
+                               
+                                   WidthRequest="10"/>
+                    </gauge:LinearContentPointer.Content>
+                </gauge:LinearContentPointer>
+            </gauge:SfLinearGauge.MarkerPointers>
+
+            <gauge:SfLinearGauge.BarPointers>
+                <gauge:BarPointer   Fill="#ff73ab"  CornerStyle="BothCurve" EnableAnimation="True"  AnimationDuration="500"  Value="12.34"/>
+            </gauge:SfLinearGauge.BarPointers>
+
+        </gauge:SfLinearGauge>
+        
         
         <HorizontalStackLayout Margin="10" HorizontalOptions="Center" VerticalOptions="Center">
           

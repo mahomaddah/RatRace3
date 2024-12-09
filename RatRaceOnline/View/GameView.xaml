@@ -97,39 +97,54 @@
                 </VerticalStackLayout>
             </cards:SfCardView>
 
-            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10"  CornerRadius="10">
+            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10" BackgroundColor="#4ea1ce"  CornerRadius="10">
                 <VerticalStackLayout>
-                <Label  Text="LightPink" BackgroundColor="#4ea1ce" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Label  Text="Banking App:" TextColor="#9072C9" FontAttributes="Bold" Margin="5,0,0,0"  VerticalTextAlignment="Start" FontSize="Title" HorizontalTextAlignment="Start"/>
                     <HorizontalStackLayout  BackgroundColor="#4ea1ce" >
                         
                    
-                   <Image Margin="10" Source="bankatransparent.png" MinimumWidthRequest="400" MaximumHeightRequest="490"  BackgroundColor="#4ea1ce"  />
-                    
-                    <radialMenu:SfRadialMenu x:Name="radialMenu" AnimationDuration="400"
+                   <Image Margin="10" Source="banking_app.png" MinimumWidthRequest="400" MaximumHeightRequest="490"  BackgroundColor="#4ea1ce"  />
+                        <Image ToolTipProperties.Text="“Investing is like gardening: plant wisely, nurture patiently, and let time grow your wealth.”" Source="gardening.png"  WidthRequest="300"/>
+                   
+
+                    <radialMenu:SfRadialMenu x:Name="radialMenu" AnimationDuration="400" 
                                          RimColor="#9072C9"
+                                                 Point="-273, 130"
+                                             EnableCenterButtonAnimation="True"
+                                             IsDragEnabled="False"
+                                 
+                                            CenterButtonTextColor="#9072C9"
+                                             CenterButtonBackTextColor="#9072C9"
+                                             CenterButtonFontAttributes="Bold"
+                                             CenterButtonBackFontAttributes="Bold"
+                                             CenterButtonBackFontSize="20"
+                                             CenterButtonFontSize="20"
+                                 
                                         CenterButtonText="Bank"
+                                             SeparatorColor="#3f3d56"
+                                     CenterButtonBackgroundColor="#3f3d56"
                                         CenterButtonRadius="30"
                                              RimRadius="250"
                                          CenterButtonBackText="Back"
-                                        CenterButtonFontSize="10"  >
+                                      >
                                         <radialMenu:SfRadialMenu.Items>
-                                <radialMenu:SfRadialMenuItem BackgroundColor="#ff73ab" Text="Fixed Deposit"
-                                              FontSize="8"/>
-                                <radialMenu:SfRadialMenuItem BackgroundColor="#e1a9d4" Text="Recursive deposit"
-                                                FontSize="8"/>
-                                <radialMenu:SfRadialMenuItem BackgroundColor="#62892d" Text="S&amp;P500 index (SPY ETF)"
-                                                 FontSize="5"/>
-                                <radialMenu:SfRadialMenuItem BackgroundColor="Goldenrod" Text="Bonds" 
-                                            FontSize="10">
+                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="Fixed Deposit" Image="cash_fast.png"
+                                              FontAutoScalingEnabled="True"/>
+                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="Recursive deposit" Image="cash_recursive_deposit.png"
+                                                FontAutoScalingEnabled="True"/>
+                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="S&amp;P500 index (SPY ETF)" Image="cash_etf_icon.png"
+                                                 FontAutoScalingEnabled="True"/>
+                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="Bonds" Image="cash_bond_icon.png"
+                                            FontAutoScalingEnabled="True">
                                              <radialMenu:SfRadialMenuItem.Items>
-                                        <radialMenu:SfRadialMenuItem Text="Tbond" BackgroundColor="#42A5F5" FontSize="10"/>
-                                        <radialMenu:SfRadialMenuItem Text="Coporate Bonds" BackgroundColor="#81b839" FontSize="10"/>
-                                        <radialMenu:SfRadialMenuItem Text="Gold Bonds" BackgroundColor="#0b7b98" FontSize="10"/>
-                                        <radialMenu:SfRadialMenuItem Text="Long term Bonds" BackgroundColor="#ff73ab" FontSize="10"/>
+                                        <radialMenu:SfRadialMenuItem FontAutoScalingEnabled="True" Text="Tbond" BackgroundColor="#9072C9" Image="cash_bond_icon.png"  />
+                                        <radialMenu:SfRadialMenuItem Text="Coporate Bonds" BackgroundColor="#9072C9" FontSize="8" Image="cash_coporate_bond.png" />
+
+                                        <radialMenu:SfRadialMenuItem Text="Long term Bonds" BackgroundColor="#9072C9" FontAutoScalingEnabled="True" Image="cash_long_term_bond.png" />
                                      
                                     </radialMenu:SfRadialMenuItem.Items>
                                             </radialMenu:SfRadialMenuItem>
-                                <radialMenu:SfRadialMenuItem BackgroundColor="#e1a9d4" Text="Mutual fund"
+                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="Mutual fund" Image="cash_central_bank.png"
                                                              FontSize="8"/>
 
                             </radialMenu:SfRadialMenu.Items>
@@ -153,18 +168,19 @@
                         VerticalOptions="Start"
                  WidthRequest="120"                         
                 HeightRequest="108"
-                ToolTipProperties.Text="Collect your income , manage your life expenses..."
-                    Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}"  CommandParameter="0" Clicked="cardNavBtn_Clicked"  x:Name="paymentPageNavBtn" Margin="10" ImageSource="cardpayment.png" BorderWidth="2" BorderColor="#9072C9"
+                ToolTipProperties.Text="Collect your income , Manage your life expenses..."
+                    Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}"  CommandParameter="0" Clicked="cardNavBtn_Clicked"  x:Name="paymentPageNavBtn" Margin="10"
+                        ImageSource="cardpayment.png" BorderWidth="2" BorderColor="#9072C9"
                         BackgroundColor="#CCCD3370" CornerRadius="10">
 
                     </Button>
-                    <Button    ToolTipProperties.Text="Financial Statements..."
+                    <Button    ToolTipProperties.Text="Financial Statements, Balance Sheet, Manage your Assets and Liability, See your free cash flow "
                         Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
                             CommandParameter="1"
                              Clicked="cardNavBtn_Clicked" 
                              VerticalOptions="Start"
                             WidthRequest="120"  HeightRequest="108"
-                            Margin="10" ImageSource="projections.png"
+                            Margin="10" ImageSource="checkingfinansalstatment.png"
                             BorderWidth="2" BorderColor="#9072C9"
                        
                             BackgroundColor="#ff73ab"
@@ -173,6 +189,7 @@
                             CornerRadius="10">
                     </Button>
                     <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
+                               ToolTipProperties.Text="Bank : Fixed Deposit in bank , Invest in Index or Bonds"
                              Clicked="cardNavBtn_Clicked" 
                     CommandParameter="2"
                     WidthRequest="120"  HeightRequest="108"
@@ -189,10 +206,11 @@
 
                     <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
                              Clicked="cardNavBtn_Clicked" 
+                            ToolTipProperties.Text="US Stock Market: Invest in IPO Companies, Buy, Sell, Study Financial Statement and projections of the company..."
                      CommandParameter="3"
                              VerticalOptions="Start"
                            WidthRequest="120"  HeightRequest="108"
-                     Margin="10" ImageSource="buy_house.png"
+                     Margin="10" ImageSource="projections.png"
                      BorderWidth="2" BorderColor="#9072C9"
        
                      MaximumHeightRequest="108"
@@ -206,24 +224,25 @@
                        CommandParameter="4"
                              VerticalOptions="Start"
                                WidthRequest="120"  HeightRequest="108"
-                       Margin="10" ImageSource="checkingfinansalstatment.png"
+                       Margin="10" ImageSource="newonline.png"
                        BorderWidth="2" BorderColor="#9072C9"
                         MaximumHeightRequest="108"
                        BackgroundColor="#FF007C9C"
-            
+      ToolTipProperties.Text="Read News... Check what is a trend in the market (Note: News can be Misleading, manipulated, or Already Priced, in the long term what matters is the Quality of the asset)"
                         Background="#FF007C9C"
                        CornerRadius="10">
                     </Button>
                     <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
                              Clicked="cardNavBtn_Clicked" 
                       CommandParameter="5"
+
                              VerticalOptions="Start"
                                 WidthRequest="120"  HeightRequest="108"
-                      Margin="10" ImageSource="cardpayment.png"
+                      Margin="10" ImageSource="buy_house.png"
                       BorderWidth="2" BorderColor="#9072C9"
                      MaximumHeightRequest="108"
                       BackgroundColor="#FF007C9C"
-                       ToolTipProperties.Text="pay debt..."
+                         ToolTipProperties.Text="Join the Auction to buy Real Estate or invest in the city mall project"
                        Background="#FF019FCC"
                       CornerRadius="10">
                     </Button>
@@ -240,7 +259,7 @@
                    Background="#FF71CBB1"
                             Text="Next Turn"
                             TextColor="#9072C9"
-                            ToolTipProperties.Text="Next Turn..."
+                            ToolTipProperties.Text="(Next Turn) Pass to Next Month.."
                   CornerRadius="10">
                         
                     </Button>
