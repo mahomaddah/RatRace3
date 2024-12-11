@@ -53,107 +53,102 @@
 
         <cards:SfCardLayout VisibleIndex="{Binding VisibleIndex, Mode=TwoWay}"  x:Name="CardGamesLayout" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,10,0"  SwipeDirection="Right"  BackgroundColor="#339072C9">
 
-            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10" CornerRadius="10"   BackgroundColor="#0b7b98">
+            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10" CornerRadius="10"   BackgroundColor="#CCCD3370">
                 <VerticalStackLayout>
-                    <Label  x:Name="labelPaymentsPage" Margin="2,0,0,0" FontAttributes="Bold" FontSize="Title" TextColor="#9072C9"  Text="Payments" BackgroundColor="#0b7b98" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
-                    <Image Margin="10" Source="cardpayment.png" MaximumHeightRequest="490" HorizontalOptions="Center"  BackgroundColor="#0b7b98" />
+                    <Label  x:Name="labelPaymentsPage" Margin="2,0,0,0" FontAttributes="Bold" FontSize="Title" TextColor="#9072C9"  Text="Payments" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Image HorizontalOptions="End" Margin="10" Source="cardpayment.png" MaximumHeightRequest="490"  />
                     
                 </VerticalStackLayout>
 
             </cards:SfCardView>
 
-            <cards:SfCardView IndicatorThickness="12" IndicatorColor="Goldenrod" BorderColor="#9072C9" BorderWidth="10"  CornerRadius="10">
+            <cards:SfCardView IndicatorThickness="12" IndicatorColor="#9072C9" Background="#ff73ab" BorderColor="#9072C9" BorderWidth="10"  CornerRadius="10">
                 <VerticalStackLayout>
-                     <Label  Text="MediumPurple" BackgroundColor="#42A5F5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                    <Image Margin="10" Source="checkingfinansalstatment.png"  BackgroundColor="#42A5F5" MaximumHeightRequest="490" />
+                    <Label Margin="2,0,0,0" FontAttributes="Bold" TextColor="#9072C9" FontSize="Title" Text="Financial Statements, Balance Sheet, Manage your Assets and Liability"  VerticalTextAlignment="Start" HorizontalTextAlignment="Start"/>
+                    <Image Margin="10" Source="checkingfinansalstatment.png"  HorizontalOptions="End" MaximumHeightRequest="490" />
                 </VerticalStackLayout>
             </cards:SfCardView>
 
-            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10"  CornerRadius="10">
+            <cards:SfCardView BorderColor="#9072C9" Background="#FFE3AAD6" BorderWidth="10"  CornerRadius="10">
                 <VerticalStackLayout>
-                    <Label  Text="LightPink" BackgroundColor="#81b839" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                    <Image Margin="10" Source="buy_house.png" BackgroundColor="#81b839" MaximumHeightRequest="490"  />
-                </VerticalStackLayout>
-            </cards:SfCardView>
+                    <Label  Text="Bank : Fixed Deposit in bank , Invest in Index or Bonds" TextColor="#9072C9" FontAttributes="Bold" Margin="5,0,0,0"  VerticalTextAlignment="Start" FontSize="Title" HorizontalTextAlignment="Start"/>
+                    <HorizontalStackLayout   >
 
-            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10"  CornerRadius="10">
-                <VerticalStackLayout>
-                    <Label  Text="LightPink" BackgroundColor="#62892d" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                    <Image Margin="10" Source="buy_house.png" BackgroundColor="#62892d" MaximumHeightRequest="490"  />
-                </VerticalStackLayout>
-            </cards:SfCardView>
 
-            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10"  CornerRadius="10">
-                <VerticalStackLayout>
-                    <Label  Text="Real state" BackgroundColor="#e1a9d4" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                    <Image Margin="10" Source="mobilborsa.png" MaximumHeightRequest="490"  BackgroundColor="#e1a9d4"   />
-                </VerticalStackLayout>
-            </cards:SfCardView>
+                        <Image HorizontalOptions="End" Margin="10" Source="mobilborsa.png" MinimumWidthRequest="400" MaximumHeightRequest="490"   />
+                        <Image HorizontalOptions="End" ToolTipProperties.Text="“Investing is like gardening: plant wisely, nurture patiently, and let time grow your wealth.”" Source="gardening.png"  WidthRequest="300"/>
 
-            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10" BackgroundColor="#ff73ab"   CornerRadius="10">
-                <VerticalStackLayout>
-                    <Label  Text="Financal Planing" FontAttributes="Bold" TextColor="#9072C9" BackgroundColor="#ff73ab" Margin="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
-                    <Image HorizontalOptions="End" Margin="10" Source="projections.png" MaximumWidthRequest="400"/>
-                </VerticalStackLayout>
-            </cards:SfCardView>
 
-            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10" BackgroundColor="#4ea1ce"  CornerRadius="10">
-                <VerticalStackLayout>
-                    <Label  Text="Banking App:" TextColor="#9072C9" FontAttributes="Bold" Margin="5,0,0,0"  VerticalTextAlignment="Start" FontSize="Title" HorizontalTextAlignment="Start"/>
-                    <HorizontalStackLayout  BackgroundColor="#4ea1ce" >
-                        
-                   
-                   <Image Margin="10" Source="banking_app.png" MinimumWidthRequest="400" MaximumHeightRequest="490"  BackgroundColor="#4ea1ce"  />
-                        <Image ToolTipProperties.Text="“Investing is like gardening: plant wisely, nurture patiently, and let time grow your wealth.”" Source="gardening.png"  WidthRequest="300"/>
-                   
-
-                    <radialMenu:SfRadialMenu x:Name="radialMenu" AnimationDuration="400" 
-                                         RimColor="#9072C9"
-                                                 Point="-273, 130"
-                                             EnableCenterButtonAnimation="True"
-                                             IsDragEnabled="False"
-                                 
-                                            CenterButtonTextColor="#9072C9"
-                                             CenterButtonBackTextColor="#9072C9"
-                                             CenterButtonFontAttributes="Bold"
-                                             CenterButtonBackFontAttributes="Bold"
-                                             CenterButtonBackFontSize="20"
-                                             CenterButtonFontSize="20"
-                                 
-                                        CenterButtonText="Bank"
-                                             SeparatorColor="#3f3d56"
-                                     CenterButtonBackgroundColor="#3f3d56"
-                                        CenterButtonRadius="30"
-                                             RimRadius="250"
-                                         CenterButtonBackText="Back"
-                                      >
-                                        <radialMenu:SfRadialMenu.Items>
+                        <radialMenu:SfRadialMenu x:Name="radialMenu" AnimationDuration="400" 
+                                 RimColor="#9072C9"
+                                         Point="-273, 130"
+                                     EnableCenterButtonAnimation="True"
+                                     IsDragEnabled="False"
+                         
+                                    CenterButtonTextColor="#9072C9"
+                                     CenterButtonBackTextColor="#9072C9"
+                                     CenterButtonFontAttributes="Bold"
+                                     CenterButtonBackFontAttributes="Bold"
+                                     CenterButtonBackFontSize="20"
+                                     CenterButtonFontSize="20"
+                         
+                                CenterButtonText="Bank"
+                                     SeparatorColor="#3f3d56"
+                             CenterButtonBackgroundColor="#3f3d56"
+                                CenterButtonRadius="30"
+                                     RimRadius="250"
+                                 CenterButtonBackText="Back"
+                              >
+                            <radialMenu:SfRadialMenu.Items>
                                 <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="Fixed Deposit" Image="cash_fast.png"
-                                              FontAutoScalingEnabled="True"/>
+                                      FontAutoScalingEnabled="True"/>
                                 <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="Recursive deposit" Image="cash_recursive_deposit.png"
-                                                FontAutoScalingEnabled="True"/>
+                                        FontAutoScalingEnabled="True"/>
                                 <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="S&amp;P500 index (SPY ETF)" Image="cash_etf_icon.png"
-                                                 FontAutoScalingEnabled="True"/>
+                                         FontAutoScalingEnabled="True"/>
                                 <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="Bonds" Image="cash_bond_icon.png"
-                                            FontAutoScalingEnabled="True">
-                                             <radialMenu:SfRadialMenuItem.Items>
+                                    FontAutoScalingEnabled="True">
+                                    <radialMenu:SfRadialMenuItem.Items>
                                         <radialMenu:SfRadialMenuItem FontAutoScalingEnabled="True" Text="Tbond" BackgroundColor="#9072C9" Image="cash_bond_icon.png"  />
                                         <radialMenu:SfRadialMenuItem Text="Coporate Bonds" BackgroundColor="#9072C9" FontSize="8" Image="cash_coporate_bond.png" />
 
                                         <radialMenu:SfRadialMenuItem Text="Long term Bonds" BackgroundColor="#9072C9" FontAutoScalingEnabled="True" Image="cash_long_term_bond.png" />
-                                     
+
                                     </radialMenu:SfRadialMenuItem.Items>
-                                            </radialMenu:SfRadialMenuItem>
+                                </radialMenu:SfRadialMenuItem>
                                 <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="Mutual fund" Image="cash_central_bank.png"
-                                                             FontSize="8"/>
+                                                     FontSize="8"/>
 
                             </radialMenu:SfRadialMenu.Items>
-                                    </radialMenu:SfRadialMenu>
+                        </radialMenu:SfRadialMenu>
                     </HorizontalStackLayout>
 
                 </VerticalStackLayout>
-                    
+
             </cards:SfCardView>
+       
+            <cards:SfCardView BorderColor="#9072C9" Background="#FFFF7D7D" BorderWidth="10"  CornerRadius="10">
+                <VerticalStackLayout>
+                    <Label  Margin="2,0,0,0" FontAttributes="Bold" TextColor="#9072C9" FontSize="Title" HorizontalOptions="Start" Text="Invest in US Companies : Analyze, Buy and Sell"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Image Margin="10" Source="projections.png" HorizontalOptions="End" MaximumHeightRequest="490"  />
+                </VerticalStackLayout>
+            </cards:SfCardView>
+
+            <cards:SfCardView BorderColor="#9072C9" Background="#FF007C9C" BorderWidth="10"  CornerRadius="10">
+                <VerticalStackLayout>
+                    <Label  Text="Newspaper"  Margin="2,0,0,0" FontAttributes="Bold" TextColor="White" FontSize="Title"  VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Image Margin="10"  HorizontalOptions="End" Source="newonline.png" MaximumHeightRequest="490"  />
+                </VerticalStackLayout>
+            </cards:SfCardView>
+
+            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10"     Background="#FF019FCC"  CornerRadius="10">
+                <VerticalStackLayout>
+                    <Label  Text="Buy Real Estate or invest in the city mall project"  Margin="4,0,0,0" FontAttributes="Bold" TextColor="White" FontSize="Title"  VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Image HorizontalOptions="End" Margin="10" Source="buy_house.png" MaximumWidthRequest="400"/>
+                </VerticalStackLayout>
+            </cards:SfCardView>
+
+        
 
         </cards:SfCardLayout>
 
@@ -241,7 +236,7 @@
                       Margin="10" ImageSource="buy_house.png"
                       BorderWidth="2" BorderColor="#9072C9"
                      MaximumHeightRequest="108"
-                      BackgroundColor="#FF007C9C"
+                  
                          ToolTipProperties.Text="Join the Auction to buy Real Estate or invest in the city mall project"
                        Background="#FF019FCC"
                       CornerRadius="10">
