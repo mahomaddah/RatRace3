@@ -7,6 +7,7 @@
               xmlns:local="clr-namespace:RatRace3"
              xmlns:cards="clr-namespace:Syncfusion.Maui.Cards;assembly=Syncfusion.Maui.Cards"
              xmlns:sfavatar="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:expander="clr-namespace:Syncfusion.Maui.Expander;assembly=Syncfusion.Maui.Expander"
              xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu">
 
     <ContentPage.BindingContext>
@@ -28,11 +29,11 @@
                 Margin="0,0,0,-5"
                Text="Month:"
                VerticalOptions="Start" 
-               HorizontalOptions="Center" FontAttributes="Italic" TextColor="#9072C9" FontSize="Caption" />
+               HorizontalOptions="Center" FontAttributes="Italic" TextColor="#9072C9" FontSize="{OnPlatform Default='Caption' , WinUI='Subtitle', MacCatalyst='Subtitle'}" />
             <Label 
              Text="1 / 24"
              VerticalOptions="Start" 
-             HorizontalOptions="Center" FontAttributes="Bold" TextColor="#9072C9" FontSize="Subtitle" />   
+             HorizontalOptions="Center" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='Subtitle', WinUI='Title', MacCatalyst='Title' }"  />   
 
         </VerticalStackLayout>
 
@@ -42,109 +43,278 @@
             <Label    Margin="0,0,0,-5"
                 Text="Balance:"
                 VerticalOptions="Start" 
-                HorizontalOptions="Center" TextColor="#9072C9"  FontSize="Caption"  FontAttributes="Italic" />
+                HorizontalOptions="Center" TextColor="#9072C9"   FontSize="{OnPlatform Default='Caption' , WinUI='Subtitle', MacCatalyst='Subtitle'}"  FontAttributes="Italic" />
 
             <Label 
                 Text="$2,975.04"
                 VerticalOptions="Start" 
-                HorizontalOptions="Center" TextColor="#9072C9"  FontSize="Subtitle" FontAttributes="Bold"  />
+                HorizontalOptions="Center" TextColor="#9072C9"  FontSize="{OnPlatform Default='Subtitle', WinUI='Title', MacCatalyst='Title' }" FontAttributes="Bold"  />
         </VerticalStackLayout>
 
 
         <cards:SfCardLayout VisibleIndex="{Binding VisibleIndex, Mode=TwoWay}"  x:Name="CardGamesLayout" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,10,0"  SwipeDirection="Right"  BackgroundColor="#339072C9">
 
             <cards:SfCardView BorderColor="#9072C9" BorderWidth="10" CornerRadius="10"   BackgroundColor="#CCCD3370">
-                <VerticalStackLayout>
-                    <Label  x:Name="labelPaymentsPage" Margin="2,0,0,0" FontAttributes="Bold" FontSize="Title" TextColor="#9072C9"  Text="Payments" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                <Grid>
                     <Image HorizontalOptions="End" Margin="10" Source="cardpayment.png" MaximumHeightRequest="490"  />
-                    
-                </VerticalStackLayout>
+                    <Label  x:Name="labelPaymentsPage" Margin="2,0,0,0" FontAttributes="Bold"  FontSize="{OnPlatform Default='Caption' , WinUI='Title', MacCatalyst='Subtitle'}" TextColor="#9072C9"  Text="Payments" VerticalTextAlignment="Start" HorizontalTextAlignment="Start"/>
+                    <ScrollView HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="{OnPlatform Android='10,35,0,0' ,Default='60,35,0,0' , iOS='10,35,0,0'}">
+                        <StackLayout  HorizontalOptions="{OnPlatform MacCatalyst=Center,WinUI=Center}"  >
+                            
+                            <Border  StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,0,8,8',WinUI='8,0,6,8',MacCatalyst='8,0,6,8'}" Stroke="#9072C9"  StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=560,WinUI=540}">
+                                <expander:SfExpander AnimationDuration="200" IsExpanded="True" >
+                                    <expander:SfExpander.Header>
+                                        <Grid >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="48"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="35"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="mobilborsa.png" WidthRequest="15" HeightRequest="15"></Image>
+                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="Invoice Date" FontSize="14" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
+                                        </Grid>
+                                    </expander:SfExpander.Header>
+                                    <expander:SfExpander.Content>
+                                        <Grid Padding="18,8,0,18" >
+                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="11:03 AM, 15 January 2019" FontSize="14" VerticalOptions="CenterAndExpand"/>
+                                        </Grid>
+                                    </expander:SfExpander.Content>
+                                </expander:SfExpander>
+                            </Border>
+                            <Border StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,0,8,8',WinUI='8,0,6,8',MacCatalyst='8,0,6,8'}" Stroke="#9072C9" WidthRequest="{OnPlatform  MacCatalyst='560',WinUI='540'}" StrokeThickness="{OnPlatform MacCatalyst=2}">
+                                <expander:SfExpander  AnimationDuration="200" IsExpanded="False">
+                                    <expander:SfExpander.Header>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="48"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="35"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="mobilborsa.png" WidthRequest="15" HeightRequest="15"></Image>
+                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="Item(s)" FontSize="14" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
+                                        </Grid>
+                                    </expander:SfExpander.Header>
+                                    <expander:SfExpander.Content>
+                                        <Grid Padding="18,8,18,18">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="2018 Subaru Outback"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="All-Weather Mats" Grid.Row="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Door Edge Guard Kit" Grid.Row="2"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Rear Bumper Cover" Grid.Row="3"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Wheel Locks" Grid.Row="4"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Gas Full Tank" Grid.Row="5"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Total Amount" TextColor="{StaticResource Primary}" Grid.Row="6"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$35,705.00" Grid.Row="0" Grid.Column="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$101.00" Grid.Row="1" Grid.Column="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$162.00" Grid.Row="2" Grid.Column="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$107.00" Grid.Row="3" Grid.Column="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$81.00" Grid.Row="4" Grid.Column="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$64.00" Grid.Row="5" Grid.Column="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$36,220.00" TextColor="{StaticResource Primary}" Grid.Row="6" Grid.Column="1"/>
+                                        </Grid>
+                                    </expander:SfExpander.Content>
+                                </expander:SfExpander>
+                                
+                            </Border>
+                            <Border StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,0,8,8',WinUI='8,0,6,8',MacCatalyst='8,0,6,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{ OnPlatform MacCatalyst=560,WinUI=540}">
+                                <expander:SfExpander AnimationDuration="200"  IsExpanded="False">
+                                    <expander:SfExpander.Header>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="48"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="35"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                         
+                                            <Label Margin="2" CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="Payment Details" FontSize="14" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
+                                            <Button Margin="10" x:Name="CollectIncomeBTN" Clicked="CollectIncomeBTN_Clicked" Padding="2" ImageSource="mobilborsa.png" BackgroundColor="Transparent" WidthRequest="20" TextColor="White"  Text="Pay"></Button>
+                                        </Grid>
+                                    </expander:SfExpander.Header>
+                                    <expander:SfExpander.Content>
+                                        <Grid Padding="18,8,18,18"  RowSpacing="6" >
+                                            <Grid.Resources>
+                                                <Style TargetType="Label">
+                                                    <Setter Property="FontFamily" Value="Roboto-Regular"/>
+                                                </Style>
+                                            </Grid.Resources>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Card Payment"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Third-Party coupons" Grid.Row="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Total Amount Paid" TextColor="{StaticResource Primary}" Grid.Row="2"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$31,200.00" Grid.Column="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$5,000.00" Grid.Row="1" Grid.Column="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$36,200.00" TextColor="{StaticResource Primary}" Grid.Row="2" Grid.Column="1"/>
+                                        </Grid>
+                                    </expander:SfExpander.Content>
+                                </expander:SfExpander>
+                            </Border>
+                            <Border StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,0,8,8',WinUI='8,0,6,8',MacCatalyst='8,0,6,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=560,WinUI=540}">
+                                <expander:SfExpander AnimationDuration="200" IsExpanded="True">
+                                    <expander:SfExpander.Header>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="48"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="35"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="mobilborsa.png" WidthRequest="15" HeightRequest="15"></Image>
+                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontSize="14" Text="Address" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
+                                        </Grid>
+                                    </expander:SfExpander.Header>
+                                    <expander:SfExpander.Content>
+                                        <Grid Padding="18,8,18,18" Grid.Row="1" RowSpacing="1">
+                                            <Grid.Resources>
+                                                <Style TargetType="Label">
+                                                    <Setter Property="FontFamily" Value="Roboto-Regular"/>
+                                                </Style>
+                                            </Grid.Resources>
+                                            <Grid.RowDefinitions >
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Label CharacterSpacing="0.25"  FontSize="14" Text="Alex" FontAttributes="Bold"/>
+                                            <Label CharacterSpacing="0.25"  FontSize="14" Text="No.8 Blossom St, Washington, DC 20019" Grid.Row="1"/>
+                                            <Label CharacterSpacing="0.25"  FontSize="14" Text="(202) 547-3555" Grid.Row="2"/>
+                                        </Grid>
+                                    </expander:SfExpander.Content>
+                                </expander:SfExpander>
+                            </Border>
+                        </StackLayout>
+                    </ScrollView>
+
+
+             
+                  
+           </Grid>
 
             </cards:SfCardView>
 
             <cards:SfCardView IndicatorThickness="12" IndicatorColor="#9072C9" Background="#ff73ab" BorderColor="#9072C9" BorderWidth="10"  CornerRadius="10">
-                <VerticalStackLayout>
-                    <Label Margin="2,0,0,0" FontAttributes="Bold" TextColor="#9072C9" FontSize="Title" Text="Financial Statements, Balance Sheet, Manage your Assets and Liability"  VerticalTextAlignment="Start" HorizontalTextAlignment="Start"/>
-                    <Image Margin="10" Source="checkingfinansalstatment.png"  HorizontalOptions="End" MaximumHeightRequest="490" />
-                </VerticalStackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="12*"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="2" Margin="10" Source="checkingfinansalstatment.png"  HorizontalOptions="End" MaximumHeightRequest="490" />
+                    <Label Grid.Row="0" Margin="2,0,0,0" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}" Text="Financial Statements, Balance Sheet, Manage your Assets and Liability"  VerticalTextAlignment="Start" HorizontalTextAlignment="Start"/>
+                   
+                </Grid>
             </cards:SfCardView>
 
             <cards:SfCardView BorderColor="#9072C9" Background="#FFE3AAD6" BorderWidth="10"  CornerRadius="10">
-                <VerticalStackLayout>
-                    <Label  Text="Bank : Fixed Deposit in bank , Invest in Index or Bonds" TextColor="#9072C9" FontAttributes="Bold" Margin="5,0,0,0"  VerticalTextAlignment="Start" FontSize="Title" HorizontalTextAlignment="Start"/>
-                    <HorizontalStackLayout   >
+                <Grid>
+                    <Label  Text="Bank : Fixed Deposit in bank , Invest in Index or Bonds" TextColor="#9072C9" FontAttributes="Bold" Margin="5,0,0,0" VerticalTextAlignment="Start" FontSize="{OnPlatform Android='Caption',iOS='Caption', Default='Title'}" HorizontalTextAlignment="Start"/>
+
+                    <StackLayout Orientation="Horizontal"  VerticalOptions="End">
+                   
+                  
+
+                        <Image  WidthRequest="{OnPlatform Default='300' , Android='180'}" Margin="{OnPlatform Android='20,10,0,10', iOS='20,30,10,0', Default='70,70,10,0'}" VerticalOptions="End" HorizontalOptions="Start" ToolTipProperties.Text="“Investing is like gardening: plant wisely, nurture patiently, and let time grow your wealth.”" Source="gardening.png"  />
+                        <Image  WidthRequest="{OnPlatform Default='300' , Android='30'}"   HorizontalOptions="Center" Margin="10,-5,10,10" Source="mobilborsa.png" VerticalOptions="End"   />
 
 
-                        <Image HorizontalOptions="End" Margin="10" Source="mobilborsa.png" MinimumWidthRequest="400" MaximumHeightRequest="490"   />
-                        <Image HorizontalOptions="End" ToolTipProperties.Text="“Investing is like gardening: plant wisely, nurture patiently, and let time grow your wealth.”" Source="gardening.png"  WidthRequest="300"/>
 
-
-                        <radialMenu:SfRadialMenu x:Name="radialMenu" AnimationDuration="400" 
+                        <radialMenu:SfRadialMenu Margin="{OnPlatform Default='0,0,0,0', Android='-300,0,0,0'}" x:Name="radialMenu" AnimationDuration="400" HeightRequest="{OnPlatform Default='300' , Android='150' ,iOS='150'}" VerticalOptions="End" 
                                  RimColor="#9072C9"
-                                         Point="-273, 130"
+                                                
+                                     Point="{OnPlatform Default='-603, 30',Android='83,125' ,iOS='83,125' }"
                                      EnableCenterButtonAnimation="True"
-                                     IsDragEnabled="False"
-                         
+                                     IsDragEnabled="False" 
+                                       CenterButtonSize="{ OnPlatform Default='56' , Android='40' , iOS='40'}"
+                                             
+                                    RimRadius="{OnPlatform Default='250' , Android='110'}"
                                     CenterButtonTextColor="#9072C9"
                                      CenterButtonBackTextColor="#9072C9"
                                      CenterButtonFontAttributes="Bold"
                                      CenterButtonBackFontAttributes="Bold"
-                                     CenterButtonBackFontSize="20"
-                                     CenterButtonFontSize="20"
+                                     CenterButtonBackFontSize="{OnPlatform Default='20' , Android='10'}"
+                                     CenterButtonFontSize="{OnPlatform Default='20' , Android='10'}"
                          
                                 CenterButtonText="Bank"
-                                     SeparatorColor="#3f3d56"
-                             CenterButtonBackgroundColor="#3f3d56"
-                                CenterButtonRadius="30"
-                                     RimRadius="250"
-                                 CenterButtonBackText="Back"
+                                CenterButtonBackText="Back"
+                                SeparatorColor="#3f3d56"
+                                CenterButtonBackgroundColor="#3f3d56"
+                                CenterButtonRadius="{OnPlatform Default='100' }"
+                                               
+                                    
+                                
                               >
                             <radialMenu:SfRadialMenu.Items>
-                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="Fixed Deposit" Image="cash_fast.png"
-                                      FontAutoScalingEnabled="True"/>
-                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="Recursive deposit" Image="cash_recursive_deposit.png"
-                                        FontAutoScalingEnabled="True"/>
-                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="S&amp;P500 index (SPY ETF)" Image="cash_etf_icon.png"
+                                <radialMenu:SfRadialMenuItem  ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='14', Default='25' }" BackgroundColor="#9072C9" Text="FD" Image="cash_fast.png"
+                                    FontAttributes="Bold" ToolTipProperties.Text="Fixed Deposit" />
+                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="RD" Image="cash_recursive_deposit.png"
+                                        ItemWidth="{OnPlatform Android='35' , Default='55'}" ToolTipProperties.Text="Recursive deposit" TextColor="#E3AAD6" FontSize="{OnPlatform Android='17', Default='25' }"/>
+                                <radialMenu:SfRadialMenuItem    FontAttributes="Bold" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='7', Default='8' }" BackgroundColor="#9072C9" Text="S&amp;P500 index (SPY ETF)" ToolTipProperties.Text="S&amp;P500 index (SPY ETF)" Image="cash_etf_icon.png"
                                          FontAutoScalingEnabled="True"/>
-                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="Bonds" Image="cash_bond_icon.png"
+                                <radialMenu:SfRadialMenuItem  ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='12', Default='14' }"  FontAttributes="Bold" BackgroundColor="#9072C9" Text="Bonds" Image="cash_bond_icon.png"
                                     FontAutoScalingEnabled="True">
                                     <radialMenu:SfRadialMenuItem.Items>
-                                        <radialMenu:SfRadialMenuItem FontAutoScalingEnabled="True" Text="Tbond" BackgroundColor="#9072C9" Image="cash_bond_icon.png"  />
-                                        <radialMenu:SfRadialMenuItem Text="Coporate Bonds" BackgroundColor="#9072C9" FontSize="8" Image="cash_coporate_bond.png" />
+                                        <radialMenu:SfRadialMenuItem   FontAttributes="Bold" ToolTipProperties.Text="Tbond" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='10', Default='17' }" FontAutoScalingEnabled="True" Text="Tbond" BackgroundColor="#9072C9" Image="cash_bond_icon.png"  />
+                                        <radialMenu:SfRadialMenuItem   FontAttributes="Bold" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='8', Default='12' }" ToolTipProperties.Text="Coporate Bonds" Text="Coporate Bonds" BackgroundColor="#9072C9" Image="cash_coporate_bond.png" />
 
-                                        <radialMenu:SfRadialMenuItem Text="Long term Bonds" BackgroundColor="#9072C9" FontAutoScalingEnabled="True" Image="cash_long_term_bond.png" />
+                                        <radialMenu:SfRadialMenuItem  Text="Long term Bonds"   FontAttributes="Bold" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6"  FontSize="{OnPlatform Android='9', Default='12' }" ToolTipProperties.Text="Long term Bonds" BackgroundColor="#9072C9" FontAutoScalingEnabled="True" Image="cash_long_term_bond.png" />
 
                                     </radialMenu:SfRadialMenuItem.Items>
                                 </radialMenu:SfRadialMenuItem>
-                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="Mutual fund" Image="cash_central_bank.png"
-                                                     FontSize="8"/>
+                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9"   FontAttributes="Bold"  ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='10', Default='12' }" Text="Mutual fund" Image="cash_central_bank.png"
+                                       ToolTipProperties.Text="Mutual Fund"             />
 
                             </radialMenu:SfRadialMenu.Items>
                         </radialMenu:SfRadialMenu>
-                    </HorizontalStackLayout>
+               
 
-                </VerticalStackLayout>
+                </StackLayout>
+                </Grid>
 
             </cards:SfCardView>
        
             <cards:SfCardView BorderColor="#9072C9" Background="#FFFF7D7D" BorderWidth="10"  CornerRadius="10">
                 <VerticalStackLayout>
-                    <Label  Margin="2,0,0,0" FontAttributes="Bold" TextColor="#9072C9" FontSize="Title" HorizontalOptions="Start" Text="Invest in US Companies : Analyze, Buy and Sell"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                    <Image Margin="10" Source="projections.png" HorizontalOptions="End" MaximumHeightRequest="490"  />
+                    <Label  Margin="2,0,0,0" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  HorizontalOptions="Start" Text="Invest in US Companies : Analyze, Buy and Sell"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Image Margin="10" Source="projections.png" HorizontalOptions="End" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"  />
                 </VerticalStackLayout>
             </cards:SfCardView>
 
             <cards:SfCardView BorderColor="#9072C9" Background="#FF007C9C" BorderWidth="10"  CornerRadius="10">
                 <VerticalStackLayout>
-                    <Label  Text="Newspaper"  Margin="2,0,0,0" FontAttributes="Bold" TextColor="White" FontSize="Title"  VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
-                    <Image Margin="10"  HorizontalOptions="End" Source="newonline.png" MaximumHeightRequest="490"  />
+                    <Label  Text="Newspaper"  Margin="2,0,0,0" FontAttributes="Bold" TextColor="White"  FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Image Margin="10"  HorizontalOptions="End" Source="newonline.png" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"  />
                 </VerticalStackLayout>
             </cards:SfCardView>
 
             <cards:SfCardView BorderColor="#9072C9" BorderWidth="10"     Background="#FF019FCC"  CornerRadius="10">
                 <VerticalStackLayout>
-                    <Label  Text="Buy Real Estate or invest in the city mall project"  Margin="4,0,0,0" FontAttributes="Bold" TextColor="White" FontSize="Title"  VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
-                    <Image HorizontalOptions="End" Margin="10" Source="buy_house.png" MaximumWidthRequest="400"/>
+                    <Label  Text="Buy Real Estate or invest in the city mall project"  Margin="4,0,0,0" FontAttributes="Bold" TextColor="White" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    <Image HorizontalOptions="End" Margin="10" Source="buy_house.png" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"/>
                 </VerticalStackLayout>
             </cards:SfCardView>
 
@@ -153,7 +323,7 @@
         </cards:SfCardLayout>
 
 
-        <Grid            Grid.Row="2" Grid.ColumnSpan="2" x:Name="navigationBar">
+        <Grid  Grid.Row="2" Grid.ColumnSpan="2" x:Name="navigationBar">
 
             <ScrollView  Orientation="Horizontal">
 
@@ -161,8 +331,8 @@
 
                     <Button     
                         VerticalOptions="Start"
-                 WidthRequest="120"                         
-                HeightRequest="108"
+                WidthRequest="{OnPlatform Default='120' ,Android='100' ,iOS='100'}"                       
+                HeightRequest="{OnPlatform Default='108' ,Android='70' ,iOS='70'}"
                 ToolTipProperties.Text="Collect your income , Manage your life expenses..."
                     Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}"  CommandParameter="0" Clicked="cardNavBtn_Clicked"  x:Name="paymentPageNavBtn" Margin="10"
                         ImageSource="cardpayment.png" BorderWidth="2" BorderColor="#9072C9"
@@ -174,7 +344,8 @@
                             CommandParameter="1"
                              Clicked="cardNavBtn_Clicked" 
                              VerticalOptions="Start"
-                            WidthRequest="120"  HeightRequest="108"
+                           WidthRequest="{OnPlatform Default='120' ,Android='100' ,iOS='100'}"                       
+ HeightRequest="{OnPlatform Default='108' ,Android='70' ,iOS='70'}"
                             Margin="10" ImageSource="checkingfinansalstatment.png"
                             BorderWidth="2" BorderColor="#9072C9"
                        
@@ -187,7 +358,8 @@
                                ToolTipProperties.Text="Bank : Fixed Deposit in bank , Invest in Index or Bonds"
                              Clicked="cardNavBtn_Clicked" 
                     CommandParameter="2"
-                    WidthRequest="120"  HeightRequest="108"
+                     WidthRequest="{OnPlatform Default='120' ,Android='100' ,iOS='100'}"                       
+                     HeightRequest="{OnPlatform Default='108' ,Android='70' ,iOS='70'}"
                                    
                              VerticalOptions="Start"
                     Margin="10" ImageSource="mobilborsa.png"
@@ -204,7 +376,8 @@
                             ToolTipProperties.Text="US Stock Market: Invest in IPO Companies, Buy, Sell, Study Financial Statement and projections of the company..."
                      CommandParameter="3"
                              VerticalOptions="Start"
-                           WidthRequest="120"  HeightRequest="108"
+                     WidthRequest="{OnPlatform Default='120' ,Android='100' ,iOS='100'}"                       
+                     HeightRequest="{OnPlatform Default='108' ,Android='70' ,iOS='70'}"
                      Margin="10" ImageSource="projections.png"
                      BorderWidth="2" BorderColor="#9072C9"
        
@@ -218,7 +391,8 @@
                              Clicked="cardNavBtn_Clicked" 
                        CommandParameter="4"
                              VerticalOptions="Start"
-                               WidthRequest="120"  HeightRequest="108"
+                     WidthRequest="{OnPlatform Default='120' ,Android='100' ,iOS='100'}"                       
+                     HeightRequest="{OnPlatform Default='108' ,Android='70' ,iOS='70'}"
                        Margin="10" ImageSource="newonline.png"
                        BorderWidth="2" BorderColor="#9072C9"
                         MaximumHeightRequest="108"
@@ -232,7 +406,8 @@
                       CommandParameter="5"
 
                              VerticalOptions="Start"
-                                WidthRequest="120"  HeightRequest="108"
+                     WidthRequest="{OnPlatform Default='120' ,Android='100' ,iOS='100'}"                       
+                     HeightRequest="{OnPlatform Default='108' ,Android='70' ,iOS='70'}"
                       Margin="10" ImageSource="buy_house.png"
                       BorderWidth="2" BorderColor="#9072C9"
                      MaximumHeightRequest="108"
@@ -246,7 +421,8 @@
                   Clicked="GameNextTurnBtn_Clicked" 
                   CommandParameter="6"
                    VerticalOptions="Start"
-                   WidthRequest="120"  HeightRequest="108"
+                     WidthRequest="{OnPlatform Default='120' ,Android='100' ,iOS='100'}"                       
+                     HeightRequest="{OnPlatform Default='108' ,Android='70' ,iOS='70'}"
                   Margin="10,10,10,10" ImageSource="next_turn.png"
                   BorderWidth="3" BorderColor="White"
                  MaximumHeightRequest="108"
@@ -264,7 +440,8 @@
                      ToolTipProperties.Text="check game goals or finish the game!"
                      CommandParameter="7"
                       VerticalOptions="Start"
-                      WidthRequest="120"  HeightRequest="108"
+                     WidthRequest="{OnPlatform Default='120' ,Android='100' ,iOS='100'}"                       
+                     HeightRequest="{OnPlatform Default='108' ,Android='70' ,iOS='70'}"
                      Margin="10" ImageSource="game_win_invesment_data.png"
                      BorderWidth="2" BorderColor="Goldenrod"
                     MaximumHeightRequest="108"

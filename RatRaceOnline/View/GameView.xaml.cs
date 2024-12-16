@@ -4,7 +4,7 @@ using Syncfusion.Maui.Cards;
 
 public partial class GameView : ContentPage
 {
-    public CardViewModel CardviewModel { get; set; } 
+    public CardViewModel CardviewModel { get; set; }
     public GameView()
 	{
 		InitializeComponent();
@@ -12,8 +12,31 @@ public partial class GameView : ContentPage
         BindingContext = CardviewModel;
 
         // Set default card index to open first 
-        CardviewModel.VisibleIndex = 2;
+        CardviewModel.VisibleIndex = 1;
+
+        UpdateOrientation();
+
+        // Event to detect orientation change
+        DeviceDisplay.MainDisplayInfoChanged += (s, e) => UpdateOrientation();
+
+      
+
+    }
+    private void UpdateOrientation()
+    {
        
+        // for fixin radial Menu button's ( flower bank button android rotation bug..)
+        if (  (DeviceInfo.Platform == DevicePlatform.Android || DeviceInfo.Platform == DevicePlatform.iOS) && DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Landscape)
+        {
+            //change button point change the 0,0 to a real working tested button location ...
+            radialMenu.Point = new Point(0,0);
+        }
+        else if ((DeviceInfo.Platform == DevicePlatform.Android || DeviceInfo.Platform == DevicePlatform.iOS) && DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Portrait)
+        {
+            //return button point 83,125 which tested for a
+            radialMenu.Point = new Point(83, 125);
+        }
+
     }
 
     private async void cardNavBtn_Clicked(object sender, EventArgs e)
@@ -26,14 +49,19 @@ public partial class GameView : ContentPage
         }
     }
 
-    private void GameProgressBtn_Clicked(object sender, EventArgs e)
+    private async void GameProgressBtn_Clicked(object sender, EventArgs e)
     {
-
+        await Shell.Current.GoToAsync("StoryDetailView");
     }
 
     private void GameNextTurnBtn_Clicked(object sender, EventArgs e)
     {
+        //  await DisplayAlert("Alert", ((Button)sender).CommandParameter.ToString(),);
+    }
 
+    private async void CollectIncomeBTN_Clicked(object sender, EventArgs e)
+    {
+        await DisplayAlert("Income...", "$1,200.00 Total Income Collected!","Amazing! $$$");
     }
 }
 
