@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RatRace3.MarketPage"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             xmlns:local="clr-namespace:RatRace3;assembly=RatRace3"
+             xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
+             Title="Market Page">
+    
+    <VerticalStackLayout>
+        <Label Margin="2,2,2,10" 
+            Text="Welcome to Market..."
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <chart:SfCartesianChart Margin="10" x:Name="Chart"  >
+            <!-- Define X and Y axes -->
+            <chart:SfCartesianChart.ZoomPanBehavior>
+                <chart:ChartZoomPanBehavior EnablePinchZooming="True"/>
+            </chart:SfCartesianChart.ZoomPanBehavior>
+            
+            <chart:SfCartesianChart.XAxes>
+                <chart:CategoryAxis>
+              
+                        <chart:CategoryAxis.Title>
+                        <chart:ChartAxisTitle Text="(Monthly Candles)"/>
+                        </chart:CategoryAxis.Title>
+                 
+                </chart:CategoryAxis>
+            </chart:SfCartesianChart.XAxes>
+            
+            <chart:SfCartesianChart.YAxes>
+                <chart:LogarithmicAxis >
+                    <chart:LogarithmicAxis.Title>
+                        <chart:ChartAxisTitle Text="Stock Price (in USD)"/>
+                    </chart:LogarithmicAxis.Title>
+                </chart:LogarithmicAxis>
+            </chart:SfCartesianChart.YAxes>
+
+            <!-- Add Data -->
+            <chart:SfCartesianChart.Series  
+                    EnableAnimation="True"
+                    AnimationDuration="10000" >
+
+                <chart:ColumnSeries ItemsSource="{Binding ChartData}"
+                        EnableAnimation="True"  
+                        Spacing="0.1"
+                                      Label="USD"
+                                    EnableTooltip="True"
+                        Width="4.6"
+                        ShowDataLabels="True"
+                        PaletteBrushes="{Binding PaletteBrushes}" 
+                        XBindingPath="Date"
+                        YBindingPath="Value"/>
+                
+            </chart:SfCartesianChart.Series>
+
+        </chart:SfCartesianChart>
+        <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" Text="Current Stock Price: $53.44"></Label>
+        <Label Margin="10,0,10,10" HorizontalOptions="Center" VerticalOptions="Center"  FontSize="Subtitle" Text="Total Price: $641.32"></Label>
+        <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Body" Text="Use the slider to select the number of shares you want to trade."></Label>
+
+        <gauge:SfLinearGauge EnableAxisAnimation="True" AnimationDuration="500" Interval="5" TickPosition="Outside" LabelPosition="Outside" Background="Transparent"  ShowLabels="True" UseRangeColorForAxis="True" Margin="1" WidthRequest="430">
+
+            <gauge:SfLinearGauge.LabelStyle>
+                <gauge:GaugeLabelStyle FontAttributes="Bold" FontSize="8" 
+                                           TextColor="#9072C9"/>
+            </gauge:SfLinearGauge.LabelStyle>
+
+            <gauge:SfLinearGauge.LineStyle>
+                <gauge:LinearLineStyle Thickness="3"  CornerStyle="BothCurve">
+                        <gauge:LinearLineStyle.GradientStops>
+                        <gauge:GaugeGradientStop Value="0" Color="#FF45B3C1"/>
+                        <gauge:GaugeGradientStop Value="50" Color="#FF6ECAB2"/>
+                        <gauge:GaugeGradientStop Value="100" Color="#FF84D6AA"/>
+                    </gauge:LinearLineStyle.GradientStops>
+                    </gauge:LinearLineStyle>
+                </gauge:SfLinearGauge.LineStyle>
+
+
+            <gauge:SfLinearGauge.MarkerPointers >
+
+
+
+                <gauge:LinearShapePointer     x:Name="markerPointer"  IsInteractive="True" Fill="#FF6ECAB2" Value="5"/>
+
+             
+            </gauge:SfLinearGauge.MarkerPointers>
+
+            <gauge:SfLinearGauge.BarPointers>
+
+                <gauge:BarPointer IsInteractive="True" PointerSize="3" Fill="#ff73ab"      Value="{Binding Source={x:Reference markerPointer}, Path=Value ,Mode=TwoWay}" CornerStyle="BothCurve" EnableAnimation="True"  AnimationDuration="500"  />
+            </gauge:SfLinearGauge.BarPointers>
+
+        </gauge:SfLinearGauge>
+        
+        
+        <HorizontalStackLayout Margin="10" HorizontalOptions="Center" VerticalOptions="Center">
+          
+            <Button Margin="0,0,10,0" Text="Buy"></Button>
+              <Button Text="Sell"></Button>
+        </HorizontalStackLayout>
+      
+
+    </VerticalStackLayout>
+</ContentPage>

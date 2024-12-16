@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RatRace3.View.StockSelectView"
+             Title="StockSelectView">
+    <VerticalStackLayout>
+        <Label 
+            Text="10 - 12 company/asset will be here in a listview names logos invest button and Company Statments button undeer each of them ..."
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        
+        
+    </VerticalStackLayout>
+</ContentPage>

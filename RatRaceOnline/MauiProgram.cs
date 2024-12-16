@@ -1,4 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using Syncfusion.Licensing;
+using Syncfusion.Maui.Core.Hosting;
+
+
 
 namespace RatRace3
 {
@@ -8,15 +12,22 @@ namespace RatRace3
         {
             var builder = MauiApp.CreateBuilder();
             builder
+                .ConfigureSyncfusionCore()
+                
                 .UseMauiApp<App>()
+          
+         
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+       
                 });
+           
 
+         
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

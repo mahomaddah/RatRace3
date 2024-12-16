@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:sfavatar="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             x:Class="RatRace3.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+     
+            <sfavatar:SfAvatarView Margin="1" HorizontalOptions="CenterAndExpand" ContentType="Custom"
+                        ImageSource="ratrace3vector.png"
+                        VerticalOptions="Center"
+                       
+                        HeightRequest="210"
+                        CornerRadius="80"
+                        WidthRequest="210" 
+                        Stroke="#9072C9"
+                        StrokeThickness="3"
+            />
+      
+
+      
+            
+            <Button
+                 x:Name="SinglePlayerBtn"
+                 Text="Single Player" 
+                
+                 SemanticProperties.Hint="Play Camping mode Offline..."
+                 Clicked="SinglePlayerBtn_Clicked"
+                 WidthRequest="200"
+                 MaximumWidthRequest="300"
+                 HorizontalOptions="CenterAndExpand" 
+            />
+          
+            <Button  Margin="4" Clicked="MultiplayerClicked"   WidthRequest="200" MaximumWidthRequest="300" Text="Multi Player (soon)"></Button>
+            
+            <Button  Margin="4" Clicked="RealEconomyClicked"   WidthRequest="200" MaximumWidthRequest="300" Text="Real Economy (soon)"></Button>
+
+
+            <Button
+            x:Name="MarketPageBtn"
+            Text="Tournament (soon)"            
+            Clicked="MarketPageBtn_Clicked"
+            WidthRequest="200"
+    
+            MaximumWidthRequest="300"
+            HorizontalOptions="CenterAndExpand" />
+            
+            
+            <VerticalStackLayout Margin="0,0,0,0">
+
+                <Label
+                Text="RAT RACE 3"
+                Style="{StaticResource Headline}" 
+                TextColor="#9072C9"
+                />
+
+                <Label
+                 TextColor="#9072C9"
+                Text="Real Life Monopoly"
+                Style="{StaticResource SubHeadline}"              
+                />
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
+
+    
