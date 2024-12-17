@@ -11,11 +11,14 @@ namespace RatRace3
 {
     public class CardViewModel : INotifyPropertyChanged
     {
+        public List<string> Liabilities { get; set; }
+
         public ICommand ChangeCardIndexCommand { get; }
 
         public CardViewModel()
         {
             ChangeCardIndexCommand = new Command<int>(index => VisibleIndex = index);
+            Liabilities = new List<string> { "Education Loan" , "Phone Debt"  };
         }
 
         private int _visibleIndex;

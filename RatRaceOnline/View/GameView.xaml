@@ -220,13 +220,192 @@
 
             <cards:SfCardView IndicatorThickness="12" IndicatorColor="#9072C9" Background="#ff73ab" BorderColor="#9072C9" BorderWidth="10"  CornerRadius="10">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="12*"/>
-                    </Grid.RowDefinitions>
                     <Image Grid.Row="2" Margin="10" Source="checkingfinansalstatment.png"  HorizontalOptions="End" MaximumHeightRequest="490" />
-                    <Label Grid.Row="0" Margin="2,0,0,0" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}" Text="Financial Statements, Balance Sheet, Manage your Assets and Liability"  VerticalTextAlignment="Start" HorizontalTextAlignment="Start"/>
-                   
+                    <Label  Margin="2,0,0,0" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}" Text="Financial Statements, Balance Sheet, Manage your Assets and Liability"  VerticalTextAlignment="Start" HorizontalTextAlignment="Start"/>
+                    <ScrollView HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="{OnPlatform Android='10,35,0,0' ,Default='60,35,0,0' , iOS='10,35,0,0'}">
+                        <StackLayout  HorizontalOptions="{OnPlatform MacCatalyst=Center,WinUI=Center}"  >
+
+                            <Border  StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8',WinUI='8,0,6,8',MacCatalyst='8,0,6,8'}" Stroke="#9072C9"  StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=560,WinUI=540}">
+                                <expander:SfExpander AnimationDuration="200" IsExpanded="True" ToolTipProperties.Text="One person's income is another person's expenses" >
+                                    <expander:SfExpander.Header>
+                                        <Grid >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="48"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="48"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="48"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Grid.Column="0" Margin="0,-3,0,0" Source="income.png"  HeightRequest="40"></Image>
+                                            <HorizontalStackLayout Grid.Column="1" >
+                                                <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Total Income:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
+                                                <Label x:Name="TotalIncomeLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$1,300.00" FontSize="14" VerticalOptions="CenterAndExpand"/>
+
+                                            </HorizontalStackLayout>
+                                            <Image Grid.Column="2" Margin="0,-3,0,0" Source="expences.png"  HeightRequest="35"></Image>
+                                            <HorizontalStackLayout Grid.Column="3" >
+                                                <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Total Expense:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
+                                                <Label x:Name="TotalIncomesLB" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$739.34" FontSize="14" VerticalOptions="CenterAndExpand"/>
+
+                                            </HorizontalStackLayout>
+                                        </Grid>
+                                    </expander:SfExpander.Header>
+                                    <expander:SfExpander.Content>
+                                        <Grid Padding="18,8,0,18" >
+                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="11:03 AM, 15 January 2019" FontSize="14" VerticalOptions="CenterAndExpand"/>
+                                        </Grid>
+                                    </expander:SfExpander.Content>
+                                </expander:SfExpander>
+                            </Border>
+                            <HorizontalStackLayout>
+                                <Border StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2}"  WidthRequest="{OnPlatform  MacCatalyst='284',WinUI='262'}">
+                                    <expander:SfExpander  ToolTipProperties.Text="Rule One. You must know the difference between an asset and a liability, and buy assets. An asset is something that puts money in my pocket. A liability is something that takes money out of my pocket.-Robert Kiyosaki" AnimationDuration="200" IsExpanded="False">
+                                        <expander:SfExpander.Header>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="48"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="48"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Column="0" Margin="0,0,0,0" Source="asset.png"  HeightRequest="40"></Image>
+                                                <HorizontalStackLayout Grid.Column="1" >
+                                                    <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Assets:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
+                                                    <Label x:Name="TotalAssetsLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$0.00" FontSize="14" VerticalOptions="CenterAndExpand"/>
+
+                                                </HorizontalStackLayout>
+                                            </Grid>
+                                        </expander:SfExpander.Header>
+                                        <expander:SfExpander.Content>
+                                            <Grid Padding="18,8,18,18">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="20"/>
+                                                    <RowDefinition Height="20"/>
+                                                    <RowDefinition Height="20"/>
+                                                    <RowDefinition Height="20"/>
+                                                    <RowDefinition Height="20"/>
+                                                    <RowDefinition Height="20"/>
+                                                    <RowDefinition Height="20"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  Text="2018 Subaru Outback"/>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  Text="All-Weather Mats" Grid.Row="1"/>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  Text="Door Edge Guard Kit" Grid.Row="2"/>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  Text="Rear Bumper Cover" Grid.Row="3"/>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  Text="Wheel Locks" Grid.Row="4"/>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  Text="Gas Full Tank" Grid.Row="5"/>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  Text="Total Amount" TextColor="{StaticResource Primary}" Grid.Row="6"/>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$35,705.00" Grid.Row="0" Grid.Column="1"/>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$101.00" Grid.Row="1" Grid.Column="1"/>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$162.00" Grid.Row="2" Grid.Column="1"/>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$107.00" Grid.Row="3" Grid.Column="1"/>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$81.00" Grid.Row="4" Grid.Column="1"/>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$64.00" Grid.Row="5" Grid.Column="1"/>
+                                                <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$36,220.00" TextColor="{StaticResource Primary}" Grid.Row="6" Grid.Column="1"/>
+                                            </Grid>
+                                        </expander:SfExpander.Content>
+                                    </expander:SfExpander>
+
+                                </Border>
+                                <Border  StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=284,WinUI=262}">
+                                    <expander:SfExpander AnimationDuration="200" IsExpanded="True" ToolTipProperties.Text="Note: Surround yourself with assets, not liabilities. The most valuable assets in life are intangible assets like health, a happy family, financial freedom, a good heart, a constantly learning brain, and a lot of hobbies. Other assets are replaceable with time.">
+                                        <expander:SfExpander.Header>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="48"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="48"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Column="0" Margin="0,0,0,0" Source="liability.png"  HeightRequest="40"></Image>
+                                                <HorizontalStackLayout Grid.Column="1" >
+                                                    <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Liabilities:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
+                                                    <Label x:Name="LiabilitiesLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="-$10,400.00" FontSize="14" VerticalOptions="CenterAndExpand"/>
+
+                                                </HorizontalStackLayout>
+                                            </Grid>
+                                        </expander:SfExpander.Header>
+                                        <expander:SfExpander.Content>
+                                            <Grid Padding="18,8,18,18" Grid.Row="1" RowSpacing="1">
+                                                <Grid.Resources>
+                                                    <Style TargetType="Label">
+                                                        <Setter Property="FontFamily" Value="Roboto-Regular"/>
+                                                    </Style>
+                                                </Grid.Resources>
+                                                <Label>Education Loan -$10,400.00</Label>
+                                                <ListView x:Name="LiabilitiesLV" >
+                                               
+                                                </ListView>
+                                                  
+                                            </Grid>
+                                        </expander:SfExpander.Content>
+                                    </expander:SfExpander>
+                                </Border>
+                            </HorizontalStackLayout>
+                            <Border StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8',WinUI='8,8,6,8',MacCatalyst='8,8,6,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{ OnPlatform MacCatalyst=560,WinUI=540}">
+                                <expander:SfExpander AnimationDuration="200"  IsExpanded="False">
+                                    <expander:SfExpander.Header>
+                                       
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="48"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="148"/>
+                                                <ColumnDefinition Width="48"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                            <Button Grid.Column="0" BorderColor="#9072C9"  BorderWidth="1" Text="Collect All $" TextColor="#9072C9" Margin="2,2,2,2" BackgroundColor="#269072C9" Padding="2" ImageSource="freecashflow.png" Clicked="CollectIncomeBTN_Clicked"  ></Button>
+                                            <Image  HorizontalOptions="Start"  Source="freecashflow.png" Grid.Column="1" WidthRequest="38" Margin="0,-10,0,0"></Image>
+                                            <HorizontalStackLayout HorizontalOptions="Start" Margin="1" Grid.Column="2" >
+                                                    <Label CharacterSpacing="0.25" HorizontalOptions="Start" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Cash Flow:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
+                                                    <Label  x:Name="FreeCashFlowLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$0.00" FontSize="14" VerticalOptions="CenterAndExpand"/>
+                                               
+                                            </HorizontalStackLayout>
+                                            </Grid>
+                                    
+                                    </expander:SfExpander.Header>
+                                    <expander:SfExpander.Content>
+                                        <Grid Padding="18,8,18,18"  RowSpacing="6" >
+                                            <Grid.Resources>
+                                                <Style TargetType="Label">
+                                                    <Setter Property="FontFamily" Value="Roboto-Regular"/>
+                                                </Style>
+                                            </Grid.Resources>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Card Payment"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Third-Party coupons" Grid.Row="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Total Amount Paid" TextColor="{StaticResource Primary}" Grid.Row="2"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$31,200.00" Grid.Column="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$5,000.00" Grid.Row="1" Grid.Column="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$36,200.00" TextColor="{StaticResource Primary}" Grid.Row="2" Grid.Column="1"/>
+                                        </Grid>
+                                    </expander:SfExpander.Content>
+                                </expander:SfExpander>
+                            </Border>
+                           
+                            
+                        </StackLayout>
+                    </ScrollView>
+
+
+
                 </Grid>
             </cards:SfCardView>
 
