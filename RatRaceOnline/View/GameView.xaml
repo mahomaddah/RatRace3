@@ -238,13 +238,13 @@
                                                 <ColumnDefinition Width="48"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Image Grid.Column="0" Margin="0,-3,0,0" Source="income.png"  HeightRequest="40"></Image>
+                                            <Image Grid.Column="0" Margin="0,-3,0,0" Source="incomei.png"  HeightRequest="90"></Image>
                                             <HorizontalStackLayout Grid.Column="1" >
                                                 <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Total Income:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
                                                 <Label x:Name="TotalIncomeLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$1,300.00" FontSize="14" VerticalOptions="CenterAndExpand"/>
 
                                             </HorizontalStackLayout>
-                                            <Image Grid.Column="2" Margin="0,-3,0,0" Source="expences.png"  HeightRequest="35"></Image>
+                                            <Image Grid.Column="2" Margin="0,-3,0,0" Source="expenceshi.png"  HeightRequest="45"></Image>
                                             <HorizontalStackLayout Grid.Column="3" >
                                                 <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Total Expense:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
                                                 <Label x:Name="TotalIncomesLB" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$739.34" FontSize="14" VerticalOptions="CenterAndExpand"/>
@@ -271,7 +271,7 @@
                                                     <ColumnDefinition Width="48"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <Image Grid.Column="0" Margin="0,0,0,0" Source="asset.png"  HeightRequest="40"></Image>
+                                                <Image Grid.Column="0" Margin="0,0,0,0" Source="assethi.png"  HeightRequest="40"></Image>
                                                 <HorizontalStackLayout Grid.Column="1" >
                                                     <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Assets:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
                                                     <Label x:Name="TotalAssetsLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$0.00" FontSize="14" VerticalOptions="CenterAndExpand"/>
@@ -311,7 +311,7 @@
                                             </Grid>
                                         </expander:SfExpander.Content>
                                     </expander:SfExpander>
-
+                                        
                                 </Border>
                                 <Border  StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=284,WinUI=262}">
                                     <expander:SfExpander AnimationDuration="200" IsExpanded="True" ToolTipProperties.Text="Note: Surround yourself with assets, not liabilities. The most valuable assets in life are intangible assets like health, a happy family, financial freedom, a good heart, a constantly learning brain, and a lot of hobbies. Other assets are replaceable with time.">
@@ -324,7 +324,7 @@
                                                     <ColumnDefinition Width="48"/>
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <Image Grid.Column="0" Margin="0,0,0,0" Source="liability.png"  HeightRequest="40"></Image>
+                                                <Image Grid.Column="0" Margin="0,0,0,0" Source="liabilityhi.png"  HeightRequest="40"></Image>
                                                 <HorizontalStackLayout Grid.Column="1" >
                                                     <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Liabilities:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
                                                     <Label x:Name="LiabilitiesLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="-$10,400.00" FontSize="14" VerticalOptions="CenterAndExpand"/>
@@ -363,8 +363,8 @@
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
-                                            <Button Grid.Column="0" BorderColor="#9072C9"  BorderWidth="1" Text="Collect All $" TextColor="#9072C9" Margin="2,2,2,2" BackgroundColor="#269072C9" Padding="2" ImageSource="freecashflow.png" Clicked="CollectIncomeBTN_Clicked"  ></Button>
-                                            <Image  HorizontalOptions="Start"  Source="freecashflow.png" Grid.Column="1" WidthRequest="38" Margin="0,-10,0,0"></Image>
+                                            <Button Grid.Column="0" BorderColor="#9072C9"  BorderWidth="1" Text="Collect All $" TextColor="#9072C9" Margin="2,2,2,2" BackgroundColor="#269072C9" Padding="2" ImageSource="freecashflowhi.png" Clicked="CollectIncomeBTN_Clicked"  ></Button>
+                                            <Image  HorizontalOptions="Start"  Source="freecashflowhi.png"  Grid.Column="1"  WidthRequest="48" Margin="0,-10,0,0"></Image>
                                             <HorizontalStackLayout HorizontalOptions="Start" Margin="1" Grid.Column="2" >
                                                     <Label CharacterSpacing="0.25" HorizontalOptions="Start" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Cash Flow:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
                                                     <Label  x:Name="FreeCashFlowLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$0.00" FontSize="14" VerticalOptions="CenterAndExpand"/>
@@ -477,17 +477,61 @@
             </cards:SfCardView>
        
             <cards:SfCardView BorderColor="#9072C9" Background="#FFFF7D7D" BorderWidth="10"  CornerRadius="10">
-                <VerticalStackLayout>
-                    <Label  Margin="2,0,0,0" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  HorizontalOptions="Start" Text="Invest in US Companies : Analyze, Buy and Sell"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                <Grid>
+                   
+                    
+                    <Label  Margin="2,0,0,0" VerticalOptions="Start" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  HorizontalOptions="Start" Text="Invest in US Companies : Analyze, Buy and Sell"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                     <Image Margin="10" Source="projections.png" HorizontalOptions="End" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"  />
-                </VerticalStackLayout>
+                    <ListView x:Name="LVcompaiesMarket">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+
+                                <Button ImageSource="msft.png" Text="{Binding Symbol}" TextColor="#9072C9" HeightRequest="50" CornerRadius="25" BorderWidth="2" BorderColor="#9072C9"/>
+
+
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
+                </Grid>
             </cards:SfCardView>
 
             <cards:SfCardView BorderColor="#9072C9" Background="#FF007C9C" BorderWidth="10"  CornerRadius="10">
-                <VerticalStackLayout>
-                    <Label  Text="Newspaper"  Margin="2,0,0,0" FontAttributes="Bold" TextColor="White"  FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
-                    <Image Margin="10"  HorizontalOptions="End" Source="newonline.png" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"  />
-                </VerticalStackLayout>
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="20*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0"  Text="Newspaper"  Margin="2,0,0,0" FontAttributes="Bold" TextColor="White"  FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+                    
+                        <Image Grid.Row="1" Grid.Column="1"  Margin="10"  HorizontalOptions="End" Source="newonline.png" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"  />
+
+                  
+           
+                        <ScrollView Margin="5" HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always" Grid.Row="1" Grid.Column="0" WidthRequest="1000" HorizontalOptions="Center" HeightRequest="450">
+
+                            <Border  StrokeShape="RoundRectangle 8,8,8,8"  Stroke="#9072C9"  StrokeThickness="{OnPlatform MacCatalyst=3,Default=3}">
+
+                            <Grid >
+                                <Image Source="news_first_shablon.png" WidthRequest="1000" HeightRequest="1414">
+                                
+                                </Image>
+                                    
+                                <Label  Margin="770,260,0,0" Text="FUN FACTS  !!!" FontFamily="TAN harmoni" FontSize="Title" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
+                                <Label  Margin="100,190,0,0" Text="18.12.2024" FontFamily="Times New Roman" FontAttributes="Italic"  FontSize="Title"  TextColor="#404040"  ></Label>
+                                <Label  Margin="70,220,0,0" Text="RAT RACE3" FontFamily="Times New Roman"   FontSize="125"  TextColor="#404040"  ></Label>
+                                <Label  Margin="70,315,0,0" Text="IS POPULAR!" FontFamily="Times New Roman"   FontSize="110"  TextColor="#404040"  ></Label>
+                            </Grid>
+                          </Border>
+                    </ScrollView>
+                    
+                </Grid>
             </cards:SfCardView>
 
             <cards:SfCardView BorderColor="#9072C9" BorderWidth="10"     Background="#FF019FCC"  CornerRadius="10">

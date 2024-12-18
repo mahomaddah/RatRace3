@@ -19,7 +19,10 @@ public partial class GameView : ContentPage
         // Event to detect orientation change
         DeviceDisplay.MainDisplayInfoChanged += (s, e) => UpdateOrientation();
 
-      
+        //binding VM to Listview ....
+      //  LVcompaiesMarket.ItemsSource = CardviewModel.StockMarketCompanys;
+
+
 
     }
     private void UpdateOrientation()
@@ -54,9 +57,10 @@ public partial class GameView : ContentPage
         await Shell.Current.GoToAsync("StoryDetailView");
     }
 
-    private void GameNextTurnBtn_Clicked(object sender, EventArgs e)
+    private async void GameNextTurnBtn_Clicked(object sender, EventArgs e)
     {
         //  await DisplayAlert("Alert", ((Button)sender).CommandParameter.ToString(),);
+        await Shell.Current.GoToAsync("NewsPaperView");
     }
 
     private async void CollectIncomeBTN_Clicked(object sender, EventArgs e)
