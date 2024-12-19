@@ -522,11 +522,16 @@
                                 <Image Source="news_first_shablon.png" WidthRequest="1000" HeightRequest="1414">
                                 
                                 </Image>
-                                    
-                                <Label  Margin="770,260,0,0" Text="FUN FACTS  !!!" FontFamily="TAN harmoni" FontSize="Title" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
+
+                                <Label  Margin="770,260,0,0" Text="FUN FACTS" FontFamily="TANharmoni" FontSize="Title" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
                                 <Label  Margin="100,190,0,0" Text="18.12.2024" FontFamily="Times New Roman" FontAttributes="Italic"  FontSize="Title"  TextColor="#404040"  ></Label>
-                                <Label  Margin="70,220,0,0" Text="RAT RACE3" FontFamily="Times New Roman"   FontSize="125"  TextColor="#404040"  ></Label>
-                                <Label  Margin="70,315,0,0" Text="IS POPULAR!" FontFamily="Times New Roman"   FontSize="110"  TextColor="#404040"  ></Label>
+                                <Label  Margin="70,250,0,0" Text="RATRACE3 GAME IS"  WidthRequest="735" MaxLines="1"  FontFamily="TANharmoni"  FontSize="110"  TextColor="#404040" HorizontalOptions="Start" ></Label>
+                                <Label  Margin="70,345,0,0" Text="GETTING POPULAR!"   WidthRequest="735" MaxLines="1"  FontFamily="TANharmoni"   FontSize="110" HorizontalOptions="Start"  TextColor="#404040"  ></Label>
+                                <Label Margin="0,310,40,0" HorizontalOptions="End" FontSize="16" FontFamily="CentaurMTStd-BoldItalic" WidthRequest="190" FontAttributes="Bold" TextColor="#404040" >From Aaron Loeb</Label>
+                                <Label Margin="0,330,40,0" HorizontalOptions="End" FontSize="16" FontFamily="CentaurMTStd-Italic" WidthRequest="190" TextColor="#404040" >“Mom, your strength and love have been the foundation of our family. I cherish every moment spent with you. Happy 80th birthday!”</Label>
+                                <Image HorizontalOptions="Center" VerticalOptions="Center" Margin="0,300,0,0" WidthRequest="700" Source="mark_zakerberg_news_image.png">
+                                    
+                                </Image>
                             </Grid>
                           </Border>
                     </ScrollView>

@@ -21,7 +21,10 @@ namespace RatRace3
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-       
+                    fonts.AddFont("OPTIEngraversOldEnglish.otf", "EngraversOldEnglish");
+                    fonts.AddFont("Harmoni.otf", "TANharmoni");
+                    fonts.AddFont("CentaurMTStd-Italic.ttf", "CentaurMTStd-Italic");
+                    fonts.AddFont("CentaurMTStd-BoldItalic.ttf", "CentaurMTStd-BoldItalic");
                 });
            
 
