@@ -9,7 +9,7 @@ namespace RatRace3
             Routing.RegisterRoute("StoryModeView", typeof(StoryModeView));
             Routing.RegisterRoute("StoryDetailView", typeof(StoryDetailView));
             Routing.RegisterRoute("GameView", typeof(GameView));
-            Routing.RegisterRoute("NewsPaperView", typeof(NewsPaperView));
+          
 
             InitializeComponent();
         }

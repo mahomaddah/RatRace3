@@ -523,15 +523,34 @@
                                 
                                 </Image>
 
-                                <Label  Margin="770,260,0,0" Text="FUN FACTS" FontFamily="TANharmoni" FontSize="Title" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
-                                <Label  Margin="100,190,0,0" Text="18.12.2024" FontFamily="Times New Roman" FontAttributes="Italic"  FontSize="Title"  TextColor="#404040"  ></Label>
+                                <Label  Margin="772,267,0,0" Text="FAMILY TRIBUTES" FontFamily="TANharmoni" FontSize="28" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
+                                <HorizontalStackLayout Margin="50,190,0,0" >
+                                    <Label   Text="VOL. 10, NO. 4  " FontFamily="TimeRomanBoldItalic" FontAttributes="Bold" FontSize="20"  TextColor="#404040"  ></Label>
+                                    <Label Margin="8,0,0,0"   Text=":U.S. INFLATION:2.7%| U.S. 10-YR. TREAS. yield:4.232%| S&amp;P 500 ETF:+31.67%yr." FontFamily="TimeRomanBoldItalic" FontAttributes="Bold" FontSize="17"  TextColor="#404040"  ></Label>
+                                    <Label Margin="8,0,0,0"   Text="20/12/2025" FontFamily="TimeRomanBoldItalic" FontAttributes="Bold" FontSize="20"  TextColor="#404040"  ></Label>
+                                </HorizontalStackLayout>
+                               
                                 <Label  Margin="70,250,0,0" Text="RATRACE3 GAME IS"  WidthRequest="735" MaxLines="1"  FontFamily="TANharmoni"  FontSize="110"  TextColor="#404040" HorizontalOptions="Start" ></Label>
                                 <Label  Margin="70,345,0,0" Text="GETTING POPULAR!"   WidthRequest="735" MaxLines="1"  FontFamily="TANharmoni"   FontSize="110" HorizontalOptions="Start"  TextColor="#404040"  ></Label>
-                                <Label Margin="0,310,40,0" HorizontalOptions="End" FontSize="16" FontFamily="CentaurMTStd-BoldItalic" WidthRequest="190" FontAttributes="Bold" TextColor="#404040" >From Aaron Loeb</Label>
+                                <Label Margin="0,310,0,0" HorizontalOptions="End" FontSize="16" FontFamily="CentaurMTStd-BoldItalic" WidthRequest="190" FontAttributes="Bold" TextColor="#404040" >From Aaron Loeb</Label>
                                 <Label Margin="0,330,40,0" HorizontalOptions="End" FontSize="16" FontFamily="CentaurMTStd-Italic" WidthRequest="190" TextColor="#404040" >“Mom, your strength and love have been the foundation of our family. I cherish every moment spent with you. Happy 80th birthday!”</Label>
-                                <Image HorizontalOptions="Center" VerticalOptions="Center" Margin="0,300,0,0" WidthRequest="700" Source="mark_zakerberg_news_image.png">
+                     
+                                <Image HorizontalOptions="Center" VerticalOptions="Center" Margin="2,198,0,0" WidthRequest="440" Source="mark_zakerberg_news_image.png">
                                     
                                 </Image>
+                                <Label Margin="0,-300,0,0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="ImageHeader" Text="META'S CEO MARK ZUCKERBERG APOLOGIZED!!" FontFamily="TANharmoni" FontSize="28" TextColor="#404040"/>
+                                <Label HorizontalOptions="Start" VerticalOptions="Center" Margin="55,-310,0,0" Text="B" FontFamily="EngraversOldEnglish" FontSize="55" FontAttributes="Bold" TextColor="#fdf9da" />
+                                <Label HorizontalOptions="Start" VerticalOptions="Center"  Margin="125,-305,0,0" FontSize="16" WidthRequest="140" LineHeight="1" FontFamily="CentaurMTStd-Italic"    TextColor="#404040" >Born on September 25, 1944, in a small town, Eleanor grew up during</Label>
+                                <Label HorizontalOptions="Start" VerticalOptions="Center"  Margin="40,210,0,0" FontSize="15" WidthRequest="220" FontFamily="CentaurMTStd-Italic"    TextColor="#404040" >of great change. Known for her warmth, resilience, and generosity, she was a caring soul who always put her family first. In her twenties, she married Bartholomew Henderson, and together they raised three children, creating a home filled with love and laughter. Eleanor became a cornerstone of her community, volunteering and offering support to those in need. As a grandmother to five grandchildren, she passed on life lessons, cherished traditions, and endless love. As she turns 80, we joyfully celebrate her life’s journey, the impact she’s made, and the many memories yet to come. Happy 80th Birthday, Eleanor!</Label>
+                                <Label HorizontalOptions="Center" VerticalOptions="Start"  Margin="-222,445,0,0" Text="MORE VC INVESTED VALUEHUNTER!" FontFamily="Times New Roman" FontSize="32" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
+                                <Label  Margin="805,890,0,0" Text="FUN FACTS" FontFamily="TANharmoni" FontSize="28" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
+                                <Label  HorizontalOptions="Start" VerticalOptions="End" Margin="47,0,0,340" Text="THIS DAY IN HISTORY" FontFamily="TANharmoni" FontSize="28" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
+
+                                <Label HorizontalOptions="Center" VerticalOptions="End"  Margin="0,0,-20,250" Text="WORLD'S BEST PIE RECIPE REVEALED!" MaxLines="2" WidthRequest="400" FontFamily="Times New Roman" FontSize="40" FontAttributes="Bold" TextColor="#404040"  ></Label>
+                                <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="End" >
+                                    <Label  Margin="0,0,25,70" HorizontalTextAlignment="Justify" FontSize="14" WidthRequest="180" LineHeight="1" FontFamily="CentaurMTStd-Italic"    TextColor="#404040" >Discover Eleanor's legendary pie recipe, cherished for decades and passed down through generations. This culinary masterpiece offers a delightful blend of flavors and love, reflecting her baking skill.</Label>
+                                    <Label  Margin="0,0,0,0" FontSize="14" HorizontalTextAlignment="Justify"  WidthRequest="180" LineHeight="1" FontFamily="CentaurMTStd-Italic"    TextColor="#404040" >Whether it’s for a holiday gathering or a family dinner, this pie never fails to bring joy and create lasting memories. Get ready to bake a pie that’s guaranteed to impress and become a cherished tradition!</Label>
+                                </HorizontalStackLayout>
                             </Grid>
                           </Border>
                     </ScrollView>

@@ -25,6 +25,7 @@ namespace RatRace3
                     fonts.AddFont("Harmoni.otf", "TANharmoni");
                     fonts.AddFont("CentaurMTStd-Italic.ttf", "CentaurMTStd-Italic");
                     fonts.AddFont("CentaurMTStd-BoldItalic.ttf", "CentaurMTStd-BoldItalic");
+                    fonts.AddFont("TimeRomanBoldItalic.ttf", "TimeRomanBoldItalic");
                 });
            
 
