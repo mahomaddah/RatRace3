@@ -41,7 +41,7 @@
 
 
             <Button
-            x:Name="MarketPageBtn"
+         
             Text="Tournament (soon)"            
             Clicked="MarketPageBtn_Clicked"
             WidthRequest="200"

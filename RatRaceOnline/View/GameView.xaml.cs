@@ -1,9 +1,7 @@
 namespace RatRace3.View;
 using RatRace3.View;
-using MediaManager;
 
-using Syncfusion.Maui.Cards;
-using MediaManager.Playback;
+
 
 public partial class GameView : ContentPage
 {
@@ -64,33 +62,13 @@ public partial class GameView : ContentPage
     {
         //  await DisplayAlert("Alert", ((Button)sender).CommandParameter.ToString(),);
         //await Shell.Current.GoToAsync("NewsPaperView");
-        PlayBackgroundMusic();
+      //  PlayBackgroundMusic();
     }
 
     private async void CollectIncomeBTN_Clicked(object sender, EventArgs e)
     {
         await DisplayAlert("Income...", "$1,200.00 Total Income Collected!","Amazing! $$$");
     }
-
-    private async void PlayBackgroundMusic()
-    {
-        try
-        {
-            var mediaManager = CrossMediaManager.Current;
-
-            // Set the media file to play
-            string musicFilePath = "resource://RatRace3.Resources.Raw.night_jazz.mp3";
-            await mediaManager.Play(musicFilePath);
-        
-            // Loop the audio
-            mediaManager.RepeatMode = RepeatMode.One;
-            await mediaManager.Play();
-        }
-        catch (Exception ex)
-        {
-           // Console.WriteLine($"Error playing music: {ex.Message}");
-            await DisplayAlert("Error playing music:", ex.Message , "Fuck the music! Continue!!");
-        }
-    }
+  
 }
 
