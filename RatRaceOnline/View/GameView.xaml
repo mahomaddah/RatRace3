@@ -221,11 +221,11 @@
             <cards:SfCardView IndicatorThickness="12" IndicatorColor="#9072C9" Background="#ff73ab" BorderColor="#9072C9" BorderWidth="10"  CornerRadius="10">
                 <Grid>
                     <Image Grid.Row="2" Margin="10" Source="checkingfinansalstatment.png"  HorizontalOptions="End" MaximumHeightRequest="490" />
-                    <Label  Margin="2,0,0,0" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}" Text="Financial Statements, Balance Sheet, Manage your Assets and Liability"  VerticalTextAlignment="Start" HorizontalTextAlignment="Start"/>
-                    <ScrollView HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="{OnPlatform Android='10,35,0,0' ,Default='60,35,0,0' , iOS='10,35,0,0'}">
+                    <Label  Margin="2,0,0,0" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='10',MacCatalyst='Subtitle', WinUI='Subtitle'}" Text="Financial Statements, Balance Sheet, Manage your Assets and Liability"  VerticalTextAlignment="Start" HorizontalTextAlignment="Start"/>
+                    <ScrollView HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="{OnPlatform Android='0,35,0,0' ,Default='60,35,0,0' , iOS='10,35,0,0'}">
                         <StackLayout  HorizontalOptions="{OnPlatform MacCatalyst=Center,WinUI=Center}"  >
 
-                            <Border  StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8',WinUI='8,0,6,8',MacCatalyst='8,0,6,8'}" Stroke="#9072C9"  StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=560,WinUI=540}">
+                            <Border  StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8',WinUI='8,0,6,8',MacCatalyst='8,0,6,8'}" Stroke="#9072C9"  StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  Default=100,MacCatalyst=560,WinUI=540}">
                                 <expander:SfExpander AnimationDuration="200" IsExpanded="True" ToolTipProperties.Text="One person's income is another person's expenses" >
                                     <expander:SfExpander.Header>
                                         <Grid >
@@ -233,28 +233,28 @@
                                                 <RowDefinition Height="48"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="48"/>
+                                                <ColumnDefinition Width="{OnPlatform Default='48' , Android=30}"/>
                                                 <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="48"/>
+                                                <ColumnDefinition Width="{OnPlatform Default='48' , Android=30}"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Image Grid.Column="0" Margin="0,-3,0,0" Source="incomei.png"  HeightRequest="90"></Image>
+                                            <Image Grid.Column="0" Margin="0,-3,0,0" Source="incomei.png"  HeightRequest="{OnPlatform Default='90' ,Android=25}"></Image>
                                             <HorizontalStackLayout Grid.Column="1" >
-                                                <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Total Income:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
-                                                <Label x:Name="TotalIncomeLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$1,300.00" FontSize="14" VerticalOptions="CenterAndExpand"/>
+                                                <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Total Income:" FontSize="{OnPlatform Default=14 , Android=10}"  VerticalOptions="CenterAndExpand"/>
+                                                <Label x:Name="TotalIncomeLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$1,300.00" FontSize="{OnPlatform Default=14 , Android=10}" VerticalOptions="CenterAndExpand"/>
 
                                             </HorizontalStackLayout>
-                                            <Image Grid.Column="2" Margin="0,-3,0,0" Source="expenceshi.png"  HeightRequest="45"></Image>
+                                            <Image Grid.Column="2" Margin="0,-3,0,0" Source="expenceshi.png"  HeightRequest="{OnPlatform Default=45 , Android=25}"></Image>
                                             <HorizontalStackLayout Grid.Column="3" >
-                                                <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Total Expense:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
-                                                <Label x:Name="TotalIncomesLB" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$739.34" FontSize="14" VerticalOptions="CenterAndExpand"/>
+                                                <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Total Expense:" FontSize="{OnPlatform Default=14 , Android=10}"  VerticalOptions="CenterAndExpand"/>
+                                                <Label x:Name="TotalIncomesLB" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$739.34" FontSize="{OnPlatform Default=14 , Android=10}" VerticalOptions="CenterAndExpand"/>
 
                                             </HorizontalStackLayout>
                                         </Grid>
                                     </expander:SfExpander.Header>
                                     <expander:SfExpander.Content>
                                         <Grid Padding="18,8,0,18" >
-                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="11:03 AM, 15 January 2019" FontSize="14" VerticalOptions="CenterAndExpand"/>
+                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="11:03 AM, 15 January 2019" FontSize="{OnPlatform Default=14 , Android=10}" VerticalOptions="CenterAndExpand"/>
                                         </Grid>
                                     </expander:SfExpander.Content>
                                 </expander:SfExpander>
@@ -508,38 +508,67 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0"  Text="Newspaper"  Margin="2,0,0,0" FontAttributes="Bold" TextColor="White"  FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
-                    
-                        <Image Grid.Row="1" Grid.Column="1"  Margin="10"  HorizontalOptions="End" Source="newonline.png" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"  />
+                        <Label Grid.Row="0"  Text="Newspaper"  Margin="2,0,0,0" FontAttributes="Bold" TextColor="White"  FontSize="{OnPlatform Default='10',MacCatalyst='Subtitle', WinUI='Subtitle'}"  VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
 
-                  
-           
-                        <ScrollView Margin="5" HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always" Grid.Row="1" Grid.Column="0" WidthRequest="1000" HorizontalOptions="Center" HeightRequest="450">
+                    <Image Grid.Row="{OnPlatform Default='1' , Android='0'}" Grid.Column="1"  Margin="{OnPlatform Android='1,5,1,0' , Default='10'}"  HorizontalOptions="End" Source="newonline.png" HeightRequest="{OnPlatform iOS='120',Android='30', Default='390', WinUI='490', MacCatalyst='490'}"  />
+
+
+
+                    <ScrollView  Margin="5" HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always" Grid.Row="1" Grid.Column="0" WidthRequest="{OnPlatform Default=1000 , Android=240}" HorizontalOptions="Center" MinimumHeightRequest="{OnPlatform Default=450 , Android=250 }">
 
                             <Border  StrokeShape="RoundRectangle 8,8,8,8"  Stroke="#9072C9"  StrokeThickness="{OnPlatform MacCatalyst=3,Default=3}">
 
                             <Grid >
-                                <Image Source="news_first_shablon.png" WidthRequest="1000" HeightRequest="1414">
+                                <Image HorizontalOptions="Start" VerticalOptions="Start" Margin="{OnPlatform Default='0,0,0,0',Android='30,-100,0,0'}" Source="news_first_shablon.png" WidthRequest="{OnPlatform Default='1000' , Android='210'}" HeightRequest="{OnPlatform Android='500', Default='1414'  }">
                                 
                                 </Image>
 
-                                <Label  Margin="772,267,0,0" Text="FAMILY TRIBUTES" FontFamily="TANharmoni" FontSize="28" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
-                                <HorizontalStackLayout Margin="50,190,0,0" >
-                                    <Label   Text="VOL. 10, NO. 4  " FontFamily="TimeRomanBoldItalic" FontAttributes="Bold" FontSize="20"  TextColor="#404040"  ></Label>
-                                    <Label Margin="8,0,0,0"   Text=":U.S. INFLATION:2.7%| U.S. 10-YR. TREAS. yield:4.232%| S&amp;P 500 ETF:+31.67%yr." FontFamily="TimeRomanBoldItalic" FontAttributes="Bold" FontSize="17"  TextColor="#404040"  ></Label>
-                                    <Label Margin="8,0,0,0"   Text="20/12/2025" FontFamily="TimeRomanBoldItalic" FontAttributes="Bold" FontSize="20"  TextColor="#404040"  ></Label>
+                                <Label  Margin="{OnPlatform Default='772,267,0,0' , Android='191,56,0,0'}" FontSize="{OnPlatform Default=28, Android=7}"  Text="FAMILY TRIBUTES" FontFamily="TANharmoni" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
+                                <HorizontalStackLayout Margin="{OnPlatform Default='50,190,0,0' , Android='2,40,0,0'}" >
+                                    <Label Margin="5,0,0,0"  FontSize="{OnPlatform Default=20,Android=5}" Text="VOL. 10, NO. 4  " FontFamily="TimeRomanBoldItalic" FontAttributes="Bold"   TextColor="#404040"  ></Label>
+                                    <Label Margin="{OnPlatform Default='8,0,0,0' , Android='-4,0,0,0'}"  FontSize="{OnPlatform Default=17,Android=5}" Text=":U.S. INFLATION:2.7%| U.S. 10-YR. TREAS. yield:4.232%| S&amp;P 500 ETF:+31.67%yr." FontFamily="TimeRomanBoldItalic" FontAttributes="Bold" TextColor="#404040"  ></Label>
+                                    <Label Margin="{OnPlatform Default='8,0,0,0' , Android='-0,0,0,0'}" FontSize="{OnPlatform Default=20,Android=5}" Text="20/12/2025" FontFamily="TimeRomanBoldItalic" FontAttributes="Bold"  TextColor="#404040"  ></Label>
                                 </HorizontalStackLayout>
-                               
-                                <Label  Margin="70,250,0,0" Text="RATRACE3 GAME IS"  WidthRequest="735" MaxLines="1"  FontFamily="TANharmoni"  FontSize="110"  TextColor="#404040" HorizontalOptions="Start" ></Label>
-                                <Label  Margin="70,345,0,0" Text="GETTING POPULAR!"   WidthRequest="735" MaxLines="1"  FontFamily="TANharmoni"   FontSize="110" HorizontalOptions="Start"  TextColor="#404040"  ></Label>
-                                <Label Margin="0,310,0,0" HorizontalOptions="End" FontSize="16" FontFamily="CentaurMTStd-BoldItalic" WidthRequest="190" FontAttributes="Bold" TextColor="#404040" >From Aaron Loeb</Label>
-                                <Label Margin="0,330,40,0" HorizontalOptions="End" FontSize="16" FontFamily="CentaurMTStd-Italic" WidthRequest="190" TextColor="#404040" >“Mom, your strength and love have been the foundation of our family. I cherish every moment spent with you. Happy 80th birthday!”</Label>
-                     
-                                <Image HorizontalOptions="Center" VerticalOptions="Center" Margin="2,198,0,0" WidthRequest="440" Source="mark_zakerberg_news_image.png">
+
+                                <Label  Margin="{OnPlatform Default='70,250,0,0', Android='40,52,0,0'}" FontSize="{OnPlatform Default=110,Android=23}" Text="RATRACE3 GAME IS"  WidthRequest="{OnPlatform Default=735,Android=300}" MaxLines="1"  FontFamily="TANharmoni"    TextColor="#404040" HorizontalOptions="Start" ></Label>
+                                <Label  Margin="{OnPlatform Default='70,345,0,0', Android='38,70,0,0'}" Text="GETTING POPULAR!"  FontSize="{OnPlatform Default=110,Android=23}"   WidthRequest="{OnPlatform Default=735,Android=300}" MaxLines="1"  FontFamily="TANharmoni"  HorizontalOptions="Start"  TextColor="#404040"  ></Label>
+
+                                <Label Margin="{OnPlatform Default='0,310,0,0' , Android='0,67,-149,0'}" HorizontalOptions="End" FontSize="{OnPlatform Default=16, Android=6}" WidthRequest="190" FontFamily="CentaurMTStd-BoldItalic"  FontAttributes="Bold" TextColor="#404040" >From Aaron Loeb</Label>
+                                <Label Margin="{OnPlatform Default='0,330,45,0' , Android='0,72,4,0'}" FontSize="{OnPlatform Default=16, Android=4.8}" WidthRequest="{OnPlatform Default=190, Android=40 }"  HorizontalOptions="End"  FontFamily="CentaurMTStd-Italic"  TextColor="#404040" >“Mom, your strength and love have been the foundation of our family. I cherish every moment spent with you. Happy 80th birthday!”</Label>
+                                <VerticalStackLayout Margin="{OnPlatform Default='0,0,45,260' , Android='0,0,0,10'}" HorizontalOptions="End" VerticalOptions="Center"  >
+                                    <Label Margin="0,0,0,0" HorizontalTextAlignment="Center" FontSize="{OnPlatform Default=16, Android=4.8}" WidthRequest="{OnPlatform Default=190, Android=40 }" FontFamily="CentaurMTStd-BoldItalic"  FontAttributes="Bold" TextColor="#404040" >From Adeline Palmerston</Label>
+                                    <Label Margin="0,1,0,0" HorizontalOptions="End" FontSize="{OnPlatform Default=16, Android=4.8}" WidthRequest="{OnPlatform Default=190, Android=40 }" FontFamily="CentaurMTStd-Italic" TextColor="#404040" >“Eleanor, your kindness and wisdom have shaped my life in countless ways. Here’s to celebrating you today and always. Love you!”</Label>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Margin="0,0,45,-125" HorizontalOptions="End" VerticalOptions="Center"  >
+                                    <Label Margin="0,0,0,0" HorizontalTextAlignment="Center" FontSize="16" FontFamily="CentaurMTStd-BoldItalic" WidthRequest="190" FontAttributes="Bold" TextColor="#404040" >From Noah Schumacher</Label>
+                                    <Label Margin="0,5,0,0" HorizontalOptions="End" FontSize="16" FontFamily="CentaurMTStd-Italic" WidthRequest="190" TextColor="#404040" >“Happy 80th, Grandma! Your stories and laughter are the heart of our family. Wishing you a day as wonderful as you are!”</Label>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Margin="0,0,45,360" HorizontalOptions="End" VerticalOptions="End"  >
+                                    <Label Margin="0,0,0,0" HorizontalTextAlignment="Center" FontSize="16" FontFamily="CentaurMTStd-BoldItalic" WidthRequest="190" FontAttributes="Bold" TextColor="#404040" >Favorite Hobby</Label>
+                                    <Label Margin="0,5,0,0" HorizontalOptions="End" FontSize="16" FontFamily="CentaurMTStd-Italic" WidthRequest="190" TextColor="#404040" >Eleanor excels at knitting, having made over 100 cozy blankets and scarves for loved ones.</Label>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Margin="0,0,45,220" HorizontalOptions="End" VerticalOptions="End"  >
+                                    <Label Margin="0,0,0,0" HorizontalTextAlignment="Center" FontSize="16" FontFamily="CentaurMTStd-BoldItalic" WidthRequest="190" FontAttributes="Bold" TextColor="#404040" >Quirky Habit</Label>
+                                    <Label Margin="0,5,0,0" HorizontalOptions="End" FontSize="16" FontFamily="CentaurMTStd-Italic" WidthRequest="190" TextColor="#404040" >Every morning, Eleanor savors tea with lemon and cinnamon, a ritual perfected over decades.</Label>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Margin="0,0,45,67" HorizontalOptions="End" VerticalOptions="End"  >
+                                    <Label Margin="0,0,0,0" HorizontalTextAlignment="Center" FontSize="16" FontFamily="CentaurMTStd-BoldItalic" WidthRequest="190" FontAttributes="Bold" TextColor="#404040" >Secret Talent</Label>
+                                    <Label Margin="0,5,0,0" HorizontalOptions="End" FontSize="16" FontFamily="CentaurMTStd-Italic" WidthRequest="190" TextColor="#404040" >Eleanor excels at gardening, cultivating stunning roses and winning local awards.</Label>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Margin="50,0,0,210" HorizontalOptions="Start" VerticalOptions="End"  >
+                                    <Label Margin="0,0,0,0" HorizontalTextAlignment="Center" FontSize="16" FontFamily="CentaurMTStd-BoldItalic" WidthRequest="190" FontAttributes="Bold" TextColor="#404040" >Fashion</Label>
+                                    <Label Margin="0,5,0,0" HorizontalTextAlignment="Center" HorizontalOptions="End" FontSize="16" FontFamily="CentaurMTStd-Italic" WidthRequest="190" TextColor="#404040" >The fashion world was adopting new styles that would define the decade in everyday clothing.</Label>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Margin="50,0,0,70" HorizontalOptions="Start" VerticalOptions="End"  >
+                                    <Label Margin="0,0,0,0" HorizontalTextAlignment="Center" FontSize="16" FontFamily="CentaurMTStd-BoldItalic" WidthRequest="190" FontAttributes="Bold" TextColor="#404040" >Entertainment</Label>
+                                    <Label Margin="0,5,0,0" HorizontalTextAlignment="Center" HorizontalOptions="End" FontSize="16" FontFamily="CentaurMTStd-Italic" WidthRequest="190" TextColor="#404040" >The film “The Great Adventure” became a cinematic highlight.</Label>
+                                </VerticalStackLayout>
+
+                                <Image HorizontalOptions="{OnPlatform Default='Center' , Android='Start'}" VerticalOptions="{OnPlatform Default='Center' , Android='Start'}" Margin="{OnPlatform Default='2,198,0,0' , Android='89,128,2,2'}" WidthRequest="{OnPlatform Default=440, Android=93}" Source="mark_zakerberg_news_image.png">
                                     
                                 </Image>
-                                <Label Margin="0,-300,0,0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="ImageHeader" Text="META'S CEO MARK ZUCKERBERG APOLOGIZED!!" FontFamily="TANharmoni" FontSize="28" TextColor="#404040"/>
-                                <Label HorizontalOptions="Start" VerticalOptions="Center" Margin="55,-310,0,0" Text="B" FontFamily="EngraversOldEnglish" FontSize="55" FontAttributes="Bold" TextColor="#fdf9da" />
+                                <Label Margin="{OnPlatform Default='0,-300,0,0' ,Android='92,114,0,0'}" FontSize="{OnPlatform Default=28,Android=6}" HorizontalOptions="{OnPlatform Default='Center', Android='Start'}" VerticalOptions="{OnPlatform Default='Center', Android='Start'}" x:Name="ImageHeader" Text="META'S CEO MARK ZUCKERBERG APOLOGIZED!!" FontFamily="TANharmoni"  TextColor="#404040"/>
+                                <Label FontSize="{OnPlatform Default=55, Android=12}" Margin="{OnPlatform Default='55,-310,0,0', Android='41,110,0,0'}" HorizontalOptions="Start" VerticalOptions="{OnPlatform Default='Center',Android='Start'}"  Text="B" FontFamily="EngraversOldEnglish"  FontAttributes="Bold" TextColor="#fdf9da" />
                                 <Label HorizontalOptions="Start" VerticalOptions="Center"  Margin="125,-305,0,0" FontSize="16" WidthRequest="140" LineHeight="1" FontFamily="CentaurMTStd-Italic"    TextColor="#404040" >Born on September 25, 1944, in a small town, Eleanor grew up during</Label>
                                 <Label HorizontalOptions="Start" VerticalOptions="Center"  Margin="40,210,0,0" FontSize="15" WidthRequest="220" FontFamily="CentaurMTStd-Italic"    TextColor="#404040" >of great change. Known for her warmth, resilience, and generosity, she was a caring soul who always put her family first. In her twenties, she married Bartholomew Henderson, and together they raised three children, creating a home filled with love and laughter. Eleanor became a cornerstone of her community, volunteering and offering support to those in need. As a grandmother to five grandchildren, she passed on life lessons, cherished traditions, and endless love. As she turns 80, we joyfully celebrate her life’s journey, the impact she’s made, and the many memories yet to come. Happy 80th Birthday, Eleanor!</Label>
                                 <Label HorizontalOptions="Center" VerticalOptions="Start"  Margin="-222,445,0,0" Text="MORE VC INVESTED VALUEHUNTER!" FontFamily="Times New Roman" FontSize="32" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
