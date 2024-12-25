@@ -8,7 +8,12 @@
              xmlns:cards="clr-namespace:Syncfusion.Maui.Cards;assembly=Syncfusion.Maui.Cards"
              xmlns:sfavatar="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              xmlns:expander="clr-namespace:Syncfusion.Maui.Expander;assembly=Syncfusion.Maui.Expander"
-             xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu">
+             xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu"
+             xmlns:sunburst="clr-namespace:Syncfusion.Maui.SunburstChart;assembly=Syncfusion.Maui.SunburstChart"
+             xmlns:models="clr-namespace:RatRace3.Models"
+             xmlns:ViewModels="clr-namespace:RatRace3.ViewModel"
+          
+             >
 
     <ContentPage.BindingContext>
         <local:CardViewModel />
@@ -482,15 +487,22 @@
                     
                     <Label  Margin="2,0,0,0" VerticalOptions="Start" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  HorizontalOptions="Start" Text="Invest in US Companies : Analyze, Buy and Sell"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                     <Image Margin="10" Source="projections.png" HorizontalOptions="End" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"  />
-                    <ListView x:Name="LVcompaiesMarket">
+                    <ListView x:Name="LVcompaiesMarket" ItemsSource="DataSource" WidthRequest="500" HeightRequest="500">
+                        <ListView.BindingContext>
+                            <ViewModels:CompanyListViewModel/>
+                        </ListView.BindingContext>
+                      
                         <ListView.ItemTemplate>
                             <DataTemplate>
-
+                                <Grid>
+                                    <Label>hii</Label>
+                              
                                 <Button ImageSource="msft.png" Text="{Binding Symbol}" TextColor="#9072C9" HeightRequest="50" CornerRadius="25" BorderWidth="2" BorderColor="#9072C9"/>
 
-
+                                </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
+                  
                     </ListView>
                     
                 </Grid>
@@ -523,7 +535,7 @@
                                 
                                 </Image>
 
-                                <Label  Margin="{OnPlatform Default='772,267,0,0' , Android='191,56,0,0'}" FontSize="{OnPlatform Default=28, Android=7}"  Text="FAMILY TRIBUTES" FontFamily="TANharmoni" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
+                                <Label  Margin="{OnPlatform Default='772,267,0,0' , Android='191,56,0,0'}" FontSize="{OnPlatform Default=28, Android=7}"  Text="FAMILY TRIBUTES" FontFamily="TANharmoni" FontAttributes="Bold" TextColor="#fdf9da"   ></Label>
                                 <HorizontalStackLayout Margin="{OnPlatform Default='50,190,0,0' , Android='2,40,0,0'}" >
                                     <Label Margin="5,0,0,0"  FontSize="{OnPlatform Default=20,Android=5}" Text="VOL. 10, NO. 4  " FontFamily="TimeRomanBoldItalic" FontAttributes="Bold"   TextColor="#404040"  ></Label>
                                     <Label Margin="{OnPlatform Default='8,0,0,0' , Android='-4,0,0,0'}"  FontSize="{OnPlatform Default=17,Android=5}" Text=":U.S. INFLATION:2.7%| U.S. 10-YR. TREAS. yield:4.232%| S&amp;P 500 ETF:+31.67%yr." FontFamily="TimeRomanBoldItalic" FontAttributes="Bold" TextColor="#404040"  ></Label>
@@ -588,10 +600,70 @@
             </cards:SfCardView>
 
             <cards:SfCardView BorderColor="#9072C9" BorderWidth="10"     Background="#FF019FCC"  CornerRadius="10">
-                <VerticalStackLayout>
-                    <Label  Text="Buy Real Estate or invest in the city mall project"  Margin="4,0,0,0" FontAttributes="Bold" TextColor="White" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
-                    <Image HorizontalOptions="End" Margin="10" Source="buy_house.png" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"/>
-                </VerticalStackLayout>
+                <Grid>
+                    
+                    
+                    <Image VerticalOptions="End" HorizontalOptions="End" Margin="10" Source="buy_house.png" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="20*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.ColumnSpan="2"   VerticalOptions="Start"  Text="Buy Real Estate or invest in the city mall project"  Margin="4,0,0,0" FontAttributes="Bold" TextColor="White" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
+
+                        <Grid Margin="2,10,2,2" Grid.Column="0" Grid.Row="1">
+                           
+                            <sunburst:SfSunburstChart x:Name="sunburst" ShowLabels="True" EnableTooltip="True"
+                              ItemsSource="{Binding DataSource}" 
+                              ValueMemberPath="EmployeesCount"
+                                               Stroke="#FFFFFF"
+                          StrokeWidth="2"       
+                                                      >
+
+                                <sunburst:SfSunburstChart.BindingContext>
+                                    <ViewModels:SunburstViewModel/>
+                                </sunburst:SfSunburstChart.BindingContext>
+                                
+                                <sunburst:SfSunburstChart.Title>
+                                    <Label Text="Real State Units" MaximumWidthRequest="150" BackgroundColor="#4CFFFFFF" TextColor="#9072C9" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                                </sunburst:SfSunburstChart.Title>
+                                
+                                <sunburst:SfSunburstChart.Legend>
+                                    <sunburst:SunburstLegend/>
+                                </sunburst:SfSunburstChart.Legend>
+
+                                <sunburst:SfSunburstChart.Levels>
+                                    <sunburst:SunburstHierarchicalLevel GroupMemberPath="Country"/>
+                                    <sunburst:SunburstHierarchicalLevel GroupMemberPath="JobDescription"/>
+                                    <sunburst:SunburstHierarchicalLevel GroupMemberPath="JobGroup"/>
+                                </sunburst:SfSunburstChart.Levels>
+                                <sunburst:SfSunburstChart.CenterView>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="3*" />
+                                            <RowDefinition Height="1*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Image Grid.Row="0" Source="realstate_mall_transpar.png" WidthRequest="65" Margin="1,1,1,2" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+                                        <Label  Grid.Row="1" Text="City Mall Project" FontSize="12" FontFamily="EngraversOldEnglish" HorizontalOptions="Center" TextColor="#9072C9" ></Label>
+                                        
+                                    </Grid>
+                                </sunburst:SfSunburstChart.CenterView>
+                           
+
+                            </sunburst:SfSunburstChart>
+
+
+                        </Grid>
+                        
+                    </Grid>
+                </Grid>
             </cards:SfCardView>
 
         
