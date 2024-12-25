@@ -13,7 +13,7 @@ namespace RatRace3
     public class CardViewModel : INotifyPropertyChanged
     {
 
-        public List<Company> StockMarketCompanys { get; set; } // sonra gercekten List<company> obje turune cevirilcek
+        
         public List<string> Liabilities { get; set; }
 
         public ICommand ChangeCardIndexCommand { get; }
@@ -23,11 +23,11 @@ namespace RatRace3
             ChangeCardIndexCommand = new Command<int>(index => VisibleIndex = index);
             Liabilities = new List<string> { "Education Loan" , "Phone Debt"  };
 
-            StockMarketCompanys = new List<Company> {
-                new Company { Symbol="MSFT" , StockPrice = 231.12 , StockDetail = "Wide ecconomic moat Great Technology company" },
-                new Company { Symbol="GOOGL" , StockPrice = 181.12 , StockDetail = "Wide ecconomic moat Great Technology company" }
+            //StockMarketCompanys = new List<Company> {
+            //    new Company { Symbol="MSFT" , StockPrice = 231.12 , StockDetail = "Wide ecconomic moat Great Technology company" },
+            //    new Company { Symbol="GOOGL" , StockPrice = 181.12 , StockDetail = "Wide ecconomic moat Great Technology company" }
 
-            };
+            //};
         }
 
         private int _visibleIndex;

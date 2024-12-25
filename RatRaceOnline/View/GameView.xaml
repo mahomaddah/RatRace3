@@ -10,6 +10,7 @@
              xmlns:expander="clr-namespace:Syncfusion.Maui.Expander;assembly=Syncfusion.Maui.Expander"
              xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu"
              xmlns:sunburst="clr-namespace:Syncfusion.Maui.SunburstChart;assembly=Syncfusion.Maui.SunburstChart"
+             xmlns:Rotator="clr-namespace:Syncfusion.Maui.Rotator;assembly=Syncfusion.Maui.Rotator"
              xmlns:models="clr-namespace:RatRace3.Models"
              xmlns:ViewModels="clr-namespace:RatRace3.ViewModel"
           
@@ -483,28 +484,52 @@
        
             <cards:SfCardView BorderColor="#9072C9" Background="#FFFF7D7D" BorderWidth="10"  CornerRadius="10">
                 <Grid>
-                   
-                    
-                    <Label  Margin="2,0,0,0" VerticalOptions="Start" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  HorizontalOptions="Start" Text="Invest in US Companies : Analyze, Buy and Sell"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                    <Image Margin="10" Source="projections.png" HorizontalOptions="End" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"  />
-                    <ListView x:Name="LVcompaiesMarket" ItemsSource="DataSource" WidthRequest="500" HeightRequest="500">
-                        <ListView.BindingContext>
-                            <ViewModels:CompanyListViewModel/>
-                        </ListView.BindingContext>
-                      
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Label>hii</Label>
-                              
-                                <Button ImageSource="msft.png" Text="{Binding Symbol}" TextColor="#9072C9" HeightRequest="50" CornerRadius="25" BorderWidth="2" BorderColor="#9072C9"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="20*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                  
-                    </ListView>
-                    
+                    <Grid.BindingContext>
+                        <ViewModels:RotatorViewModel/>
+                    </Grid.BindingContext>
+
+                    <Label Grid.Row="0" Grid.ColumnSpan="2"  Margin="2,0,0,0" VerticalOptions="Start" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  HorizontalOptions="Start" Text="Invest in US Companies : Analyze, Buy and Sell"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Image Grid.Row="1" Grid.Column="1" Margin="10" Source="projections.png" HorizontalOptions="End" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"  />
+
+
+
+                    <Border Stroke="White"       StrokeThickness="2" Grid.Row="1" Grid.Column="0" Margin="2" >
+
+
+                        <Rotator:SfRotator    
+                            Grid.Row="1" Grid.Column="0" Margin="3"
+                            x:Name="rotator" 
+                            IsTextVisible="True"
+                        NavigationDelay="2000"
+                        EnableSwiping="False"              
+                        EnableAutoPlay="True"
+                        
+                        ItemsSource="{Binding RotatorItems}" 
+                        SelectedIndex="2"
+                        NavigationDirection="Horizontal"
+                        NavigationStripMode="Thumbnail" 
+                         NavigationStripPosition="Top"
+                        BackgroundColor="#4C9072C9"
+                            
+                      >
+                            <Rotator:SfRotator.ItemTemplate>
+                                <DataTemplate>
+                                
+                                    <Image  Margin="2" Source="{Binding Image}"/>
+                                </DataTemplate>
+                            </Rotator:SfRotator.ItemTemplate>
+                        </Rotator:SfRotator>
+
+                    </Border>
                 </Grid>
             </cards:SfCardView>
 
@@ -693,7 +718,7 @@
                              Clicked="cardNavBtn_Clicked" 
                              VerticalOptions="Start"
                            WidthRequest="{OnPlatform Default='120' ,Android='100' ,iOS='100'}"                       
- HeightRequest="{OnPlatform Default='108' ,Android='70' ,iOS='70'}"
+                            HeightRequest="{OnPlatform Default='108' ,Android='70' ,iOS='70'}"
                             Margin="10" ImageSource="checkingfinansalstatment.png"
                             BorderWidth="2" BorderColor="#9072C9"
                        

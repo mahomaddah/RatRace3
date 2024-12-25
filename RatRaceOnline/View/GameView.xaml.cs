@@ -20,7 +20,8 @@ public partial class GameView : ContentPage
         // Event to detect orientation change
         DeviceDisplay.MainDisplayInfoChanged += (s, e) => UpdateOrientation();
 
-      
+        //binding VM to Listview ....
+     //   LVcompaiesMarket.ItemsSource = CardviewModel.StockMarketCompanys;
 
 
 
