@@ -1,18 +1,25 @@
 namespace RatRace3;
+
+using RatRace3.Models;
 using Syncfusion.Maui.Charts;
+using System.Globalization;
+
 public partial class MarketPage : ContentPage
 {
+    public Company CurrentCompany { get; set; }
     public IEnumerable<object> ChartData { get; private set; }
     public List<Brush> PaletteBrushes { get; private set; }
     public MarketPage()
     {
 
-      
+      this.CurrentCompany = new Company { Symbol = "NVDA", StockPrice = 141.34, StockDetail = "Technology company Internet Search Monopoly..." };
+
+
 
         // Set BindingContext
-    
-    //    Chart.Series.Add(new ColumnSeries());
-  
+
+        //    Chart.Series.Add(new ColumnSeries());
+
 
         var columnSeries = new ColumnSeries
         {
@@ -61,6 +68,24 @@ public partial class MarketPage : ContentPage
         BindingContext = this;
  
     }
+
+    private void markerPointer_ValueChangeCompleted(object sender, Syncfusion.Maui.Gauges.ValueChangedEventArgs e)
+    {
+           TotalPriceLB.Text = (e.Value * CurrentCompany.StockPrice).ToString("C2" , CultureInfo.CreateSpecificCulture("en-US"));
+    }
+
+    private void ContentPage_Loaded(object sender, EventArgs e)
+    {
+        var appShell = (AppShell)Shell.Current;
+
+        CurrentCompany = appShell.CurrentCompany;
+        StockIcon.Source =CurrentCompany.Symbol.ToLower() + ".png";
+        StockSymbol.Text = CurrentCompany.Symbol;
+        StockPriceLB.Text = (CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
+    }
+
+
+
 }
 //Note : ileride gradient e gecmek istersek ... chartlar icin ...
 //new GradientStopCollection()

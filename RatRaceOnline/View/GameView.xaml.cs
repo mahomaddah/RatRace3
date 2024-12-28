@@ -1,5 +1,6 @@
 namespace RatRace3.View;
 using RatRace3.View;
+using RatRace3.Models;
 using RatRace3.ViewModel;
 using Syncfusion.Maui.Rotator;
 
@@ -81,7 +82,15 @@ public partial class GameView : ContentPage
         SfRotatorItem selectedCompany = IpoCompaniesVM.RotatorItems[router.SelectedIndex];
         if(selectedCompany!= null)
         {
-            await  DisplayAlert("Selected company's image, symbol and price ... Send them to Market page by Shell goToAsync parameter ... ",selectedCompany.Image,"OK");
+            var appShell = (AppShell)Shell.Current;
+            appShell.CurrentCompany = new Company
+            {
+                Symbol = selectedCompany.Image,
+                StockPrice = 10.12,
+                StockDetail = selectedCompany.ItemText
+            };
+
+          //  await  DisplayAlert("Selected company's image, symbol and price ... Send them to Market page by Shell goToAsync parameter ... ",selectedCompany.Image,"OK");
         }
         await Shell.Current.GoToAsync("MarketPage");
     }

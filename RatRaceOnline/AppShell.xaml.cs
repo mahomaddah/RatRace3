@@ -1,19 +1,33 @@
 ﻿using RatRace3.View;
 using Plugin.Maui.Audio;
+using RatRace3.Models;
 namespace RatRace3
 {
     public partial class AppShell : Shell
     {
+        public Company CurrentCompany { get; set; }
         public AppShell()
         {
             Routing.RegisterRoute("MarketPage", typeof(MarketPage));
             Routing.RegisterRoute("StoryModeView", typeof(StoryModeView));
             Routing.RegisterRoute("StoryDetailView", typeof(StoryDetailView));
             Routing.RegisterRoute("GameView", typeof(GameView));
-          
+
+            getData();
 
             InitializeComponent();
             PlayBackgroundMusic();
+        }
+        void getData()
+        {
+            CurrentCompany = new Company
+            {
+                Symbol = "AAPL",
+                StockPrice = 150.25,
+                StockDetail = "Apple Inc. - Technology Company"
+            };
+
+
         }
 
         private void TurnMusicBtn_Clicked(object sender, EventArgs e)
