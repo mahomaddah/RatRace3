@@ -2,13 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"         
              xmlns:syncfusionCaro="clr-namespace:Syncfusion.Maui.Carousel;assembly=Syncfusion.Maui.Carousel"
-             xmlns:local="clr-namespace:RatRace3"
+              xmlns:local="clr-namespace:RatRace3"
+             xmlns:ViewModel="clr-namespace:RatRace3.ViewModel"
              Loaded="ContentPage_Loaded"
+    
              x:Class="RatRace3.StoryModeView"
              Title="Escape Rat Race:">
     
     <ContentPage.BindingContext>
-        <local:CarouselViewModel/>
+        <ViewModel:CarouselViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>

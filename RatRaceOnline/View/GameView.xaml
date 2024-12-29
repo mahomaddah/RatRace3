@@ -17,7 +17,7 @@
              >
 
     <ContentPage.BindingContext>
-        <local:CardViewModel />
+        <ViewModels:CardViewModel />
     </ContentPage.BindingContext>
 
     <Grid>

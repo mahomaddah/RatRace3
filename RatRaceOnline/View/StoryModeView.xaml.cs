@@ -1,6 +1,7 @@
 namespace RatRace3;
 
 using Microsoft.Maui.Graphics;
+using RatRace3.ViewModel;
 
 public partial class StoryModeView : ContentPage
 {

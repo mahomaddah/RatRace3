@@ -8,12 +8,12 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using RatRace3.Models;
 
-namespace RatRace3
+namespace RatRace3.ViewModel
 {
     public class CardViewModel : INotifyPropertyChanged
     {
 
-        
+
         public List<string> Liabilities { get; set; }
 
         public ICommand ChangeCardIndexCommand { get; }
@@ -21,7 +21,7 @@ namespace RatRace3
         public CardViewModel()
         {
             ChangeCardIndexCommand = new Command<int>(index => VisibleIndex = index);
-            Liabilities = new List<string> { "Education Loan" , "Phone Debt"  };
+            Liabilities = new List<string> { "Education Loan", "Phone Debt" };
 
             //StockMarketCompanys = new List<Company> {
             //    new Company { Symbol="MSFT" , StockPrice = 231.12 , StockDetail = "Wide ecconomic moat Great Technology company" },

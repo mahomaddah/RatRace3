@@ -57,7 +57,7 @@
             </chart:SfCartesianChart.Series>
 
         </chart:SfCartesianChart>
-        <Image x:Name="StockIcon" Margin="1" Source="googl.png" HorizontalOptions="Center" WidthRequest="90" HeightRequest="90"/>
+        <Image ToolTipProperties.Text="Company Details..." x:Name="StockIcon" Margin="1" Source="googl.png" HorizontalOptions="Center" WidthRequest="90" HeightRequest="90"/>
         <Label x:Name="StockSymbol" Margin="0,5,0,0" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" >GOOGL</Label>
        
         <HorizontalStackLayout Margin="5" HorizontalOptions="Center" VerticalOptions="Center">
