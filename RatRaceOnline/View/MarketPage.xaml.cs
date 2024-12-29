@@ -80,13 +80,16 @@ public partial class MarketPage : ContentPage
 
         CurrentCompany = appShell.CurrentCompany;
         StockIcon.Source =CurrentCompany.Symbol.ToLower() + ".png";
-        StockSymbol.Text = CurrentCompany.Symbol;
-        StockPriceLB.Text = (CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
+        StockSymbol.Text = CurrentCompany.Symbol;       
+        ToolTipProperties.SetText(StockIcon, CurrentCompany.StockDetail);
+        StockPriceLB.Text = (CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US")); 
+        TotalPriceLB.Text = (markerPointer.Value * CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
     }
 
 
 
 }
+
 //Note : ileride gradient e gecmek istersek ... chartlar icin ...
 //new GradientStopCollection()
 //{

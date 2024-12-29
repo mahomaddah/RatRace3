@@ -104,7 +104,7 @@
 
         <HorizontalStackLayout Margin="4" HorizontalOptions="Center" VerticalOptions="Center" >
             <Label  FontSize="Subtitle" Text="Total Price:"></Label>
-            <Label Margin="5,0,0,0" x:Name="TotalPriceLB" FontSize="Subtitle" Text="641.32"></Label>
+            <Label Margin="5,0,0,0" x:Name="TotalPriceLB" FontSize="Subtitle" Text="$641.32"></Label>
         </HorizontalStackLayout>
 
         <HorizontalStackLayout Margin="4" HorizontalOptions="Center" VerticalOptions="Center">

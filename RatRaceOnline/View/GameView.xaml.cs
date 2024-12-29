@@ -52,8 +52,6 @@ public partial class GameView : ContentPage
 		if(sender!=null)
 		{ 
           CardviewModel.VisibleIndex = Convert.ToInt16(((Button)sender).CommandParameter);
-        // BindingContext = CardviewModel;
-        // await DisplayAlert("Alert", ((Button)sender).CommandParameter.ToString(), "OK");
         }
     }
 
@@ -64,14 +62,13 @@ public partial class GameView : ContentPage
 
     private async void GameNextTurnBtn_Clicked(object sender, EventArgs e)
     {
-        //  await DisplayAlert("Alert", ((Button)sender).CommandParameter.ToString(),);
-        //await Shell.Current.GoToAsync("NewsPaperView");
-      //  PlayBackgroundMusic();
+        
     }
 
     private async void CollectIncomeBTN_Clicked(object sender, EventArgs e)
     {
         await DisplayAlert("Income...", "$1,200.00 Total Income Collected!","Amazing! $$$");
+        //TODO: add player objects ... += 1200 to player.blance....
     }
 
     private async void CompanyInvestRoter_ItemTapped(object sender, EventArgs e)
@@ -83,14 +80,14 @@ public partial class GameView : ContentPage
         if(selectedCompany!= null)
         {
             var appShell = (AppShell)Shell.Current;
+            Company SelectedObject = appShell.IPOcompanies.First(x => selectedCompany.Image.Contains(x.Symbol));
             appShell.CurrentCompany = new Company
             {
-                Symbol = selectedCompany.Image,
-                StockPrice = 10.12,
-                StockDetail = selectedCompany.ItemText
+                Symbol = SelectedObject.Symbol,
+                StockPrice = SelectedObject.StockPrice,
+                StockDetail = SelectedObject.StockDetail,
+                StockExchange = SelectedObject.StockExchange
             };
-
-          //  await  DisplayAlert("Selected company's image, symbol and price ... Send them to Market page by Shell goToAsync parameter ... ",selectedCompany.Image,"OK");
         }
         await Shell.Current.GoToAsync("MarketPage");
     }
