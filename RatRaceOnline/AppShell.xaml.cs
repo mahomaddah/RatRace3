@@ -15,6 +15,7 @@ namespace RatRace3
             Routing.RegisterRoute("StoryDetailView", typeof(StoryDetailView));
             Routing.RegisterRoute("GameView", typeof(GameView));
 
+
             getData();
 
             InitializeComponent();
