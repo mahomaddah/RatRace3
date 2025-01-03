@@ -10,7 +10,7 @@
              Title="Escape Rat Race:">
     
     <ContentPage.BindingContext>
-        <ViewModel:CarouselViewModel/>
+        <ViewModel:SelectLevelViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>

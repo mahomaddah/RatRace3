@@ -13,8 +13,7 @@ namespace RatRace3.Models
         public string AssetName { get; set; }
         public double AssetValue { get; set; }
         /// <summary>
-        /// //false by defult...
-        /// </summary>
+        /// //false by 
         public bool IsBankDeposit { get; set; }//false by defult...
         /// <summary>
         /// //false by defult...

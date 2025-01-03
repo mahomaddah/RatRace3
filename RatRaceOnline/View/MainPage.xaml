@@ -43,7 +43,7 @@
             <Button
          
             Text="Tournament (soon)"            
-            Clicked="MarketPageBtn_Clicked"
+            Clicked="MultiplayerClicked"
             WidthRequest="200"
     
             MaximumWidthRequest="300"

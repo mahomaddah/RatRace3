@@ -1,4 +1,4 @@
-﻿namespace RatRace3.View
+﻿namespace RatRace3.Models
 {
     public class StoryGoalModel
     {

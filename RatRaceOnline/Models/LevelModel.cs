@@ -6,21 +6,54 @@ using System.Threading.Tasks;
 
 namespace RatRace3.Models
 {
+    //public class LevelModel
+    //{
+    //    public string StoryLevelID { get; set; }
+    //    public string Header { get; set; }
+    //    public string Description { get; set; }
+    //    public string ImagePath { get; set; }
+    //    public int HighestMounthScore { get; set; }
+    //    public bool isStarted { get; set; }
+    //    public bool isUnlocked { get; set; }
+
+    //    public List<PlayerModel> Players { get; set; }
+
+    //    public LevelModel()
+    //    {
+    //        Players = new List<PlayerModel> { new PlayerModel {PlayerModelID = 1 , Balance = 1.1 , Income =1.1 , TotalExpences = 1.1  } };
+    //    }
+    //}
+
     public class LevelModel
     {
+        /// <summary>
+        /// is IsGameFinishable means if the use won the game or reached all the levels's list of goals:  StoryGoalModels
+        /// </summary>
+        public bool IsGameFinishable { get; set; }
+        public List<PlayerModel> Players { get; set; }
+        public bool IsNewGameStarted { get; set; }
         public string StoryLevelID { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string ImagePath { get; set; }
-        public int HighestMounthScore { get; set; }
+        public short HighestMounthScore { get; set; }
+        public string Header { get; set; }
+        public string DetailStory { get; set; }
         public bool isStarted { get; set; }
         public bool isUnlocked { get; set; }
-
-        public List<PlayerModel> Players { get; set; }
-
+        public List<StoryGoalModel> StoryGoalModels { get; set; }
         public LevelModel()
         {
-            Players = new List<PlayerModel> { new PlayerModel {PlayerModelID = 1 , Balance = 1.1 , Income =1.1 , TotalExpences = 1.1  } };
+            IsGameFinishable=false;
+
+            Players = new List<PlayerModel> { new PlayerModel { PlayerModelID = 1, Balance = 1.1, Income = 1.1, TotalExpences = 1.1 } };
+            
+            StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 3 } };
+
+        }
+        private string _image;
+
+        public string Image
+        {
+            get { return _image; }
+            set { _image = value; }
         }
     }
 }

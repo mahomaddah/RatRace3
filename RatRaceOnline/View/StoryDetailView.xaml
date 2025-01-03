@@ -2,23 +2,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RatRace3.View.StoryDetailView"
-             Title="Level2:The Software Engineer's Breakthrough">
-    
-        
+             Loaded="ContentPage_Loaded"
+             Title="{Binding Header}" >
 
-        <VerticalStackLayout Padding="5">
+    <VerticalStackLayout Padding="5">
+     
             <Label x:Name="StoryDetailLB"
-                FontSize="Micro"
+             
                    Margin="5"
+                   FontSize="{OnIdiom Phone=12 , Default=18}"
                          MaximumWidthRequest="1000" MaximumHeightRequest="500"
-                Text="As a budding software engineer, you're stuck in a low-paying job with no prospects of promotion. But one day, you're inspired to create a groundbreaking app. The only question is: do you have the grit to see your idea through, or will the challenges of the tech world overwhelm you? Build, fail, and try again to see where your code takes you."          
+                    Text="{Binding DetailStory}"             
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
 
             
             <ListView x:Name="GameGoalsListV"
                      VerticalOptions="CenterAndExpand"
-                    
+                     ItemsSource="{Binding StoryGoalModels}"
                       HeightRequest="100"
                    
                       MaximumWidthRequest="1000"
@@ -57,9 +58,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
-            <Button x:Name="FinishGameButton" Clicked="FinishGameButton_Clicked"  Margin="5" IsEnabled="False" Text="Finish the Game" HeightRequest="40" MaximumWidthRequest="300"></Button>
-            <Button x:Name="BackToGameButton" Clicked="BackToGameButton_Clicked" Margin="5" Text="Back to the Game" HeightRequest="40"  MaximumWidthRequest="300"></Button>
+
+        <Button   IsEnabled="{Binding IsGameFinishable }" x:Name="FinishGameButton" Clicked="FinishGameButton_Clicked"  Margin="5" Text="Finish the Game" HeightRequest="40" WidthRequest="{OnIdiom Phone=150 , Default=300}"></Button>
+        <Button x:Name="BackToGameButton" Clicked="BackToGameButton_Clicked" Margin="5" Text="Back to the Game" HeightRequest="40" WidthRequest="{OnIdiom Phone=150 , Default=300}"></Button>
             
         </VerticalStackLayout>
   
