@@ -14,13 +14,14 @@
                          MaximumWidthRequest="1000" MaximumHeightRequest="500"
                     Text="{Binding DetailStory}"             
                 VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center" 
+            />
 
-            
+        
             <ListView x:Name="GameGoalsListV"
                      VerticalOptions="CenterAndExpand"
                      ItemsSource="{Binding StoryGoalModels}"
-                      HeightRequest="100"
+                     HeightRequest="100"
                    
                       MaximumWidthRequest="1000"
                       Margin="10,30,10,5"

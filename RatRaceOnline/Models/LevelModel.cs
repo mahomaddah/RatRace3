@@ -24,12 +24,17 @@ namespace RatRace3.Models
     //    }
     //}
 
+
+
     public class LevelModel
     {
         /// <summary>
         /// is IsGameFinishable means if the use won the game or reached all the levels's list of goals:  StoryGoalModels
         /// </summary>
         public bool IsGameFinishable { get; set; }
+        /// <summary>
+        /// Players.first is always the user himself and other can be multiplayer or bots to simulate real economy ...
+        /// </summary>
         public List<PlayerModel> Players { get; set; }
         public bool IsNewGameStarted { get; set; }
         public string StoryLevelID { get; set; }

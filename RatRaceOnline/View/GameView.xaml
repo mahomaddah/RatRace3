@@ -669,7 +669,7 @@
                            
                             <sunburst:SfSunburstChart x:Name="sunburst" ShowLabels="True" EnableTooltip="True"
                               ItemsSource="{Binding DataSource}" 
-                              ValueMemberPath="EmployeesCount"
+                              ValueMemberPath="Rent"
                                                Stroke="#FFFFFF"
                           StrokeWidth="2"       
                                                       >
@@ -687,9 +687,9 @@
                                 </sunburst:SfSunburstChart.Legend>
 
                                 <sunburst:SfSunburstChart.Levels>
-                                    <sunburst:SunburstHierarchicalLevel GroupMemberPath="Country"/>
-                                    <sunburst:SunburstHierarchicalLevel GroupMemberPath="JobDescription"/>
-                                    <sunburst:SunburstHierarchicalLevel GroupMemberPath="JobGroup"/>
+                                    <sunburst:SunburstHierarchicalLevel GroupMemberPath="Sector"/>
+                                    <sunburst:SunburstHierarchicalLevel GroupMemberPath="RealStateName"/>
+                                    <sunburst:SunburstHierarchicalLevel GroupMemberPath="LandType"/>
                                 </sunburst:SfSunburstChart.Levels>
                                 <sunburst:SfSunburstChart.CenterView>
                                     <Grid>
@@ -698,7 +698,7 @@
                                             <RowDefinition Height="1*" />
                                         </Grid.RowDefinitions>
 
-                                        <Image Grid.Row="0" Source="realstate_mall_transpar.png" WidthRequest="65" Margin="1,1,1,2" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+                                        <Image Grid.Row="0" Source="realstate_mall_transpar.png" WidthRequest="{OnIdiom Default=65, Phone=15}" Margin="1,1,1,2" HorizontalOptions="Center" VerticalOptions="Center"></Image>
                                         <Label  Grid.Row="1" Text="City Mall Project" FontSize="12" FontFamily="EngraversOldEnglish" HorizontalOptions="Center" TextColor="#9072C9" ></Label>
                                         
                                     </Grid>
