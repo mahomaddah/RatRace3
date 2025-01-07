@@ -37,12 +37,12 @@ public partial class GameView : ContentPage
         if (  (DeviceInfo.Platform == DevicePlatform.Android || DeviceInfo.Platform == DevicePlatform.iOS) && DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Landscape)
         {
             //change button point change the 0,0 to a real working tested button location ...
-            radialMenu.Point = new Point(0,0);
+            BankRadialMenu.Point = new Point(0,0);
         }
         else if ((DeviceInfo.Platform == DevicePlatform.Android || DeviceInfo.Platform == DevicePlatform.iOS) && DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Portrait)
         {
             //return button point 83,125 which tested for a
-            radialMenu.Point = new Point(83, 125);
+            BankRadialMenu.Point = new Point(83, 125);
         }
 
     }
@@ -90,6 +90,12 @@ public partial class GameView : ContentPage
             };
         }
         await Shell.Current.GoToAsync("MarketPage");
+    }
+
+    private async void FixedDeposit_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
+    {
+        await DisplayAlert("Bank..", "Fixed deposit account addet to asset list!", "OK$$$");
+        BankRadialMenu.IsOpen = false;
     }
 }
 

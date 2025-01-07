@@ -38,9 +38,11 @@ namespace RatRace3.ViewModel
                 new SunburstModel {Sector= "Real Estate", LandType =  "Technical", RealStateName ="Prologis, Inc. REITs",  Rent = 60 },
                 new SunburstModel {Sector= "Utilities", LandType =  "Technical", RealStateName ="NextEra Energy (NNE)",  Rent = 27 },
                 new SunburstModel {Sector= "Information Technology", LandType =  "Management", RealStateName = "MSFT",  Rent = 40 },
-             new SunburstModel {Sector= "Information Technology", LandType =  "Technical",RealStateName = "GOOGL (Google Cloud)", Rent =  60 },
-             new SunburstModel {Sector= "Information Technology", LandType =  "Technical",RealStateName = "Amazon (AWS)", Rent =  60 },
-          new SunburstModel {Sector= "Communication Services", LandType =  "Technical",RealStateName = "Amazon (Prime Video)",  Rent = 33 }
+                new SunburstModel {Sector= "Information Technology", LandType =  "Technical",RealStateName = "GOOGL (Google Cloud)", Rent =  60 },
+                new SunburstModel {Sector= "Information Technology", LandType =  "Technical",RealStateName = "Amazon (AWS)", Rent =  60 },
+                new SunburstModel {Sector= "Communication Services", LandType =  "Technical",RealStateName = "Amazon (Prime Video)",  Rent = 33 }
+
+
 
             };
         }

@@ -265,9 +265,13 @@
                                     </expander:SfExpander.Content>
                                 </expander:SfExpander>
                             </Border>
-                            <HorizontalStackLayout>
-                                <Border StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2}"  WidthRequest="{OnPlatform  MacCatalyst='284',WinUI='262'}">
-                                    <expander:SfExpander  ToolTipProperties.Text="Rule One. You must know the difference between an asset and a liability, and buy assets. An asset is something that puts money in my pocket. A liability is something that takes money out of my pocket.-Robert Kiyosaki" AnimationDuration="200" IsExpanded="False">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Grid.ColumnSpan="1" StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2}"  WidthRequest="{OnPlatform  MacCatalyst='284',WinUI='262'}">
+                                    <expander:SfExpander Grid.Column="1" Grid.ColumnSpan="1" ToolTipProperties.Text="Rule One. You must know the difference between an asset and a liability, and buy assets. An asset is something that puts money in my pocket. A liability is something that takes money out of my pocket.-Robert Kiyosaki" AnimationDuration="200" IsExpanded="False">
                                         <expander:SfExpander.Header>
                                             <Grid>
                                                 <Grid.RowDefinitions>
@@ -319,8 +323,8 @@
                                     </expander:SfExpander>
                                         
                                 </Border>
-                                <Border  StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=284,WinUI=262}">
-                                    <expander:SfExpander AnimationDuration="200" IsExpanded="True" ToolTipProperties.Text="Note: Surround yourself with assets, not liabilities. The most valuable assets in life are intangible assets like health, a happy family, financial freedom, a good heart, a constantly learning brain, and a lot of hobbies. Other assets are replaceable with time.">
+                                <Border  Grid.Column="1" Grid.ColumnSpan="1" StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=284,WinUI=262}">
+                                    <expander:SfExpander Grid.ColumnSpan="1" Grid.Column="1" AnimationDuration="200" IsExpanded="True" ToolTipProperties.Text="Note: Surround yourself with assets, not liabilities. The most valuable assets in life are intangible assets like health, a happy family, financial freedom, a good heart, a constantly learning brain, and a lot of hobbies. Other assets are replaceable with time.">
                                         <expander:SfExpander.Header>
                                             <Grid>
                                                 <Grid.RowDefinitions>
@@ -354,7 +358,7 @@
                                         </expander:SfExpander.Content>
                                     </expander:SfExpander>
                                 </Border>
-                            </HorizontalStackLayout>
+                            </Grid>
                             <Border StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8',WinUI='8,8,6,8',MacCatalyst='8,8,6,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{ OnPlatform MacCatalyst=560,WinUI=540}">
                                 <expander:SfExpander AnimationDuration="200"  IsExpanded="False">
                                     <expander:SfExpander.Header>
@@ -428,7 +432,7 @@
 
 
 
-                        <radialMenu:SfRadialMenu Margin="{OnPlatform Default='0,0,0,0', Android='-300,0,0,0'}" x:Name="radialMenu" AnimationDuration="400" HeightRequest="{OnPlatform Default='300' , Android='150' ,iOS='150'}" VerticalOptions="End" 
+                        <radialMenu:SfRadialMenu Margin="{OnPlatform Default='0,0,0,0', Android='-300,0,0,0'}" x:Name="BankRadialMenu" AnimationDuration="400" HeightRequest="{OnPlatform Default='300' , Android='150' ,iOS='150'}" VerticalOptions="End" 
                                  RimColor="#9072C9"
                                                 
                                      Point="{OnPlatform Default='-603, 30',Android='83,125' ,iOS='83,125' }"
@@ -449,12 +453,11 @@
                                 SeparatorColor="#3f3d56"
                                 CenterButtonBackgroundColor="#3f3d56"
                                 CenterButtonRadius="{OnPlatform Default='100' }"
-                                               
-                                    
+                          
                                 
                               >
                             <radialMenu:SfRadialMenu.Items>
-                                <radialMenu:SfRadialMenuItem  ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='14', Default='25' }" BackgroundColor="#9072C9" Text="FD" Image="cash_fast.png"
+                                <radialMenu:SfRadialMenuItem x:Name="FixedDeposit" ItemTapped="FixedDeposit_ItemTapped"  ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='14', Default='25' }" BackgroundColor="#9072C9" Text="FD" Image="cash_fast.png"
                                     FontAttributes="Bold" ToolTipProperties.Text="Fixed Deposit" />
                                 <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="RD" Image="cash_recursive_deposit.png"
                                         ItemWidth="{OnPlatform Android='35' , Default='55'}" ToolTipProperties.Text="Recursive deposit" TextColor="#E3AAD6" FontSize="{OnPlatform Android='17', Default='25' }"/>

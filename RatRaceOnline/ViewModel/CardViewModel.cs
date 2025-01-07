@@ -22,6 +22,7 @@ namespace RatRace3.ViewModel
         {
             ChangeCardIndexCommand = new Command<int>(index => VisibleIndex = index);
             Liabilities = new List<string> { "Education Loan", "Phone Debt" };
+            //TODO change to LIst< LIabilityModel>...
 
             //StockMarketCompanys = new List<Company> {
             //    new Company { Symbol="MSFT" , StockPrice = 231.12 , StockDetail = "Wide ecconomic moat Great Technology company" },
