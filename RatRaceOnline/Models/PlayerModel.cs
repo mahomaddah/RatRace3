@@ -19,6 +19,8 @@
         {
             Assets = new List<AssetModel> { };
             Liabilities = new List<LiabilityModel> { };
+            IncomeSources = new List<IncomeSourceModel> { };
+            Expenses = new List<ExpenseModel> { };
         }
 
 

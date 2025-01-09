@@ -18,6 +18,8 @@ public partial class StoryModeView : ContentPage
         var appShell = (AppShell)Shell.Current;
         SelectLevelViewModel SelectedObject = appShell.SelectLevelViewModel;
         this.BindingContext = SelectedObject;
+
+        storyLevelsCarousel.SelectedIndex = appShell.UIsettingsModel.LastPlayedLevelIndex;
     }
 
     private async void StartGameClicked(object sender, EventArgs e)

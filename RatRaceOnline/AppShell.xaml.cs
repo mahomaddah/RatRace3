@@ -11,9 +11,10 @@ namespace RatRace3
         public Company CurrentCompany { get; set; }
         public ObservableCollection<Company> IPOcompanies { get; set; }
         public SelectLevelViewModel SelectLevelViewModel { get; set; }
-
+        public UIsettingsModel UIsettingsModel { get; set; }
         public AppShell()
         {
+
             Routing.RegisterRoute("MarketPage", typeof(MarketPage));
             Routing.RegisterRoute("StoryModeView", typeof(StoryModeView));
             Routing.RegisterRoute("StoryDetailView", typeof(StoryDetailView));
@@ -23,41 +24,76 @@ namespace RatRace3
             getData();
 
             InitializeComponent();
-            PlayBackgroundMusic();
+            if (UIsettingsModel.IsMusicPlaying)
+            {
+                 PlayBackgroundMusic();
+            }
+            else
+            {
+                IsMusicPlaying = false;
+
+                TurnMusicBtn.IconImageSource = "music_on.png";
+            }
+          
         }
         void getData()
         {
-
+            UIsettingsModel = new Models.UIsettingsModel
+            {
+                IsMusicPlaying = true,
+                LastPlayedLevelIndex = 1
+            };
+        
             SelectLevelViewModel = new SelectLevelViewModel
             {
                 ImageCollection = new List<LevelModel>()
             };
             //dammy data ...
 
-
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
                 StoryLevelID = "A",
+                Players = new List<PlayerModel> { new PlayerModel{
+                    Liabilities = new List<LiabilityModel> 
+                    {   
+                        new LiabilityModel {LiabilityName ="Ducati Bike Debt" ,Totalamount =3900.00 , MounthRemaining = 12  ,IntrestRate = 0.0 , LiabilityModelID =1 },
+                        new LiabilityModel{LiabilityName="Expensive Drone Debt", Totalamount=2600.00, MounthRemaining = 12, IntrestRate=0.0, LiabilityModelID = 2 },
+                        new LiabilityModel{LiabilityName="Motorcycle Camping gear Debt", Totalamount=1300.00, MounthRemaining = 12, IntrestRate=0.0, LiabilityModelID = 2 }
+                    },
+                    IncomeSources= new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary" , amount = 2600.00 , IncomeSourceID=1 } },
+                    Assets = new List<AssetModel>
+                    {
+                        new AssetModel {AssetName = "Fixed Deposit 1" ,AssetType = AssetTypes.Stock , AssetValue = 1248.00 , IntrestRate= 0.08 , IsBankDeposit= true , IsRecursiveDepositRD = false ,PassiveIncome = 8.32 , AssetModelID = 1   } 
+                    },
+                    Expenses = new List<ExpenseModel>
+                    {
+                       new ExpenseModel{ Name = "Ducati Bike Debt EMI", Amount = 325, ExpenseModelID =1},
+                       new ExpenseModel{ Name = "Expensive Drone Debt EMI", Amount = 216.67, ExpenseModelID =2},
+                       new ExpenseModel{ Name = "Motorcycle Camping gear Debt EMI", Amount = 108.33, ExpenseModelID =3}
+                    }
+                    
+
+                }},
+                Image = "software_engineer.png",
+                Header = "The System Engineer's Breakthrough",
+                DetailStory = "Erdem is a Presnipal System Engineer @ Huawei Tech. Ltd., receives a 100% salary hike and splurges on luxury items such as a Brand new Ducati bike!, an expensive drone, and Motorcycle Camping gear on EMI. Help him pay off his debts within a year.",
+                isStarted = false,
+                isUnlocked = false,
+                HighestMounthScore = 0,
+                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 3 } }
+            });
+
+            SelectLevelViewModel.ImageCollection.Add(new LevelModel
+            {
+                StoryLevelID = "2",
                 Image = "undraw_investing.png",
                 Header = "Investing Adventure",
                 DetailStory = "You start your journey as a novice investor, barely making ends meet. One day, you stumble upon a hidden gem in the stock market that others have overlooked. Will you risk your savings on this company, or play it safe with traditional investments? Your choices will decide if you break free from the rat race or fall further into it.",
                 isStarted = false,
                 isUnlocked = true,
                 HighestMounthScore = 0,
-                StoryGoalModels=new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 3 } }
-
-            });
-
-            SelectLevelViewModel.ImageCollection.Add(new LevelModel
-            {
-                StoryLevelID = "2",
-                Image = "software_engineer.png",
-                Header = "The Software Engineer's Breakthrough",
-                DetailStory = "As a budding software engineer, you're stuck in a low-paying job with no prospects of promotion. But one day, you're inspired to create a groundbreaking app. The only question is: do you have the grit to see your idea through, or will the challenges of the tech world overwhelm you? Build, fail, and try again to see where your code takes you.",
-                isStarted = false,
-                isUnlocked = false,
-                HighestMounthScore = 0,
                 StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 3 } }
+
             });
 
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
@@ -107,6 +143,7 @@ namespace RatRace3
                 HighestMounthScore = 0,
                 StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 3 } }
             });
+
 
             IPOcompanies = new ObservableCollection<Company>
             {
@@ -167,7 +204,9 @@ namespace RatRace3
                 }
             };
 
-            CurrentCompany = IPOcompanies.First();        
+            CurrentCompany = IPOcompanies.First();       
+            
+
         }
 
         private void TurnMusicBtn_Clicked(object sender, EventArgs e)
