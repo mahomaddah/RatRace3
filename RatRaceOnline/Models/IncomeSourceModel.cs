@@ -4,7 +4,7 @@
     {
         public int IncomeSourceID { get; set; }
         public string Name { get; set; }
-        public double amount { get; set; }  
+        public double Amount { get; set; }  
 
     }
 }

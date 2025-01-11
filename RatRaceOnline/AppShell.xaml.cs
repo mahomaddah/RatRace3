@@ -38,6 +38,8 @@ namespace RatRace3
         }
         void getData()
         {
+           
+
             UIsettingsModel = new Models.UIsettingsModel
             {
                 IsMusicPlaying = true,
@@ -56,11 +58,11 @@ namespace RatRace3
                 Players = new List<PlayerModel> { new PlayerModel{
                     Liabilities = new List<LiabilityModel> 
                     {   
-                        new LiabilityModel {LiabilityName ="Ducati Bike Debt" ,Totalamount =3900.00 , MounthRemaining = 12  ,IntrestRate = 0.0 , LiabilityModelID =1 },
+                        new LiabilityModel{LiabilityName ="Ducati Bike Debt" ,Totalamount =3900.00 , MounthRemaining = 12  ,IntrestRate = 0.0 , LiabilityModelID =1 },
                         new LiabilityModel{LiabilityName="Expensive Drone Debt", Totalamount=2600.00, MounthRemaining = 12, IntrestRate=0.0, LiabilityModelID = 2 },
                         new LiabilityModel{LiabilityName="Motorcycle Camping gear Debt", Totalamount=1300.00, MounthRemaining = 12, IntrestRate=0.0, LiabilityModelID = 2 }
                     },
-                    IncomeSources= new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary" , amount = 2600.00 , IncomeSourceID=1 } },
+                    IncomeSources= new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary" , Amount = 2600.00 , IncomeSourceID=1 } },
                     Assets = new List<AssetModel>
                     {
                         new AssetModel {AssetName = "Fixed Deposit 1" ,AssetType = AssetTypes.Stock , AssetValue = 1248.00 , IntrestRate= 0.08 , IsBankDeposit= true , IsRecursiveDepositRD = false ,PassiveIncome = 8.32 , AssetModelID = 1   } 
@@ -70,13 +72,14 @@ namespace RatRace3
                        new ExpenseModel{ Name = "Ducati Bike Debt EMI", Amount = 325, ExpenseModelID =1},
                        new ExpenseModel{ Name = "Expensive Drone Debt EMI", Amount = 216.67, ExpenseModelID =2},
                        new ExpenseModel{ Name = "Motorcycle Camping gear Debt EMI", Amount = 108.33, ExpenseModelID =3}
-                    }
-                    
+                    } 
 
                 }},
+
+
                 Image = "software_engineer.png",
                 Header = "The System Engineer's Breakthrough",
-                DetailStory = "Erdem is a Presnipal System Engineer @ Huawei Tech. Ltd., receives a 100% salary hike and splurges on luxury items such as a Brand new Ducati bike!, an expensive drone, and Motorcycle Camping gear on EMI. Help him pay off his debts within a year.",
+                DetailStory = "Erdem is a Principal System Engineer @ Huawei Tech. Ltd., receives a 100% salary hike and splurges on luxury items such as a Brand new Ducati bike!, an expensive drone, and Motorcycle Camping gear on EMI. Help him pay off his debts within a year.",
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,
@@ -204,9 +207,9 @@ namespace RatRace3
                 }
             };
 
-            CurrentCompany = IPOcompanies.First();       
-            
+            CurrentCompany = IPOcompanies.First();
 
+         //   CurrentLevelModel = SelectLevelViewModel.ImageCollection.FirstOrDefault();//TODO ... DELET ME 
         }
 
         private void TurnMusicBtn_Clicked(object sender, EventArgs e)

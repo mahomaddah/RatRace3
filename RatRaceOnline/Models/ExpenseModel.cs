@@ -19,3 +19,5 @@
 
     }
 }
+
+//After MVP... i will add sectors... human biologic , socio and pschologic needs , and wants based things ...

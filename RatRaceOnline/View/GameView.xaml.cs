@@ -6,16 +6,31 @@ using Syncfusion.Maui.Rotator;
 
 public partial class GameView : ContentPage
 {
-    public CardViewModel CardviewModel { get; set; }
+    public GameViewModel GameViewModel { get; set; }
     public RotatorViewModel IpoCompaniesVM { get; set; }
+    private void GameStarted(object sender, EventArgs e)
+    {
+        //GameViewModel = new GameViewModel();
+        //BindingContext = GameViewModel;
+        //IpoCompaniesVM = new RotatorViewModel();
+        //ListViewIncomeSourses.ItemsSource = GameViewModel.CurrentLevelPlayer.IncomeSources;
+        //CompanyInvestRoter.ItemsSource = IpoCompaniesVM.RotatorItems;
+
+    }
+
     public GameView()
 	{
 		InitializeComponent();
-        CardviewModel = new CardViewModel();
-        BindingContext = CardviewModel;
+        GameViewModel = new GameViewModel();
+      
 
         // Set default card index to open first 
-        CardviewModel.VisibleIndex = 1;
+        GameViewModel.VisibleIndex = 1;
+        var appShell = (AppShell)Shell.Current;
+
+        GameViewModel.CurrentLevelPlayer = appShell.CurrentLevelModel.Players.First();
+        BindingContext = GameViewModel;
+
 
         UpdateOrientation();
 
@@ -23,7 +38,7 @@ public partial class GameView : ContentPage
         DeviceDisplay.MainDisplayInfoChanged += (s, e) => UpdateOrientation();
 
         //binding VM to Listview ....
-        //   LVcompaiesMarket.ItemsSource = CardviewModel.StockMarketCompanys;
+        //   LVcompaiesMarket.ItemsSource = GameViewModel.StockMarketCompanys;
         IpoCompaniesVM = new RotatorViewModel();
 
         CompanyInvestRoter.ItemsSource = IpoCompaniesVM.RotatorItems;
@@ -51,7 +66,7 @@ public partial class GameView : ContentPage
     {
 		if(sender!=null)
 		{ 
-          CardviewModel.VisibleIndex = Convert.ToInt16(((Button)sender).CommandParameter);
+          GameViewModel.VisibleIndex = Convert.ToInt16(((Button)sender).CommandParameter);
         }
     }
 
@@ -97,5 +112,7 @@ public partial class GameView : ContentPage
         await DisplayAlert("Bank..", "Fixed deposit account addet to asset list!", "OK$$$");
         BankRadialMenu.IsOpen = false;
     }
+
+    
 }
 
