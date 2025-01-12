@@ -3,6 +3,7 @@ using RatRace3.View;
 using RatRace3.Models;
 using RatRace3.ViewModel;
 using Syncfusion.Maui.Rotator;
+using System.Globalization;
 
 public partial class GameView : ContentPage
 {
@@ -82,8 +83,11 @@ public partial class GameView : ContentPage
 
     private async void CollectIncomeBTN_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Income...", "$1,200.00 Total Income Collected!","Amazing! $$$");
+      //  await DisplayAlert("Income...", "$1,200.00 Total Income Collected!","Amazing! $$$");
         //TODO: add player objects ... += 1200 to player.blance....
+       // GameViewModel.CurrentBalance += 1200; // better to bind to viewmoddel ... 
+       // CollectIncomeBtn.IsEnabled = false; // beter to bind to viewmodel
+
     }
 
     private async void CompanyInvestRoter_ItemTapped(object sender, EventArgs e)
@@ -113,6 +117,12 @@ public partial class GameView : ContentPage
         BankRadialMenu.IsOpen = false;
     }
 
-    
+    private async void BankAssetWithdrawal(object sender, Syncfusion.Maui.ListView.ItemDoubleTappedEventArgs e)
+    {
+       
+        await DisplayAlert("Bank: "+ ((RatRace3.ViewModel.ListViewItemModel)e.DataItem).ItemText,"Bank Deposit Sucssesfully Withdrawed", "Good! Cash is King :D");
+    }
+
+
 }
 

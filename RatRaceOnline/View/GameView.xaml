@@ -13,6 +13,7 @@
              xmlns:Rotator="clr-namespace:Syncfusion.Maui.Rotator;assembly=Syncfusion.Maui.Rotator"
              xmlns:models="clr-namespace:RatRace3.Models"
              xmlns:ViewModels="clr-namespace:RatRace3.ViewModel"
+             xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
              xmlns:sflistview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
           
              >
@@ -38,7 +39,7 @@
                VerticalOptions="Start" 
                HorizontalOptions="Center" FontAttributes="Italic" TextColor="#9072C9" FontSize="{OnPlatform Default='Caption' , WinUI='Subtitle', MacCatalyst='Subtitle'}" />
             <Label 
-             Text="1 / 24"
+             Text="{Binding CurrentMonth}"
              VerticalOptions="Start" 
              HorizontalOptions="Center" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='Subtitle', WinUI='Title', MacCatalyst='Title' }"  />   
 
@@ -53,7 +54,7 @@
                 HorizontalOptions="Center" TextColor="#9072C9"   FontSize="{OnPlatform Default='Caption' , WinUI='Subtitle', MacCatalyst='Subtitle'}"  FontAttributes="Italic" />
 
             <Label 
-                Text="$2,975.04"
+                Text="{Binding CurrentBalance}"
                 VerticalOptions="Start" 
                 HorizontalOptions="Center" TextColor="#9072C9"  FontSize="{OnPlatform Default='Subtitle', WinUI='Title', MacCatalyst='Title' }" FontAttributes="Bold"  />
         </VerticalStackLayout>
@@ -66,7 +67,7 @@
                     <Image HorizontalOptions="End" Margin="10" Source="cardpayment.png" MaximumHeightRequest="490"  />
                     <Label  x:Name="labelPaymentsPage" Margin="2,0,0,0" FontAttributes="Bold"  FontSize="{OnPlatform Default='Caption' , WinUI='Title', MacCatalyst='Subtitle'}" TextColor="#9072C9"  Text="Payments" VerticalTextAlignment="Start" HorizontalTextAlignment="Start"/>
                     <ScrollView HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="{OnPlatform Android='10,35,0,0' ,Default='60,35,0,0' , iOS='10,35,0,0'}">
-                        <StackLayout  HorizontalOptions="{OnPlatform MacCatalyst=Center,WinUI=Center}"  >
+                        <StackLayout ToolTipProperties.Text="Life Quality Managment Will Unlock after Level 5 and Next Version..." HorizontalOptions="{OnPlatform MacCatalyst=Center,WinUI=Center}"  >
                             
                             <Border  StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,0,8,8',WinUI='8,0,6,8',MacCatalyst='8,0,6,8'}" Stroke="#9072C9"  StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=560,WinUI=540}">
                                 <expander:SfExpander AnimationDuration="200" IsExpanded="True" >
@@ -79,13 +80,13 @@
                                                 <ColumnDefinition Width="35"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Image Source="mobilborsa.png" WidthRequest="15" HeightRequest="15"></Image>
-                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="Invoice Date" FontSize="14" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
+                                            <Image Source="expenceshi.png" WidthRequest="15" HeightRequest="15"></Image>
+                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="Food and Shelter" FontSize="14" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
                                         </Grid>
                                     </expander:SfExpander.Header>
                                     <expander:SfExpander.Content>
                                         <Grid Padding="18,8,0,18" >
-                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="11:03 AM, 15 January 2019" FontSize="14" VerticalOptions="CenterAndExpand"/>
+                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="Budget :$1000 Quality :3.2" FontSize="14" VerticalOptions="CenterAndExpand"/>
                                         </Grid>
                                     </expander:SfExpander.Content>
                                 </expander:SfExpander>
@@ -101,39 +102,13 @@
                                                 <ColumnDefinition Width="35"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Image Source="mobilborsa.png" WidthRequest="15" HeightRequest="15"></Image>
-                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="Item(s)" FontSize="14" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
+                                            <Image Source="liabilityhi.png" WidthRequest="15" HeightRequest="15"></Image>
+                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="Consumer Defensive" FontSize="14" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
                                         </Grid>
                                     </expander:SfExpander.Header>
                                     <expander:SfExpander.Content>
-                                        <Grid Padding="18,8,18,18">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="20"/>
-                                                <RowDefinition Height="20"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="2018 Subaru Outback"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="All-Weather Mats" Grid.Row="1"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Door Edge Guard Kit" Grid.Row="2"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Rear Bumper Cover" Grid.Row="3"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Wheel Locks" Grid.Row="4"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Gas Full Tank" Grid.Row="5"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Total Amount" TextColor="{StaticResource Primary}" Grid.Row="6"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$35,705.00" Grid.Row="0" Grid.Column="1"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$101.00" Grid.Row="1" Grid.Column="1"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$162.00" Grid.Row="2" Grid.Column="1"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$107.00" Grid.Row="3" Grid.Column="1"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$81.00" Grid.Row="4" Grid.Column="1"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$64.00" Grid.Row="5" Grid.Column="1"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$36,220.00" TextColor="{StaticResource Primary}" Grid.Row="6" Grid.Column="1"/>
+                                        <Grid>
+                                            <Label Margin="20,2,2,2">there will be a list view ... and pick bar for selecting budget .. needs and solutions ..</Label>
                                         </Grid>
                                     </expander:SfExpander.Content>
                                 </expander:SfExpander>
@@ -150,9 +125,9 @@
                                                 <ColumnDefinition Width="35"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                         
-                                            <Label Margin="2" CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="Payment Details" FontSize="14" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
-                                            <Button Margin="10" x:Name="CollectIncomeBTN" Clicked="CollectIncomeBTN_Clicked" Padding="2" ImageSource="mobilborsa.png" BackgroundColor="Transparent" WidthRequest="20" TextColor="White"  Text="Pay"></Button>
+                                            <Image Source="liabilityhi.png" WidthRequest="15" HeightRequest="15"></Image>
+                                            <Label Margin="2" CharacterSpacing="0.25" ToolTipProperties.Text="How much Time budget enerjy to put for work Overworking will Reduce your social and fun needs." FontFamily="Roboto-Regular"  Text="Work and Studies" FontSize="14" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
+                                           
                                         </Grid>
                                     </expander:SfExpander.Header>
                                     <expander:SfExpander.Content>
@@ -171,8 +146,8 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Card Payment"/>
-                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="Third-Party coupons" Grid.Row="1"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="University Loan"/>
+                                            <Label FontSize="14" CharacterSpacing="0.25"  Text="ChatGPT PRO 2 Yr Subsciption" Grid.Row="1"/>
                                             <Label FontSize="14" CharacterSpacing="0.25"  Text="Total Amount Paid" TextColor="{StaticResource Primary}" Grid.Row="2"/>
                                             <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$31,200.00" Grid.Column="1"/>
                                             <Label FontSize="14" CharacterSpacing="0.25"  HorizontalOptions="End" Text="$5,000.00" Grid.Row="1" Grid.Column="1"/>
@@ -181,10 +156,10 @@
                                     </expander:SfExpander.Content>
                                 </expander:SfExpander>
                             </Border>
-                            <Border StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,0,8,8',WinUI='8,0,6,8',MacCatalyst='8,0,6,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=560,WinUI=540}">
-                                <expander:SfExpander AnimationDuration="200" IsExpanded="True">
+                            <Border  StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,0,8,8',WinUI='8,0,6,8',MacCatalyst='8,0,6,8'}" Stroke="#9072C9"  StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=560,WinUI=540}">
+                                <expander:SfExpander AnimationDuration="200" IsExpanded="True" >
                                     <expander:SfExpander.Header>
-                                        <Grid>
+                                        <Grid >
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="48"/>
                                             </Grid.RowDefinitions>
@@ -192,29 +167,40 @@
                                                 <ColumnDefinition Width="35"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Image Source="mobilborsa.png" WidthRequest="15" HeightRequest="15"></Image>
-                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontSize="14" Text="Address" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
+                                            <Image Source="expenceshi.png" WidthRequest="15" HeightRequest="15"></Image>
+                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="Fun and Social" FontSize="14" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
                                         </Grid>
                                     </expander:SfExpander.Header>
                                     <expander:SfExpander.Content>
-                                        <Grid Padding="18,8,18,18" Grid.Row="1" RowSpacing="1">
-                                            <Grid.Resources>
-                                                <Style TargetType="Label">
-                                                    <Setter Property="FontFamily" Value="Roboto-Regular"/>
-                                                </Style>
-                                            </Grid.Resources>
-                                            <Grid.RowDefinitions >
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-                                            <Label CharacterSpacing="0.25"  FontSize="14" Text="Alex" FontAttributes="Bold"/>
-                                            <Label CharacterSpacing="0.25"  FontSize="14" Text="No.8 Blossom St, Washington, DC 20019" Grid.Row="1"/>
-                                            <Label CharacterSpacing="0.25"  FontSize="14" Text="(202) 547-3555" Grid.Row="2"/>
+                                        <Grid Padding="18,8,0,18" >
+                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="Budget :$500 Quality :1.2" FontSize="14" VerticalOptions="CenterAndExpand"/>
                                         </Grid>
                                     </expander:SfExpander.Content>
                                 </expander:SfExpander>
                             </Border>
+                            <Border  StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,0,8,8',WinUI='8,0,6,8',MacCatalyst='8,0,6,8'}" Stroke="#9072C9"  StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=560,WinUI=540}">
+                                <expander:SfExpander AnimationDuration="200" IsExpanded="True" >
+                                    <expander:SfExpander.Header>
+                                        <Grid >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="48"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="35"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="assethi.png" WidthRequest="15" HeightRequest="15"></Image>
+                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text="Assurance, Reputation, and Consumer Discretionary Payments" FontSize="14" Grid.Column="1" VerticalOptions="CenterAndExpand"/>
+                                        </Grid>
+                                    </expander:SfExpander.Header>
+                                    <expander:SfExpander.Content>
+                                        <Grid Padding="18,8,0,18" >
+                                            <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular"  Text=" Hilton SPA and Rolex Budget :$5000 Quality :4.2" FontSize="14" VerticalOptions="CenterAndExpand"/>
+                                        </Grid>
+                                    </expander:SfExpander.Content>
+                                </expander:SfExpander>
+                            </Border>
+
                         </StackLayout>
                     </ScrollView>
 
@@ -347,7 +333,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Border Grid.Column="0" Grid.ColumnSpan="1" StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2}"  WidthRequest="{OnPlatform  MacCatalyst='284',WinUI='262'}">
-                                    <expander:SfExpander Grid.Column="1" IsExpanded="True" Grid.ColumnSpan="1" ToolTipProperties.Text="Rule One. You must know the difference between an asset and a liability, and buy assets. An asset is something that puts money in my pocket. A liability is something that takes money out of my pocket.-Robert Kiyosaki" AnimationDuration="200" >
+                                    <expander:SfExpander Grid.Column="1" IsExpanded="False" Grid.ColumnSpan="1" ToolTipProperties.Text="Rule One. You must know the difference between an asset and a liability, and buy assets. An asset is something that puts money in my pocket. A liability is something that takes money out of my pocket.-Robert Kiyosaki" AnimationDuration="200" >
                                         <expander:SfExpander.Header>
                                             <Grid>
                                                 <Grid.RowDefinitions>
@@ -404,7 +390,7 @@
                                         
                                 </Border>
                                 <Border  Grid.Column="1" Grid.ColumnSpan="1" StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,8,8,8'}" Stroke="#9072C9" StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=284,WinUI=262}">
-                                    <expander:SfExpander Grid.ColumnSpan="1" Grid.Column="1" AnimationDuration="200" IsExpanded="True" ToolTipProperties.Text="Note: Surround yourself with assets, not liabilities. The most valuable assets in life are intangible assets like health, a happy family, financial freedom, a good heart, a constantly learning brain, and a lot of hobbies. Other assets are replaceable with time.">
+                                    <expander:SfExpander Grid.ColumnSpan="1" Grid.Column="1" AnimationDuration="200" IsExpanded="False" ToolTipProperties.Text="Note: Surround yourself with assets, not liabilities. The most valuable assets in life are intangible assets like health, a happy family, financial freedom, a good heart, a constantly learning brain, and a lot of hobbies. Other assets are replaceable with time.">
                                         <expander:SfExpander.Header>
                                             <Grid>
                                                 <Grid.RowDefinitions>
@@ -475,7 +461,7 @@
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
-                                            <Button Grid.Column="0" BorderColor="#9072C9"  BorderWidth="1" Text="Collect All $" TextColor="#9072C9" Margin="2,2,2,2" BackgroundColor="#269072C9" Padding="2" ImageSource="freecashflowhi.png" Clicked="CollectIncomeBTN_Clicked"  ></Button>
+                                            <Button Grid.Column="0" BorderColor="#9072C9" IsEnabled="{Binding IsIncomeCollected, Mode=OneWay ,TargetNullValue=true}" x:Name="CollectIncomeBtn"  BorderWidth="1" Text="Collect All $" TextColor="#9072C9" Margin="2,2,2,2" BackgroundColor="#269072C9" Padding="2" ImageSource="freecashflowhi.png" Command="{Binding CollectIncomeCommand}" Clicked="CollectIncomeBTN_Clicked"  ></Button>
                                             <Image  HorizontalOptions="Start"  Source="freecashflowhi.png"  Grid.Column="1"  WidthRequest="48" Margin="0,-10,0,0"></Image>
                                             <HorizontalStackLayout HorizontalOptions="Start" Margin="1" Grid.Column="2" >
                                                     <Label CharacterSpacing="0.25" HorizontalOptions="Start" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Cash Flow:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
@@ -534,21 +520,107 @@
 
             <cards:SfCardView BorderColor="#9072C9" Background="#FFE3AAD6" BorderWidth="10"  CornerRadius="10">
                 <Grid>
-                    <Label  Text="Bank : Fixed Deposit in bank , Invest in Index or Bonds" TextColor="#9072C9" FontAttributes="Bold" Margin="5,0,0,0" VerticalTextAlignment="Start" FontSize="{OnPlatform Android='Caption',iOS='Caption', Default='Title'}" HorizontalTextAlignment="Start"/>
+                    <Grid.RowDefinitions>
+                       
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="12*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Margin="5,0,0,0" Text="Bank : Fixed Deposit in bank , Invest in Index or Bonds" TextColor="#9072C9" FontAttributes="Bold"  VerticalTextAlignment="Start" FontSize="{OnPlatform Android='Caption',iOS='Caption', Default='Title'}" HorizontalTextAlignment="Start"/>
+               
+                    <Grid Grid.Row="1" Margin="10,2,2,2" Grid.RowSpan="1" VerticalOptions="Start" HorizontalOptions="Start" WidthRequest="300" HeightRequest="150">
+                        <ScrollView>
+                            
+                
+                        <Grid Padding="8,8,8,8" >
+                                <sflistview:SfListView  ToolTipProperties.Text="For Withdrawal Double Tap on the selected Position!" ItemDoubleTapped="BankAssetWithdrawal" x:Name="BankPostionsLV" ItemsSource="{Binding BankAssetsListViewItemModel}"  Margin="0,0,1,0"  IsStickyFooter="True" ItemSize="50"  SelectionBackground="#993CB371">
+                                <sflistview:SfListView.FooterTemplate>
+                                    <DataTemplate >
 
-                    <StackLayout Orientation="Horizontal"  VerticalOptions="End">
+                                            <Border Margin="0,10,0,0" BackgroundColor="#9072C9" Stroke="White" StrokeShape="RoundRectangle 8,8,8,8"  StrokeThickness="1">
+                                            <Grid>
+                                                <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                                        <Label TextColor="Pink" Margin="0,0,2,0" HorizontalOptions="Center" VerticalTextAlignment="Center" FontAttributes="Bold"  >Bank Account Value :</Label>
+                                                        <Label TextColor="White" HorizontalOptions="Center" VerticalTextAlignment="Center" FontAttributes="Bold" Text="{Binding TotalBankAccountValue}" ></Label>
+                                                </HorizontalStackLayout>
+                                            </Grid>
+                                        </Border>
+
+                                    </DataTemplate>
+                                </sflistview:SfListView.FooterTemplate>
+
+                                <sflistview:SfListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid  VerticalOptions="Center"
+>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.4*" />
+                                                <ColumnDefinition Width="0.2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding ItemText}" FontAttributes="Bold" TextColor="#9072C9" FontSize="12" />
+
+                                            <Label Grid.Column="2" Text="{Binding ItemValue}" FontAttributes="Bold"  TextColor="White" FontSize="12"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </sflistview:SfListView.ItemTemplate>
+                            </sflistview:SfListView>
+                        </Grid>
+                        </ScrollView>
+                    </Grid>
+             
+                        
+                    
+                    <StackLayout Grid.Row="1" Orientation="Horizontal"  VerticalOptions="End">
                    
-                  
-
                         <Image  WidthRequest="{OnPlatform Default='300' , Android='180'}" Margin="{OnPlatform Android='20,10,0,10', iOS='20,30,10,0', Default='70,70,10,0'}" VerticalOptions="End" HorizontalOptions="Start" ToolTipProperties.Text="“Investing is like gardening: plant wisely, nurture patiently, and let time grow your wealth.”" Source="gardening.png"  />
-                        <Image  WidthRequest="{OnPlatform Default='300' , Android='30'}"   HorizontalOptions="Center" Margin="10,-5,10,10" Source="mobilborsa.png" VerticalOptions="End"   />
 
+                        <VerticalStackLayout WidthRequest="40" VerticalOptions="Center"  Margin="2">
+    
+                            
+                            <Label MaxLines="1" Margin="1" Text="{Binding CurrentBankDepositAmount,Mode=TwoWay}" FontSize="8" ></Label>
+
+                            <gauge:SfLinearGauge Orientation="Vertical" Minimum="0" Interval="{Binding BankDepositInterval ,TargetNullValue=1000}" Maximum="{Binding BankDepositMaxLimit ,TargetNullValue=10000}"  VerticalOptions="Center" EnableAxisAnimation="True" AnimationDuration="500"  TickPosition="Outside" LabelPosition="Outside" Background="#E3AAD6"  ShowLabels="True" UseRangeColorForAxis="True" HeightRequest="200" Margin="1" WidthRequest="50">
+
+                                <gauge:SfLinearGauge.LabelStyle>
+                                    <gauge:GaugeLabelStyle FontAttributes="Bold" FontSize="8" 
+                                     TextColor="#9072C9"/>
+                                </gauge:SfLinearGauge.LabelStyle>
+
+                                <gauge:SfLinearGauge.LineStyle>
+                                    <gauge:LinearLineStyle Thickness="3"  CornerStyle="BothCurve">
+                                        <gauge:LinearLineStyle.GradientStops>
+                                            <gauge:GaugeGradientStop Value="0" Color="#FF45B3C1"/>
+                                            <gauge:GaugeGradientStop Value="{Binding BankDepositInterval ,TargetNullValue=200}" Color="#FF6ECAB2"/>
+                                            <gauge:GaugeGradientStop Value="{Binding BankDepositMaxLimit ,TargetNullValue=2000}" Color="#FF84D6AA"/>
+                                        </gauge:LinearLineStyle.GradientStops>
+                                    </gauge:LinearLineStyle>
+                                </gauge:SfLinearGauge.LineStyle>
+
+
+                                <gauge:SfLinearGauge.MarkerPointers >
+
+
+
+                                    <gauge:LinearShapePointer   Value="{Binding CurrentBankDepositAmount ,Mode=TwoWay ,TargetNullValue=5}" x:Name="markerPointer"  IsInteractive="True" Fill="#FF6ECAB2" />
+
+
+                                </gauge:SfLinearGauge.MarkerPointers>
+
+                                <gauge:SfLinearGauge.BarPointers>
+
+                                    <gauge:BarPointer IsInteractive="True" PointerSize="3" Fill="#ff73ab" Value="{Binding Source={x:Reference markerPointer}, Path=Value ,Mode=TwoWay}" CornerStyle="BothCurve" EnableAnimation="True"  AnimationDuration="500"  />
+                                </gauge:SfLinearGauge.BarPointers>
+
+                            </gauge:SfLinearGauge>
+                        </VerticalStackLayout>
+
+                        <Image  WidthRequest="{OnPlatform Default='300' , Android='30'}"   HorizontalOptions="Center" Margin="10,-5,10,10" Source="mobilborsa.png" VerticalOptions="End"   />
+                        
 
 
                         <radialMenu:SfRadialMenu Margin="{OnPlatform Default='0,0,0,0', Android='-300,0,0,0'}" x:Name="BankRadialMenu" AnimationDuration="400" HeightRequest="{OnPlatform Default='300' , Android='150' ,iOS='150'}" VerticalOptions="End" 
                                  RimColor="#9072C9"
                                                 
-                                     Point="{OnPlatform Default='-603, 30',Android='83,125' ,iOS='83,125' }"
+                                     Point="{OnPlatform Default='-647, 30',Android='39,125' ,iOS='39,125' }"
                                      EnableCenterButtonAnimation="True"
                                      IsDragEnabled="False" 
                                        CenterButtonSize="{ OnPlatform Default='56' , Android='40' , iOS='40'}"
@@ -594,6 +666,7 @@
                
 
                 </StackLayout>
+             
                 </Grid>
 
             </cards:SfCardView>

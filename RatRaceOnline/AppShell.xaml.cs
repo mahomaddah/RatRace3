@@ -42,7 +42,7 @@ namespace RatRace3
 
             UIsettingsModel = new Models.UIsettingsModel
             {
-                IsMusicPlaying = true,
+                IsMusicPlaying = false, //TODO : return to true befroe MVP releseing ....
                 LastPlayedLevelIndex = 1
             };
         
