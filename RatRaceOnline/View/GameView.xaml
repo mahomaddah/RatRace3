@@ -252,10 +252,7 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Grid.BindingContext>
-                                                <ViewModels:GameViewModel/>
-                                            </Grid.BindingContext>
-
+                                    
                                             <sflistview:SfListView   ItemsSource="{Binding IncomeListViewItemModel}" x:Name="IncomesLV" Margin="0,0,1,0"  IsStickyFooter="True" ItemSize="50"  SelectionBackground="#993CB371">
                                                 <sflistview:SfListView.FooterTemplate>
                                                     <DataTemplate >
@@ -841,7 +838,7 @@
                     
                     
                     <Image VerticalOptions="End" HorizontalOptions="End" Margin="10" Source="buy_house.png" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"/>
-                    <Grid>
+                    <Grid ToolTipProperties.Text="Real State And Mall Invesment will unlock after level 6 and next version:)">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="20*"/>
@@ -854,7 +851,7 @@
 
                         <Label Grid.Row="0" Grid.ColumnSpan="2"   VerticalOptions="Start"  Text="Buy Real Estate or invest in the city mall project"  Margin="4,0,0,0" FontAttributes="Bold" TextColor="White" FontSize="{OnPlatform Default='Caption',MacCatalyst='Subtitle', WinUI='Subtitle'}"  VerticalTextAlignment="Center" HorizontalTextAlignment="Start"/>
 
-                        <Grid Margin="2,10,2,2" Grid.Column="0" Grid.Row="1">
+                        <Grid Margin="2,10,2,2" Grid.Column="0" Grid.Row="1" >
                            
                             <sunburst:SfSunburstChart x:Name="sunburst" ShowLabels="True" EnableTooltip="True"
                               ItemsSource="{Binding DataSource}" 

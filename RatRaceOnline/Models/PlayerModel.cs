@@ -5,7 +5,7 @@
         public int PlayerModelID { get; set; }
         public double TotalExpences { get; set; }
         public double Balance { get; set; }
-        public double Income { get; set; }
+        public double NetTotalIncome { get; set; }
 
         public int MaximumMonth { get; set; }
         public int CurrentMonth { get; set; }
@@ -14,6 +14,7 @@
         public List<ExpenseModel> Expenses { get; set; }
         public List<AssetModel>  Assets { get; set; }
         public List<LiabilityModel> Liabilities { get; set; }
+
 
         public PlayerModel()
         {

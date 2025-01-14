@@ -14,7 +14,7 @@ public partial class GameView : ContentPage
         //GameViewModel = new GameViewModel();
         //BindingContext = GameViewModel;
         //IpoCompaniesVM = new RotatorViewModel();
-        //ListViewIncomeSourses.ItemsSource = GameViewModel.CurrentLevelPlayer.IncomeSources;
+        //ListViewIncomeSourses.ItemsSource = GameViewModel.Player.IncomeSources;
         //CompanyInvestRoter.ItemsSource = IpoCompaniesVM.RotatorItems;
 
     }
@@ -28,10 +28,11 @@ public partial class GameView : ContentPage
         // Set default card index to open first 
         GameViewModel.VisibleIndex = 1;
         var appShell = (AppShell)Shell.Current;
+        GameViewModel.LoadPlayerData(appShell.CurrentLevelModel.Players.First());
 
-        GameViewModel.CurrentLevelPlayer = appShell.CurrentLevelModel.Players.First();
+        // var playerModel = appShell.CurrentLevelModel.Players.First();
         BindingContext = GameViewModel;
-
+      
 
         UpdateOrientation();
 
@@ -83,7 +84,7 @@ public partial class GameView : ContentPage
 
     private async void CollectIncomeBTN_Clicked(object sender, EventArgs e)
     {
-      //  await DisplayAlert("Income...", "$1,200.00 Total Income Collected!","Amazing! $$$");
+      //  await DisplayAlert("TotalIncome...", "$1,200.00 Total TotalIncome Collected!","Amazing! $$$");
         //TODO: add player objects ... += 1200 to player.blance....
        // GameViewModel.CurrentBalance += 1200; // better to bind to viewmoddel ... 
        // CollectIncomeBtn.IsEnabled = false; // beter to bind to viewmodel

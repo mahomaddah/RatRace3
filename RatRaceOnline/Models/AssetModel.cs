@@ -9,7 +9,7 @@ namespace RatRace3.Models
 {
     public class AssetModel
     {
-        public Enum AssetType { get; set; }
+        public string AssetType { get; set; }
         public int AssetModelID { get; set; }
         /// <summary>
         /// PassiveIncome Will be Mounthly ...
@@ -38,11 +38,12 @@ namespace RatRace3.Models
         {
             IsBankDeposit = false;
             IsRecursiveDepositRD = false;
-            AssetType = AssetTypes.Stock;
+            AssetType = AssetTypes.Stock.ToString();
         }
 
        
     }
+
     public enum AssetTypes
     {
         FixedDeposit,

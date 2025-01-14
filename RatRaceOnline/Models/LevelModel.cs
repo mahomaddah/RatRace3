@@ -20,7 +20,7 @@ namespace RatRace3.Models
 
     //    public LevelModel()
     //    {
-    //        Players = new List<PlayerModel> { new PlayerModel {PlayerModelID = 1 , Balance = 1.1 , Income =1.1 , TotalExpences = 1.1  } };
+    //        Players = new List<PlayerModel> { new PlayerModel {PlayerModelID = 1 , Balance = 1.1 , TotalIncome =1.1 , TotalExpences = 1.1  } };
     //    }
     //}
 
@@ -48,7 +48,7 @@ namespace RatRace3.Models
         {
             IsGameFinishable=false;
 
-            Players = new List<PlayerModel> { new PlayerModel { PlayerModelID = 1, Balance = 1.1, Income = 1.1, TotalExpences = 1.1 } };
+            Players = new List<PlayerModel> { new PlayerModel { PlayerModelID = 1, Balance = 1.1, TotalExpences = 1.1 } };
             
             StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 3 } };
 

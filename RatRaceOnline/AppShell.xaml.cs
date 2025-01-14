@@ -55,7 +55,7 @@ namespace RatRace3
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
                 StoryLevelID = "A",
-                Players = new List<PlayerModel> { new PlayerModel{
+                Players = new List<PlayerModel> { new PlayerModel{Balance=30.14,
                     Liabilities = new List<LiabilityModel> 
                     {   
                         new LiabilityModel{LiabilityName ="Ducati Bike Debt" ,Totalamount =3900.00 , MounthRemaining = 12  ,IntrestRate = 0.0 , LiabilityModelID =1 },
@@ -65,14 +65,16 @@ namespace RatRace3
                     IncomeSources= new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary" , Amount = 2600.00 , IncomeSourceID=1 } },
                     Assets = new List<AssetModel>
                     {
-                        new AssetModel {AssetName = "Fixed Deposit 1" ,AssetType = AssetTypes.Stock , AssetValue = 1248.00 , IntrestRate= 0.08 , IsBankDeposit= true , IsRecursiveDepositRD = false ,PassiveIncome = 8.32 , AssetModelID = 1   } 
+                        new AssetModel {AssetName = "FD $5020.63 @4.12% Intrest Rate | JP Morgen Bank" ,AssetType = AssetTypes.FixedDeposit.ToString() , AssetValue = 1248.00 , IntrestRate= 0.08 , IsBankDeposit= true , IsRecursiveDepositRD = false ,PassiveIncome = 8.32 , AssetModelID = 1   },
+                           new AssetModel {AssetName = "MSFT P&L 28% @ $128.12" ,AssetType = AssetTypes.FixedDeposit.ToString() , AssetValue = 148.00 , IntrestRate= 0.18 , IsBankDeposit= false , IsRecursiveDepositRD = false ,PassiveIncome = 4.32 , AssetModelID = 2   }
                     },
                     Expenses = new List<ExpenseModel>
                     {
                        new ExpenseModel{ Name = "Ducati Bike Debt EMI", Amount = 325, ExpenseModelID =1},
                        new ExpenseModel{ Name = "Expensive Drone Debt EMI", Amount = 216.67, ExpenseModelID =2},
                        new ExpenseModel{ Name = "Motorcycle Camping gear Debt EMI", Amount = 108.33, ExpenseModelID =3}
-                    } 
+                    }
+                 
 
                 }},
 
@@ -89,6 +91,26 @@ namespace RatRace3
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
                 StoryLevelID = "2",
+                Players = new List<PlayerModel> { new PlayerModel{Balance=31.14,
+                    Liabilities = new List<LiabilityModel>
+                    {
+                        new LiabilityModel{LiabilityName ="b Bike Debt" ,Totalamount =3900.00 , MounthRemaining = 12  ,IntrestRate = 0.0 , LiabilityModelID =1 },
+                        new LiabilityModel{LiabilityName="Expensive Drone Debt", Totalamount=2600.00, MounthRemaining = 12, IntrestRate=0.0, LiabilityModelID = 2 },
+                        new LiabilityModel{LiabilityName="Motorcycle Camping gear Debt", Totalamount=1300.00, MounthRemaining = 12, IntrestRate=0.0, LiabilityModelID = 2 }
+                    },
+                    IncomeSources= new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary" , Amount = 2600.00 , IncomeSourceID=1 } },
+                    Assets = new List<AssetModel>
+                    {
+                        new AssetModel {AssetName = "Fixed Deposit 1" ,AssetType = AssetTypes.Stock.ToString() , AssetValue = 1248.00 , IntrestRate= 0.08 , IsBankDeposit= true , IsRecursiveDepositRD = false ,PassiveIncome = 8.32 , AssetModelID = 1   }
+                    },
+                    Expenses = new List<ExpenseModel>
+                    {
+                       new ExpenseModel{ Name = "Ducati Bike Debt EMI", Amount = 325, ExpenseModelID =1},
+                       new ExpenseModel{ Name = "Expensive Drone Debt EMI", Amount = 216.67, ExpenseModelID =2},
+                       new ExpenseModel{ Name = "Motorcycle Camping gear Debt EMI", Amount = 108.33, ExpenseModelID =3}
+                    }
+
+                }},
                 Image = "undraw_investing.png",
                 Header = "Investing Adventure",
                 DetailStory = "You start your journey as a novice investor, barely making ends meet. One day, you stumble upon a hidden gem in the stock market that others have overlooked. Will you risk your savings on this company, or play it safe with traditional investments? Your choices will decide if you break free from the rat race or fall further into it.",
