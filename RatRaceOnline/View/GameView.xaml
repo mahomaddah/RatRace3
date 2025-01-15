@@ -62,12 +62,12 @@
 
         <cards:SfCardLayout VisibleIndex="{Binding VisibleIndex, Mode=TwoWay}"  x:Name="CardGamesLayout" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,10,0"  SwipeDirection="Right"  BackgroundColor="#339072C9">
 
-            <cards:SfCardView BorderColor="#9072C9" BorderWidth="10" CornerRadius="10"   BackgroundColor="#CCCD3370">
-                <Grid>
+            <cards:SfCardView  BorderColor="#9072C9" BorderWidth="10" CornerRadius="10"   BackgroundColor="#CCCD3370">
+                <Grid ToolTipProperties.Text="Life Quality Managment Will Unlock after Level 5 and Next Version..." >
                     <Image HorizontalOptions="End" Margin="10" Source="cardpayment.png" MaximumHeightRequest="490"  />
                     <Label  x:Name="labelPaymentsPage" Margin="2,0,0,0" FontAttributes="Bold"  FontSize="{OnPlatform Default='Caption' , WinUI='Title', MacCatalyst='Subtitle'}" TextColor="#9072C9"  Text="Payments" VerticalTextAlignment="Start" HorizontalTextAlignment="Start"/>
                     <ScrollView HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="{OnPlatform Android='10,35,0,0' ,Default='60,35,0,0' , iOS='10,35,0,0'}">
-                        <StackLayout ToolTipProperties.Text="Life Quality Managment Will Unlock after Level 5 and Next Version..." HorizontalOptions="{OnPlatform MacCatalyst=Center,WinUI=Center}"  >
+                        <StackLayout HorizontalOptions="{OnPlatform MacCatalyst=Center,WinUI=Center}"  >
                             
                             <Border  StrokeShape="RoundRectangle 8,8,8,8" Margin="{OnPlatform Default='8,0,8,8',WinUI='8,0,6,8',MacCatalyst='8,0,6,8'}" Stroke="#9072C9"  StrokeThickness="{OnPlatform MacCatalyst=2,Default=1}" WidthRequest="{OnPlatform  MacCatalyst=560,WinUI=540}">
                                 <expander:SfExpander AnimationDuration="200" IsExpanded="True" >
@@ -343,7 +343,7 @@
                                                 <Image Grid.Column="0" Margin="0,0,0,0" Source="assethi.png"  HeightRequest="40"></Image>
                                                 <HorizontalStackLayout Grid.Column="1" >
                                                     <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Assets:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
-                                                    <Label x:Name="TotalAssetsLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$0.00" FontSize="14" VerticalOptions="CenterAndExpand"/>
+                                                    <Label x:Name="TotalAssetsLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="{Binding NetWorth}" FontSize="14" VerticalOptions="CenterAndExpand"/>
 
                                                 </HorizontalStackLayout>
                                             </Grid>
@@ -400,7 +400,7 @@
                                                 <Image Grid.Column="0" Margin="0,0,0,0" Source="liabilityhi.png"  HeightRequest="40"></Image>
                                                 <HorizontalStackLayout Grid.Column="1" >
                                                     <Label CharacterSpacing="0.25" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Liabilities:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
-                                                    <Label x:Name="LiabilitiesLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="-$10,400.00" FontSize="14" VerticalOptions="CenterAndExpand"/>
+                                                    <Label x:Name="LiabilitiesLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="{Binding TotalDebt}" FontSize="14" VerticalOptions="CenterAndExpand"/>
 
                                                 </HorizontalStackLayout>
                                             </Grid>
@@ -458,11 +458,11 @@
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
-                                            <Button Grid.Column="0" BorderColor="#9072C9" IsEnabled="{Binding IsIncomeCollected, Mode=OneWay ,TargetNullValue=true}" x:Name="CollectIncomeBtn"  BorderWidth="1" Text="Collect All $" TextColor="#9072C9" Margin="2,2,2,2" BackgroundColor="#269072C9" Padding="2" ImageSource="freecashflowhi.png" Command="{Binding CollectIncomeCommand}" Clicked="CollectIncomeBTN_Clicked"  ></Button>
+                                            <Button Grid.Column="0" BorderColor="#9072C9" IsEnabled="{Binding IncomeButtonEnable,TargetNullValue=true}" x:Name="CollectIncomeBtn"  BorderWidth="1" Text="Collect All $" TextColor="#9072C9" Margin="2,2,2,2" BackgroundColor="#269072C9" Padding="2" ImageSource="freecashflowhi.png" Command="{Binding CollectIncomeCommand}"   ></Button>
                                             <Image  HorizontalOptions="Start"  Source="freecashflowhi.png"  Grid.Column="1"  WidthRequest="48" Margin="0,-10,0,0"></Image>
                                             <HorizontalStackLayout HorizontalOptions="Start" Margin="1" Grid.Column="2" >
                                                     <Label CharacterSpacing="0.25" HorizontalOptions="Start" FontFamily="Roboto-Regular" TextColor="#9072C9" FontAttributes="Bold" Text="Cash Flow:" FontSize="14"  VerticalOptions="CenterAndExpand"/>
-                                                    <Label  x:Name="FreeCashFlowLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="$0.00" FontSize="14" VerticalOptions="CenterAndExpand"/>
+                                                <Label  x:Name="FreeCashFlowLabel" CharacterSpacing="0.25" FontFamily="Roboto-Regular" FontAttributes="Bold" Margin="10,0,0,0"  Text="{Binding TotalCashFlow}" FontSize="14" VerticalOptions="CenterAndExpand"/>
                                                
                                             </HorizontalStackLayout>
                                             </Grid>
@@ -477,7 +477,7 @@
                                                         <Border Margin="0,10,0,0" BackgroundColor="LimeGreen" Stroke="#9072C9" StrokeShape="RoundRectangle 8,8,8,8"  StrokeThickness="2">
                                                             <Grid>
                                                                 <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                                                    <Label TextColor="#9072C9" Margin="0,0,2,0" HorizontalOptions="Center" VerticalTextAlignment="Center" FontAttributes="Bold"  >Net Worth:</Label>
+                                                                    <Label TextColor="#9072C9" Margin="0,0,2,0" HorizontalOptions="Center" VerticalTextAlignment="Center" FontAttributes="Bold"  >Total Cash Flow:</Label>
                                                                     <Label TextColor="White" HorizontalOptions="Center" VerticalTextAlignment="Center" FontAttributes="Bold" Text="{Binding TotalCashFlow}" ></Label>
                                                                 </HorizontalStackLayout>
                                                             </Grid>
@@ -998,9 +998,9 @@
                        Background="#FF019FCC"
                       CornerRadius="10">
                     </Button>
-                    <Button Command="{Binding ChangeCardIndexCommand ,Mode=TwoWay}" 
+                    <Button Command="{Binding NextTurnCommand ,Mode=TwoWay}" 
                     x:Name="GameNextTurnBtn"
-                  Clicked="GameNextTurnBtn_Clicked" 
+               
                   CommandParameter="6"
                    VerticalOptions="Start"
                      WidthRequest="{OnPlatform Default='120' ,Android='100' ,iOS='100'}"                       

@@ -18,6 +18,10 @@ namespace RatRace3.Models
         public string AssetName { get; set; }
         public double AssetValue { get; set; }
         /// <summary>
+        /// if the AssetType Is Stock , That stock's Company Model's ID ...
+        /// </summary>
+        public int StockCompanyID { get; set; }
+        /// <summary>
         /// //false by 
         public bool IsBankDeposit { get; set; }//false by defult...
         /// <summary>
@@ -50,6 +54,8 @@ namespace RatRace3.Models
         RecursiveDeposit,
         Bond,
         Stock,
-        RealEstate
+        RealEstate,
+        MutualFund
+
     }
 }

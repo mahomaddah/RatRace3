@@ -215,15 +215,25 @@ namespace RatRace3.ViewModel
             }
         }
 
-        private bool isIncomeNotCollected;
+        private bool isIncomeCollected;
 
-        public bool IsIncomeNotCollected
+        private bool IsIncomeCollected
         {
-            get { return isIncomeNotCollected; }
-            set { isIncomeNotCollected = value;
+            get { return isIncomeCollected; }
+            set { isIncomeCollected = value;
+                IncomeButtonEnable = !value;
+            }
+        }
+        private bool incomeButtonEnable;
+
+        public bool IncomeButtonEnable
+        {
+            get { return incomeButtonEnable; }
+            set { incomeButtonEnable = value;
                 OnPropertyChanged();
             }
         }
+
 
         CultureInfo USD_Formant = CultureInfo.CreateSpecificCulture("en-US"); // for forcing $1,234.56 Money format 
 
@@ -233,7 +243,7 @@ namespace RatRace3.ViewModel
 
             Player = playerModel;
 
-
+            IsIncomeCollected = false;
 
             ////Use Player Model Instead of Hard Coded VIEWMODEL DATA.... 
 
@@ -291,10 +301,12 @@ namespace RatRace3.ViewModel
             BankAssetsListViewItemModel = new ObservableCollection<ListViewItemModel>();
             //Note: Bank asset is Player Assets.find(x=>x.IsBankAsset).ToList()...// LIKE RD FD MF BOND ... 
 
+            //adding user Total cash Blance as user's asset : 
+            playerModel.Assets.Add(new AssetModel { AssetName = "Cash Balance", AssetValue = balance });
 
             foreach (var asset in playerModel.Assets)
             {
-                totalNetworth += asset.AssetValue - totalDebt;
+                totalNetworth += asset.AssetValue;
                 AssetsListViewItemModel.Add(new ListViewItemModel() { ItemText = asset.AssetName, ItemValue = (asset.AssetValue).ToString("C2", USD_Formant) });
 
                 if (asset.IsBankDeposit == true ||asset.AssetType.ToString().Equals(AssetTypes.FixedDeposit) || asset.AssetType.ToString().Equals(AssetTypes.Bond) || asset.AssetType.ToString().Equals(AssetTypes.RecursiveDeposit))
@@ -305,7 +317,7 @@ namespace RatRace3.ViewModel
                 }
 
             }
-
+            totalNetworth -= totalDebt;
 
             //note total is sum of all bank asset items list
             TotalBankAccountValue = (bankAccounttotalValue).ToString("C2", USD_Formant);
@@ -324,8 +336,7 @@ namespace RatRace3.ViewModel
 
 
 
-        }
-
+        }    
         private  void CollectIncome()
         {
             var USD_Formant = CultureInfo.CreateSpecificCulture("en-US"); // for forcing $1,234.56 Money format 
@@ -333,38 +344,100 @@ namespace RatRace3.ViewModel
                                                                           //  CurrentBalance += TotalIncome; //TODO : first chage it to Double and than to string ....
             //double.TryParse(TotalIncome.Substring(1).ToString(), out double TIncome);
             //double.TryParse(CurrentBalance.Skip(1).ToString(), out double TBalance);
-            CurrentBalance = (2000+1000).ToString("C2", USD_Formant);
+            if(Player!=null && IsIncomeCollected == false)
+            {
+                Player.Balance += (Player.NetTotalIncome);
+                IsIncomeCollected = true;
+                CurrentBalance = Player.Balance.ToString("C2", USD_Formant);
 
-          //  IsIncomeNotCollected = false;
+            }
+
+            //  IsIncomeCollected = false;
             //   TotalIncome = "0"; // Reset total income after collection
         }
 
-        void nextTurn()
+        void NextTurn()
         {
-            if(Player!=null)
+            if (Player != null) {         
+    
             if(Player.CurrentMonth <= Player.MaximumMonth)
             {
-                //Game is Continuing...
-            
-            Player.CurrentMonth++;
-            CurrentMonth = (Player.CurrentMonth + " / " + Player.MaximumMonth).ToString();
+                    if (isIncomeCollected == false)
+                    {
+                        CollectIncome();
+                    }
+                
+                    //NEW TURN :...
 
-            double balance = Player.Balance + Player.NetTotalIncome;
-            CurrentBalance = (balance).ToString("C2", USD_Formant);
+               Player.CurrentMonth++;
+               CurrentMonth = (Player.CurrentMonth + " / " + Player.MaximumMonth).ToString();
+               IsIncomeCollected = false;//for new turn...
+
             }
-            else
+            else //finishing mounth... Checking game goals...
             {
-
-                VisibleIndex = 8; // nav  to game detail...
-                var appShell = (AppShell)Shell.Current;
-                //if Goal met win ...
-                // else lose ...
-
-                appShell.CurrentLevelModel.IsGameFinishable = true;
+                    reCalcluteGameGoals();
+            
             }
+           }
         }
 
+        async void preFinishingGame()
+        {
 
+        }
+        async void reCalcluteGameGoals()
+        {
+            
+            //Calcluting goals...
+
+            var appShell = (AppShell)Shell.Current;
+            //if Goal met win ...
+            bool isAllGoalsMet = true;
+            foreach (var LevelGoal in appShell.CurrentLevelModel.StoryGoalModels)
+            {
+                //if(goal.Goal.Contains(GameGoalTypes.) // for goal type ...
+                if(LevelGoal.Goal== GameGoalTypes.Balance.ToString())
+                {
+
+                }
+                if (LevelGoal.Goal == GameGoalTypes.Liabilities.ToString())
+                {
+
+                }
+                if (LevelGoal.Goal == GameGoalTypes.RealEstate.ToString())
+                {
+
+                }
+                if (LevelGoal.Goal == GameGoalTypes.Month.ToString())
+                {
+
+                }
+                if (LevelGoal.Goal == GameGoalTypes.Month.ToString())
+                {
+
+                }
+                if(LevelGoal.Goal == GameGoalTypes.Cashflow.ToString())
+                {
+
+                }
+
+                if (LevelGoal.YouHave != LevelGoal.Target)
+                {
+                    isAllGoalsMet = false;
+                }
+
+            }
+              
+           //finishing game ....
+            await Shell.Current.GoToAsync("StoryDetailView");
+            if (isAllGoalsMet) 
+                appShell.CurrentLevelModel.IsGameFinishable = true;
+            else
+            {
+                Shell.Current.DisplayAlert("Game Over", "Month is " + Player.CurrentMonth + "!! You Could not reach all the goals to win!", "OK.");
+            }
+        }
 
         private PlayerModel _currentLevelPlayer;
         public PlayerModel Player
@@ -388,7 +461,7 @@ namespace RatRace3.ViewModel
           //  MarkerValueChangedCommand = new Command<ValueChangedEventArgs>(OnMarkerValueChanged);
             ChangeCardIndexCommand = new Command<int>(index => VisibleIndex = index);
             CollectIncomeCommand = new Command(CollectIncome);
-            NextTurnCommand = new Command(nextTurn);
+            NextTurnCommand = new Command(NextTurn);
             //delete me ....
             //TODO: get correct object  from AppSell Or in ctor... and replace null...:
 

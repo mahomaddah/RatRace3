@@ -77,19 +77,19 @@ public partial class GameView : ContentPage
         await Shell.Current.GoToAsync("StoryDetailView");
     }
 
-    private async void GameNextTurnBtn_Clicked(object sender, EventArgs e)
-    {
+    //private async void GameNextTurnBtn_Clicked(object sender, EventArgs e)
+    //{
         
-    }
+    //}
 
-    private async void CollectIncomeBTN_Clicked(object sender, EventArgs e)
-    {
-      //  await DisplayAlert("TotalIncome...", "$1,200.00 Total TotalIncome Collected!","Amazing! $$$");
-        //TODO: add player objects ... += 1200 to player.blance....
-       // GameViewModel.CurrentBalance += 1200; // better to bind to viewmoddel ... 
-       // CollectIncomeBtn.IsEnabled = false; // beter to bind to viewmodel
+    //private async void CollectIncomeBTN_Clicked(object sender, EventArgs e)
+    //{
+    //  //  await DisplayAlert("TotalIncome...", "$1,200.00 Total TotalIncome Collected!","Amazing! $$$");
+    //    //TODO: add player objects ... += 1200 to player.blance....
+    //   // GameViewModel.CurrentBalance += 1200; // better to bind to viewmoddel ... 
+    //   // CollectIncomeBtn.IsEnabled = false; // beter to bind to viewmodel
 
-    }
+    //}
 
     private async void CompanyInvestRoter_ItemTapped(object sender, EventArgs e)
     {

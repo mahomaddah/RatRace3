@@ -26,7 +26,7 @@ namespace RatRace3
             InitializeComponent();
             if (UIsettingsModel.IsMusicPlaying)
             {
-                 PlayBackgroundMusic();
+                PlayBackgroundMusic();
             }
             else
             {
@@ -34,95 +34,121 @@ namespace RatRace3
 
                 TurnMusicBtn.IconImageSource = "music_on.png";
             }
-          
+
         }
         void getData()
         {
-           
+
 
             UIsettingsModel = new Models.UIsettingsModel
             {
                 IsMusicPlaying = false, //TODO : return to true befroe MVP releseing ....
                 LastPlayedLevelIndex = 1
             };
-        
+
             SelectLevelViewModel = new SelectLevelViewModel
             {
                 ImageCollection = new List<LevelModel>()
             };
             //dammy data ...
-
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
+                Players = new List<PlayerModel> { new PlayerModel{
+                Balance = 50.00,
+                NetTotalIncome = 2200,
+                CurrentMonth = 1,
+                MaximumMonth = 24,
+                Liabilities = new List<LiabilityModel>
+                {
+                    new LiabilityModel{LiabilityName ="Ducati Bike Debt", Totalamount = 3600.00, MounthRemaining = 12, IntrestRate = 0.02, LiabilityModelID = 1},
+                    new LiabilityModel{LiabilityName="Expensive Drone Debt", Totalamount=2400.00, MounthRemaining = 12, IntrestRate=0.03, LiabilityModelID = 2},
+                    new LiabilityModel{LiabilityName="Motorcycle Camping Gear Debt", Totalamount=1200.00, MounthRemaining = 12, IntrestRate=0.01, LiabilityModelID = 3}
+                },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 2800.00, IncomeSourceID=1 } },
+                Assets = new List<AssetModel>
+                {
+                    new AssetModel {AssetName = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 1300.00, IntrestRate= 0.04, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 4.33, AssetModelID = 1},
+                    new AssetModel {AssetName = "MSFT P&L 28% @ $128.12", AssetType = AssetTypes.Stock.ToString(), AssetValue = 200.00, IntrestRate= 0.10, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2}
+                },
+                Expenses = new List<ExpenseModel>
+                {
+                    new ExpenseModel{ Name = "Ducati Bike Debt EMI", Amount = 300.00, ExpenseModelID = 1},
+                    new ExpenseModel{ Name = "Expensive Drone Debt EMI", Amount = 200.00, ExpenseModelID = 2},
+                    new ExpenseModel{ Name = "Motorcycle Camping Gear Debt EMI", Amount = 100.00, ExpenseModelID = 3}
+                }
+            }},
                 StoryLevelID = "A",
-                Players = new List<PlayerModel> { new PlayerModel{Balance=30.14,
-                    Liabilities = new List<LiabilityModel> 
-                    {   
-                        new LiabilityModel{LiabilityName ="Ducati Bike Debt" ,Totalamount =3900.00 , MounthRemaining = 12  ,IntrestRate = 0.0 , LiabilityModelID =1 },
-                        new LiabilityModel{LiabilityName="Expensive Drone Debt", Totalamount=2600.00, MounthRemaining = 12, IntrestRate=0.0, LiabilityModelID = 2 },
-                        new LiabilityModel{LiabilityName="Motorcycle Camping gear Debt", Totalamount=1300.00, MounthRemaining = 12, IntrestRate=0.0, LiabilityModelID = 2 }
-                    },
-                    IncomeSources= new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary" , Amount = 2600.00 , IncomeSourceID=1 } },
-                    Assets = new List<AssetModel>
-                    {
-                        new AssetModel {AssetName = "FD $5020.63 @4.12% Intrest Rate | JP Morgen Bank" ,AssetType = AssetTypes.FixedDeposit.ToString() , AssetValue = 1248.00 , IntrestRate= 0.08 , IsBankDeposit= true , IsRecursiveDepositRD = false ,PassiveIncome = 8.32 , AssetModelID = 1   },
-                           new AssetModel {AssetName = "MSFT P&L 28% @ $128.12" ,AssetType = AssetTypes.FixedDeposit.ToString() , AssetValue = 148.00 , IntrestRate= 0.18 , IsBankDeposit= false , IsRecursiveDepositRD = false ,PassiveIncome = 4.32 , AssetModelID = 2   }
-                    },
-                    Expenses = new List<ExpenseModel>
-                    {
-                       new ExpenseModel{ Name = "Ducati Bike Debt EMI", Amount = 325, ExpenseModelID =1},
-                       new ExpenseModel{ Name = "Expensive Drone Debt EMI", Amount = 216.67, ExpenseModelID =2},
-                       new ExpenseModel{ Name = "Motorcycle Camping gear Debt EMI", Amount = 108.33, ExpenseModelID =3}
-                    }
-                 
-
-                }},
-
-
                 Image = "software_engineer.png",
                 Header = "The System Engineer's Breakthrough",
-                DetailStory = "Erdem is a Principal System Engineer @ Huawei Tech. Ltd., receives a 100% salary hike and splurges on luxury items such as a Brand new Ducati bike!, an expensive drone, and Motorcycle Camping gear on EMI. Help him pay off his debts within a year.",
+                DetailStory = "Erdem is a Principal System Engineer @ Huawei Tech. Ltd., receives a 100% salary hike and splurges on luxury items such as a brand-new Ducati bike!, an expensive drone, and motorcycle camping gear on EMI. Help him pay off his debts within a year.",
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,
-                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 3 } }
+                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 3 },
+                new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 24, YouHave = 1 }}
             });
 
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
+                Players = new List<PlayerModel> { new PlayerModel{
+                Balance = 400.00,
+                NetTotalIncome = 2400,
+                CurrentMonth = 1,
+                MaximumMonth = 24,
+                Liabilities = new List<LiabilityModel>
+                {
+                    new LiabilityModel{LiabilityName ="KUBA TK03 Bike Debt", Totalamount = 3500.00, MounthRemaining = 12, IntrestRate = 0.02, LiabilityModelID = 1},
+                    new LiabilityModel{LiabilityName="Motorcycle Safe Jacket Debt", Totalamount=2500.00, MounthRemaining = 12, IntrestRate=0.02, LiabilityModelID = 2},
+                    new LiabilityModel{LiabilityName="Motorcycle Helmet Debt", Totalamount=1200.00, MounthRemaining = 12, IntrestRate=0.01, LiabilityModelID = 3}
+                },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 2800.00, IncomeSourceID=1 } },
+                Assets = new List<AssetModel>
+                {
+                    new AssetModel {AssetName = "GOOGL Stock", AssetType = AssetTypes.Stock.ToString(), AssetValue = 1500.00, IntrestRate= 0.05, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 7.50, AssetModelID = 1}
+                },
+                Expenses = new List<ExpenseModel>
+                {
+                    new ExpenseModel{ Name = "KUBA TK03 Bike Debt EMI", Amount = 300.00, ExpenseModelID = 1},
+                    new ExpenseModel{ Name = "Motorcycle Safe Jacket Debt EMI", Amount = 200.00, ExpenseModelID = 2},
+                    new ExpenseModel{ Name = "Motorcycle Helmet Debt EMI", Amount = 100.00, ExpenseModelID = 3}
+                }
+            }},
                 StoryLevelID = "2",
-                Players = new List<PlayerModel> { new PlayerModel{Balance=31.14,
-                    Liabilities = new List<LiabilityModel>
-                    {
-                        new LiabilityModel{LiabilityName ="b Bike Debt" ,Totalamount =3900.00 , MounthRemaining = 12  ,IntrestRate = 0.0 , LiabilityModelID =1 },
-                        new LiabilityModel{LiabilityName="Expensive Drone Debt", Totalamount=2600.00, MounthRemaining = 12, IntrestRate=0.0, LiabilityModelID = 2 },
-                        new LiabilityModel{LiabilityName="Motorcycle Camping gear Debt", Totalamount=1300.00, MounthRemaining = 12, IntrestRate=0.0, LiabilityModelID = 2 }
-                    },
-                    IncomeSources= new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary" , Amount = 2600.00 , IncomeSourceID=1 } },
-                    Assets = new List<AssetModel>
-                    {
-                        new AssetModel {AssetName = "Fixed Deposit 1" ,AssetType = AssetTypes.Stock.ToString() , AssetValue = 1248.00 , IntrestRate= 0.08 , IsBankDeposit= true , IsRecursiveDepositRD = false ,PassiveIncome = 8.32 , AssetModelID = 1   }
-                    },
-                    Expenses = new List<ExpenseModel>
-                    {
-                       new ExpenseModel{ Name = "Ducati Bike Debt EMI", Amount = 325, ExpenseModelID =1},
-                       new ExpenseModel{ Name = "Expensive Drone Debt EMI", Amount = 216.67, ExpenseModelID =2},
-                       new ExpenseModel{ Name = "Motorcycle Camping gear Debt EMI", Amount = 108.33, ExpenseModelID =3}
-                    }
-
-                }},
                 Image = "undraw_investing.png",
                 Header = "Investing Adventure",
-                DetailStory = "You start your journey as a novice investor, barely making ends meet. One day, you stumble upon a hidden gem in the stock market that others have overlooked. Will you risk your savings on this company, or play it safe with traditional investments? Your choices will decide if you break free from the rat race or fall further into it.",
+                DetailStory = "You start your journey as a novice investor, barely making ends meet. One day, you stumble upon a hidden gem in the stock market that others have overlooked. Will you risk your savings on this company, or play it safe with traditional investments? Your choices will decide if you break free from the rat race or fall further into it.You also bought your friend Erdem's old Motorcycle with debt so you need to handle them.",
                 isStarted = false,
                 isUnlocked = true,
                 HighestMounthScore = 0,
-                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 3 } }
-
+                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 10000, YouHave = 400 } }
             });
 
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
+                Players = new List<PlayerModel> { new PlayerModel{
+                Balance = 2000.00,
+                NetTotalIncome = 2100,
+                CurrentMonth = 1,
+                MaximumMonth = 12,
+                Liabilities = new List<LiabilityModel>
+                {
+                    new LiabilityModel{LiabilityName ="Student Loan", Totalamount = 5000.00, MounthRemaining = 24, IntrestRate = 0.05, LiabilityModelID = 1},
+                    new LiabilityModel{LiabilityName="Car Loan", Totalamount=8000.00, MounthRemaining = 36, IntrestRate=0.03, LiabilityModelID = 2}
+                },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Part-Time Job", Amount = 1200.00, IncomeSourceID=1 }, new IncomeSourceModel { Name = "Freelancing", Amount = 900.00, IncomeSourceID=2 } },
+                Assets = new List<AssetModel>
+                {
+                    new AssetModel {AssetName = "Savings Account", AssetType = AssetTypes.RecursiveDeposit.ToString(), AssetValue = 1000.00, IntrestRate= 0.02, IsBankDeposit= true, IsRecursiveDepositRD = true, PassiveIncome = 1.67, AssetModelID = 1}
+                },
+                Expenses = new List<ExpenseModel>
+                {
+                    new ExpenseModel{ Name = "Student Loan EMI", Amount = 220.00, ExpenseModelID = 1},
+                    new ExpenseModel{ Name = "Car Loan EMI", Amount = 300.00, ExpenseModelID = 2},
+                    new ExpenseModel{ Name = "Groceries", Amount = 150.00, ExpenseModelID = 3},
+                    new ExpenseModel{ Name = "Transportation", Amount = 100.00, ExpenseModelID = 4}
+                }
+            }},
+
                 StoryLevelID = "3",
                 Image = "exams.png",
                 Header = "The Exam Hustle",
@@ -130,11 +156,34 @@ namespace RatRace3
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,
-                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 3 } }
+                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = GameGoalTypes.Cashflow.ToString(), Target = 2400, YouHave = 2100 } }
             });
 
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
+                Players = new List<PlayerModel> { new PlayerModel{
+                Balance = 1500.00,
+                NetTotalIncome = 2500,
+                CurrentMonth = 1,
+                MaximumMonth = 18,
+                Liabilities = new List<LiabilityModel>
+                {
+                    new LiabilityModel{LiabilityName ="Credit Card Debt", Totalamount = 7000.00, MounthRemaining = 12, IntrestRate = 0.18, LiabilityModelID = 1},
+                    new LiabilityModel{LiabilityName="Payday Loan", Totalamount=3000.00, MounthRemaining = 6, IntrestRate=0.25, LiabilityModelID = 2}
+                },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Full-Time Job", Amount = 2500.00, IncomeSourceID=1 } },
+                Assets = new List<AssetModel>
+                {
+                    new AssetModel {AssetName = "Retirement Fund", AssetType = AssetTypes.MutualFund.ToString(), AssetValue = 5000.00, IntrestRate= 0.06, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 25.00, AssetModelID = 1}
+                },
+                Expenses = new List<ExpenseModel>
+                {
+                    new ExpenseModel{ Name = "Credit Card Minimum Payment", Amount = 200.00, ExpenseModelID = 1},
+                    new ExpenseModel{ Name = "Payday Loan EMI", Amount = 500.00, ExpenseModelID = 2},
+                    new ExpenseModel{ Name = "Rent", Amount = 800.00, ExpenseModelID = 3},
+                    new ExpenseModel{ Name = "Utilities", Amount = 200.00, ExpenseModelID = 4}
+                }
+            }},
                 StoryLevelID = "4",
                 Image = "interview.png",
                 Header = "The Interview Gauntlet",
@@ -142,11 +191,32 @@ namespace RatRace3
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,
-                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 3 } }
+                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 3000, YouHave = 1500 } }
             });
 
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
+                Players = new List<PlayerModel> { new PlayerModel{
+                Balance = 1000.00,
+                NetTotalIncome = 2000,
+                CurrentMonth = 1,
+                MaximumMonth = 24,
+                Liabilities = new List<LiabilityModel>
+                {
+                    new LiabilityModel{LiabilityName ="Startup Loan", Totalamount = 10000.00, MounthRemaining = 24, IntrestRate = 0.10, LiabilityModelID = 1}
+                },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Side Hustle", Amount = 1000.00, IncomeSourceID=1 }, new IncomeSourceModel { Name = "Savings Interest", Amount = 50.00, IncomeSourceID=2 } },
+                Assets = new List<AssetModel>
+                {
+                    new AssetModel {AssetName = "Startup Equity", AssetType = AssetTypes.Stock.ToString(), AssetValue = 20000.00, IntrestRate= 0.00, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 0.00, AssetModelID = 1}
+                },
+                Expenses = new List<ExpenseModel>
+                {
+                    new ExpenseModel{ Name = "Startup Loan EMI", Amount = 500.00, ExpenseModelID = 1},
+                    new ExpenseModel{ Name = "Team Salaries", Amount = 1000.00, ExpenseModelID = 2},
+                    new ExpenseModel{ Name = "Office Rent", Amount = 800.00, ExpenseModelID = 3}
+                }
+            }},
                 StoryLevelID = "5",
                 Image = "dotnet_bot.png",
                 Header = "Launching Your Dreams",
@@ -154,11 +224,35 @@ namespace RatRace3
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,
-                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 3 } }
+                StoryGoalModels = new List<StoryGoalModel> {
+                new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 4000, YouHave = 1000 },
+                new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 24, YouHave = 1 }
+            }
             });
 
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
+                Players = new List<PlayerModel> { new PlayerModel{
+                Balance = 3000.00,
+                NetTotalIncome = 3000,
+                CurrentMonth = 1,
+                MaximumMonth = 36,
+                Liabilities = new List<LiabilityModel>
+                {
+                    new LiabilityModel{LiabilityName ="Shared Office Loan", Totalamount = 15000.00, MounthRemaining = 36, IntrestRate = 0.08, LiabilityModelID = 1}
+                },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Team Project Revenue", Amount = 3000.00, IncomeSourceID=1 } },
+                Assets = new List<AssetModel>
+                {
+                    new AssetModel {AssetName = "Shared Project Assets", AssetType = AssetTypes.Stock.ToString(), AssetValue = 5000.00, IntrestRate= 0.00, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 0.00, AssetModelID = 1}
+                },
+                Expenses = new List<ExpenseModel>
+                {
+                    new ExpenseModel{ Name = "Office Loan EMI", Amount = 500.00, ExpenseModelID = 1},
+                    new ExpenseModel{ Name = "Team Resources", Amount = 1000.00, ExpenseModelID = 2},
+                    new ExpenseModel{ Name = "Miscellaneous Expenses", Amount = 300.00, ExpenseModelID = 3}
+                }
+            }},
                 StoryLevelID = "6",
                 Image = "shared_goals.png",
                 Header = "Shared Goals, Shared Dreams",
@@ -166,7 +260,7 @@ namespace RatRace3
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,
-                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 3 } }
+                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 1 } }
             });
 
 
@@ -231,7 +325,8 @@ namespace RatRace3
 
             CurrentCompany = IPOcompanies.First();
 
-         //   CurrentLevelModel = SelectLevelViewModel.ImageCollection.FirstOrDefault();//TODO ... DELET ME 
+
+            //   CurrentLevelModel = SelectLevelViewModel.ImageCollection.FirstOrDefault();//TODO ... DELET ME 
         }
 
         private void TurnMusicBtn_Clicked(object sender, EventArgs e)
@@ -259,7 +354,7 @@ namespace RatRace3
                 {
                     BackgroudMusic.Stop();
                     IsMusicPlaying = false;
-                 
+
                     TurnMusicBtn.IconImageSource = "music_on.png";
                 }
             }
