@@ -64,6 +64,14 @@
                 Style="{StaticResource SubHeadline}"              
                 />
 
+                <Label
+                TextColor="#9072C9"
+                Text="We promise an ad-free gaming experience, with occasional resources like free webinars to support financial literacy and a fairer economy."
+                HorizontalOptions="Center"
+                 Padding="10"
+                HorizontalTextAlignment="Center"
+                FontSize="12"            
+               />
             </VerticalStackLayout>
 
         </VerticalStackLayout>

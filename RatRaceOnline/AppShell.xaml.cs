@@ -3,10 +3,12 @@ using Plugin.Maui.Audio;
 using RatRace3.Models;
 using System.Collections.ObjectModel;
 using RatRace3.ViewModel;
+using RatRace3.DAL;
 namespace RatRace3
 {
     public partial class AppShell : Shell
     {
+
         public LevelModel CurrentLevelModel { get; set; }
         public Company CurrentCompany { get; set; }
         public ObservableCollection<Company> IPOcompanies { get; set; }
@@ -20,7 +22,7 @@ namespace RatRace3
             Routing.RegisterRoute("StoryDetailView", typeof(StoryDetailView));
             Routing.RegisterRoute("GameView", typeof(GameView));
 
-
+        
             getData();
 
             InitializeComponent();
@@ -38,7 +40,8 @@ namespace RatRace3
         }
         void getData()
         {
-
+  
+           
 
             UIsettingsModel = new Models.UIsettingsModel
             {
@@ -325,9 +328,49 @@ namespace RatRace3
 
             CurrentCompany = IPOcompanies.First();
 
+            //Loading Data Method...
+       //     LoadDataFromLiteDB();
 
-            //   CurrentLevelModel = SelectLevelViewModel.ImageCollection.FirstOrDefault();//TODO ... DELET ME 
+               CurrentLevelModel = SelectLevelViewModel.ImageCollection.FirstOrDefault();//TODO ... DELET ME 
+
+            //Saving Data... method...
+          //  SaveDataToLiteDB();
+
+
+
         }
+
+        void LoadDataFromLiteDB()
+        {
+            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "GameData.db");
+            var localDb = new DataAccessService(dbPath);
+
+            // UISettingsModel verisini yükleme
+            UIsettingsModel = localDb.GetDataById<UIsettingsModel>(1, "UISettings");
+
+            // Tüm seviyeleri yükleme
+
+
+            SelectLevelViewModel = new SelectLevelViewModel
+            {
+                ImageCollection = localDb.GetAllData<LevelModel>("Levels").ToList()
+            };
+
+        }
+        void SaveDataToLiteDB()
+        {
+            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "GameData.db");
+            var localDb = new DataAccessService(dbPath);
+            localDb.SaveData(UIsettingsModel, "UISettings");
+
+            // SelectLevelViewModel verisini kaydetme
+            foreach (var level in SelectLevelViewModel.ImageCollection)
+            {
+                localDb.SaveData(level, "Levels");
+            }
+
+        }
+
 
         private void TurnMusicBtn_Clicked(object sender, EventArgs e)
         {
