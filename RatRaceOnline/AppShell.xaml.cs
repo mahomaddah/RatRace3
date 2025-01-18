@@ -22,10 +22,10 @@ namespace RatRace3
             Routing.RegisterRoute("StoryDetailView", typeof(StoryDetailView));
             Routing.RegisterRoute("GameView", typeof(GameView));
 
-        
+            InitializeComponent();
             getData();
 
-            InitializeComponent();
+            
             if (UIsettingsModel.IsMusicPlaying)
             {
                 PlayBackgroundMusic();
@@ -36,6 +36,7 @@ namespace RatRace3
 
                 TurnMusicBtn.IconImageSource = "music_on.png";
             }
+
 
         }
         void getData()
@@ -329,49 +330,55 @@ namespace RatRace3
             CurrentCompany = IPOcompanies.First();
 
             //Loading Data Method...
-          LoadDataFromLiteDB();
+            
+            //    LoadDataFromLiteDB();
 
-               CurrentLevelModel = SelectLevelViewModel.ImageCollection.FirstOrDefault();//TODO ... DELET ME 
+            CurrentLevelModel = SelectLevelViewModel.ImageCollection.FirstOrDefault();//TODO ... DELET ME 
 
             //Saving Data... method...
-          //  SaveDataToLiteDB();
+            //  SaveDataToLiteDB();
+            //  LoadDataFromLiteDB();
 
-
-
-        }
-
-        void LoadDataFromLiteDB()
-        {
-            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "GameData.db");
-            var localDb = new DataAccessService(dbPath);
-
-            // UISettingsModel verisini yükleme
-            UIsettingsModel = localDb.GetDataById<UIsettingsModel>(1, "UISettings");
-
-            // Tüm seviyeleri yükleme
-
-
-            SelectLevelViewModel = new SelectLevelViewModel
-            {
-                ImageCollection = localDb.GetAllData<LevelModel>("Levels").ToList()
-            };
-
-        }
-        void SaveDataToLiteDB()
-        {
-            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "GameData.db");
-            var localDb = new DataAccessService(dbPath);
-            localDb.SaveData(UIsettingsModel, "UISettings");
-
-            // SelectLevelViewModel verisini kaydetme
-            foreach (var level in SelectLevelViewModel.ImageCollection)
-            {
-                localDb.SaveData(level, "Levels");
-            }
+            var dal = new DataAccessService();
+           // dal.SaveUISettings(UIsettingsModel);
+         
+              UIsettingsModel= dal.GetUISettings();
 
         }
 
+        //void LoadDataFromLiteDB()//TODO: load needed to be fixed ... load have problem...
+        //{
+        //    var dbPath = Path.Combine(FileSystem.AppDataDirectory, "GameData.db");
+        //    var localDb = new DataAccessService(dbPath);
 
+        //    // UISettingsModel verisini yükleme
+        //    //   UIsettingsModel = localDb.GetDataById<UIsettingsModel>(1, "UISettings");
+
+        //    // Tüm seviyeleri yükleme
+        //    SelectLevelViewModel = new SelectLevelViewModel();
+
+        //    SelectLevelViewModel = new SelectLevelViewModel
+        //    {
+        //        ImageCollection = localDb.GetAllData<LevelModel>("Levels").ToList()
+        //    };
+
+        //}
+        //void SaveDataToLiteDB()
+        //{
+        //    var dbPath = Path.Combine(FileSystem.AppDataDirectory, "GameData.db");
+        //    var localDb = new DataAccessService(dbPath);
+        //    localDb.SaveData(UIsettingsModel, "UISettings");
+
+        //    // SelectLevelViewModel verisini kaydetme
+        //    foreach (var level in SelectLevelViewModel.ImageCollection)
+        //    {
+        //        localDb.SaveData(level, "Levels");
+        //    }
+
+        //}
+
+        #region Music Codes
+        
         private void TurnMusicBtn_Clicked(object sender, EventArgs e)
         {
             PlayBackgroundMusic();
@@ -391,7 +398,10 @@ namespace RatRace3
                     BackgroudMusic.Loop = true;
                     BackgroudMusic.Play();
                     IsMusicPlaying = true;
+
                     TurnMusicBtn.IconImageSource = "music_off.png";
+
+                   
                 }
                 else
                 {
@@ -400,12 +410,18 @@ namespace RatRace3
 
                     TurnMusicBtn.IconImageSource = "music_on.png";
                 }
+               
+                UIsettingsModel.IsMusicPlaying = IsMusicPlaying;
+                var dal = new DataAccessService();
+                dal.SaveUISettings(UIsettingsModel);
             }
             catch (Exception ex)
             {
                 // Console.WriteLine($"Error playing music: {ex.Message}");
                 await DisplayAlert("Error playing music:", ex.Message, "Fuck the music! Continue!!");
             }
+            #endregion
+
         }
     }
 }
