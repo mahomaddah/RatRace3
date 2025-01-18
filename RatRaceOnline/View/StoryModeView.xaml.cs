@@ -20,6 +20,7 @@ public partial class StoryModeView : ContentPage
         this.BindingContext = SelectedObject;
 
         storyLevelsCarousel.SelectedIndex = appShell.UIsettingsModel.LastPlayedLevelIndex;
+ 
     }
 
     private async void StartGameClicked(object sender, EventArgs e)
@@ -37,6 +38,12 @@ public partial class StoryModeView : ContentPage
 
     private async void RestartGameClicked(object sender, EventArgs e)
     {
+        bool result =  await Shell.Current.DisplayAlert("New Game?", "Are you sure you want to restart? Your old save will be overwritten!", "Yes" , "No" );
+
+        if (result)
+        {
+
+
         var appShell = (AppShell)Shell.Current;
         var model = appShell.SelectLevelViewModel.ImageCollection.ElementAtOrDefault(storyLevelsCarousel.SelectedIndex);
         if (model != null)
@@ -45,6 +52,8 @@ public partial class StoryModeView : ContentPage
             appShell.CurrentLevelModel = model;
         }
         await Shell.Current.GoToAsync("StoryDetailView");
+
+        }
     }
 }
 

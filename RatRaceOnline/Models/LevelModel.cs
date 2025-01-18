@@ -42,7 +42,7 @@ namespace RatRace3.Models
         /// </summary>
         public bool IsGameFinished{ get; set; }
         public string StoryLevelID { get; set; }
-        public short HighestMounthScore { get; set; }
+        public int HighestMounthScore { get; set; }
         public string Header { get; set; }
         public string DetailStory { get; set; }
         public bool isStarted { get; set; }

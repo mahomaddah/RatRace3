@@ -329,7 +329,7 @@ namespace RatRace3
             CurrentCompany = IPOcompanies.First();
 
             //Loading Data Method...
-       //     LoadDataFromLiteDB();
+          LoadDataFromLiteDB();
 
                CurrentLevelModel = SelectLevelViewModel.ImageCollection.FirstOrDefault();//TODO ... DELET ME 
 

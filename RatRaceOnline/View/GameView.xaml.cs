@@ -28,6 +28,15 @@ public partial class GameView : ContentPage
         // Set default card index to open first 
         GameViewModel.VisibleIndex = 1;
         var appShell = (AppShell)Shell.Current;
+        if (appShell.CurrentLevelModel.IsNewGameStarted)
+        {
+            //come for new game ... 
+        }
+        else
+        {
+            //come for Load last game
+        }
+
         GameViewModel.LoadPlayerData(appShell.CurrentLevelModel.Players.First());
 
         // var playerModel = appShell.CurrentLevelModel.Players.First();

@@ -17,6 +17,9 @@ public partial class StoryDetailView : ContentPage
         appShell.CurrentLevelModel.IsGameFinished = true;
         //save... data month number ... score etc... TODO..
 
+        appShell.CurrentLevelModel.HighestMounthScore = appShell.CurrentLevelModel.Players.FirstOrDefault().CurrentMonth;
+        //unlock next ...
+
         await Shell.Current.DisplayAlert("Congratulations!", "\"You have successfully achieved all the goals required to complete this level of game. Great job!\"", "Victory, Baby!????");
         await Shell.Current.GoToAsync("StoryModeView");
     

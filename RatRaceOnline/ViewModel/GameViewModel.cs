@@ -242,7 +242,7 @@ namespace RatRace3.ViewModel
 
         public void LoadPlayerData(Models.PlayerModel playerModel)
         {
-
+         
             Player = playerModel;
 
             IsIncomeCollected = false;
