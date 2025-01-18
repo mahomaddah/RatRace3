@@ -37,6 +37,10 @@ namespace RatRace3.Models
         /// </summary>
         public List<PlayerModel> Players { get; set; }
         public bool IsNewGameStarted { get; set; }
+        /// <summary>
+        ///IsGameFinished: for records and etc...and next level unlocks.. get True after Finish game button of taht level clicked...
+        /// </summary>
+        public bool IsGameFinished{ get; set; }
         public string StoryLevelID { get; set; }
         public short HighestMounthScore { get; set; }
         public string Header { get; set; }

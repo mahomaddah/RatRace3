@@ -235,6 +235,8 @@ namespace RatRace3.ViewModel
         }
 
 
+
+
         CultureInfo USD_Formant = CultureInfo.CreateSpecificCulture("en-US"); // for forcing $1,234.56 Money format 
 
 
@@ -337,6 +339,7 @@ namespace RatRace3.ViewModel
 
 
         }    
+
         private  void CollectIncome()
         {
             var USD_Formant = CultureInfo.CreateSpecificCulture("en-US"); // for forcing $1,234.56 Money format 
@@ -353,90 +356,105 @@ namespace RatRace3.ViewModel
             }
 
             //  IsIncomeCollected = false;
-            //   TotalIncome = "0"; // Reset total income after collection
+            //  TotalIncome = "0"; // Reset total income after collection
         }
+
 
         void NextTurn()
         {
-            if (Player != null) {         
+            if (Player != null) 
+            {         
     
-            if(Player.CurrentMonth <= Player.MaximumMonth)
-            {
-                    if (isIncomeCollected == false)
-                    {
-                        CollectIncome();
-                    }
+                if(Player.CurrentMonth < Player.MaximumMonth)
+                { 
+                        if (isIncomeCollected == false)
+                        {
+                            CollectIncome();
+                        }
                 
-                    //NEW TURN :...
+                        //NEW TURN :...
+                   //Pass one month... Update Debts , assets ,income, expences... moves... 
+                   Player.CurrentMonth++;
+                   CurrentMonth = (Player.CurrentMonth + " / " + Player.MaximumMonth).ToString();
 
-               Player.CurrentMonth++;
-               CurrentMonth = (Player.CurrentMonth + " / " + Player.MaximumMonth).ToString();
-               IsIncomeCollected = false;//for new turn...
+                   IsIncomeCollected = false;//for new turn...
 
-            }
-            else //finishing mounth... Checking game goals...
-            {
+                    //Checking Game Goals:
                     reCalcluteGameGoals();
-            
-            }
+
+                }
+                else //finishing mounth... Checking game goals...
+                {
+                    LastMonthCame(); // maybe don't need ...
+                }
            }
         }
 
-        async void preFinishingGame()
+        async void LastMonthCame()
         {
+            //Check if game finishing ...
+          
+            await Shell.Current.DisplayAlert("Game Over", "Month is " + Player.CurrentMonth + ". Unfortunately, Fund Manager! You couldn’t achieve all the goals needed to win!", "Not Again!");
+         
+            await Shell.Current.GoToAsync("StoryDetailView");
 
         }
         async void reCalcluteGameGoals()
-        {
-            
+        {            
             //Calcluting goals...
-
             var appShell = (AppShell)Shell.Current;
             //if Goal met win ...
             bool isAllGoalsMet = true;
-            foreach (var LevelGoal in appShell.CurrentLevelModel.StoryGoalModels)
+            foreach (StoryGoalModel LevelGoal in appShell.CurrentLevelModel.StoryGoalModels)
             {
                 //if(goal.Goal.Contains(GameGoalTypes.) // for goal type ...
-                if(LevelGoal.Goal== GameGoalTypes.Balance.ToString())
-                {
-
+                //1# check and update you haves to new values...
+                if (LevelGoal.Goal== GameGoalTypes.Balance.ToString())
+                {//>=
+                    LevelGoal.YouHave = Player.Balance;          
+                }             
+                else if (LevelGoal.Goal == GameGoalTypes.RealEstate.ToString())
+                {//>=
+                    LevelGoal.YouHave = Player.RealStateS.Count;
                 }
-                if (LevelGoal.Goal == GameGoalTypes.Liabilities.ToString())
-                {
-
+                else if (LevelGoal.Goal == GameGoalTypes.Cashflow.ToString())
+                {//>=
+                    LevelGoal.YouHave = Player.NetTotalIncome;
                 }
-                if (LevelGoal.Goal == GameGoalTypes.RealEstate.ToString())
-                {
-
+                else if (LevelGoal.Goal == GameGoalTypes.Month.ToString())
+                {//>=
+                    LevelGoal.YouHave = Player.CurrentMonth;
                 }
-                if (LevelGoal.Goal == GameGoalTypes.Month.ToString())
-                {
-
-                }
-                if (LevelGoal.Goal == GameGoalTypes.Month.ToString())
-                {
-
-                }
-                if(LevelGoal.Goal == GameGoalTypes.Cashflow.ToString())
-                {
-
+                else if (LevelGoal.Goal == GameGoalTypes.Liabilities.ToString())
+                {//<=
+                    LevelGoal.YouHave = Player.Liabilities.Count;
                 }
 
-                if (LevelGoal.YouHave != LevelGoal.Target)
+                //update the appShell.CurrentLevelModel.StoryGoalModels; 
+
+                //check if he Met all goal ... or not and change IsAllGoalMet....
+
+            
+                if (LevelGoal.Goal == GameGoalTypes.Liabilities.ToString() && LevelGoal.YouHave > LevelGoal.Target)//bad things..
                 {
+                    isAllGoalsMet = false;
+                }
+                else if (LevelGoal.YouHave < LevelGoal.Target) //good things..
+                {
+                    //if even one gaol is not met means still finish game button false...
                     isAllGoalsMet = false;
                 }
 
             }
-              
-           //finishing game ....
-            await Shell.Current.GoToAsync("StoryDetailView");
-            if (isAllGoalsMet) 
-                appShell.CurrentLevelModel.IsGameFinishable = true;
-            else
+
+            //finishing game ....
+      
+            if (isAllGoalsMet)
             {
-                Shell.Current.DisplayAlert("Game Over", "Month is " + Player.CurrentMonth + "!! You Could not reach all the goals to win!", "OK.");
-            }
+                //game won...
+                appShell.CurrentLevelModel.IsGameFinishable = true;
+                await Shell.Current.GoToAsync("StoryDetailView");
+            }  
         }
 
         private PlayerModel _currentLevelPlayer;
@@ -464,6 +482,10 @@ namespace RatRace3.ViewModel
             NextTurnCommand = new Command(NextTurn);
             //delete me ....
             //TODO: get correct object  from AppSell Or in ctor... and replace null...:
+
+
+
+
 
 
 

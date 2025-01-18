@@ -95,7 +95,7 @@ namespace RatRace3
             {
                 Players = new List<PlayerModel> { new PlayerModel{
                 Balance = 400.00,
-                NetTotalIncome = 2400,
+                NetTotalIncome = 500,
                 CurrentMonth = 1,
                 MaximumMonth = 24,
                 Liabilities = new List<LiabilityModel>
@@ -104,7 +104,7 @@ namespace RatRace3
                     new LiabilityModel{LiabilityName="Motorcycle Safe Jacket Debt", Totalamount=2500.00, MounthRemaining = 12, IntrestRate=0.02, LiabilityModelID = 2},
                     new LiabilityModel{LiabilityName="Motorcycle Helmet Debt", Totalamount=1200.00, MounthRemaining = 12, IntrestRate=0.01, LiabilityModelID = 3}
                 },
-                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 2800.00, IncomeSourceID=1 } },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 900.00, IncomeSourceID=1 } },
                 Assets = new List<AssetModel>
                 {
                     new AssetModel {AssetName = "GOOGL Stock", AssetType = AssetTypes.Stock.ToString(), AssetValue = 1500.00, IntrestRate= 0.05, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 7.50, AssetModelID = 1}

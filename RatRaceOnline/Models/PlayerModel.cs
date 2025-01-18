@@ -5,10 +5,15 @@
         public int PlayerModelID { get; set; }
         public double TotalExpences { get; set; }
         public double Balance { get; set; }
+        /// <summary>
+        /// NetTotalIncome = player Cashflow...
+        /// </summary>
         public double NetTotalIncome { get; set; }
 
         public int MaximumMonth { get; set; }
         public int CurrentMonth { get; set; }
+
+        public List<RealStateUnitModel> RealStateS { get; set; }
 
         public List<IncomeSourceModel> IncomeSources { get; set; }
         public List<ExpenseModel> Expenses { get; set; }
@@ -22,6 +27,7 @@
             Liabilities = new List<LiabilityModel> { };
             IncomeSources = new List<IncomeSourceModel> { };
             Expenses = new List<ExpenseModel> { };
+            RealStateS = new List<RealStateUnitModel> { };
         }
 
 
