@@ -64,7 +64,7 @@ namespace RatRace3
                 MaximumMonth = 24,
                 Liabilities = new List<LiabilityModel>
                 {
-                    new LiabilityModel{LiabilityName ="Ducati Bike Debt", TotalAmount = 3600.00, MonthsRemaining = 12, InterestRate = 0.02, LiabilityModelID = 1},
+                    new LiabilityModel{LiabilityName ="Ducati Bike Debt", RemainingAmount=3600, TotalAmount = 3600.00, MonthsRemaining = 12, InterestRate = 0.02 , LiabilityModelID = 1},
                     new LiabilityModel{LiabilityName="Expensive Drone Debt", TotalAmount=2400.00, MonthsRemaining = 12, InterestRate=0.03, LiabilityModelID = 2},
                     new LiabilityModel{LiabilityName="Motorcycle Camping Gear Debt", TotalAmount=1200.00, MonthsRemaining = 12, InterestRate=0.01, LiabilityModelID = 3}
                 },
@@ -80,7 +80,7 @@ namespace RatRace3
                     new ExpenseModel{ Name = "Ducati Bike Debt EMI", Amount = 300.00, ExpenseModelID = 1},
                     new ExpenseModel{ Name = "Expensive Drone Debt EMI", Amount = 200.00, ExpenseModelID = 2},
                     new ExpenseModel{ Name = "Motorcycle Camping Gear Debt EMI", Amount = 100.00, ExpenseModelID = 3},
-                    new ExpenseModel{ Name = "Minimum Surviving Expenses", Amount = 2072.33, ExpenseModelID = 4}
+                    new ExpenseModel{ Name = "Minimum Surviving Expenses", Amount = 1072.33, ExpenseModelID = 4}
                 }
             }},
                 StoryLevelID = "A",

@@ -12,7 +12,7 @@ namespace RatRace3.Models
         private double _totalAmount;
         private double _remainingAmount;
         private int _monthsRemaining;
-        private double _emi;
+        private double _emi; 
         private double _interestRate;
 
         public int LiabilityModelID { get; set; }
@@ -38,6 +38,7 @@ namespace RatRace3.Models
                 if (_totalAmount != value)
                 {
                     _totalAmount = value;
+                    RemainingAmount = _totalAmount;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(TotalAmountFormatted)); // Notify for dependent properties
                 }
@@ -103,6 +104,7 @@ namespace RatRace3.Models
         public LiabilityModel()
         {
             RemainingAmount = TotalAmount;
+            
         }
 
         // Computed Properties

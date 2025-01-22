@@ -535,7 +535,7 @@
             
                                       ShowDividers="True"
                                       NumberFormat="$##" ShowLabels="True" ShowTicks="True" 
-                                      Value="{Binding SelectedPayAmount, Mode=TwoWay}" >
+                                      Value="{Binding SelectedPayAmount, Mode=TwoWay }" >
                                         <sfslider:SfSlider.Tooltip>
                                             <sfslider:SliderTooltip />
                                         </sfslider:SfSlider.Tooltip>

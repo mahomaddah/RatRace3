@@ -400,19 +400,25 @@ namespace RatRace3.ViewModel
         {
           //  await Shell.Current.DisplayAlert("Debt", "Debt Payment Successful.", "OK");
 
-            if (SelectedLiability != null && amount > 0)
+            if (SelectedLiability != null && amount > 0 && Player.Balance>0)
             {
                 SelectedLiability.RemainingAmount -= amount;
-
+                Player.Balance -= amount;
+                var balance = Player.Balance;
+                CurrentBalance = (balance).ToString("C2", USD_Formant);
                 // Update remaining months dynamically
                 SelectedLiability.MonthsRemaining = (int)Math.Ceiling(SelectedLiability.RemainingAmount / SelectedLiability.Emi);
 
-
+                double.TryParse(TotalDebt.Substring(1), out double totalDebt);
                 // Close Popup
+                totalDebt -= amount;
                 IsPopupOpen = false;
+                TotalDebt = (totalDebt.ToString("C2", USD_Formant));
 
+                //   Networth
                 // Notify changes
                 OnPropertyChanged(nameof(SelectedLiability));
+                DebtListViewItemModel.First(x => x.ItemText.Contains(SelectedLiability.LiabilityName)).ItemValue = SelectedLiability.RemainingAmountFormatted;
             }
         }
 
@@ -572,12 +578,6 @@ namespace RatRace3.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public async void DebtDetailViewTapped(RatRace3.ViewModel.ListViewItemModel debtObject)
-        {
-           // await Shell.Current.DisplayAlert("View model", "Debt pay clicked...", "Payyy"); //....
-           //var liabilityModel=  Player.Liabilities.Find(x => x.LiabilityName.Contains(debtObject.ItemText));
-           //  SelectedLiability = liabilityModel;
-
-        }
+     
     }
 }
