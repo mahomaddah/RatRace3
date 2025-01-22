@@ -288,8 +288,8 @@ namespace RatRace3.ViewModel
             double totalDebt = 0;
             foreach (var debt in playerModel.Liabilities)
             {
-                totalDebt += debt.Totalamount;
-                DebtListViewItemModel.Add(new ListViewItemModel() { ItemText = debt.LiabilityName, ItemValue = (debt.Totalamount).ToString("C2", USD_Formant) });
+                totalDebt += debt.TotalAmount;
+                DebtListViewItemModel.Add(new ListViewItemModel() { ItemText = debt.LiabilityName, ItemValue = (debt.TotalAmount).ToString("C2", USD_Formant) });
             }
 
             TotalDebt = (totalDebt).ToString("C2", USD_Formant);
@@ -359,6 +359,62 @@ namespace RatRace3.ViewModel
             //  TotalIncome = "0"; // Reset total income after collection
         }
 
+        // Popup Visibility
+        private bool _isPopupOpen;
+        public bool IsPopupOpen
+        {
+            get => _isPopupOpen;
+            set
+            {
+                _isPopupOpen = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Selected Liability
+        private LiabilityModel _selectedLiability;
+        public LiabilityModel SelectedLiability
+        {
+            get => _selectedLiability;
+            set
+            {
+                _selectedLiability = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Amount to Pay
+        private double _selectedPayAmount;
+        public double SelectedPayAmount
+        {
+            get => _selectedPayAmount;
+            set
+            {
+                _selectedPayAmount = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private async void PayDebt(double amount)
+        {
+          //  await Shell.Current.DisplayAlert("Debt", "Debt Payment Successful.", "OK");
+
+            if (SelectedLiability != null && amount > 0)
+            {
+                SelectedLiability.RemainingAmount -= amount;
+
+                // Update remaining months dynamically
+                SelectedLiability.MonthsRemaining = (int)Math.Ceiling(SelectedLiability.RemainingAmount / SelectedLiability.Emi);
+
+
+                // Close Popup
+                IsPopupOpen = false;
+
+                // Notify changes
+                OnPropertyChanged(nameof(SelectedLiability));
+            }
+        }
 
         void NextTurn()
         {
@@ -470,6 +526,7 @@ namespace RatRace3.ViewModel
                 }
             }
         }
+        public ICommand PayDebtCommand { get; }
         public ICommand NextTurnCommand { get; }
         public ICommand CollectIncomeCommand { get; }
         public ICommand ChangeCardIndexCommand { get; }
@@ -480,6 +537,7 @@ namespace RatRace3.ViewModel
             ChangeCardIndexCommand = new Command<int>(index => VisibleIndex = index);
             CollectIncomeCommand = new Command(CollectIncome);
             NextTurnCommand = new Command(NextTurn);
+            PayDebtCommand = new Command<double>(PayDebt);
             //delete me ....
             //TODO: get correct object  from AppSell Or in ctor... and replace null...:
 
@@ -512,6 +570,14 @@ namespace RatRace3.ViewModel
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public async void DebtDetailViewTapped(RatRace3.ViewModel.ListViewItemModel debtObject)
+        {
+           // await Shell.Current.DisplayAlert("View model", "Debt pay clicked...", "Payyy"); //....
+           //var liabilityModel=  Player.Liabilities.Find(x => x.LiabilityName.Contains(debtObject.ItemText));
+           //  SelectedLiability = liabilityModel;
+
         }
     }
 }

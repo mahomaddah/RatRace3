@@ -15,6 +15,8 @@
              xmlns:ViewModels="clr-namespace:RatRace3.ViewModel"
              xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
              xmlns:sflistview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:sfpopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
+             xmlns:sfslider="clr-namespace:Syncfusion.Maui.Sliders;assembly=Syncfusion.Maui.Sliders"
           
              >
 
@@ -407,7 +409,7 @@
                                         </expander:SfExpander.Header>
                                         <expander:SfExpander.Content>
                                             <Grid Padding="8,8,8,8" >
-                                                <sflistview:SfListView   Grid.ColumnSpan="2"  ItemsSource="{Binding DebtListViewItemModel}" SelectionBackground="#99C71585" x:Name="DebtsLV" Margin="0,0,1,0"  IsStickyFooter="True" ItemSize="50">
+                                                <sflistview:SfListView ItemDoubleTapped="DebtDetailViewTapped"  Grid.ColumnSpan="2"  ItemsSource="{Binding DebtListViewItemModel}" SelectionBackground="#99C71585" x:Name="DebtsLV" Margin="0,0,1,0"  IsStickyFooter="True" ItemSize="50">
                                                     <sflistview:SfListView.FooterTemplate>
                                                         <DataTemplate >
 
@@ -435,6 +437,7 @@
                                                                 <Label Text="{Binding ItemText}" FontAttributes="Bold" TextColor="#9072C9" FontSize="12" />
 
                                                                 <Label Grid.Column="2" Text="{Binding ItemValue}" FontAttributes="Bold"  TextColor="White" FontSize="12"/>
+                                                                
                                                             </Grid>
                                                         </DataTemplate>
                                                     </sflistview:SfListView.ItemTemplate>
@@ -510,7 +513,44 @@
                         </StackLayout>
                     </ScrollView>
 
+                    <sfpopup:SfPopup  WidthRequest="500" HeightRequest="400" x:Name="DebtPopup"  HeaderTitle="Debt Detail:" IsOpen="{Binding IsPopupOpen, Mode=TwoWay}" AppearanceMode="OneButton">
+                     
+                    
+                        <sfpopup:SfPopup.ContentTemplate>
+                            <DataTemplate>
+                                <VerticalStackLayout Padding="5" Spacing="2">
+                                    <Label TextColor="#9072C9" Text="{Binding SelectedLiability.LiabilityName}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
+                                    <Label TextColor="#9072C9" Text="{Binding SelectedLiability.TotalAmountFormatted}" HorizontalOptions="Center" />
+                                    <Label TextColor="#9072C9" Text="{Binding SelectedLiability.RemainingAmountFormatted}" HorizontalOptions="Center" />
+                                    <Label TextColor="#9072C9"  Text="{Binding SelectedLiability.MonthsRemainingFormatted}" HorizontalOptions="Center" />
+                                    <Label TextColor="#9072C9"  Text="{Binding SelectedLiability.EmiFormatted}" HorizontalOptions="Center" />
+                                    <Label TextColor="#9072C9" Text="{Binding SelectedLiability.InterestRateFormatted}" HorizontalOptions="Center" />
 
+
+
+                                    <sfslider:SfSlider
+                                       
+                                      Maximum="{Binding Player.Balance}"
+                                 
+            
+                                      ShowDividers="True"
+                                      NumberFormat="$##" ShowLabels="True" ShowTicks="True" 
+                                      Value="{Binding SelectedPayAmount, Mode=TwoWay}" >
+                                        <sfslider:SfSlider.Tooltip>
+                                            <sfslider:SliderTooltip />
+                                        </sfslider:SfSlider.Tooltip>
+                                        
+                                    </sfslider:SfSlider>
+
+                                    <Button Text="Pay Off" Margin="5" MaximumWidthRequest="200"
+                                Command="{Binding PayDebtCommand}" 
+                                CommandParameter="{Binding SelectedPayAmount}" />
+
+
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </sfpopup:SfPopup.ContentTemplate>
+                    </sfpopup:SfPopup>
 
                 </Grid>
             </cards:SfCardView>

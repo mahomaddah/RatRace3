@@ -4,6 +4,9 @@ using RatRace3.Models;
 using RatRace3.ViewModel;
 using Syncfusion.Maui.Rotator;
 using System.Globalization;
+using System.Net.NetworkInformation;
+using Syncfusion.Maui.Popup;
+using System.Linq;
 
 public partial class GameView : ContentPage
 {
@@ -133,6 +136,19 @@ public partial class GameView : ContentPage
         await DisplayAlert("Bank: "+ ((RatRace3.ViewModel.ListViewItemModel)e.DataItem).ItemText,"Bank Deposit Sucssesfully Withdrawed", "Good! Cash is King :D");
     }
 
+    private async void DebtDetailViewTapped(object sender, Syncfusion.Maui.ListView.ItemDoubleTappedEventArgs e)
+    {
+       // DebtPopup.BindingContext = new LiabilityModel { LiabilityName = "Student Loan", TotalAmount = 5000.00, MonthsRemaining = 24, InterestRate = 0.05, LiabilityModelID = 1 };
+      
+    //   await DisplayAlert("Debt: "+((RatRace3.ViewModel.ListViewItemModel)e.DataItem).ItemText,"Debt Details...", "Pay Debts");
+   //      GameViewModel.DebtDetailViewTapped((RatRace3.ViewModel.ListViewItemModel)e.DataItem);
+        //var appShell = (AppShell)Shell.Current;
+        //var SelectedObject = appShell.CurrentLevelModel.Players.First();
+
+        var liabilityModel = GameViewModel.Player.Liabilities.Find(x => x.LiabilityName.Contains(((ListViewItemModel)e.DataItem).ItemText));
+        GameViewModel.SelectedLiability = liabilityModel;
+        DebtPopup.Show();
+    }
 
 }
 

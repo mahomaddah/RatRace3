@@ -28,6 +28,12 @@ namespace RatRace3.Models
         /// //false by defult...
         /// </summary>
         public bool IsRecursiveDepositRD { get; set; }
+        /// <summary>
+        /// IncomeSourceID is the Passive income that asset crate on income list ... like bank deposit deposit and Mountlhy incomes...
+        /// if (FD or RD,..)  ... Asset deleted income sourse should be also deleted.. 
+        /// IncomeSourceID = 0; // in case of passive asset that not gereate value by time like gold...
+        /// </summary>
+        public int IncomeSourceID { get; set; }
 
         /// <summary>
         /// //if i'ts a Fixed deposit at bank or RD or mutual fund or even SPX maybe ... (Note :i't ANNUAL ) ...
@@ -43,6 +49,7 @@ namespace RatRace3.Models
             IsBankDeposit = false;
             IsRecursiveDepositRD = false;
             AssetType = AssetTypes.Stock.ToString();
+            IncomeSourceID = 0; // in case of passive asset that not gereate value by time like gold...
         }
 
        
