@@ -296,7 +296,7 @@
                                                         <Border Margin="0,10,0,0" BackgroundColor="#99C71585" Stroke="#9072C9" StrokeShape="RoundRectangle 8,8,8,8"  StrokeThickness="2">
                                                             <Grid>
                                                                 <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                                                    <Label TextColor="#9072C9" Margin="0,0,2,0" HorizontalOptions="Center" VerticalTextAlignment="Center" FontAttributes="Bold"  >Total Income:</Label>
+                                                                    <Label TextColor="#9072C9" Margin="0,0,2,0" HorizontalOptions="Center" VerticalTextAlignment="Center" FontAttributes="Bold"  >Total Expenses:</Label>
                                                                     <Label TextColor="White" HorizontalOptions="Center" VerticalTextAlignment="Center" FontAttributes="Bold" Text="{Binding TotalExpense}"  ></Label>
                                                                 </HorizontalStackLayout>
                                                             </Grid>
@@ -514,8 +514,11 @@
                     </ScrollView>
 
                     <sfpopup:SfPopup  WidthRequest="500" HeightRequest="400" x:Name="DebtPopup"  HeaderTitle="Debt Detail:" IsOpen="{Binding IsPopupOpen, Mode=TwoWay}" AppearanceMode="OneButton">
-                     
-                    
+
+                        <sfpopup:SfPopup.PopupStyle>
+                            <sfpopup:PopupStyle PopupBackground="#C3B0D6" />
+                        </sfpopup:SfPopup.PopupStyle>
+
                         <sfpopup:SfPopup.ContentTemplate>
                             <DataTemplate>
                                 <VerticalStackLayout Padding="5" Spacing="2">
@@ -529,8 +532,8 @@
 
 
                                     <sfslider:SfSlider
-                                       
-                                      Maximum="{Binding Player.Balance}"
+                                      x:Name="SelectDebtDetailValueSlider"
+                                      Maximum="{Binding SelectedLiability.MaximumPayable}"
                                  
             
                                       ShowDividers="True"

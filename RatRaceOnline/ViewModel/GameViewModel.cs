@@ -239,10 +239,27 @@ namespace RatRace3.ViewModel
 
         CultureInfo USD_Formant = CultureInfo.CreateSpecificCulture("en-US"); // for forcing $1,234.56 Money format 
 
+        double totalExpences ;
 
+        double totalIncomeSum ;
+        double totalDebtSum;
+        double totalNetworth;
+        double totalCashFlowSum;
         public void LoadPlayerData(Models.PlayerModel playerModel)
         {
-         
+            CashFlowListViewItemModel.Clear();
+            IncomeListViewItemModel.Clear();
+            ExpencesListViewItemModels.Clear();
+            DebtListViewItemModel.Clear();
+            AssetsListViewItemModel.Clear();
+            BankAssetsListViewItemModel.Clear();
+
+            totalCashFlowSum = 0;
+             totalExpences = 0;
+
+            totalIncomeSum = 0;
+            totalDebtSum = 0;
+             totalNetworth = 0;
             Player = playerModel;
 
             IsIncomeCollected = false;
@@ -262,19 +279,19 @@ namespace RatRace3.ViewModel
             
             CurrentMonth = (playerModel.CurrentMonth + " / " + playerModel.MaximumMonth).ToString();
 
-            IncomeListViewItemModel = new ObservableCollection<ListViewItemModel>();
-            double totalIncome = 0;
+            //IncomeListViewItemModel = new ObservableCollection<ListViewItemModel>();
+          
             foreach (var income in playerModel.IncomeSources)
             {
-                totalIncome += income.Amount;
+                totalIncomeSum += income.Amount;
                 IncomeListViewItemModel.Add(new ListViewItemModel() { ItemText = income.Name, ItemValue = (income.Amount).ToString("C2", USD_Formant) });
             }
 
             // for each ile tum itemleri topla ve incomeLisview ekle...
-            TotalIncome = (totalIncome).ToString("C2", USD_Formant);
-            Player.NetTotalIncome = totalIncome;
-            ExpencesListViewItemModels = new ObservableCollection<ListViewItemModel>();
-            double totalExpences = 0;
+            TotalIncome = (totalIncomeSum).ToString("C2", USD_Formant);
+            Player.NetTotalIncome = totalIncomeSum;
+          //  ExpencesListViewItemModels = new ObservableCollection<ListViewItemModel>();
+           
             foreach(var expences in playerModel.Expenses)
             {
                 totalExpences += expences.Amount;
@@ -284,27 +301,27 @@ namespace RatRace3.ViewModel
 
             TotalExpense = (totalExpences).ToString("C2", USD_Formant);
   
-            DebtListViewItemModel = new ObservableCollection<ListViewItemModel>();
-            double totalDebt = 0;
+          //  DebtListViewItemModel = new ObservableCollection<ListViewItemModel>();
+           
             foreach (var debt in playerModel.Liabilities)
             {
-                totalDebt += debt.TotalAmount;
+                totalDebtSum += debt.TotalAmount;
                 DebtListViewItemModel.Add(new ListViewItemModel() { ItemText = debt.LiabilityName, ItemValue = (debt.TotalAmount).ToString("C2", USD_Formant) });
             }
 
-            TotalDebt = (totalDebt).ToString("C2", USD_Formant);
+            TotalDebt = (totalDebtSum).ToString("C2", USD_Formant);
 
-            AssetsListViewItemModel = new ObservableCollection<ListViewItemModel>();
+           // AssetsListViewItemModel = new ObservableCollection<ListViewItemModel>();
 
-            double totalNetworth = 0;
+            
             double bankAccounttotalValue = 0;
 
             //Bank assets : FX RD BOND MUTUAL >...
-            BankAssetsListViewItemModel = new ObservableCollection<ListViewItemModel>();
+            // BankAssetsListViewItemModel = new ObservableCollection<ListViewItemModel>();
             //Note: Bank asset is Player Assets.find(x=>x.IsBankAsset).ToList()...// LIKE RD FD MF BOND ... 
 
             //adding user Total cash Blance as user's asset : 
-            playerModel.Assets.Add(new AssetModel { AssetName = "Cash Balance", AssetValue = balance });
+            //updatePlayeBlanceAsAssetObject();
 
             foreach (var asset in playerModel.Assets)
             {
@@ -319,7 +336,7 @@ namespace RatRace3.ViewModel
                 }
 
             }
-            totalNetworth -= totalDebt;
+            totalNetworth -= totalDebtSum;
 
             //note total is sum of all bank asset items list
             TotalBankAccountValue = (bankAccounttotalValue).ToString("C2", USD_Formant);
@@ -327,18 +344,42 @@ namespace RatRace3.ViewModel
 
             NetWorth = (totalNetworth).ToString("C2", USD_Formant);
 
-            CashFlowListViewItemModel = new ObservableCollection<ListViewItemModel>();
-            double totalCashFlow = totalIncome - totalExpences;// - deprications and amorthisman of assets in the future updates ... :)
+         //   CashFlowListViewItemModel = new ObservableCollection<ListViewItemModel>();
+            //  totalCashFlowSum = totalIncomeSum - totalExpences;// - deprications and amorthisman of assets in the future updates ... :)
             //oprational cash flow , investin and financing cash flow can be added in the futures...
-            cashFlowListViewItemModel.Add(new ListViewItemModel() { ItemText = "Free Cash Flow of month", ItemValue = (totalCashFlow).ToString("C2", USD_Formant) });
+            updateTotalCashFlow();
+
+            cashFlowListViewItemModel.Add(new ListViewItemModel() { ItemText = "Free Cash Flow of month", ItemValue = (totalCashFlowSum).ToString("C2", USD_Formant) });
 
 
-            TotalCashFlow = (totalCashFlow).ToString("C2", USD_Formant);
-            Player.NetTotalIncome = totalCashFlow;
+            //TotalCashFlow = (totalCashFlowSum).ToString("C2", USD_Formant);
+            //Player.NetTotalIncome = totalCashFlowSum;
+
+           
 
 
+        }
+        void updateTotalCashFlow()
+        {
+            totalCashFlowSum = totalIncomeSum - totalExpences;
+            TotalCashFlow = (totalCashFlowSum).ToString("C2", USD_Formant);
+            Player.NetTotalIncome = totalCashFlowSum;
+        }
 
-        }    
+        /// <summary>
+        /// game Brock when calling this line so i removed the future
+        /// </summary>
+        void updatePlayeBlanceAsAssetObject()
+        {
+            var toRemove = Player.Assets.Find(x => x.AssetName.Equals("Cash Balance"));
+            if (toRemove != null)
+                Player.Assets.Remove(toRemove);
+            Player.Assets.Add(new AssetModel { AssetName = "Cash Balance", AssetValue = Player.Balance });
+
+           // AssetsListViewItemModel.First(x => x.ItemText.Equals("Cash Balance")).ItemValue = Player.Balance.ToString(); //shity brocking line...
+
+         
+        }
 
         private  void CollectIncome()
         {
@@ -368,8 +409,14 @@ namespace RatRace3.ViewModel
             {
                 _isPopupOpen = value;
                 OnPropertyChanged();
+                //Call UpdateSelectDebtDetailValueSlider.MaxLimit...
+                OnPropertyChanged(nameof(SelectedLiability.MaximumPayable));
+                SelectedPayAmount = SelectedLiability.MaximumPayable;
             }
         }
+
+
+
 
         // Selected Liability
         private LiabilityModel _selectedLiability;
@@ -392,15 +439,26 @@ namespace RatRace3.ViewModel
             {
                 _selectedPayAmount = value;
                 OnPropertyChanged();
+
+
             }
         }
 
+        void updateStatmentsdataFromPlayerObject()
+        {
+            //up
+           
+            LoadPlayerData(Player);
+
+        }
+
+      
 
         private async void PayDebt(double amount)
         {
           //  await Shell.Current.DisplayAlert("Debt", "Debt Payment Successful.", "OK");
 
-            if (SelectedLiability != null && amount > 0 && Player.Balance>0)
+            if (SelectedLiability != null && SelectedLiability.RemainingAmount>0 && amount > 0 && Player.Balance>0 && amount<= Player.Balance)
             {
                 SelectedLiability.RemainingAmount -= amount;
                 Player.Balance -= amount;
@@ -409,17 +467,53 @@ namespace RatRace3.ViewModel
                 // Update remaining months dynamically
                 SelectedLiability.MonthsRemaining = (int)Math.Ceiling(SelectedLiability.RemainingAmount / SelectedLiability.Emi);
 
-                double.TryParse(TotalDebt.Substring(1), out double totalDebt);
-                // Close Popup
-                totalDebt -= amount;
-                IsPopupOpen = false;
-                TotalDebt = (totalDebt.ToString("C2", USD_Formant));
+                try
+                {//bu kisim calismiyor cokuyor bir sekilde ...
+
+                    double newTotalDebts = Convert.ToDouble(TotalDebt.Substring(1)); //get total debt value ...
+                                                                                     // Close Popup
+                    newTotalDebts -= amount;
+                    IsPopupOpen = false;
+                    TotalDebt = (newTotalDebts.ToString("C2", USD_Formant));
+                }
+                catch
+                {
+
+                }
+            
 
                 //   Networth
                 // Notify changes
                 OnPropertyChanged(nameof(SelectedLiability));
                 DebtListViewItemModel.First(x => x.ItemText.Contains(SelectedLiability.LiabilityName)).ItemValue = SelectedLiability.RemainingAmountFormatted;
+              
             }
+
+            if(SelectedLiability!=null && SelectedLiability.RemainingAmount<=0.009)
+            {
+                //Debt payment Complated...
+               
+                DebtListViewItemModel.Remove(DebtListViewItemModel.First(x => x.ItemText.Equals(SelectedLiability.LiabilityName)));
+              //  var appShell = (AppShell)Shell.Current;
+               
+                var RelatedExpenceOnject = Player.Expenses.First(x=>x.RelatedLiabilityID.Equals(SelectedLiability.LiabilityModelID) || x.ExpenseModelID.Equals(SelectedLiability.ExpenseModelID));
+                if (RelatedExpenceOnject != null)
+                {  //Delete Expences related to that liability if there is any ....
+                    var item = ExpencesListViewItemModels.First(x => x.ItemText.Equals(RelatedExpenceOnject.Name));
+
+                   ExpencesListViewItemModels.Remove(item);
+                   Player.Expenses.Remove(RelatedExpenceOnject);
+
+                }
+                Player.Liabilities.Remove(SelectedLiability);
+
+
+                IsPopupOpen = false;
+                await Shell.Current.DisplayAlert(SelectedLiability.LiabilityName.ToString(), "Debt Payments successful!!", "Cool");
+            }
+
+            //     LoadPlayerData(Player);// for updating Gui from data 
+            updateStatmentsdataFromPlayerObject();
         }
 
         void NextTurn()
@@ -546,6 +640,13 @@ namespace RatRace3.ViewModel
             PayDebtCommand = new Command<double>(PayDebt);
             //delete me ....
             //TODO: get correct object  from AppSell Or in ctor... and replace null...:
+            CashFlowListViewItemModel = new ObservableCollection<ListViewItemModel>();
+            BankAssetsListViewItemModel = new ObservableCollection<ListViewItemModel>();
+            AssetsListViewItemModel = new ObservableCollection<ListViewItemModel>();
+            DebtListViewItemModel = new ObservableCollection<ListViewItemModel>();
+            ExpencesListViewItemModels = new ObservableCollection<ListViewItemModel>();
+            IncomeListViewItemModel = new ObservableCollection<ListViewItemModel>();
+
 
 
 

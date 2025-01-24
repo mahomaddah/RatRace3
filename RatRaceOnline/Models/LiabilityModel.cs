@@ -113,8 +113,11 @@ namespace RatRace3.Models
         public string MonthsRemainingFormatted => $"Months Remaining: {MonthsRemaining}";
         public string EmiFormatted => "EMI: "+Emi.ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
         public string InterestRateFormatted => $"Interest Rate: {InterestRate:P}";
+       
+        
+        public double MaximumPayable => Math.Min(RemainingAmount, ((AppShell)Shell.Current).CurrentLevelModel.Players.First().Balance); // Example max limit
 
-        public double MaximumPayable => Math.Min(RemainingAmount, 1000); // Example max limit
+        public int ExpenseModelID { get; internal set; }
 
         // Property change notification
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

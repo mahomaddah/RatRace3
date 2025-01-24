@@ -64,12 +64,12 @@ namespace RatRace3
                 MaximumMonth = 24,
                 Liabilities = new List<LiabilityModel>
                 {
-                    new LiabilityModel{LiabilityName ="Ducati Bike Debt", RemainingAmount=3600, TotalAmount = 3600.00, MonthsRemaining = 12, InterestRate = 0.02 , LiabilityModelID = 1},
-                    new LiabilityModel{LiabilityName="Expensive Drone Debt", TotalAmount=2400.00, MonthsRemaining = 12, InterestRate=0.03, LiabilityModelID = 2},
-                    new LiabilityModel{LiabilityName="Motorcycle Camping Gear Debt", TotalAmount=1200.00, MonthsRemaining = 12, InterestRate=0.01, LiabilityModelID = 3}
+                    new LiabilityModel{LiabilityName ="Ducati Bike Debt", RemainingAmount=3600, TotalAmount = 3600.00, MonthsRemaining = 12, InterestRate = 0.02 , LiabilityModelID = 1 ,  ExpenseModelID = 1},
+                    new LiabilityModel{LiabilityName="Expensive Drone Debt", TotalAmount=2400.00, MonthsRemaining = 12, InterestRate=0.03, LiabilityModelID = 2 , ExpenseModelID = 2},
+                    new LiabilityModel{LiabilityName="Motorcycle Camping Gear Debt", TotalAmount=1200.00, MonthsRemaining = 12, InterestRate=0.01, LiabilityModelID = 3 , ExpenseModelID = 3}
                 },
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 2800.00, IncomeSourceID=1 } ,
-                                                             new IncomeSourceModel { Name = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank" ,Amount =53.56 ,IncomeSourceID = 2 } },
+                                                             new IncomeSourceModel { Name = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank" ,Amount =53.56 ,IncomeSourceID = 2 ,RelatedAssetID = 1 } },
                 Assets = new List<AssetModel>
                 {
                     new AssetModel {AssetName = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 1300.00, IntrestRate= 0.0412, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 53.56, AssetModelID = 1 ,IncomeSourceID = 2},
@@ -77,9 +77,9 @@ namespace RatRace3
                 },
                 Expenses = new List<ExpenseModel>
                 {
-                    new ExpenseModel{ Name = "Ducati Bike Debt EMI", Amount = 300.00, ExpenseModelID = 1},
-                    new ExpenseModel{ Name = "Expensive Drone Debt EMI", Amount = 200.00, ExpenseModelID = 2},
-                    new ExpenseModel{ Name = "Motorcycle Camping Gear Debt EMI", Amount = 100.00, ExpenseModelID = 3},
+                    new ExpenseModel{ Name = "Ducati Bike Debt EMI", Amount = 300.00, ExpenseModelID = 1 ,RelatedLiabilityID = 1 },
+                    new ExpenseModel{ Name = "Expensive Drone Debt EMI", Amount = 200.00, ExpenseModelID = 2  ,RelatedLiabilityID = 2},
+                    new ExpenseModel{ Name = "Motorcycle Camping Gear Debt EMI", Amount = 100.00, ExpenseModelID = 3  ,RelatedLiabilityID = 3},
                     new ExpenseModel{ Name = "Minimum Surviving Expenses", Amount = 1072.33, ExpenseModelID = 4}
                 }
             }},
@@ -91,23 +91,24 @@ namespace RatRace3
                 isUnlocked = false,
                 HighestMounthScore = 0,
                 StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 3 },
-                new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 24, YouHave = 1 }
+                new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 24, YouHave = 1 },
+                new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 22000, YouHave = 50 } 
 
-                }
+            }
             });
 
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
                 Players = new List<PlayerModel> { new PlayerModel{
                 Balance = 400.00,
-                NetTotalIncome = 500,
+                NetTotalIncome = 1500,
                 CurrentMonth = 1,
                 MaximumMonth = 24,
                 Liabilities = new List<LiabilityModel>
                 {
-                    new LiabilityModel{LiabilityName ="KUBA TK03 Bike Debt", TotalAmount = 3500.00, MonthsRemaining = 12, InterestRate = 0.02, LiabilityModelID = 1},
-                    new LiabilityModel{LiabilityName="Motorcycle Safe Jacket Debt", TotalAmount=2500.00, MonthsRemaining = 12, InterestRate=0.02, LiabilityModelID = 2},
-                    new LiabilityModel{LiabilityName="Motorcycle Helmet Debt", TotalAmount=1200.00, MonthsRemaining = 12, InterestRate=0.01, LiabilityModelID = 3}
+                    new LiabilityModel{LiabilityName ="KUBA TK03 Bike Debt", TotalAmount = 3500.00, MonthsRemaining = 12, InterestRate = 0.02, LiabilityModelID = 1 ,ExpenseModelID =1},
+                    new LiabilityModel{LiabilityName="Motorcycle Safe Jacket Debt", TotalAmount=2500.00, MonthsRemaining = 12, InterestRate=0.02, LiabilityModelID = 2 ,ExpenseModelID =2},
+                    new LiabilityModel{LiabilityName="Motorcycle Helmet Debt", TotalAmount=1200.00, MonthsRemaining = 12, InterestRate=0.01, LiabilityModelID = 3 ,ExpenseModelID =3}
                 },
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 900.00, IncomeSourceID=1 } },
                 Assets = new List<AssetModel>
@@ -116,9 +117,9 @@ namespace RatRace3
                 },
                 Expenses = new List<ExpenseModel>
                 {
-                    new ExpenseModel{ Name = "KUBA TK03 Bike Debt EMI", Amount = 300.00, ExpenseModelID = 1},
-                    new ExpenseModel{ Name = "Motorcycle Safe Jacket Debt EMI", Amount = 200.00, ExpenseModelID = 2},
-                    new ExpenseModel{ Name = "Motorcycle Helmet Debt EMI", Amount = 100.00, ExpenseModelID = 3}
+                    new ExpenseModel{ Name = "KUBA TK03 Bike Debt EMI", Amount = 300.00, ExpenseModelID = 1, RelatedLiabilityID = 1},
+                    new ExpenseModel{ Name = "Motorcycle Safe Jacket Debt EMI", Amount = 200.00, ExpenseModelID = 2 ,RelatedLiabilityID = 2},
+                    new ExpenseModel{ Name = "Motorcycle Helmet Debt EMI", Amount = 100.00, ExpenseModelID = 3, RelatedLiabilityID = 3}
                 }
             }},
                 StoryLevelID = "2",
@@ -140,8 +141,8 @@ namespace RatRace3
                 MaximumMonth = 12,
                 Liabilities = new List<LiabilityModel>
                 {
-                    new LiabilityModel{LiabilityName ="Student Loan", TotalAmount = 5000.00, MonthsRemaining = 24, InterestRate = 0.05, LiabilityModelID = 1},
-                    new LiabilityModel{LiabilityName="Car Loan", TotalAmount=8000.00, MonthsRemaining = 36, InterestRate=0.03, LiabilityModelID = 2}
+                    new LiabilityModel{LiabilityName ="Student Loan", TotalAmount = 5000.00, MonthsRemaining = 24, InterestRate = 0.05, LiabilityModelID = 1 ,ExpenseModelID = 1},
+                    new LiabilityModel{LiabilityName="Car Loan", TotalAmount=8000.00, MonthsRemaining = 36, InterestRate=0.03, LiabilityModelID = 2 ,ExpenseModelID =2}
                 },
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Part-Time Job", Amount = 1200.00, IncomeSourceID=1 },
                                                             new IncomeSourceModel { Name = "Freelancing", Amount = 900.00, IncomeSourceID=2 },
@@ -153,8 +154,8 @@ namespace RatRace3
                 },
                 Expenses = new List<ExpenseModel>
                 {
-                    new ExpenseModel{ Name = "Student Loan EMI", Amount = 220.00, ExpenseModelID = 1},
-                    new ExpenseModel{ Name = "Car Loan EMI", Amount = 300.00, ExpenseModelID = 2},
+                    new ExpenseModel{ Name = "Student Loan EMI", Amount = 220.00, ExpenseModelID = 1, RelatedLiabilityID = 1},
+                    new ExpenseModel{ Name = "Car Loan EMI", Amount = 300.00, ExpenseModelID = 2 , RelatedLiabilityID = 2},
                     new ExpenseModel{ Name = "Groceries", Amount = 150.00, ExpenseModelID = 3},
                     new ExpenseModel{ Name = "Transportation", Amount = 100.00, ExpenseModelID = 4}
                 }
@@ -179,8 +180,8 @@ namespace RatRace3
                 MaximumMonth = 24,
                 Liabilities = new List<LiabilityModel>
                 {
-                    new LiabilityModel{LiabilityName ="Credit Card Debt", TotalAmount = 7000.00, MonthsRemaining = 12, InterestRate = 0.18, LiabilityModelID = 1},
-                    new LiabilityModel{LiabilityName="Payday Loan", TotalAmount=3000.00, MonthsRemaining = 6, InterestRate=0.25, LiabilityModelID = 2}
+                    new LiabilityModel{LiabilityName ="Credit Card Debt", TotalAmount = 7000.00, MonthsRemaining = 12, InterestRate = 0.18, LiabilityModelID = 1 , ExpenseModelID =1},
+                    new LiabilityModel{LiabilityName="Payday Loan", TotalAmount=3000.00, MonthsRemaining = 6, InterestRate=0.25, LiabilityModelID = 2 , ExpenseModelID = 2}
                 },
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Full-Time Job", Amount = 2500.00, IncomeSourceID=1 } },
                 Assets = new List<AssetModel>
@@ -189,8 +190,9 @@ namespace RatRace3
                 },
                 Expenses = new List<ExpenseModel>
                 {
-                    new ExpenseModel{ Name = "Credit Card Minimum Payment", Amount = 200.00, ExpenseModelID = 1},
-                    new ExpenseModel{ Name = "Payday Loan EMI", Amount = 500.00, ExpenseModelID = 2},
+                    new ExpenseModel{ Name = "Credit Card Minimum Payment", Amount = 200.00, ExpenseModelID = 1 , RelatedLiabilityID=1},
+                    new ExpenseModel{ Name = "Payday Loan EMI", Amount = 500.00, ExpenseModelID = 2, RelatedLiabilityID = 2},
+
                     new ExpenseModel{ Name = "Rent", Amount = 800.00, ExpenseModelID = 3},
                     new ExpenseModel{ Name = "Utilities", Amount = 200.00, ExpenseModelID = 4}
                 }
@@ -217,7 +219,7 @@ namespace RatRace3
                 MaximumMonth = 24,
                 Liabilities = new List<LiabilityModel>
                 {
-                    new LiabilityModel{LiabilityName ="Startup Loan", TotalAmount = 10000.00, MonthsRemaining = 24, InterestRate = 0.10, LiabilityModelID = 1}
+                    new LiabilityModel{LiabilityName ="Startup Loan", TotalAmount = 10000.00, MonthsRemaining = 24, InterestRate = 0.10, LiabilityModelID = 1 ,ExpenseModelID =1 }
                 },
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Side Hustle", Amount = 1000.00, IncomeSourceID=1 }, new IncomeSourceModel { Name = "Savings Interest", Amount = 50.00, IncomeSourceID=2 } },
                 Assets = new List<AssetModel>
@@ -226,7 +228,7 @@ namespace RatRace3
                 },
                 Expenses = new List<ExpenseModel>
                 {
-                    new ExpenseModel{ Name = "Startup Loan EMI", Amount = 500.00, ExpenseModelID = 1},
+                    new ExpenseModel{ Name = "Startup Loan EMI", Amount = 500.00, ExpenseModelID = 1, RelatedLiabilityID = 1},
                     new ExpenseModel{ Name = "Team Salaries", Amount = 1000.00, ExpenseModelID = 2},
                     new ExpenseModel{ Name = "Office Rent", Amount = 800.00, ExpenseModelID = 3}
                 }
@@ -254,16 +256,16 @@ namespace RatRace3
                 MaximumMonth = 36,
                 Liabilities = new List<LiabilityModel>
                 {
-                    new LiabilityModel{LiabilityName ="Shared Office Loan", TotalAmount = 15000.00, MonthsRemaining = 36, InterestRate = 0.08, LiabilityModelID = 1}
+                    new LiabilityModel{LiabilityName ="Shared Office Loan", TotalAmount = 15000.00, MonthsRemaining = 36, InterestRate = 0.08, LiabilityModelID = 1 ,ExpenseModelID =1}
                 },
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Team Project Revenue", Amount = 3000.00, IncomeSourceID=1 } },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "Shared Project Assets", AssetType = AssetTypes.Stock.ToString(), AssetValue = 5000.00, IntrestRate= 0.00, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 0.00, AssetModelID = 1}
+                    new AssetModel {AssetName = "Shared Project Assets", AssetType = AssetTypes.Stock.ToString(), AssetValue = 5000.00, IntrestRate= 0.00, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 0.00, AssetModelID = 1 ,IncomeSourceID = 1}
                 },
                 Expenses = new List<ExpenseModel>
                 {
-                    new ExpenseModel{ Name = "Office Loan EMI", Amount = 500.00, ExpenseModelID = 1},
+                    new ExpenseModel{ Name = "Office Loan EMI", Amount = 500.00, ExpenseModelID = 1, RelatedLiabilityID = 1},
                     new ExpenseModel{ Name = "Team Resources", Amount = 1000.00, ExpenseModelID = 2},
                     new ExpenseModel{ Name = "Miscellaneous Expenses", Amount = 300.00, ExpenseModelID = 3}
                 }
@@ -427,8 +429,7 @@ namespace RatRace3
                 dal.SaveUISettings(UIsettingsModel);
             }
             catch (Exception ex)
-            {
-                // Console.WriteLine($"Error playing music: {ex.Message}");
+            {       
                 await DisplayAlert("Error playing music:", ex.Message, "Fuck the music! Continue!!");
             }
             #endregion
