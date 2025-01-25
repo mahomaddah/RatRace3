@@ -10,6 +10,7 @@ namespace RatRace3
     {
 
         public LevelModel CurrentLevelModel { get; set; }
+      
         public Company CurrentCompany { get; set; }
         public ObservableCollection<Company> IPOcompanies { get; set; }
         public SelectLevelViewModel SelectLevelViewModel { get; set; }
