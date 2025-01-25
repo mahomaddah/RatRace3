@@ -126,14 +126,55 @@ public partial class GameView : ContentPage
 
     private async void FixedDeposit_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
     {
-        await DisplayAlert("Bank..", "Fixed deposit account addet to asset list!", "OK$$$");
-        BankRadialMenu.IsOpen = false;
+        double IntrestRate = 0.041;//simdilik yuzde 4.1% olsun ilerie belki gazete deki TBon ile baglariz.....
+
+        try {
+
+            //    double deposit = Convert.ToDouble(GameViewModel.CurrentBankDepositAmount);
+            bool isValid = double.TryParse(GameViewModel.CurrentBankDepositAmount,out double deposit);
+        //await DisplayAlert("Bank..", "Fixed deposit account addet to asset list!", "OK$$$");
+        if (isValid && deposit> 0.009 && GameViewModel.Player.Balance >= deposit)
+        {
+            GameViewModel.Player.Balance -= deposit;
+            double passiveIncoemAmounth = Math.Round((deposit * IntrestRate / 12),2);
+            var RelatedAssetID = Guid.NewGuid().ToString();
+            var assetsPassiveIncome = new IncomeSourceModel { AssetIncomeSourseRelatingGUID = RelatedAssetID, Amount = passiveIncoemAmounth, Name = "FD $" + passiveIncoemAmounth + "@"+IntrestRate.ToString("p")+" Intrest |Passive Income" };
+            GameViewModel.Player.Assets.Add(new AssetModel { AssetIncomeSourseRelatingGUID= RelatedAssetID, AssetName = "FD $" + deposit.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) +"@" + IntrestRate.ToString("p") + " Intrest |JPMorgen Bank" ,AssetValue = deposit,AssetType= AssetTypes
+            .FixedDeposit.ToString() ,IntrestRate = 0.041, IsBankDeposit=true,IsRecursiveDepositRD = false ,PassiveIncome = passiveIncoemAmounth });
+            GameViewModel.Player.IncomeSources.Add(assetsPassiveIncome);
+            GameViewModel.LoadPlayerData(GameViewModel.Player);//fore updating bank listview and statments....
+            BankRadialMenu.IsOpen = false;
+            }
+            else
+            {
+                await DisplayAlert("Bank:" , "Please Enter a Valid Amounth of fund", "Hony No$");
+            }
+
+        }
+        catch
+        {
+            //await DisplayAlert("Bank:", "Issue With creating New Postion", "Ok");
+        }
     }
 
     private async void BankAssetWithdrawal(object sender, Syncfusion.Maui.ListView.ItemDoubleTappedEventArgs e)
     {
-       
-        await DisplayAlert("Bank: "+ ((RatRace3.ViewModel.ListViewItemModel)e.DataItem).ItemText,"Bank Deposit Sucssesfully Withdrawed", "Good! Cash is King :D");
+        //BankAssetWithdrawal
+        var SelectedBankAsset = GameViewModel.Player.Assets.Find(x => x.AssetName.Contains(((ListViewItemModel)e.DataItem).ItemText));
+        if (SelectedBankAsset != null) {
+            var assetRelatedIncomeSource = GameViewModel.Player.IncomeSources.Find(y => y.AssetIncomeSourseRelatingGUID.ToString() == SelectedBankAsset.AssetIncomeSourseRelatingGUID.ToString());
+            if (assetRelatedIncomeSource != null) {
+
+                GameViewModel.Player.Balance += SelectedBankAsset.AssetValue;//withdared..
+
+                GameViewModel.Player.IncomeSources.Remove(assetRelatedIncomeSource);
+                GameViewModel.Player.Assets.Remove(SelectedBankAsset);
+
+
+                GameViewModel.LoadPlayerData(GameViewModel.Player);
+
+            }
+        }
     }
 
     private async void DebtDetailViewTapped(object sender, Syncfusion.Maui.ListView.ItemDoubleTappedEventArgs e)

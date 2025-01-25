@@ -69,11 +69,11 @@ namespace RatRace3
                     new LiabilityModel{LiabilityName="Expensive Drone Debt", TotalAmount=2400.00, MonthsRemaining = 12, InterestRate=0.03, LiabilityModelID = 2 , ExpenseModelID = 2},
                     new LiabilityModel{LiabilityName="Motorcycle Camping Gear Debt", TotalAmount=1200.00, MonthsRemaining = 12, InterestRate=0.01, LiabilityModelID = 3 , ExpenseModelID = 3}
                 },
-                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 2800.00, IncomeSourceID=1 } ,
-                                                             new IncomeSourceModel { Name = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank" ,Amount =53.56 ,IncomeSourceID = 2 ,RelatedAssetID = 1 } },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 2800.00  } ,
+                                                             new IncomeSourceModel { Name = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank" ,Amount =53.56  ,AssetIncomeSourseRelatingGUID = 2.ToString() } },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 1300.00, IntrestRate= 0.0412, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 53.56, AssetModelID = 1 ,IncomeSourceID = 2},
+                    new AssetModel {AssetName = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 1300.00, IntrestRate= 0.0412, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 53.56, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = 2.ToString()},
                     new AssetModel {AssetName = "MSFT P&L 28% @ $128.12", AssetType = AssetTypes.Stock.ToString(), AssetValue = 200.00, IntrestRate= 0.10, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2}
                 },
                 Expenses = new List<ExpenseModel>
@@ -111,7 +111,7 @@ namespace RatRace3
                     new LiabilityModel{LiabilityName="Motorcycle Safe Jacket Debt", TotalAmount=2500.00, MonthsRemaining = 12, InterestRate=0.02, LiabilityModelID = 2 ,ExpenseModelID =2},
                     new LiabilityModel{LiabilityName="Motorcycle Helmet Debt", TotalAmount=1200.00, MonthsRemaining = 12, InterestRate=0.01, LiabilityModelID = 3 ,ExpenseModelID =3}
                 },
-                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 900.00, IncomeSourceID=1 } },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 900.00 } },
                 Assets = new List<AssetModel>
                 {
                     new AssetModel {AssetName = "GOOGL Stock", AssetType = AssetTypes.Stock.ToString(), AssetValue = 1500.00, IntrestRate= 0.05, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 7.50, AssetModelID = 1}
@@ -145,13 +145,13 @@ namespace RatRace3
                     new LiabilityModel{LiabilityName ="Student Loan", TotalAmount = 5000.00, MonthsRemaining = 24, InterestRate = 0.05, LiabilityModelID = 1 ,ExpenseModelID = 1},
                     new LiabilityModel{LiabilityName="Car Loan", TotalAmount=8000.00, MonthsRemaining = 36, InterestRate=0.03, LiabilityModelID = 2 ,ExpenseModelID =2}
                 },
-                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Part-Time Job", Amount = 1200.00, IncomeSourceID=1 },
-                                                            new IncomeSourceModel { Name = "Freelancing", Amount = 900.00, IncomeSourceID=2 },
-                                                           new IncomeSourceModel { Name = "Savings Account Passive Income" ,Amount =20 ,IncomeSourceID = 3 ,RelatedAssetID =1 } 
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Part-Time Job", Amount = 1200.00 },
+                                                            new IncomeSourceModel { Name = "Freelancing", Amount = 900.00},
+                                                           new IncomeSourceModel { Name = "Savings Account Passive Income" ,Amount =20 ,AssetIncomeSourseRelatingGUID =3.ToString() } 
                 },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "Savings Account", AssetType = AssetTypes.RecursiveDeposit.ToString() , AssetValue = 1000.00, IntrestRate= 0.02, IsBankDeposit= true, IsRecursiveDepositRD = true, PassiveIncome = 20.00, AssetModelID = 1 ,IncomeSourceID=3}
+                    new AssetModel {AssetName = "Savings Account", AssetType = AssetTypes.RecursiveDeposit.ToString() , AssetValue = 1000.00, IntrestRate= 0.02, IsBankDeposit= true, IsRecursiveDepositRD = true, PassiveIncome = 20.00 ,AssetIncomeSourseRelatingGUID=3.ToString() }
                 },
                 Expenses = new List<ExpenseModel>
                 {
@@ -184,7 +184,7 @@ namespace RatRace3
                     new LiabilityModel{LiabilityName ="Credit Card Debt", TotalAmount = 7000.00, MonthsRemaining = 12, InterestRate = 0.18, LiabilityModelID = 1 , ExpenseModelID =1},
                     new LiabilityModel{LiabilityName="Payday Loan", TotalAmount=3000.00, MonthsRemaining = 6, InterestRate=0.25, LiabilityModelID = 2 , ExpenseModelID = 2}
                 },
-                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Full-Time Job", Amount = 2500.00, IncomeSourceID=1 } },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Full-Time Job", Amount = 2500.00 } },
                 Assets = new List<AssetModel>
                 {
                     new AssetModel {AssetName = "Retirement Fund", AssetType = AssetTypes.MutualFund.ToString(), AssetValue = 5000.00, IntrestRate= 0.06, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 25.00, AssetModelID = 1}
@@ -222,10 +222,10 @@ namespace RatRace3
                 {
                     new LiabilityModel{LiabilityName ="Startup Loan", TotalAmount = 10000.00, MonthsRemaining = 24, InterestRate = 0.10, LiabilityModelID = 1 ,ExpenseModelID =1 }
                 },
-                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Side Hustle", Amount = 1000.00, IncomeSourceID=1 }, new IncomeSourceModel { Name = "Savings Interest", Amount = 50.00, IncomeSourceID=2 } },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Side Hustle", Amount = 1000.00 }, new IncomeSourceModel { Name = "Savings Interest", Amount = 200.00, AssetIncomeSourseRelatingGUID="2" } },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "Startup Equity", AssetType = AssetTypes.Stock.ToString(), AssetValue = 20000.00, IntrestRate= 0.00, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 0.00, AssetModelID = 1}
+                    new AssetModel {AssetName = "Startup Equity", AssetType = AssetTypes.Stock.ToString(), AssetValue = 20000.00, IntrestRate= 0.01, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome =200.00, AssetModelID = 1 , AssetIncomeSourseRelatingGUID = "2"}
                 },
                 Expenses = new List<ExpenseModel>
                 {
@@ -259,10 +259,10 @@ namespace RatRace3
                 {
                     new LiabilityModel{LiabilityName ="Shared Office Loan", TotalAmount = 15000.00, MonthsRemaining = 36, InterestRate = 0.08, LiabilityModelID = 1 ,ExpenseModelID =1}
                 },
-                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Team Project Revenue", Amount = 3000.00, IncomeSourceID=1 } },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Team Project Revenue", Amount = 3000.00 ,AssetIncomeSourseRelatingGUID="1" } },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "Shared Project Assets", AssetType = AssetTypes.Stock.ToString(), AssetValue = 5000.00, IntrestRate= 0.00, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 0.00, AssetModelID = 1 ,IncomeSourceID = 1}
+                    new AssetModel {AssetName = "Shared Project Assets", AssetType = AssetTypes.Stock.ToString(), AssetValue = 5000.00, IntrestRate= 0.00, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 0.00, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = "1"}
                 },
                 Expenses = new List<ExpenseModel>
                 {

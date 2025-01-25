@@ -618,10 +618,10 @@
                             
                             <Label MaxLines="1" Margin="1" Text="{Binding CurrentBankDepositAmount,Mode=TwoWay}" FontSize="8" ></Label>
 
-                            <gauge:SfLinearGauge Orientation="Vertical" Minimum="0" Interval="{Binding BankDepositInterval ,TargetNullValue=1000}" Maximum="{Binding BankDepositMaxLimit ,TargetNullValue=10000}"  VerticalOptions="Center" EnableAxisAnimation="True" AnimationDuration="500"  TickPosition="Outside" LabelPosition="Outside" Background="#E3AAD6"  ShowLabels="True" UseRangeColorForAxis="True" HeightRequest="200" Margin="1" WidthRequest="50">
+                            <gauge:SfLinearGauge x:Name="BankLinearBar" Orientation="Vertical" Minimum="0"  Maximum="{Binding Player.Balance ,TargetNullValue=10000}"  VerticalOptions="Center" EnableAxisAnimation="True" AnimationDuration="500"  TickPosition="Outside" LabelPosition="Outside" Background="#E3AAD6"  ShowLabels="True" UseRangeColorForAxis="True" HeightRequest="200" Margin="1" WidthRequest="50">
 
                                 <gauge:SfLinearGauge.LabelStyle>
-                                    <gauge:GaugeLabelStyle FontAttributes="Bold" FontSize="8" 
+                                    <gauge:GaugeLabelStyle FontAttributes="Bold" FontSize="8"
                                      TextColor="#9072C9"/>
                                 </gauge:SfLinearGauge.LabelStyle>
 
@@ -629,8 +629,8 @@
                                     <gauge:LinearLineStyle Thickness="3"  CornerStyle="BothCurve">
                                         <gauge:LinearLineStyle.GradientStops>
                                             <gauge:GaugeGradientStop Value="0" Color="#FF45B3C1"/>
-                                            <gauge:GaugeGradientStop Value="{Binding BankDepositInterval ,TargetNullValue=200}" Color="#FF6ECAB2"/>
-                                            <gauge:GaugeGradientStop Value="{Binding BankDepositMaxLimit ,TargetNullValue=2000}" Color="#FF84D6AA"/>
+                                            <gauge:GaugeGradientStop Value="200" Color="#FF6ECAB2"/>
+                                            <gauge:GaugeGradientStop Value="{Binding Player.Balance ,TargetNullValue=2000}" Color="#FF84D6AA"/>
                                         </gauge:LinearLineStyle.GradientStops>
                                     </gauge:LinearLineStyle>
                                 </gauge:SfLinearGauge.LineStyle>

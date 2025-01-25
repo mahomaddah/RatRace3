@@ -1,10 +1,26 @@
-﻿namespace RatRace3.Models
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace RatRace3.Models
 {
-    public class PlayerModel
+    public class PlayerModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         public int PlayerModelID { get; set; }
         public double TotalExpences { get; set; }
-        public double Balance { get; set; }
+      //  public double Balance { get; set; }
+
+        private double balance;
+
+        public double Balance
+        {
+            get { return balance; }
+            set { balance = Math.Round(value,2);
+
+                OnPropertyChanged();
+            }
+        }
+
         /// <summary>
         /// NetTotalIncome = player Cashflow...
         /// </summary>
@@ -28,6 +44,10 @@
             IncomeSources = new List<IncomeSourceModel> { };
             Expenses = new List<ExpenseModel> { };
             RealStateS = new List<RealStateUnitModel> { };
+        }
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
 

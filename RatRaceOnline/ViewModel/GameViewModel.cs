@@ -602,7 +602,7 @@ namespace RatRace3.ViewModel
             CurrentBalance = (balance).ToString("C2", USD_Formant);
 
 
-            BankDepositMaxLimit = Math.Round(balance, 2); // update ever time balance change... TODO ::: maybe in setter ... 
+            BankDepositMaxLimit = Math.Round(balance, 2); // update every time balance change... TODO ::: maybe in setter ... 
 
             double magnitude = Math.Pow(10, Math.Floor(Math.Log10(balance)) - 1); // Get the magnitude (e.g., 100 for 2054)
             BankDepositInterval = Math.Round(magnitude);
@@ -962,6 +962,7 @@ namespace RatRace3.ViewModel
                 {
                     _currentLevelPlayer = value;
                     OnPropertyChanged(); // Notify binding system of property change
+                   
                 }
             }
         }
