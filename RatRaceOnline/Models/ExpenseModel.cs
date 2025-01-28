@@ -13,14 +13,7 @@
 
         //After MVP... i will add sectors... human biologic , socio and pschologic needs , and wants based things ...
         public string RDrelatedAssetGUID { get; set; }
-
-
-
-
-
-
-
-
+        public bool IsRDassetsExpense { get; internal set; }
     }
 }
 

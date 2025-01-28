@@ -269,6 +269,7 @@ namespace RatRace3.ViewModel
         double totalDebtSum;
         double totalNetworth;
         double totalCashFlowSum;
+        Random rand = new Random();
         public void LoadPlayerData(Models.PlayerModel playerModel)
         {
          
@@ -569,7 +570,7 @@ namespace RatRace3.ViewModel
              }
 
             };
-            Random rand = new Random();
+           
             int newsPayperRandomseed = rand.Next(0, 4);
             //Selecting The News payper for this turn...
             CurrentNewsPaperViewModel.CurrentNewsPaperModel = CurrentNewsPaperViewModel.NewsPaperModels[newsPayperRandomseed];// [0-4] of 4 index
@@ -776,13 +777,7 @@ namespace RatRace3.ViewModel
             }
         }
 
-        void updateStatmentsdataFromPlayerObject()
-        {
-            //up
-
-            LoadPlayerData(Player);
-
-        }
+        
 
 
 
@@ -844,8 +839,7 @@ namespace RatRace3.ViewModel
                 await Shell.Current.DisplayAlert(SelectedLiability.LiabilityName.ToString(), "Debt Payments successful!!", "Cool");
             }
 
-            //     LoadPlayerData(Player);// for updating Gui from data 
-            updateStatmentsdataFromPlayerObject();
+            LoadPlayerData(Player);
         }
 
         void NextTurn()
@@ -866,9 +860,12 @@ namespace RatRace3.ViewModel
                     CurrentMonth = (Player.CurrentMonth + " / " + Player.MaximumMonth).ToString();
 
                     //Bring Random NewsPaper: //TODO.. improvemnts...
-                    BringRandomNewsPaper();
+                   // BringRandomNewsPaper();
 
                     IsIncomeCollected = false;//for new turn...
+                    updateRDassetsValue();
+                  
+
 
                     //Checking Game Goals:
                     reCalcluteGameGoals();
@@ -881,9 +878,37 @@ namespace RatRace3.ViewModel
                 }
             }
         }
+        void updateRDassetsValue()
+        {
+            //Recursive Deposit settings: 
+            //1:Find all Recursive Deposit Asset and growth each by i'ts Defult Interest DONE...
+            //2:find Each related Expance by RDrelatedAssetGUID and sum expance value to the Asset... DONE
+            //3:if asset.Age was 12 mounth widraw the asset to balance and delete the realated expances..
+            foreach(var recursiveAsset in Player.Assets.FindAll(x=>x.IsRecursiveDepositRD && x.IsBankDeposit))
+            {
+                recursiveAsset.GrowthBy(recursiveAsset.IntrestRate);
+                var expance =Player.Expenses.Find(y => y.RDrelatedAssetGUID == recursiveAsset.AssetRelatedExpanceGUID);
+                if(expance!=null)
+                recursiveAsset.AssetValue += expance.Amount;
+
+                if(recursiveAsset.AssetOwnedMonth + 12 <= Player.CurrentMonth)
+                {
+                    //Withdraw it ...
+                     Player.Balance+= recursiveAsset.AssetValue;
+                     Player.Expenses.Remove(expance);
+                     Player.Assets.Remove(recursiveAsset);
+                }
+            }
+            LoadPlayerData(Player);//for updating GUI...
+            // Expence Should be deleleted after 12 month !!! OK
+            // Expence amount should be added to the Asset every month !... OK
+            // How should we calclute Quaterly ? yearly ? monthly ? or what ?!... for now Mounthly ... OK..
+
+        }
+
         void BringRandomNewsPaper()
         {
-            int seed = new Random().Next(0, 4);
+            int seed = rand.Next(0, 4);
         
             CurrentNewsPaperViewModel.CurrentNewsPaperModel = CurrentNewsPaperViewModel.NewsPaperModels[seed];
         }

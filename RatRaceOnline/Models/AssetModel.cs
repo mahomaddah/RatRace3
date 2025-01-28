@@ -14,7 +14,7 @@ namespace RatRace3.Models
         /// <summary>
         /// Good For RD if + means growth - means Discount rate Automaticlly can grow every turn by void growth() method above...
         /// </summary>
-        public double GrowthorDiscountRate { get; set; }
+      //  public double GrowthorDiscountRate { get; set; }
         public string AssetType { get; set; }
         public int AssetModelID { get; set; }
         /// <summary>
@@ -37,7 +37,7 @@ namespace RatRace3.Models
         /// <summary>
         /// AssetIncomeSourseRelatingGUID is the Passive income that asset crate on income list ... like bank deposit deposit and Mountlhy incomes...
         /// if (FD or RD,..)  ... Asset deleted income sourse should be also deleted.. 
-        /// AssetIncomeSourseRelatingGUID = 0; // in case of passive asset that not gereate value by time like gold...
+        /// AssetIncomeSourseRelatingGUID = 0; // in case of passive asset that not gereate value by time like gold... 
         /// </summary>
         public string AssetIncomeSourseRelatingGUID { get; set; }
 
@@ -45,6 +45,15 @@ namespace RatRace3.Models
         /// //if i'ts a Fixed deposit at bank or RD or mutual fund or even SPX maybe ... (Note :i't ANNUAL ) ...
         /// </summary>
         public double IntrestRate { get; set; }//if i'ts a Fixed deposit at bank or RD or mutual fund or even SPX maybe ...
+
+        /// <summary>
+        /// for RD we have expancesObject which will be deleted after maturity and it value added to asset every month...
+        /// </summary>
+        public string AssetRelatedExpanceGUID { get; internal set; }
+       /// <summary>
+       /// Player.Month when purchesed the asset...
+       /// </summary>
+        public int AssetOwnedMonth { get; internal set; }
 
         public void GrowthBy(double GrouthOrDiscountRate)
         {
@@ -56,7 +65,8 @@ namespace RatRace3.Models
             IsRecursiveDepositRD = false;
             AssetType = AssetTypes.Stock.ToString();
             AssetIncomeSourseRelatingGUID = "0"; // in case of passive asset that not gereate value by time like gold...
-            GrowthorDiscountRate = 1;//by defult.. CHange for RD and other automatic growthing values...
+            IntrestRate = 1;//by defult.. CHange for RD and other automatic growthing values...
+            AssetOwnedMonth = 0;
         }
 
        

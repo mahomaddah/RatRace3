@@ -153,15 +153,23 @@ public partial class GameView : ContentPage
             var assetRelatedIncomeSource = GameViewModel.Player.IncomeSources.Find(y => y.AssetIncomeSourseRelatingGUID.ToString() == SelectedBankAsset.AssetIncomeSourseRelatingGUID.ToString());
             if (assetRelatedIncomeSource != null) {
 
-                GameViewModel.Player.Balance += SelectedBankAsset.AssetValue;//withdared..
-
                 GameViewModel.Player.IncomeSources.Remove(assetRelatedIncomeSource);
-                GameViewModel.Player.Assets.Remove(SelectedBankAsset);
 
-
-                GameViewModel.LoadPlayerData(GameViewModel.Player);
 
             }
+            var assetRelatedExpanceObjedRD = GameViewModel.Player.Expenses.Find(y => y.RDrelatedAssetGUID == SelectedBankAsset.AssetRelatedExpanceGUID);
+            if(assetRelatedExpanceObjedRD != null)
+            {
+                GameViewModel.Player.Expenses.Remove(assetRelatedExpanceObjedRD);
+            }
+
+            GameViewModel.Player.Balance += SelectedBankAsset.AssetValue;//withdared..
+
+            GameViewModel.Player.Assets.Remove(SelectedBankAsset);
+
+
+            GameViewModel.LoadPlayerData(GameViewModel.Player);
+
         }
     }
 
@@ -187,47 +195,45 @@ public partial class GameView : ContentPage
                 var RDrelatedAssetGUID = Guid.NewGuid().ToString();
 
                 // Calculate monthly passive income for the RD
-                double passiveIncomeAmount = Math.Round((deposit * IntrestRate / 12), 2);
+               // double passiveIncomeAmount = Math.Round((deposit * IntrestRate / 12), 2);
 
-                // Create and add the Income Source for RD
-                var rdIncomeSource = new IncomeSourceModel
-                {
-                    AssetIncomeSourseRelatingGUID = RDrelatedAssetGUID,
-                    Amount = passiveIncomeAmount,
-                    Name = $"RD ${deposit.ToString("C2", USD)} @{IntrestRate.ToString("p")} Interest | Passive Income"
-                };
+                //// Create and add the Income Source for RD
+                //var rdIncomeSource = new IncomeSourceModel
+                //{
+                //    AssetIncomeSourseRelatingGUID = RDrelatedAssetGUID,
+                //    Amount = passiveIncomeAmount,
+                //    Name = $"RD ${deposit.ToString("C2", USD)} @{IntrestRate.ToString("p")} Interest | Passive Income"
+                //};
 
                 // Create and add the Expense Model for monthly RD contribution
                 var rdExpense = new ExpenseModel
                 {
                     Amount = deposit,
-                    RDrelatedAssetGUID = RDrelatedAssetGUID,
-                    Name = $"RD Monthly Contribution: {deposit.ToString("C2", USD)}"
-                }; 
-                
-                //ISSUES:
-                //Expence SHould be deleleted after 12 month !!!
-                // Expence amounth should be added to the Asset every month !...
-                //How should we calclute Quaterly ? yearly ? monthly ? or what ?!...
+                    RDrelatedAssetGUID = RDrelatedAssetGUID, //for RD
+                    IsRDassetsExpense=true, //for RD
+                    Name = $"RD Monthly Contribution"+ " Maturity:1-Year"
+                };
+
+               
+                //test values first with  https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator....
 
                 // Create and add the RD Asset
                 GameViewModel.Player.Assets.Add(new AssetModel
                 {
-                    AssetIncomeSourseRelatingGUID = RDrelatedAssetGUID,
-                    AssetName = $"RD ${deposit.ToString("C2", USD)} @{IntrestRate.ToString("p")} for 12 Months",
-                    AssetValue = deposit,
+                    AssetRelatedExpanceGUID = RDrelatedAssetGUID,
+                    AssetName = $"RD {deposit.ToString("C2", USD)} Monthly @{IntrestRate.ToString("p")} for 12 Months",
+                    AssetValue = 0,
                     AssetType = AssetTypes.RecursiveDeposit.ToString(),
                     IntrestRate = IntrestRate,
                     IsBankDeposit = true,
                     IsRecursiveDepositRD = true,
-                    PassiveIncome = passiveIncomeAmount,
-                    GrowthorDiscountRate =IntrestRate
-                  
+                    PassiveIncome = 0,
+                    AssetOwnedMonth = GameViewModel.Player.CurrentMonth,
                     
                 });
 
                 // Add to the player's income sources and expenses
-                GameViewModel.Player.IncomeSources.Add(rdIncomeSource);
+                //GameViewModel.Player.IncomeSources.Add(rdIncomeSource);
                 GameViewModel.Player.Expenses.Add(rdExpense);
 
                 // Update the UI and close the radial menu
@@ -236,7 +242,7 @@ public partial class GameView : ContentPage
             }
             else
             {
-                await DisplayAlert("Bank Alert", $"Invalid amount entered! You currently have only {GameViewModel.Player.NetTotalIncome.ToString("C2", USD)} in free cash flow. Please enter a valid amount within your budget.", "Try Again");
+                await DisplayAlert("Bank Alert", $"Invalid amount entered! You currently have only {GameViewModel.Player.NetTotalIncome.ToString("C2", USD)} in free cash flow. Please enter a valid amount within your budget.or increase you FCF at first.", "Let's Try Again");
             }
         }
         catch

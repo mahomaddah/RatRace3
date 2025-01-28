@@ -70,11 +70,11 @@ namespace RatRace3
                     new LiabilityModel{LiabilityName="Motorcycle Camping Gear Debt", TotalAmount=1200.00, MonthsRemaining = 12, InterestRate=0.01, LiabilityModelID = 3 , ExpenseModelID = 3}
                 },
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 2800.00  } ,
-                                                             new IncomeSourceModel { Name = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank" ,Amount =53.56  ,AssetIncomeSourseRelatingGUID = 2.ToString() } },
+                                                             new IncomeSourceModel { Name = "FD $5020.63 @12.12% Welcome Interest Rate | JP Morgan Bank" ,Amount =53.56  ,AssetIncomeSourseRelatingGUID = 2.ToString() } },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 1300.00, IntrestRate= 0.0412, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 53.56, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = 2.ToString()},
-                    new AssetModel {AssetName = "MSFT P&L 28% @ $128.12", AssetType = AssetTypes.Stock.ToString(), AssetValue = 200.00, IntrestRate= 0.10, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2}
+                    new AssetModel {AssetName = "FD $5020.63 @12.12% One time Welcome Interest Rate | JP Morgan Bank", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 1300.00, IntrestRate= 0.1212, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 53.56, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = 2.ToString()},
+                    new AssetModel {AssetName = "MSFT P&L 28% @ $128.12", AssetType = AssetTypes.Stock.ToString(), AssetValue = 200.00, IntrestRate= 0.25, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2}
                 },
                 Expenses = new List<ExpenseModel>
                 {
