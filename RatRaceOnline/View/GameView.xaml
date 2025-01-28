@@ -352,7 +352,7 @@
                                         </expander:SfExpander.Header>
                                         <expander:SfExpander.Content>
                                             <Grid Padding="8,8,8,8" >
-                                                <sflistview:SfListView   Grid.ColumnSpan="2"  ItemsSource="{Binding AssetsListViewItemModel}" x:Name="AssetLV" Margin="0,0,1,0"  IsStickyFooter="True" ItemSize="50"  SelectionBackground="#993CB371">
+                                                <sflistview:SfListView   Grid.ColumnSpan="2" ItemDoubleTapped="AssetLV_ItemDoubleTapped" ItemsSource="{Binding AssetsListViewItemModel}" x:Name="AssetLV" Margin="0,0,1,0"  IsStickyFooter="True" ItemSize="50"  SelectionBackground="#993CB371">
                                                     <sflistview:SfListView.FooterTemplate>
                                                         <DataTemplate >
 
@@ -684,22 +684,22 @@
                             <radialMenu:SfRadialMenu.Items>
                                 <radialMenu:SfRadialMenuItem x:Name="FixedDeposit" ItemTapped="FixedDeposit_ItemTapped"  ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='14', Default='25' }" BackgroundColor="#9072C9" Text="FD" Image="cash_fast.png"
                                     FontAttributes="Bold" ToolTipProperties.Text="Fixed Deposit" />
-                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" Text="RD" Image="cash_recursive_deposit.png"
+                                <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9" ItemTapped="RecursiveDepositCreate_ItemTapped" x:Name="RecursiveDepositCreate" Text="RD" Image="cash_recursive_deposit.png"
                                         ItemWidth="{OnPlatform Android='35' , Default='55'}" ToolTipProperties.Text="Recursive deposit" TextColor="#E3AAD6" FontSize="{OnPlatform Android='17', Default='25' }"/>
-                                <radialMenu:SfRadialMenuItem    FontAttributes="Bold" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='7', Default='8' }" BackgroundColor="#9072C9" Text="S&amp;P500 index (SPY ETF)" ToolTipProperties.Text="S&amp;P500 index (SPY ETF)" Image="cash_etf_icon.png"
+                                <radialMenu:SfRadialMenuItem    FontAttributes="Bold" x:Name="indexSPYpositionOrder" ItemTapped="indexSPYpositionOrder_ItemTapped" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='7', Default='8' }" BackgroundColor="#9072C9" Text="S&amp;P500 index (SPY ETF)" ToolTipProperties.Text="S&amp;P500 index (SPY ETF)" Image="cash_etf_icon.png"
                                          FontAutoScalingEnabled="True"/>
                                 <radialMenu:SfRadialMenuItem  ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='12', Default='14' }"  FontAttributes="Bold" BackgroundColor="#9072C9" Text="Bonds" Image="cash_bond_icon.png"
                                     FontAutoScalingEnabled="True">
                                     <radialMenu:SfRadialMenuItem.Items>
-                                        <radialMenu:SfRadialMenuItem   FontAttributes="Bold" ToolTipProperties.Text="Tbond" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='10', Default='17' }" FontAutoScalingEnabled="True" Text="Tbond" BackgroundColor="#9072C9" Image="cash_bond_icon.png"  />
-                                        <radialMenu:SfRadialMenuItem   FontAttributes="Bold" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='8', Default='12' }" ToolTipProperties.Text="Coporate Bonds" Text="Coporate Bonds" BackgroundColor="#9072C9" Image="cash_coporate_bond.png" />
+                                        <radialMenu:SfRadialMenuItem   FontAttributes="Bold" ToolTipProperties.Text="Tbond" x:Name="TbondOrderBtn" ItemTapped="TbondOrderBtn_ItemTapped" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='10', Default='17' }" FontAutoScalingEnabled="True" Text="Tbond" BackgroundColor="#9072C9" Image="cash_bond_icon.png"  />
+                                        <radialMenu:SfRadialMenuItem   FontAttributes="Bold" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" x:Name="CoporateBondsOrderBtn" ItemTapped="CoporateBondsOrderBtn_ItemTapped" FontSize="{OnPlatform Android='8', Default='12' }" ToolTipProperties.Text="Coporate Bonds" Text="Coporate Bonds" BackgroundColor="#9072C9" Image="cash_coporate_bond.png" />
 
-                                        <radialMenu:SfRadialMenuItem  Text="Long term Bonds"   FontAttributes="Bold" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6"  FontSize="{OnPlatform Android='9', Default='12' }" ToolTipProperties.Text="Long term Bonds" BackgroundColor="#9072C9" FontAutoScalingEnabled="True" Image="cash_long_term_bond.png" />
+                                        <radialMenu:SfRadialMenuItem  Text="Long term Bonds" x:Name="LongTermBondsOrderBtn" ItemTapped="LongTermBondsOrderBtn_ItemTapped"  FontAttributes="Bold" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6"  FontSize="{OnPlatform Android='9', Default='12' }" ToolTipProperties.Text="Long term Bonds" BackgroundColor="#9072C9" FontAutoScalingEnabled="True" Image="cash_long_term_bond.png" />
 
                                     </radialMenu:SfRadialMenuItem.Items>
                                 </radialMenu:SfRadialMenuItem>
                                 <radialMenu:SfRadialMenuItem BackgroundColor="#9072C9"   FontAttributes="Bold"  ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='10', Default='12' }" Text="Mutual fund" Image="cash_central_bank.png"
-                                       ToolTipProperties.Text="Mutual Fund"             />
+                                       ToolTipProperties.Text="Mutual Fund" x:Name="MutualFundBtn" ItemTapped="MutualFundBtn_ItemTapped"/>
 
                             </radialMenu:SfRadialMenu.Items>
                         </radialMenu:SfRadialMenu>

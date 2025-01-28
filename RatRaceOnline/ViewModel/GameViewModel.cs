@@ -271,6 +271,7 @@ namespace RatRace3.ViewModel
         double totalCashFlowSum;
         public void LoadPlayerData(Models.PlayerModel playerModel)
         {
+         
             //We can change For MVP news payper to Quaterlly (mevsimde 1 (3 ayda 1 )) ... instead of monthly !...
             CurrentNewsPaperViewModel = new NewsPaperViewModel
             {
@@ -568,10 +569,11 @@ namespace RatRace3.ViewModel
              }
 
             };
-
+            Random rand = new Random();
+            int newsPayperRandomseed = rand.Next(0, 4);
             //Selecting The News payper for this turn...
-            CurrentNewsPaperViewModel.CurrentNewsPaperModel = CurrentNewsPaperViewModel.NewsPaperModels[4];// [0-4] of 4 index
-
+            CurrentNewsPaperViewModel.CurrentNewsPaperModel = CurrentNewsPaperViewModel.NewsPaperModels[newsPayperRandomseed];// [0-4] of 4 index
+         //   CurrentNewsPaperViewModel.CurrentNewsPaperModel.ImageSource = CurrentNewsPaperViewModel.NewsPaperModels{ }
            // BringRandomNewsPaper();//TODO : NOT WORKING Well ... 
 
             //   CurrentNewsPaperViewModel.CurrentNewsPaperModel.EconomicDataSetterC80(0.037 , 0.04232 , 0.3167); //for 2.7% CPI , 4.232% Tbond, 31.67% SPY.Yr.
@@ -593,11 +595,10 @@ namespace RatRace3.ViewModel
             totalNetworth = 0;
             Player = playerModel;
 
-            IsIncomeCollected = false;
 
             ////Use Player Model Instead of Hard Coded VIEWMODEL DATA.... 
 
-            CurrentBankDepositAmount = (0).ToString("C2", USD_Formant);
+            CurrentBankDepositAmount = (0).ToString("C2", USD_Formant);//Set to 0 again on every update...
             double balance = playerModel.Balance;
             CurrentBalance = (balance).ToString("C2", USD_Formant);
 
@@ -686,7 +687,7 @@ namespace RatRace3.ViewModel
             //TotalCashFlow = (totalCashFlowSum).ToString("C2", USD_Formant);
             //Player.NetTotalIncome = totalCashFlowSum;
 
-
+            reCalcluteGameGoals();
 
 
         }
@@ -698,7 +699,7 @@ namespace RatRace3.ViewModel
         }
 
         /// <summary>
-        /// game Brock when calling this line so i removed the future
+        /// game Brock when calling this line so i removed the featre
         /// </summary>
         void updatePlayeBlanceAsAssetObject()
         {
@@ -875,6 +876,7 @@ namespace RatRace3.ViewModel
                 }
                 else //finishing mounth... Checking game goals...
                 {
+                    reCalcluteGameGoals();
                     LastMonthCame(); // maybe don't need ...
                 }
             }
@@ -882,6 +884,7 @@ namespace RatRace3.ViewModel
         void BringRandomNewsPaper()
         {
             int seed = new Random().Next(0, 4);
+        
             CurrentNewsPaperViewModel.CurrentNewsPaperModel = CurrentNewsPaperViewModel.NewsPaperModels[seed];
         }
 
@@ -988,11 +991,7 @@ namespace RatRace3.ViewModel
             IncomeListViewItemModel = new ObservableCollection<ListViewItemModel>();
 
 
-
-
-
-
-
+            IsIncomeCollected = false;
 
 
         }

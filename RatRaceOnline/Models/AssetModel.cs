@@ -9,6 +9,12 @@ namespace RatRace3.Models
 {
     public class AssetModel
     {
+
+
+        /// <summary>
+        /// Good For RD if + means growth - means Discount rate Automaticlly can grow every turn by void growth() method above...
+        /// </summary>
+        public double GrowthorDiscountRate { get; set; }
         public string AssetType { get; set; }
         public int AssetModelID { get; set; }
         /// <summary>
@@ -42,7 +48,7 @@ namespace RatRace3.Models
 
         public void GrowthBy(double GrouthOrDiscountRate)
         {
-            this.AssetValue += GrouthOrDiscountRate;
+            this.AssetValue *=(1+GrouthOrDiscountRate);
         }
         public AssetModel()
         {
@@ -50,6 +56,7 @@ namespace RatRace3.Models
             IsRecursiveDepositRD = false;
             AssetType = AssetTypes.Stock.ToString();
             AssetIncomeSourseRelatingGUID = "0"; // in case of passive asset that not gereate value by time like gold...
+            GrowthorDiscountRate = 1;//by defult.. CHange for RD and other automatic growthing values...
         }
 
        

@@ -14,11 +14,7 @@ public partial class GameView : ContentPage
     public RotatorViewModel IpoCompaniesVM { get; set; }
     private void GameStarted(object sender, EventArgs e)
     {
-        //GameViewModel = new GameViewModel();
-        //BindingContext = GameViewModel;
-        //IpoCompaniesVM = new RotatorViewModel();
-        //ListViewIncomeSourses.ItemsSource = GameViewModel.Player.IncomeSources;
-        //CompanyInvestRoter.ItemsSource = IpoCompaniesVM.RotatorItems;
+     
 
     }
 
@@ -34,10 +30,13 @@ public partial class GameView : ContentPage
         if (appShell.CurrentLevelModel.IsNewGameStarted)
         {
             //come for new game ... 
+            appShell.getAnewGameData();//Get First Day data...
+         
         }
         else
         {
             //come for Load last game
+          
         }
 
         GameViewModel.LoadPlayerData(appShell.CurrentLevelModel.Players.First());
@@ -89,19 +88,6 @@ public partial class GameView : ContentPage
         await Shell.Current.GoToAsync("StoryDetailView");
     }
 
-    //private async void GameNextTurnBtn_Clicked(object sender, EventArgs e)
-    //{
-        
-    //}
-
-    //private async void CollectIncomeBTN_Clicked(object sender, EventArgs e)
-    //{
-    //  //  await DisplayAlert("TotalIncome...", "$1,200.00 Total TotalIncome Collected!","Amazing! $$$");
-    //    //TODO: add player objects ... += 1200 to player.blance....
-    //   // GameViewModel.CurrentBalance += 1200; // better to bind to viewmoddel ... 
-    //   // CollectIncomeBtn.IsEnabled = false; // beter to bind to viewmodel
-
-    //}
 
     private async void CompanyInvestRoter_ItemTapped(object sender, EventArgs e)
     {
@@ -124,9 +110,11 @@ public partial class GameView : ContentPage
         await Shell.Current.GoToAsync("MarketPage");
     }
 
+    double IntrestRate = 0.041;//simdilik yuzde 4.1% olsun ilerie belki gazete deki TBon ile baglariz.....
+
     private async void FixedDeposit_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
     {
-        double IntrestRate = 0.041;//simdilik yuzde 4.1% olsun ilerie belki gazete deki TBon ile baglariz.....
+    
 
         try {
 
@@ -178,18 +166,128 @@ public partial class GameView : ContentPage
     }
 
     private async void DebtDetailViewTapped(object sender, Syncfusion.Maui.ListView.ItemDoubleTappedEventArgs e)
-    {
-       // DebtPopup.BindingContext = new LiabilityModel { LiabilityName = "Student Loan", TotalAmount = 5000.00, MonthsRemaining = 24, InterestRate = 0.05, LiabilityModelID = 1 };
-      
-    //   await DisplayAlert("Debt: "+((RatRace3.ViewModel.ListViewItemModel)e.DataItem).ItemText,"Debt Details...", "Pay Debts");
-   //      GameViewModel.DebtDetailViewTapped((RatRace3.ViewModel.ListViewItemModel)e.DataItem);
-        //var appShell = (AppShell)Shell.Current;
-        //var SelectedObject = appShell.CurrentLevelModel.Players.First();
-
+    { 
         var liabilityModel = GameViewModel.Player.Liabilities.Find(x => x.LiabilityName.Contains(((ListViewItemModel)e.DataItem).ItemText));
         GameViewModel.SelectedLiability = liabilityModel;
         DebtPopup.Show();
     }
 
+    private async void RecursiveDepositCreate_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
+    {
+        var USD = CultureInfo.CreateSpecificCulture("en-US");
+        try
+        {
+            bool isValid = double.TryParse(GameViewModel.CurrentBankDepositAmount, out double deposit);
+
+            if (isValid && deposit > 0.009 && GameViewModel.Player.NetTotalIncome >= deposit)
+            {
+               // GameViewModel.Player.Balance -= deposit;
+
+                // Generate unique GUID to link RD asset, income, and expense
+                var RDrelatedAssetGUID = Guid.NewGuid().ToString();
+
+                // Calculate monthly passive income for the RD
+                double passiveIncomeAmount = Math.Round((deposit * IntrestRate / 12), 2);
+
+                // Create and add the Income Source for RD
+                var rdIncomeSource = new IncomeSourceModel
+                {
+                    AssetIncomeSourseRelatingGUID = RDrelatedAssetGUID,
+                    Amount = passiveIncomeAmount,
+                    Name = $"RD ${deposit.ToString("C2", USD)} @{IntrestRate.ToString("p")} Interest | Passive Income"
+                };
+
+                // Create and add the Expense Model for monthly RD contribution
+                var rdExpense = new ExpenseModel
+                {
+                    Amount = deposit,
+                    RDrelatedAssetGUID = RDrelatedAssetGUID,
+                    Name = $"RD Monthly Contribution: {deposit.ToString("C2", USD)}"
+                }; 
+                
+                //ISSUES:
+                //Expence SHould be deleleted after 12 month !!!
+                // Expence amounth should be added to the Asset every month !...
+                //How should we calclute Quaterly ? yearly ? monthly ? or what ?!...
+
+                // Create and add the RD Asset
+                GameViewModel.Player.Assets.Add(new AssetModel
+                {
+                    AssetIncomeSourseRelatingGUID = RDrelatedAssetGUID,
+                    AssetName = $"RD ${deposit.ToString("C2", USD)} @{IntrestRate.ToString("p")} for 12 Months",
+                    AssetValue = deposit,
+                    AssetType = AssetTypes.RecursiveDeposit.ToString(),
+                    IntrestRate = IntrestRate,
+                    IsBankDeposit = true,
+                    IsRecursiveDepositRD = true,
+                    PassiveIncome = passiveIncomeAmount,
+                    GrowthorDiscountRate =IntrestRate
+                  
+                    
+                });
+
+                // Add to the player's income sources and expenses
+                GameViewModel.Player.IncomeSources.Add(rdIncomeSource);
+                GameViewModel.Player.Expenses.Add(rdExpense);
+
+                // Update the UI and close the radial menu
+                GameViewModel.LoadPlayerData(GameViewModel.Player);
+                BankRadialMenu.IsOpen = false;
+            }
+            else
+            {
+                await DisplayAlert("Bank Alert", $"Invalid amount entered! You currently have only {GameViewModel.Player.NetTotalIncome.ToString("C2", USD)} in free cash flow. Please enter a valid amount within your budget.", "Try Again");
+            }
+        }
+        catch
+        {
+            await DisplayAlert("Bank Alert", "An issue occurred while creating the new RD position. Please try again.", "OK");
+        }
+    }
+
+    private void indexSPYpositionOrder_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
+    {
+
+    }
+
+    private void TbondOrderBtn_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
+    {
+
+    }
+
+    private void CoporateBondsOrderBtn_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
+    {
+
+    }
+
+    private void LongTermBondsOrderBtn_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
+    {
+
+    }
+
+    private void MutualFundBtn_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
+    {
+
+    }
+
+    private void AssetLV_ItemDoubleTapped(object sender, Syncfusion.Maui.ListView.ItemDoubleTappedEventArgs e)
+    {
+        var assetModel = GameViewModel.Player.Assets.Find(x => x.AssetName.Contains(((ListViewItemModel)e.DataItem).ItemText));
+
+            if(assetModel != null)
+            if(assetModel.IsBankDeposit || assetModel.AssetType.Contains(AssetTypes.FixedDeposit.ToString()))
+            {
+                GameViewModel.VisibleIndex = 2;//for bank....
+            }
+            else if(assetModel.AssetType == AssetTypes.Stock.ToString())
+            {   //Can bring // AssetModel...
+                GameViewModel.VisibleIndex = 3;//for market....
+            }
+            else if (assetModel.AssetType == AssetTypes.RealEstate.ToString())
+            {
+                GameViewModel.VisibleIndex = 5;//for bank....
+            }
+        
+    }
 }
 

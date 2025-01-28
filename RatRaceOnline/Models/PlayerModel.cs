@@ -8,7 +8,7 @@ namespace RatRace3.Models
         public event PropertyChangedEventHandler PropertyChanged;
         public int PlayerModelID { get; set; }
         public double TotalExpences { get; set; }
-      //  public double Balance { get; set; }
+    
 
         private double balance;
 
@@ -20,7 +20,6 @@ namespace RatRace3.Models
                 OnPropertyChanged();
             }
         }
-
         /// <summary>
         /// NetTotalIncome = player Cashflow...
         /// </summary>
