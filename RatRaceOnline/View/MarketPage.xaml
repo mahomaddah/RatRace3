@@ -60,12 +60,16 @@
         <Image ToolTipProperties.Text="Company Details..." x:Name="StockIcon" Margin="1" Source="googl.png" HorizontalOptions="Center" WidthRequest="90" HeightRequest="90"/>
         <Label x:Name="StockSymbol" Margin="0,5,0,0" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" >GOOGL</Label>
        
-        <HorizontalStackLayout Margin="5" HorizontalOptions="Center" VerticalOptions="Center">
+        <HorizontalStackLayout Margin="1" HorizontalOptions="Center" VerticalOptions="Center">
             <Label  Text="Current Stock Price:"></Label>
             <Label Margin="5,0,0,0" x:Name="StockPriceLB" Text="53.44"></Label>
         </HorizontalStackLayout>
-        
-   
+        <HorizontalStackLayout Margin="1" HorizontalOptions="Center" VerticalOptions="Center">
+            <Label  Text="Position Value Owned:"></Label>
+            <Label x:Name="PostionValueOwnedLB" Margin="5,0,0,0" Text="53.44"></Label>
+        </HorizontalStackLayout>
+
+
         <Label Margin="7" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Body" Text="Use the slider to select the number of shares you want to trade."></Label>
         
         <gauge:SfLinearGauge EnableAxisAnimation="True" AnimationDuration="500" Interval="5" TickPosition="Outside" LabelPosition="Outside" Background="Transparent"  ShowLabels="True" UseRangeColorForAxis="True" Margin="1" WidthRequest="430">
@@ -108,8 +112,9 @@
         </HorizontalStackLayout>
 
         <HorizontalStackLayout Margin="4" HorizontalOptions="Center" VerticalOptions="Center">
-            <Button Margin="0,0,10,0" Text="Buy"></Button>
-            <Button Text="Sell"></Button>
+            <Button Margin="0,0,10,0" Text="Buy" Clicked="BuyMoreAsset_Clicked"
+                    x:Name="BuyMoreAsset"></Button>
+            <Button  x:Name="SellAssetPosition" Clicked="SellAssetPosition_Clicked" Text="Sell"></Button>
         </HorizontalStackLayout>
       
 

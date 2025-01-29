@@ -24,11 +24,16 @@ namespace RatRace3.Models
         public string AssetName { get; set; }
         public double AssetValue { get; set; }
         /// <summary>
-        /// if the AssetType Is Stock , That stock's Company Model's ID ...
+        /// if the AssetType Is Stock , That stock's Company Model's Primery key which is SYMBOL of company ... 
         /// </summary>
-        public int StockCompanyID { get; set; }
-        /// <summary>
-        /// //false by 
+        public string StockCompanySymbol { get; set; }
+
+      /// <summary>
+      /// Used for P&L EVEY TIME YOU Buy StockAverageCost will be averaged...
+      /// </summary>
+        public double StockAverageBuyCost { get; set; }
+        public double StockQuantity { get; set; }
+
         public bool IsBankDeposit { get; set; }//false by defult...
         /// <summary>
         /// //false by defult...
@@ -67,6 +72,7 @@ namespace RatRace3.Models
             AssetIncomeSourseRelatingGUID = "0"; // in case of passive asset that not gereate value by time like gold...
             IntrestRate = 1;//by defult.. CHange for RD and other automatic growthing values...
             AssetOwnedMonth = 0;
+            StockAverageBuyCost = 0;
         }
 
        
@@ -79,7 +85,7 @@ namespace RatRace3.Models
         Bond,
         Stock,
         RealEstate,
-        MutualFund
-
+        MutualFund,
+        Other
     }
 }

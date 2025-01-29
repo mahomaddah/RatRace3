@@ -11,7 +11,12 @@ namespace RatRace3
 
         public LevelModel CurrentLevelModel { get; set; }
       
-        public Company CurrentCompany { get; set; }
+        public Company CurrentCompany { get; set; }//For Stock Market...
+        /// <summary>
+        /// For stock market : CurrentCompanyAsset Contain Quantity of stock ,Avreage Purchesed Price and etc... example:StockCompanySymbol = "MSFT",StockQuantity = 1.1,StockAverageBuyCost =100.23, AssetValue = 200.00, 
+        /// </summary>
+        public AssetModel CurrentCompanyAsset { get; set; }
+
         public ObservableCollection<Company> IPOcompanies { get; set; }
         public SelectLevelViewModel SelectLevelViewModel { get; set; }
         public UIsettingsModel UIsettingsModel { get; set; }
@@ -26,7 +31,8 @@ namespace RatRace3
             InitializeComponent();
             getAnewGameData();
 
-            
+
+
             if (UIsettingsModel.IsMusicPlaying)
             {
                 PlayBackgroundMusic();
@@ -74,7 +80,7 @@ namespace RatRace3
                 Assets = new List<AssetModel>
                 {
                     new AssetModel {AssetName = "FD $5020.63 @12.12% One time Welcome Interest Rate | JP Morgan Bank", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 1300.00, IntrestRate= 0.1212, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 53.56, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = 2.ToString()},
-                    new AssetModel {AssetName = "MSFT P&L 28% @ $128.12", AssetType = AssetTypes.Stock.ToString(), AssetValue = 200.00, IntrestRate= 0.25, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2}
+                    new AssetModel {AssetName = "MSFT P&L 28% @ $128.12",  AssetType = AssetTypes.Stock.ToString(),StockCompanySymbol = "MSFT",StockQuantity = 1.1,StockAverageBuyCost =100.23, AssetValue = 200.00, IntrestRate= 0.25, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2}
                 },
                 Expenses = new List<ExpenseModel>
                 {
@@ -114,7 +120,7 @@ namespace RatRace3
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 900.00 } },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "GOOGL Stock", AssetType = AssetTypes.Stock.ToString(), AssetValue = 1500.00, IntrestRate= 0.05, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 7.50, AssetModelID = 1}
+                    new AssetModel {AssetName = "GOOGL Stock", AssetType = AssetTypes.Stock.ToString(), StockCompanySymbol = "GOOGL",StockQuantity=2.12,StockAverageBuyCost=0,AssetValue = 1500.00, IntrestRate= 0.05, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 7.50, AssetModelID = 1}
                 },
                 Expenses = new List<ExpenseModel>
                 {
@@ -225,7 +231,7 @@ namespace RatRace3
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Side Hustle", Amount = 1000.00 }, new IncomeSourceModel { Name = "Savings Interest", Amount = 200.00, AssetIncomeSourseRelatingGUID="2" } },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "Startup Equity", AssetType = AssetTypes.Stock.ToString(), AssetValue = 20000.00, IntrestRate= 0.01, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome =200.00, AssetModelID = 1 , AssetIncomeSourseRelatingGUID = "2"}
+                    new AssetModel {AssetName = "Startup Equity", AssetType = AssetTypes.Other.ToString(), AssetValue = 20000.00, IntrestRate= 0.01, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome =200.00, AssetModelID = 1 , AssetIncomeSourseRelatingGUID = "2"}
                 },
                 Expenses = new List<ExpenseModel>
                 {
@@ -257,12 +263,12 @@ namespace RatRace3
                 MaximumMonth = 36,
                 Liabilities = new List<LiabilityModel>
                 {
-                    new LiabilityModel{LiabilityName ="Shared Office Loan", TotalAmount = 15000.00, MonthsRemaining = 36, InterestRate = 0.08, LiabilityModelID = 1 ,ExpenseModelID =1}
+                    new LiabilityModel{LiabilityName ="Shared Office Loan", TotalAmount = 15000.00 , MonthsRemaining = 36, InterestRate = 0.08, LiabilityModelID = 1 ,ExpenseModelID =1}
                 },
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Team Project Revenue", Amount = 3000.00 ,AssetIncomeSourseRelatingGUID="1" } },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "Shared Project Assets", AssetType = AssetTypes.Stock.ToString(), AssetValue = 5000.00, IntrestRate= 0.00, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 0.00, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = "1"}
+                    new AssetModel {AssetName = "Shared Project Assets", AssetType = AssetTypes.Other.ToString(), AssetValue = 5000.00, IntrestRate= 0.00, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 0.00, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = "1"}
                 },
                 Expenses = new List<ExpenseModel>
                 {
@@ -297,7 +303,7 @@ namespace RatRace3
                     StockDetail = "Apple Inc. - Technology Company. Apple is a Technology and Consumer Electronics leader known for its flagship product, the iPhone."
                 },
                 new Company
-                {
+                {  
                     Symbol = "MSFT",
                     StockPrice = 439.33,
                     StockDetail = "Microsoft Corporation - Technology Company. Microsoft is a leader in software, cloud computing, and productivity tools."
@@ -341,10 +347,13 @@ namespace RatRace3
                 }
             };
 
+
             CurrentCompany = IPOcompanies.First();
+            CurrentCompanyAsset = new AssetModel { AssetName = "GOOG P&L 28% @ $128.12", AssetType = AssetTypes.Stock.ToString(), StockCompanySymbol = "GOOGL", StockQuantity = 0, StockAverageBuyCost = 100.23, AssetValue = 200.00, IntrestRate = 0.25, IsBankDeposit = false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2 };
+
 
             //Loading Data Method...
-            
+
             //    LoadDataFromLiteDB();
 
             CurrentLevelModel = SelectLevelViewModel.ImageCollection.FirstOrDefault();//TODO ... DELET ME 
@@ -394,7 +403,7 @@ namespace RatRace3
                 Assets = new List<AssetModel>
                 {
                     new AssetModel {AssetName = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 1300.00, IntrestRate= 0.0412, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 53.56, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = 2.ToString()},
-                    new AssetModel {AssetName = "MSFT P&L 28% @ $128.12", AssetType = AssetTypes.Stock.ToString(), AssetValue = 200.00, IntrestRate= 0.10, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2}
+                       new AssetModel {AssetName = "MSFT P&L 28% @ $128.12",  AssetType = AssetTypes.Stock.ToString(),StockCompanySymbol = "MSFT",StockQuantity = 1.1,StockAverageBuyCost =100.23, AssetValue = 200.00, IntrestRate= 0.25, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2}
                 },
                 Expenses = new List<ExpenseModel>
                 {
@@ -434,7 +443,7 @@ namespace RatRace3
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 900.00 } },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "GOOGL Stock", AssetType = AssetTypes.Stock.ToString(), AssetValue = 1500.00, IntrestRate= 0.05, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 7.50, AssetModelID = 1}
+                    new AssetModel {AssetName = "GOOGL Stock", AssetType = AssetTypes.Stock.ToString(),StockQuantity=2, StockAverageBuyCost = 101, StockCompanySymbol = "GOOGL" , AssetValue = 1500.00, IntrestRate= 0.05, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 7.50, AssetModelID = 1}
                 },
                 Expenses = new List<ExpenseModel>
                 {
@@ -545,7 +554,7 @@ namespace RatRace3
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Side Hustle", Amount = 1000.00 }, new IncomeSourceModel { Name = "Savings Interest", Amount = 200.00, AssetIncomeSourseRelatingGUID="2" } },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "Startup Equity", AssetType = AssetTypes.Stock.ToString(), AssetValue = 20000.00, IntrestRate= 0.01, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome =200.00, AssetModelID = 1 , AssetIncomeSourseRelatingGUID = "2"}
+                    new AssetModel {AssetName = "Startup Equity", AssetType = AssetTypes.Other.ToString(), AssetValue = 20000.00, IntrestRate= 0.01, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome =200.00, AssetModelID = 1 , AssetIncomeSourseRelatingGUID = "2"}
                 },
                 Expenses = new List<ExpenseModel>
                 {
@@ -582,7 +591,7 @@ namespace RatRace3
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Team Project Revenue", Amount = 3000.00 ,AssetIncomeSourseRelatingGUID="1" } },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "Shared Project Assets", AssetType = AssetTypes.Stock.ToString(), AssetValue = 5000.00, IntrestRate= 0.00, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 0.00, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = "1"}
+                    new AssetModel {AssetName = "Shared Project Assets", AssetType = AssetTypes.Other.ToString(), AssetValue = 5000.00, IntrestRate= 0.00, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 0.00, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = "1"}
                 },
                 Expenses = new List<ExpenseModel>
                 {
@@ -668,6 +677,7 @@ namespace RatRace3
             //    LoadDataFromLiteDB();
 
             CurrentLevelModel = SelectLevelViewModel.ImageCollection.FirstOrDefault();//TODO ... DELET ME 
+            CurrentCompanyAsset = new AssetModel { AssetName = "GOOG P&L 31% @ $128.12", AssetType = AssetTypes.Stock.ToString(), StockCompanySymbol = "GOOGL", StockQuantity = 0, StockAverageBuyCost = 100.23, AssetValue = 200.00, IntrestRate = 0.25, IsBankDeposit = false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2 };
 
             //Saving Data... method...
             //  SaveDataToLiteDB();

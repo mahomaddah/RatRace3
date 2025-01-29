@@ -2,13 +2,17 @@ namespace RatRace3;
 
 using RatRace3.Models;
 using Syncfusion.Maui.Charts;
+using System;
+using System.Data.SqlTypes;
 using System.Globalization;
 
 public partial class MarketPage : ContentPage
 {
+    public AssetModel CurrentAssetModel { get; set; }
     public Company CurrentCompany { get; set; }
     public IEnumerable<object> ChartData { get; private set; }
     public List<Brush> PaletteBrushes { get; private set; }
+    Random random = new Random();
     public MarketPage()
     {
 
@@ -29,23 +33,26 @@ public partial class MarketPage : ContentPage
             PaletteBrushes = PaletteBrushes // Use the bound brushes
         };
 
-    //    Chart.Series.Clear();
-      
+        //    Chart.Series.Clear();
+
+        
         ChartData = new[]
             {
-                new { Date = "12-2023", Value = 30 },
-                new { Date = "01-2024", Value = 45 },
-                new { Date = "02-2024", Value = 25 },
-                new { Date = "03-2024", Value = 40 },
-                new { Date = "04-2024", Value = 43 },
-                new { Date = "05-2024", Value = 44 },
-                new { Date = "06-2024", Value = 50 },
-                new { Date = "07-2024", Value = 48 },
-                new { Date = "08-2024", Value = 58 },
-                new { Date = "09-2024", Value = 158 },
-                new { Date = "10-2024", Value = 128 },                      
-                new { Date = "11-2024", Value = 178 },
-                new { Date = "12-2024", Value = 188 },
+                new { Date = DateTime.Now.Date.ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(1).ToString("MMM-yyyy"), Value = 45 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(2).ToString("MMM-yyyy"), Value = 25 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(3).ToString("MMM-yyyy"), Value = 40 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(4).ToString("MMM-yyyy"), Value = 43 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(5).ToString("MMM-yyyy"), Value = 44 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(6).ToString("MMM-yyyy"), Value = 50 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(7).ToString("MMM-yyyy"), Value = 48 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(8).ToString("MMM-yyyy"), Value = 58 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(9).ToString("MMM-yyyy"), Value = 158 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(10).ToString("MMM-yyyy"), Value = 128 + random.Next(-50, 100) },                      
+                new { Date = DateTime.Now.Date.AddMonths(11).ToString("MMM-yyyy"), Value = 178 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(12).ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(13).ToString("MMM-yyyy"), Value = 178 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(14).ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) }
             };
 
 
@@ -53,6 +60,8 @@ public partial class MarketPage : ContentPage
             {
                 Color.FromArgb("#FF638A2D"),
                 Color.FromArgb("#FFE3AAD6"),
+
+
                 Color.FromArgb("#FFFF7D7D"),
                 Color.FromArgb("#FF007C9C"),
                 Color.FromArgb("#FF019FCC"),
@@ -83,11 +92,36 @@ public partial class MarketPage : ContentPage
         StockSymbol.Text = CurrentCompany.Symbol;       
         ToolTipProperties.SetText(StockIcon, CurrentCompany.StockDetail);
         StockPriceLB.Text = (CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US")); 
+        CurrentAssetModel = appShell.CurrentCompanyAsset;
+        PostionValueOwnedLB.Text= (CurrentAssetModel.StockQuantity*CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
+        //CurrentAssetModel.StockAverageBuyCost;//for P&L after MVP...
+        //CurrentAssetModel.StockCompanySymbol;//Not needed here ...
+        markerPointer.Value = CurrentAssetModel.StockQuantity;
         TotalPriceLB.Text = (markerPointer.Value * CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
+
     }
 
+    private void SellAssetPosition_Clicked(object sender, EventArgs e)
+    {
 
+        ////User SHould be ablae to sell their MSFT by Double clicking on asset this page should show up and msft postion should come here...
+        ////ready to sell! bind gameViewModel and This Logics here also make sure doble click on asset postion work well ...
+        ////aslo a tooltip like : stock market is currentlly at holyday i't will open after Level 1 was Complated and After Demo Update.....
+        //var appShell = (AppShell)Shell.Current;
+        //appShell.CurrentLevelModel.Players.First().Balance += Math.Round(CurrentCompany.StockPrice * markerPointer.Value, 2);
+        ////var AssetOfPlayer = appShell.CurrentLevelModel.Players.First().Assets.Find(x => x.AssetName == CurrentAssetModel.AssetName);
+        //if (CurrentAssetModel.StockQuantity == 0)
+        //    appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentAssetModel);
+        ////Orders System li yapmaliyiz Aslinda ileride Gercek economy gibi...
 
+    }
+
+    private void BuyMoreAsset_Clicked(object sender, EventArgs e)
+    {
+      //  if(Player . Blalance...)
+        
+
+    }
 }
 
 //Note : ileride gradient e gecmek istersek ... chartlar icin ...

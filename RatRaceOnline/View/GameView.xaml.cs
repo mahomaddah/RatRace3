@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Net.NetworkInformation;
 using Syncfusion.Maui.Popup;
 using System.Linq;
+using System.Diagnostics.Metrics;
 
 public partial class GameView : ContentPage
 {
@@ -276,7 +277,7 @@ public partial class GameView : ContentPage
 
     }
 
-    private void AssetLV_ItemDoubleTapped(object sender, Syncfusion.Maui.ListView.ItemDoubleTappedEventArgs e)
+    private async void AssetLV_ItemDoubleTapped(object sender, Syncfusion.Maui.ListView.ItemDoubleTappedEventArgs e)
     {
         var assetModel = GameViewModel.Player.Assets.Find(x => x.AssetName.Contains(((ListViewItemModel)e.DataItem).ItemText));
 
@@ -287,7 +288,26 @@ public partial class GameView : ContentPage
             }
             else if(assetModel.AssetType == AssetTypes.Stock.ToString())
             {   //Can bring // AssetModel...
-                GameViewModel.VisibleIndex = 3;//for market....
+               // GameViewModel.VisibleIndex = 3;//for market....
+
+               
+                if (assetModel != null)
+                {
+                    var appShell = (AppShell)Shell.Current;
+                    Company SelectedObject = appShell.IPOcompanies.First(x => assetModel.StockCompanySymbol.Equals(x.Symbol));
+                    appShell.CurrentCompany = new Company
+                    {
+                        Symbol = SelectedObject.Symbol,
+                        StockPrice = SelectedObject.StockPrice,
+                        StockDetail = SelectedObject.StockDetail,
+                        StockExchange = SelectedObject.StockExchange
+                    };
+                    appShell.CurrentCompanyAsset = assetModel;
+
+                }
+
+                await Shell.Current.GoToAsync("MarketPage");
+
             }
             else if (assetModel.AssetType == AssetTypes.RealEstate.ToString())
             {
