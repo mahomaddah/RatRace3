@@ -10,7 +10,7 @@ namespace RatRace3
     {
 
         public LevelModel CurrentLevelModel { get; set; }
-      
+        public GameViewModel GameViewModel { get; set; }
         public Company CurrentCompany { get; set; }//For Stock Market...
         /// <summary>
         /// For stock market : CurrentCompanyAsset Contain Quantity of stock ,Avreage Purchesed Price and etc... example:StockCompanySymbol = "MSFT",StockQuantity = 1.1,StockAverageBuyCost =100.23, AssetValue = 200.00, 
@@ -30,7 +30,7 @@ namespace RatRace3
 
             InitializeComponent();
             getAnewGameData();
-
+            GameViewModel = new GameViewModel();
 
 
             if (UIsettingsModel.IsMusicPlaying)

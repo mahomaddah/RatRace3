@@ -101,25 +101,57 @@ public partial class MarketPage : ContentPage
 
     }
 
-    private void SellAssetPosition_Clicked(object sender, EventArgs e)
+    private async void SellAssetPosition_Clicked(object sender, EventArgs e)
     {
 
         ////User SHould be ablae to sell their MSFT by Double clicking on asset this page should show up and msft postion should come here...
-        ////ready to sell! bind gameViewModel and This Logics here also make sure doble click on asset postion work well ...
-        ////aslo a tooltip like : stock market is currentlly at holyday i't will open after Level 1 was Complated and After Demo Update.....
-        //var appShell = (AppShell)Shell.Current;
-        //appShell.CurrentLevelModel.Players.First().Balance += Math.Round(CurrentCompany.StockPrice * markerPointer.Value, 2);
-        ////var AssetOfPlayer = appShell.CurrentLevelModel.Players.First().Assets.Find(x => x.AssetName == CurrentAssetModel.AssetName);
-        //if (CurrentAssetModel.StockQuantity == 0)
-        //    appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentAssetModel);
+        ////ready to sell! bind gameViewModel and This Logics here also make sure double click on asset postion work well ... DONE
+        ////aslo a tooltip like : stock market is currentlly at holyday i't will open after Level 1 was Complated and After Post Demo Update.....
+        
+        var appShell = (AppShell)Shell.Current;
+        var Player = appShell.CurrentLevelModel.Players.First();
+        if(markerPointer.Value <= CurrentAssetModel.StockQuantity && markerPointer.Value!=0)
+        {
+            //Sell amonth ...
+            CurrentAssetModel.StockQuantity -= markerPointer.Value;
+
+            Player.Balance += Math.Round(CurrentCompany.StockPrice * markerPointer.Value, 2);
+
+            if (CurrentAssetModel.StockQuantity == 0)
+                appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentAssetModel);
+        }
+        else // Ya adam da Okadar yok ya elimdeki nekadar varsa onu sat kast etmistir...
+        {
+            if (CurrentAssetModel.StockQuantity > 0.009)
+            {
+                //daha buyuktur ? 
+                bool result = await DisplayAlert("Stock Market", "The value you want to sell is higher than the total amount you hold! Did you mean to  sell all ?", "Yes, All In..", "No!!");
+                if (result)
+                {
+                    //sell all...
+                    Player.Balance += Math.Round(CurrentCompany.StockPrice * markerPointer.Value, 2);
+
+                    appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentAssetModel);
+
+                }
+            }
+        }
+
+        ContentPage_Loaded(this, new EventArgs());//Work like magic...
+
+        //Update GUI for this page and Statment page ... IF not work with functins than run above code...
+        //call // GameView.GameViewModel.LoadPlayerData(Player); from appshell or move GameViewModel To appshell directlly...
+        appShell.GameViewModel.LoadPlayerData(Player);
+        //var AssetOfPlayer = appShell.CurrentLevelModel.Players.First().Assets.Find(x => x.AssetName == CurrentAssetModel.AssetName);
+
         ////Orders System li yapmaliyiz Aslinda ileride Gercek economy gibi...
 
     }
 
     private void BuyMoreAsset_Clicked(object sender, EventArgs e)
     {
-      //  if(Player . Blalance...)
-        
+        //  if(Player . Blalance...)
+       // CurrentAssetModel.StockAverageBuyCost
 
     }
 }
