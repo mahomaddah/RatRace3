@@ -270,7 +270,7 @@ namespace RatRace3.ViewModel
         double totalNetworth;
         double totalCashFlowSum;
         Random rand = new Random();
-        public void LoadPlayerData(Models.PlayerModel playerModel)
+        public async void LoadPlayerData(Models.PlayerModel playerModel)
         {
          
             //We can change For MVP news payper to Quaterlly (mevsimde 1 (3 ayda 1 )) ... instead of monthly !...

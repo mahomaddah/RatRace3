@@ -98,7 +98,7 @@ public partial class MarketPage : ContentPage
         //CurrentAssetModel.StockCompanySymbol;//Not needed here ...
         markerPointer.Value = CurrentAssetModel.StockQuantity;
         TotalPriceLB.Text = (markerPointer.Value * CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
-
+        updateAssetValue();
     }
 
     private async void SellAssetPosition_Clicked(object sender, EventArgs e)
@@ -132,31 +132,88 @@ public partial class MarketPage : ContentPage
                     Player.Balance += Math.Round(CurrentCompany.StockPrice * markerPointer.Value, 2);
 
                     appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentAssetModel);
+                    
 
                 }
             }
         }
+        updateAssetValue();
 
         ContentPage_Loaded(this, new EventArgs());//Work like magic...
 
         //Update GUI for this page and Statment page ... IF not work with functins than run above code...
-        //call // GameView.GameViewModel.LoadPlayerData(Player); from appshell or move GameViewModel To appshell directlly...
+
         appShell.GameViewModel.LoadPlayerData(Player);
-        //var AssetOfPlayer = appShell.CurrentLevelModel.Players.First().Assets.Find(x => x.AssetName == CurrentAssetModel.AssetName);
+
+        await Shell.Current.GoToAsync("GameView");
 
         ////Orders System li yapmaliyiz Aslinda ileride Gercek economy gibi...
 
     }
-
-    private void BuyMoreAsset_Clicked(object sender, EventArgs e)
+   void updateAssetValue()
     {
-        //  if(Player . Blalance...)
-       // CurrentAssetModel.StockAverageBuyCost
-
+        if(CurrentAssetModel!=null)
+        CurrentAssetModel.AssetValue = Math.Round(CurrentAssetModel.StockQuantity * CurrentCompany.StockPrice,2);
+        //for updating also on Statment page... 
     }
+    private async void BuyMoreAsset_Clicked(object sender, EventArgs e)
+    {
+
+
+        var appShell = (AppShell)Shell.Current;
+        var Player = appShell.CurrentLevelModel.Players.First();
+
+        double purchaseAmount = Math.Round(CurrentCompany.StockPrice * markerPointer.Value, 2);
+
+        // Step 1: Check if Player has enough balance to buy the stocks
+        if (Player.Balance >= purchaseAmount && markerPointer.Value > 0)
+        {
+            Player.Balance -= purchaseAmount; // Deduct balance
+
+            var existingStock = Player.Assets.FirstOrDefault(a => a.StockCompanySymbol == CurrentCompany.Symbol);
+
+            if (existingStock != null)
+            {
+                // Step 2: Update existing stock's quantity and average buy cost
+                double totalCostBefore = existingStock.StockAverageBuyCost * existingStock.StockQuantity;
+                double newTotalCost = totalCostBefore + purchaseAmount;
+
+                existingStock.StockQuantity += markerPointer.Value;
+                existingStock.StockAverageBuyCost = Math.Round(newTotalCost / existingStock.StockQuantity, 2);
+            }
+            else
+            {
+                // Step 3: Create a new stock position
+                Player.Assets.Add(new AssetModel
+                {
+                    StockCompanySymbol = CurrentCompany.Symbol,                   
+                    AssetName = CurrentCompany.Symbol +" @ $" + CurrentCompany.StockPrice,
+                    AssetType = AssetTypes.Stock.ToString(),
+                    StockQuantity = markerPointer.Value,
+                    StockAverageBuyCost = CurrentCompany.StockPrice,
+                    AssetValue = purchaseAmount
+                });
+            }
+
+            updateAssetValue();
+
+            // Step 4: Update UI and player data
+            ContentPage_Loaded(this, new EventArgs());
+            appShell.GameViewModel.LoadPlayerData(Player);
+
+            await Shell.Current.GoToAsync("GameView");
+        }
+        else
+        {
+            await DisplayAlert("Stock Market",
+                "Insufficient balance! You need at least " + purchaseAmount.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) +
+                " to complete this purchase.", "Try Again");
+        }
+    }
+
 }
 
-//Note : ileride gradient e gecmek istersek ... chartlar icin ...
+//Note : After MVP:  ileride gradient e gecmek istersek ... chartlar icin ...
 //new GradientStopCollection()
 //{
 //    new GradientStop() { Offset = 1, Color = Color.FromRgb(255, 231, 199) },
