@@ -28,9 +28,11 @@ namespace RatRace3
             Routing.RegisterRoute("StoryDetailView", typeof(StoryDetailView));
             Routing.RegisterRoute("GameView", typeof(GameView));
 
-            InitializeComponent();
-            getAnewGameData();
+            InitializeComponent(); 
             GameViewModel = new GameViewModel();
+            getAnewGameData();
+        
+
 
 
             if (UIsettingsModel.IsMusicPlaying)

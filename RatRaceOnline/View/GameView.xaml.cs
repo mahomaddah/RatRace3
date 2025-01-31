@@ -43,7 +43,7 @@ public partial class GameView : ContentPage
         }
 
         appShell.GameViewModel = GameViewModel;//Referancing object there to call it latter form Market page... Maybe move all these GamesViewmodels Codes to Appsell after MVP or refactor in a better way :)
-
+      
         GameViewModel.LoadPlayerData(appShell.CurrentLevelModel.Players.First());
 
         // var playerModel = appShell.CurrentLevelModel.Players.First();

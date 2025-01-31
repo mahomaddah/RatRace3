@@ -237,7 +237,7 @@ namespace RatRace3.ViewModel
 
         private bool isIncomeCollected;
 
-        private bool IsIncomeCollected
+        public bool IsIncomeCollected
         {
             get { return isIncomeCollected; }
             set
@@ -999,6 +999,7 @@ namespace RatRace3.ViewModel
         public ICommand CollectIncomeCommand { get; }
         public ICommand ChangeCardIndexCommand { get; }
         // public ICommand MarkerValueChangedCommand { get; }
+    
         public GameViewModel()
         {
             //  MarkerValueChangedCommand = new Command<ValueChangedEventArgs>(OnMarkerValueChanged);
@@ -1015,8 +1016,6 @@ namespace RatRace3.ViewModel
             ExpencesListViewItemModels = new ObservableCollection<ListViewItemModel>();
             IncomeListViewItemModel = new ObservableCollection<ListViewItemModel>();
 
-
-            IsIncomeCollected = false;
 
 
         }

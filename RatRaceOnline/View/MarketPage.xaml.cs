@@ -1,5 +1,4 @@
 namespace RatRace3;
-
 using RatRace3.Models;
 using Syncfusion.Maui.Charts;
 using System;
@@ -10,8 +9,8 @@ public partial class MarketPage : ContentPage
 {
     public AssetModel CurrentAssetModel { get; set; }
     public Company CurrentCompany { get; set; }
-    public IEnumerable<object> ChartData { get; private set; }
-    public List<Brush> PaletteBrushes { get; private set; }
+    public List<object> ChartData { get; set; }
+    public List<Brush> PaletteBrushes { get; set; }
     Random random = new Random();
     public MarketPage()
     {
@@ -19,44 +18,36 @@ public partial class MarketPage : ContentPage
       this.CurrentCompany = new Company { Symbol = "NVDA", StockPrice = 141.34, StockDetail = "Technology company Internet Search Monopoly..." };
 
 
-
+        InitializeComponent();
         // Set BindingContext
 
         //    Chart.Series.Add(new ColumnSeries());
 
-
-        var columnSeries = new ColumnSeries
-        {
-            ItemsSource = ChartData,
-            XBindingPath = "Date",
-            YBindingPath = "Value",
-            PaletteBrushes = PaletteBrushes // Use the bound brushes
-        };
-
+     
         //    Chart.Series.Clear();
 
         
-        ChartData = new[]
+           ChartData = new List<object>
             {
-                new { Date = DateTime.Now.Date.ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(1).ToString("MMM-yyyy"), Value = 45 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(2).ToString("MMM-yyyy"), Value = 25 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(3).ToString("MMM-yyyy"), Value = 40 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(4).ToString("MMM-yyyy"), Value = 43 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(5).ToString("MMM-yyyy"), Value = 44 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(6).ToString("MMM-yyyy"), Value = 50 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(7).ToString("MMM-yyyy"), Value = 48 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(8).ToString("MMM-yyyy"), Value = 58 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(9).ToString("MMM-yyyy"), Value = 158 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(10).ToString("MMM-yyyy"), Value = 128 + random.Next(-50, 100) },                      
-                new { Date = DateTime.Now.Date.AddMonths(11).ToString("MMM-yyyy"), Value = 178 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(12).ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(13).ToString("MMM-yyyy"), Value = 178 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(14).ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) }
+                new { Date = DateTime.Now.Date.AddMonths(-14).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(-13).ToString("MMM-yyyy"), Value = 45 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(-12).ToString("MMM-yyyy"), Value = 25 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(-11).ToString("MMM-yyyy"), Value = 40 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(-10).ToString("MMM-yyyy"), Value = 43 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(-9).ToString("MMM-yyyy"), Value = 44 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(-8).ToString("MMM-yyyy"), Value = 50 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(-7).ToString("MMM-yyyy"), Value = 48 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(-6).ToString("MMM-yyyy"), Value = 58 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(-5).ToString("MMM-yyyy"), Value = 158 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(-4).ToString("MMM-yyyy"), Value = 128 + random.Next(-50, 100) },                      
+                new { Date = DateTime.Now.Date.AddMonths(-3).ToString("MMM-yyyy"), Value = 178 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), Value = 178 + random.Next(-50, 100) },
+                new { Date = DateTime.Now.Date.ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) }
             };
+                
 
-
-        PaletteBrushes = new List<Brush>
+            PaletteBrushes = new List<Brush>
             {
                 Color.FromArgb("#FF638A2D"),
                 Color.FromArgb("#FFE3AAD6"),
@@ -71,9 +62,18 @@ public partial class MarketPage : ContentPage
                 Color.FromArgb("#FF4DB7BE"),
                 Color.FromArgb("#FF4EB7BD")
             };
-        InitializeComponent();
+
+        var columnSeries = new ColumnSeries
+        {
+            ItemsSource = ChartData,
+            XBindingPath = "Date",
+            YBindingPath = "Value",
+            PaletteBrushes = PaletteBrushes // Use the bound brushes
+        };
+
+
         Chart.PaletteBrushes = PaletteBrushes;
-        Chart.Series.Add(columnSeries);
+        Chart.Series = new ChartSeriesCollection { columnSeries };
         BindingContext = this;
  
     }
@@ -96,8 +96,12 @@ public partial class MarketPage : ContentPage
         PostionValueOwnedLB.Text= (CurrentAssetModel.StockQuantity*CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
         //CurrentAssetModel.StockAverageBuyCost;//for P&L after MVP...
         //CurrentAssetModel.StockCompanySymbol;//Not needed here ...
-        markerPointer.Value = CurrentAssetModel.StockQuantity;
-        TotalPriceLB.Text = (markerPointer.Value * CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
+       if(markerPointer.Value!=null && TotalPriceLB.Text != null)
+        {
+            markerPointer.Value = CurrentAssetModel.StockQuantity;
+            TotalPriceLB.Text = (markerPointer.Value * CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
+        }
+
         updateAssetValue();
     }
 
@@ -129,7 +133,7 @@ public partial class MarketPage : ContentPage
                 if (result)
                 {
                     //sell all...
-                    Player.Balance += Math.Round(CurrentCompany.StockPrice * markerPointer.Value, 2);
+                    Player.Balance += Math.Round(CurrentCompany.StockPrice * CurrentAssetModel.StockQuantity, 2);
 
                     appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentAssetModel);
                     
