@@ -12,7 +12,7 @@ using System.Diagnostics.Metrics;
 public partial class GameView : ContentPage
 {
     public GameViewModel GameViewModel { get; set; }
-    public RotatorViewModel IpoCompaniesVM { get; set; }
+    public IPOcompaniesRotatorViewModel IpoCompaniesVM { get; set; }
     private void GameStarted(object sender, EventArgs e)
     {
      
@@ -30,17 +30,17 @@ public partial class GameView : ContentPage
         // Set default card index to open first 
         GameViewModel.VisibleIndex = 1;
         var appShell = (AppShell)Shell.Current;
-        if (appShell.CurrentLevelModel.IsNewGameStarted)
-        {
-            //come for new game ... 
-            appShell.getAnewGameData();//Get First Day data...
+        //if (appShell.CurrentLevelModel.IsNewGameStarted)
+        //{
+        //    //come for new game ... 
+        //    appShell.getAnewGameData();//Get First Day data...
          
-        }
-        else
-        {
-            //come for Load last game
+        //}
+        //else
+        //{
+        //    //come for Load last game
           
-        }
+        //}
 
         appShell.GameViewModel = GameViewModel;//Referancing object there to call it latter form Market page... Maybe move all these GamesViewmodels Codes to Appsell after MVP or refactor in a better way :)
       
@@ -57,7 +57,7 @@ public partial class GameView : ContentPage
 
         //binding VM to Listview ....
         //   LVcompaiesMarket.ItemsSource = GameViewModel.StockMarketCompanys;
-        IpoCompaniesVM = new RotatorViewModel();
+        IpoCompaniesVM = new IPOcompaniesRotatorViewModel();
 
         CompanyInvestRoter.ItemsSource = IpoCompaniesVM.RotatorItems;
 
@@ -318,6 +318,11 @@ public partial class GameView : ContentPage
                 GameViewModel.VisibleIndex = 5;//for bank....
             }
         
+    }
+
+    private void GetALoanOrder_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
+    {
+
     }
 }
 

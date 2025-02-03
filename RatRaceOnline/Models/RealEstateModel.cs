@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RatRace3.Models
 {
-    public class SunburstModel
+    public class RealEstateModel
     {
       
 
@@ -40,7 +40,7 @@ namespace RatRace3.Models
 
 
 
-        public SunburstModel()
+        public RealEstateModel()
         {
             CompanyLevel = 0;//by defult... //max = 5 means hotel...
         }

@@ -4,6 +4,7 @@ using RatRace3.Models;
 using System.Collections.ObjectModel;
 using RatRace3.ViewModel;
 using RatRace3.DAL;
+using System;
 namespace RatRace3
 {
     public partial class AppShell : Shell
@@ -48,6 +49,8 @@ namespace RatRace3
 
 
         }
+        #region LoadPlayerGameData:
+        /*
         public void LoadPlayerGamesData()
         {
   
@@ -147,7 +150,7 @@ namespace RatRace3
                 Balance = 2000.00,
                 NetTotalIncome = 2100,
                 CurrentMonth = 1,
-                MaximumMonth = 12,
+                MaximumMonth = 24,
                 Liabilities = new List<LiabilityModel>
                 {
                     new LiabilityModel{LiabilityName ="Student Loan", TotalAmount = 5000.00, MonthsRemaining = 24, InterestRate = 0.05, LiabilityModelID = 1 ,ExpenseModelID = 1},
@@ -155,11 +158,11 @@ namespace RatRace3
                 },
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Part-Time Job", Amount = 1200.00 },
                                                             new IncomeSourceModel { Name = "Freelancing", Amount = 900.00},
-                                                           new IncomeSourceModel { Name = "Savings Account Passive Income" ,Amount =20 ,AssetIncomeSourseRelatingGUID =3.ToString() } 
+                                                           new IncomeSourceModel { Name = "Savings Account Passive Income" ,Amount =40 ,AssetIncomeSourseRelatingGUID =3.ToString() } 
                 },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "Savings Account", AssetType = AssetTypes.RecursiveDeposit.ToString() , AssetValue = 1000.00, IntrestRate= 0.02, IsBankDeposit= true, IsRecursiveDepositRD = true, PassiveIncome = 20.00 ,AssetIncomeSourseRelatingGUID=3.ToString() }
+                    new AssetModel {AssetName = "Savings Account", AssetType = AssetTypes.RecursiveDeposit.ToString() , AssetValue = 1000.00, IntrestRate= 0.04, IsBankDeposit= true, IsRecursiveDepositRD = true, PassiveIncome = 40.00 ,AssetIncomeSourseRelatingGUID=3.ToString() }
                 },
                 Expenses = new List<ExpenseModel>
                 {
@@ -177,7 +180,7 @@ namespace RatRace3
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,
-                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = GameGoalTypes.Cashflow.ToString(), Target = 2400, YouHave = 2100 } }
+                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = GameGoalTypes.Cashflow.ToString(), Target = 2222, YouHave = 2100 } }
             });
 
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
@@ -370,7 +373,8 @@ namespace RatRace3
               UIsettingsModel= dal.GetUISettings();
 
         }
-
+       */
+        #endregion
         public void getAnewGameData()
         {
 
@@ -405,7 +409,7 @@ namespace RatRace3
                 Assets = new List<AssetModel>
                 {
                     new AssetModel {AssetName = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 1300.00, IntrestRate= 0.0412, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 53.56, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = 2.ToString()},
-                       new AssetModel {AssetName = "MSFT P&L 28% @ $128.12",  AssetType = AssetTypes.Stock.ToString(),StockCompanySymbol = "MSFT",StockQuantity = 1.1,StockAverageBuyCost =100.23, AssetValue = 200.00, IntrestRate= 0.25, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2}
+                    new AssetModel {AssetName = "MSFT P&L 28% @ $128.12",  AssetType = AssetTypes.Stock.ToString(),StockCompanySymbol = "MSFT",StockQuantity = 1.1,StockAverageBuyCost =100.23, AssetValue = 200.00, IntrestRate= 0.25, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2}
                 },
                 Expenses = new List<ExpenseModel>
                 {
@@ -612,26 +616,123 @@ namespace RatRace3
                 StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 1 } }
             });
 
+            var random = new Random();
 
             IPOcompanies = new ObservableCollection<Company>
             {
                 new Company
                 {
                     Symbol = "GOOGL",
-                    StockPrice = 125.51,
+                    StockPrice = 202.31,
                     StockDetail = "Google LLC - Technology Company. Google is a global leader in online services and search engine technology."
+                    ,
+                        StockFundementalData = new Models.StockFundementalData
+                        {
+                          StockSymbol =  "GOOGL",
+                          TotalCash=110.92 ,//in Bilion USD
+                          TotalDebts=119.01,
+                          AnnualIncome=26.30,
+
+                          EPSpast5Y=0.4840, //48.40%
+                          EPSthisYr= 1.2805,//128.05%
+                          EPSnext5Y=1.35,
+                          DCFvaluation = 230.94,//Undervalue ...
+
+                          SustainableCompetitiveAdvantage=5//5 of 9 
+
+                        },
+                       
+                       StockOrders = new List<StockOrder>
+                       {
+                            new StockOrder{ StockSymbol="GOOGL" , AmounthOfMoney = 123.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), FillingStatus = "Filled", Opration = "Sell", ShareHolderID = 1 },
+                            new StockOrder{ StockSymbol="GOOGL" , AmounthOfMoney = 103.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), FillingStatus = "Filled", Opration = "Buy", ShareHolderID = 2 },
+                            new StockOrder{ StockSymbol="GOOGL" , AmounthOfMoney = 103.56, Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), FillingStatus = "Requested", Opration = "Sell", ShareHolderID = 2 },
+                            new StockOrder{ StockSymbol="GOOGL" , AmounthOfMoney = 23.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MMM-yyyy"), FillingStatus = "Requested", Opration = "Sell", ShareHolderID = 2 },
+                            new StockOrder{ StockSymbol="GOOGL" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MMM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
+                       },
+
+                       PriceCandles = new List<PriceCandleModel>
+                       {
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), Value = 45 + random.Next(-50, 100) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(0).ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) }
+                       },
+
+
+
                 },
                 new Company
                 {
                     Symbol = "AAPL",
                     StockPrice = 258.20,
                     StockDetail = "Apple Inc. - Technology Company. Apple is a Technology and Consumer Electronics leader known for its flagship product, the iPhone."
+                      ,
+                        StockFundementalData = new Models.StockFundementalData
+                        {
+                          StockSymbol =  "AAPL",
+                          TotalCash=110.92 ,//in Bilion USD
+                          TotalDebts=119.01,
+                          AnnualIncome=88.27,
+
+                          EPSpast5Y=0.4840, //48.40%
+                          EPSthisYr= 1.2805,//128.05%
+                          EPSnext5Y=1.35,
+                          DCFvaluation = 230.94,//Undervalue ...
+
+                          SustainableCompetitiveAdvantage=5//5 of 9 
+
+                        },
+
+
+                        StockOrders = new List<StockOrder>
+                       {
+                            new StockOrder{ StockSymbol="AAPL" , AmounthOfMoney = 123.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), FillingStatus = "Filled", Opration = "Sell", ShareHolderID = 1 },
+                            new StockOrder{ StockSymbol="AAPL" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MMM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
+                       },
+
+                       PriceCandles = new List<PriceCandleModel>
+                       {
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
+                       }
+
+
                 },
                 new Company
                 {
                     Symbol = "MSFT",
                     StockPrice = 439.33,
                     StockDetail = "Microsoft Corporation - Technology Company. Microsoft is a leader in software, cloud computing, and productivity tools."
+
+                      ,
+                        StockFundementalData = new Models.StockFundementalData
+                        {
+                          StockSymbol =  "MSFT",
+                          TotalCash=110.92 ,//in Bilion USD
+                          TotalDebts=119.01,
+                          AnnualIncome=88.27,
+
+                          EPSpast5Y=0.4840, //48.40%
+                          EPSthisYr= 1.2805,//128.05%
+                          EPSnext5Y=1.35,
+                          DCFvaluation = 230.94,//Undervalue ...
+
+                          SustainableCompetitiveAdvantage=5//5 of 9 
+
+                        },
+
+
+                        StockOrders = new List<StockOrder>
+                       {
+                            new StockOrder{ StockSymbol="MSFT" , AmounthOfMoney = 123.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), FillingStatus = "Filled", Opration = "Sell", ShareHolderID = 1 },
+                            new StockOrder{ StockSymbol="MSFT" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MMM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
+                       },
+
+                       PriceCandles = new List<PriceCandleModel>
+                       {
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
+                       }
+
+
                 },
                 new Company
                 {
@@ -639,36 +740,217 @@ namespace RatRace3
                     StockPrice = 92.68,
                     StockDetail = "Walmart Inc. - Retail Company. Walmart operates retail stores worldwide and is a leader in consumer goods."
                    ,StockExchange = "NYSE"
+                     ,
+                        StockFundementalData = new Models.StockFundementalData
+                        {
+                          StockSymbol =  "WMT",
+                          TotalCash=110.92 ,//in Bilion USD
+                          TotalDebts=119.01,
+                          AnnualIncome=88.27,
+
+                          EPSpast5Y=0.4840, //48.40%
+                          EPSthisYr= 1.2805,//128.05%
+                          EPSnext5Y=1.35,
+                          DCFvaluation = 230.94,//Undervalue ...
+
+                          SustainableCompetitiveAdvantage=5//5 of 9 
+
+                        },
+
+
+                        StockOrders = new List<StockOrder>
+                       {
+                            new StockOrder{ StockSymbol="WMT" , AmounthOfMoney = 123.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), FillingStatus = "Filled", Opration = "Sell", ShareHolderID = 1 },
+                            new StockOrder{ StockSymbol="WMT" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MMM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
+                       },
+
+                       PriceCandles = new List<PriceCandleModel>
+                       {
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
+                       }
+
+
                 },
                 new Company
                 {
                     Symbol = "TSLA",
                     StockPrice = 462.25,
                     StockDetail = "Tesla, Inc. - Automotive and Energy Company. Tesla is known for its electric vehicles and sustainable energy solutions."
+
+                      ,
+                        StockFundementalData = new Models.StockFundementalData
+                        {
+                          StockSymbol =  "TSLA",
+                          TotalCash=36.56 ,//in Bilion USD
+                          TotalDebts=48.39,
+                          AnnualIncome=7.09,
+
+                          EPSpast5Y=0.4840, //48.40%
+                          EPSthisYr= 1.2805,//128.05%
+                          EPSnext5Y=1.35,
+                          DCFvaluation = 230.94,//Undervalue ...
+
+                          SustainableCompetitiveAdvantage=1//5 of 9 
+
+                        },
+
+
+                        StockOrders = new List<StockOrder>
+                       {
+                            new StockOrder{ StockSymbol="TSLA" , AmounthOfMoney = 123.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), FillingStatus = "Filled", Opration = "Sell", ShareHolderID = 1 },
+                            new StockOrder{ StockSymbol="TSLA" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MMM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
+                       },
+
+                       PriceCandles = new List<PriceCandleModel>
+                       {
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
+                       }
+
+
                 },
                 new Company
                 {
                     Symbol = "META",
                     StockPrice = 607.75,
                     StockDetail = "Meta Platforms, Inc. - Technology Company. Meta is the parent company of Facebook and a leader in social media and virtual reality."
+
+                      ,
+                        StockFundementalData = new Models.StockFundementalData
+                        {
+                          StockSymbol =  "META",
+                          TotalCash=110.92 ,//in Bilion USD
+                          TotalDebts=119.01,
+                          AnnualIncome=88.27,
+
+                          EPSpast5Y=0.4840, //48.40%
+                          EPSthisYr= 1.2805,//128.05%
+                          EPSnext5Y=1.35,
+                          DCFvaluation = 230.94,//Undervalue ...
+
+                          SustainableCompetitiveAdvantage=5//5 of 9 
+
+                        },
+
+                       StockOrders = new List<StockOrder>
+                       {
+                            new StockOrder{ StockSymbol="META" , AmounthOfMoney = 123.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), FillingStatus = "Filled", Opration = "Sell", ShareHolderID = 1 },
+                            new StockOrder{ StockSymbol="META" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MMM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
+                       },
+
+                       PriceCandles = new List<PriceCandleModel>
+                       {
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
+                       },
+
                 },
                 new Company
                 {
                     Symbol = "ADBE",
                     StockPrice = 447.94,
                     StockDetail = "Adobe Inc. - Software Company. Adobe specializes in creative software tools such as Photoshop and Acrobat."
+
+                      ,
+                        StockFundementalData = new Models.StockFundementalData
+                        {
+                          StockSymbol =  "ADBE",
+                          TotalCash=110.92 ,//in Bilion USD
+                          TotalDebts=119.01,
+                          AnnualIncome=88.27,
+
+                          EPSpast5Y=0.4840, //48.40%
+                          EPSthisYr= 1.2805,//128.05%
+                          EPSnext5Y=1.35,
+                          DCFvaluation = 230.94,//Undervalue ...
+
+                          SustainableCompetitiveAdvantage=5//5 of 9 
+
+                        },
+
+                        StockOrders = new List<StockOrder>
+                       {
+                            new StockOrder{ StockSymbol="ADBE" , AmounthOfMoney = 123.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), FillingStatus = "Filled", Opration = "Sell", ShareHolderID = 1 },
+                            new StockOrder{ StockSymbol="ADBE" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MMM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
+                       },
+
+                       PriceCandles = new List<PriceCandleModel>
+                       {
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
+                       }
+
                 },
                 new Company
                 {
                     Symbol = "NVDA",
                     StockPrice = 140.22,
                     StockDetail = "NVIDIA Corporation - Technology Company. NVIDIA is a leader in GPU technology and artificial intelligence solutions."
+
+                      ,
+                        StockFundementalData = new Models.StockFundementalData
+                        {
+                          StockSymbol =  "NVDA",
+                          TotalCash=110.92 ,//in Bilion USD
+                          TotalDebts=119.01,
+                          AnnualIncome=88.27,
+
+                          EPSpast5Y=0.4840, //48.40%
+                          EPSthisYr= 1.2805,//128.05%
+                          EPSnext5Y=1.35,
+                          DCFvaluation = 230.94,//Undervalue ...
+
+                          SustainableCompetitiveAdvantage=5//5 of 9 
+
+                        },
+
+
+                        StockOrders = new List<StockOrder>
+                       {
+                            new StockOrder{ StockSymbol="NVDA" , AmounthOfMoney = 123.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), FillingStatus = "Filled", Opration = "Sell", ShareHolderID = 1 },
+                            new StockOrder{ StockSymbol="NVDA" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MMM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
+                       },
+
+                       PriceCandles = new List<PriceCandleModel>
+                       {
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
+                       }
+
+
                 },
                 new Company
                 {
                     Symbol = "AMZN",
                     StockPrice = 229.05,
                     StockDetail = "Amazon.com, Inc. - Consumer Cyclical. Amazon is a global leader in e-commerce and cloud computing services."
+
+                      ,
+                        StockFundementalData = new Models.StockFundementalData
+                        {
+                          StockSymbol =  "AMZN",
+                          TotalCash=110.92 ,//in Bilion USD
+                          TotalDebts=119.01,
+                          AnnualIncome=88.27,
+
+                          EPSpast5Y=0.4840, //48.40%
+                          EPSthisYr= 1.2805,//128.05%
+                          EPSnext5Y=1.35,
+                          DCFvaluation = 230.94,//Undervalue ...
+
+                          SustainableCompetitiveAdvantage=5//5 of 9 
+
+                        },
+
+
+                        StockOrders = new List<StockOrder>
+                       {
+                            new StockOrder{ StockSymbol="AMZN" , AmounthOfMoney = 123.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), FillingStatus = "Filled", Opration = "Sell", ShareHolderID = 1 },
+                            new StockOrder{ StockSymbol="AMZN" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MMM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
+                       },
+
+                       PriceCandles = new List<PriceCandleModel>
+                       {
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
+                       }
+
+
                 }
             };
 

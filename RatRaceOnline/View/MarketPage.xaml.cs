@@ -18,17 +18,17 @@ public partial class MarketPage : ContentPage
       this.CurrentCompany = new Company { Symbol = "NVDA", StockPrice = 141.34, StockDetail = "Technology company Internet Search Monopoly..." };
 
 
-        InitializeComponent();
+      InitializeComponent();
         // Set BindingContext
 
         //    Chart.Series.Add(new ColumnSeries());
 
-     
+      //Real Value investors (Lords) > Momentom investors (traders)> experted workers > workers
         //    Chart.Series.Clear();
 
         
            ChartData = new List<object>
-            {
+           {
                 new { Date = DateTime.Now.Date.AddMonths(-14).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
                 new { Date = DateTime.Now.Date.AddMonths(-13).ToString("MMM-yyyy"), Value = 45 + random.Next(-50, 100) },
                 new { Date = DateTime.Now.Date.AddMonths(-12).ToString("MMM-yyyy"), Value = 25 + random.Next(-50, 100) },
@@ -44,15 +44,13 @@ public partial class MarketPage : ContentPage
                 new { Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) },
                 new { Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), Value = 178 + random.Next(-50, 100) },
                 new { Date = DateTime.Now.Date.ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) }
-            };
+           };
                 
 
             PaletteBrushes = new List<Brush>
             {
                 Color.FromArgb("#FF638A2D"),
                 Color.FromArgb("#FFE3AAD6"),
-
-
                 Color.FromArgb("#FFFF7D7D"),
                 Color.FromArgb("#FF007C9C"),
                 Color.FromArgb("#FF019FCC"),

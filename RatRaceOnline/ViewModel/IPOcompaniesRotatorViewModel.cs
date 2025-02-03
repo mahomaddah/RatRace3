@@ -11,7 +11,7 @@ using System.Globalization;
 
 namespace RatRace3.ViewModel
 {
-    public class RotatorViewModel
+    public class IPOcompaniesRotatorViewModel
     {
         // ViewModel class for Rotator.
 
@@ -30,7 +30,7 @@ namespace RatRace3.ViewModel
                 });
             }
         }
-        public RotatorViewModel()
+        public IPOcompaniesRotatorViewModel()
         {
             var appShell = (AppShell)Shell.Current;
             IPOcompanies = appShell.IPOcompanies;

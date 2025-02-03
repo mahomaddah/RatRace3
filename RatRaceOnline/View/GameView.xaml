@@ -688,9 +688,12 @@
                                         ItemWidth="{OnPlatform Android='35' , Default='55'}" ToolTipProperties.Text="Recursive deposit" TextColor="#E3AAD6" FontSize="{OnPlatform Android='17', Default='25' }"/>
                                 <radialMenu:SfRadialMenuItem    FontAttributes="Bold" x:Name="indexSPYpositionOrder" ItemTapped="indexSPYpositionOrder_ItemTapped" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='7', Default='8' }" BackgroundColor="#9072C9" Text="S&amp;P500 index (SPY ETF)" ToolTipProperties.Text="S&amp;P500 index (SPY ETF)" Image="cash_etf_icon.png"
                                          FontAutoScalingEnabled="True"/>
+                                <radialMenu:SfRadialMenuItem    FontAttributes="Bold" x:Name="GetALoanOrder" ItemTapped="GetALoanOrder_ItemTapped" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='7', Default='8' }" BackgroundColor="#9072C9" Text="Get a Loan (Coming soon)" ToolTipProperties.Text="Get a Loan (Coming soon)" Image="cash_coporate_bond.png"/>
+
                                 <radialMenu:SfRadialMenuItem  ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='12', Default='14' }"  FontAttributes="Bold" BackgroundColor="#9072C9" Text="Bonds" Image="cash_bond_icon.png"
                                     FontAutoScalingEnabled="True">
                                     <radialMenu:SfRadialMenuItem.Items>
+                                        
                                         <radialMenu:SfRadialMenuItem   FontAttributes="Bold" ToolTipProperties.Text="Tbond" x:Name="TbondOrderBtn" ItemTapped="TbondOrderBtn_ItemTapped" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" FontSize="{OnPlatform Android='10', Default='17' }" FontAutoScalingEnabled="True" Text="Tbond" BackgroundColor="#9072C9" Image="cash_bond_icon.png"  />
                                         <radialMenu:SfRadialMenuItem   FontAttributes="Bold" ItemWidth="{OnPlatform Android='35' , Default='55'}" TextColor="#E3AAD6" x:Name="CoporateBondsOrderBtn" ItemTapped="CoporateBondsOrderBtn_ItemTapped" FontSize="{OnPlatform Android='8', Default='12' }" ToolTipProperties.Text="Coporate Bonds" Text="Coporate Bonds" BackgroundColor="#9072C9" Image="cash_coporate_bond.png" />
 
@@ -724,7 +727,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid.BindingContext>
-                        <ViewModels:RotatorViewModel/>
+                        <ViewModels:IPOcompaniesRotatorViewModel/>
                     </Grid.BindingContext>
 
                     <Label Grid.Row="0" FontFamily="EngraversOldEnglish" Grid.ColumnSpan="1"  Margin="2" VerticalOptions="Start" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='10',MacCatalyst='Subtitle', WinUI='Subtitle'}"  HorizontalOptions="Start" Text="Invest in US Companies : Analyze, Buy and Sell"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
@@ -747,6 +750,10 @@
                                 <Label TextColor="#9072C9" Padding="5"  ToolTipProperties.Text="high cash low-debt Companies Have better Financial health and are better businesses to own !!" HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic">Total Cash = 380.23 B USD</Label>
                                 <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" ToolTipProperties.Text="Debt financing is the cheapest one rather than issuing new stocks which investors hate and it has tax advantages." FontFamily="CentaurMTStd-BoldItalic">Total Debt = 254.16 B USD</Label>
                                 <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" ToolTipProperties.Text="When you buy a Stock, you are not buying a lottery ticket! You are one of the owners of the underlying business, The Stronger the business, the lower the risk of default! Businesses are money-making machines the more money they print the more value they have!" FontFamily="CentaurMTStd-BoldItalic">Annual Income = 63.07 B USD</Label>
+                                <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" Text="DCF Valuation = $230.94 USD" ToolTipProperties.Text="'Discounted cash flow (DCF) is a valuation method that estimates the value of an investment using its expected future cash flows.'-Investopedia 
+                                       
+                                        'Price is What you pay. Value is what you get.' -WarrenBuffett" FontFamily="CentaurMTStd-BoldItalic"></Label>
+                                
                             </VerticalStackLayout>
 
                             <Rotator:SfRotator
@@ -905,7 +912,7 @@
                                                       >
 
                                 <sunburst:SfSunburstChart.BindingContext>
-                                    <ViewModels:SunburstViewModel/>
+                                    <ViewModels:RealestateMallViewModel/>
                                 </sunburst:SfSunburstChart.BindingContext>
                                 
                                 <sunburst:SfSunburstChart.Title>
