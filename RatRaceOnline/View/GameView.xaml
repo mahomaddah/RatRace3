@@ -747,13 +747,28 @@
 
                             <VerticalStackLayout  HorizontalOptions="Center" Margin="3" Grid.Column="0">
                                 <Label FontFamily="EngraversOldEnglish" TextColor="#9072C9" Padding="7"  Text="Balance Sheet Statement:" FontAttributes="Bold"/>
-                                <Label TextColor="#9072C9" Padding="5"  ToolTipProperties.Text="high cash low-debt Companies Have better Financial health and are better businesses to own !!" HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic">Total Cash = 380.23 B USD</Label>
-                                <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" ToolTipProperties.Text="Debt financing is the cheapest one rather than issuing new stocks which investors hate and it has tax advantages." FontFamily="CentaurMTStd-BoldItalic">Total Debt = 254.16 B USD</Label>
-                                <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" ToolTipProperties.Text="When you buy a Stock, you are not buying a lottery ticket! You are one of the owners of the underlying business, The Stronger the business, the lower the risk of default! Businesses are money-making machines the more money they print the more value they have!" FontFamily="CentaurMTStd-BoldItalic">Annual Income = 63.07 B USD</Label>
-                                <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" Text="DCF Valuation = $230.94 USD" ToolTipProperties.Text="'Discounted cash flow (DCF) is a valuation method that estimates the value of an investment using its expected future cash flows.'-Investopedia 
-                                       
-                                        'Price is What you pay. Value is what you get.' -WarrenBuffett" FontFamily="CentaurMTStd-BoldItalic"></Label>
+                                <HorizontalStackLayout>
+
+                                    <Label TextColor="#9072C9" Padding="5"  ToolTipProperties.Text="high cash low-debt Companies Have better Financial health and are better businesses to own !!" HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic">Total Cash =</Label>
+                                    <Label TextColor="#9072C9" Padding="5"  ToolTipProperties.Text="high cash low-debt Companies Have better Financial health and are better businesses to own !!" HorizontalOptions="Center" Text="$380.23 B USD" FontFamily="CentaurMTStd-BoldItalic"></Label>
+
+                                </HorizontalStackLayout>           
                                 
+                                
+                                <HorizontalStackLayout>
+                                    <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" ToolTipProperties.Text="Debt financing is the cheapest one rather than issuing new stocks which investors hate and it has tax advantages." FontFamily="CentaurMTStd-BoldItalic">Total Debt =</Label>
+                                    <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic" Text="{Binding TotalDebt ,FallbackValue='$0.00 B'}" ></Label>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+
+                                    <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" ToolTipProperties.Text="When you buy a Stock, you are not buying a lottery ticket! You are one of the owners of the underlying business, The Stronger the business, the lower the risk of default! Businesses are money-making machines the more money they print the more value they have!" FontFamily="CentaurMTStd-BoldItalic">Annual Income =</Label>
+                                    <Label Text="$63.07 B" TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic"></Label>
+                                </HorizontalStackLayout> 
+                                <HorizontalStackLayout> <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" Text="DCF Valuation =" ToolTipProperties.Text="'Discounted cash flow (DCF) is a valuation method that estimates the value of an investment using its expected future cash flows.'-Investopedia 
+                        
+                                        'Price is What you pay. Value is what you get.' -WarrenBuffett" FontFamily="CentaurMTStd-BoldItalic"></Label>
+                                    <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" Text="$230.94" FontFamily="CentaurMTStd-BoldItalic"></Label>
+                                </HorizontalStackLayout>
                             </VerticalStackLayout>
 
                             <Rotator:SfRotator
@@ -782,10 +797,28 @@
 
                             <VerticalStackLayout ToolTipProperties.Text="It's better to buy a Wonderful Company at a Fair price rather than buy a Fair company at a Wonderful price!  -Warren Buffett"  HorizontalOptions="Center" Grid.Column="2" Margin="3">
                                 <Label FontFamily="EngraversOldEnglish" TextColor="#9072C9" Padding="7" Text="Stock Income Statement:" FontAttributes="Bold"/>
-                                <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="1.Consistent increase in Sales, Net income, and Free cash flow for last 5 years." FontFamily="CentaurMTStd-BoldItalic">EPS past 5Y 48.40%</Label>
-                                <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="Buy the best fundamental businesses on the worst news,Profit from the Panic! While everyone is panicking and selling like an aimlessly repeating monkey, if you have a strong fundamental checklist and fundamental research, you can even buy more when it is cheaper!!" FontFamily="CentaurMTStd-BoldItalic">EPS this Yr 128.05%</Label>
-                                <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="Big tech companies usually manage growth projects that give them high future cash flow growth that's why P/E-like valuation rates can be misleading for calculating NVDA, AAPL, and GOOGL-like companies! that's why we usually use Discounted Cash Flow (DCF) calculations to check if tech companies are undervalued, Remember: Even if a company has great fundamentals when you buy cheap u can buy more!" FontFamily="CentaurMTStd-BoldItalic">EPS next 5Y 35.00%</Label>
-                                <Label TextColor="#9072C9" Padding="4" HorizontalOptions="Start" ToolTipProperties.Text="Warren Buffett’s Wide Economic Moat: 1.Brand Loyalty and Pricing Power 2.High Barriers to Entry 3.High Customer Switching Costs 4.Network Effect 5.Economies of Scale 6.Brand Monopoly 7.Cost Advantage 8.Intangible Assets 9.Efficient Scale"  FontFamily="CentaurMTStd-BoldItalic">Sustainable Competitive advantage : 5 of 9 (wide economic moat)</Label>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="1.Consistent increase in Sales, Net income, and Free cash flow for last 5 years." FontFamily="CentaurMTStd-BoldItalic">EPS past 5Y</Label>
+                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" Text="48.40%" ></Label>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="Buy the best fundamental businesses on the worst news,Profit from the Panic! While everyone is panicking and selling like an aimlessly repeating monkey, if you have a strong fundamental checklist and fundamental research, you can even buy more when it is cheaper!!" FontFamily="CentaurMTStd-BoldItalic">EPS this Yr </Label>
+                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" Text="128.05%" ></Label>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="Big tech companies usually manage growth projects that give them high future cash flow growth that's why P/E-like valuation rates can be misleading for calculating NVDA, AAPL, and GOOGL-like companies! that's why we usually use Discounted Cash Flow (DCF) calculations to check if tech companies are undervalued, Remember: Even if a company has great fundamentals when you buy cheap u can buy more!" FontFamily="CentaurMTStd-BoldItalic">EPS next 5Y </Label>
+                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="Big tech companies usually manage growth projects that give them high future cash flow growth that's why P/E-like valuation rates can be misleading for calculating NVDA, AAPL, and GOOGL-like companies! that's why we usually use Discounted Cash Flow (DCF) calculations to check if tech companies are undervalued, Remember: Even if a company has great fundamentals when you buy cheap u can buy more!" FontFamily="CentaurMTStd-BoldItalic" Text=" 35.00%" ></Label>
+                                </HorizontalStackLayout>
+
+                                <VerticalStackLayout>
+                                    <Label TextColor="#9072C9" Padding="4" HorizontalOptions="Start" ToolTipProperties.Text="Warren Buffett’s Wide Economic Moat: 1.Brand Loyalty and Pricing Power 2.High Barriers to Entry 3.High Customer Switching Costs 4.Network Effect 5.Economies of Scale 6.Brand Monopoly 7.Cost Advantage 8.Intangible Assets 9.Efficient Scale"  FontFamily="CentaurMTStd-BoldItalic">Sustainable Competitive advantage : </Label>
+                                    <HorizontalStackLayout>
+
+                                        <Label TextColor="#9072C9" Padding="4" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" Text="5" ></Label>
+                                        <Label TextColor="#9072C9" Padding="4" HorizontalOptions="Start" ToolTipProperties.Text="Warren Buffett’s Wide Economic Moat: 1.Brand Loyalty and Pricing Power 2.High Barriers to Entry 3.High Customer Switching Costs 4.Network Effect 5.Economies of Scale 6.Brand Monopoly 7.Cost Advantage 8.Intangible Assets 9.Efficient Scale"  FontFamily="CentaurMTStd-BoldItalic"> of 9 (wide economic moat)</Label>
+
+                                    </HorizontalStackLayout> 
+                                </VerticalStackLayout>
                             </VerticalStackLayout>
                         </Grid>
                     </Border>
@@ -815,6 +848,14 @@
                             <Border  StrokeShape="RoundRectangle 8,8,8,8"  Stroke="#9072C9"  StrokeThickness="{OnPlatform MacCatalyst=3,Default=3}">
 
                             <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition  >
+                                        
+                                    </RowDefinition>
+                                    <RowDefinition Height="*">
+                                        
+                                    </RowDefinition>
+                                </Grid.RowDefinitions>
                                 <Image HorizontalOptions="Start" VerticalOptions="Start" Margin="{OnPlatform Default='0,0,0,0',Android='30,-100,0,0'}" Source="news_first_shablon.png" WidthRequest="{OnPlatform Default='1000' , Android='210'}" HeightRequest="{OnPlatform Android='500', Default='1414'  }">
                                 
                                 </Image>
@@ -827,8 +868,8 @@
                                     <Label Margin="{OnPlatform Default='8,0,0,0' , Android='-0,0,0,0'}" FontSize="{OnPlatform Default=20,Android=5}" Text="{Binding  CurrentNewsPaperViewModel.CurrentNewsPaperModel.Date}" FontFamily="TimeRomanBoldItalic" FontAttributes="Bold"  TextColor="#404040"  ></Label>
                                 </HorizontalStackLayout>
 
-                                <Label  Margin="{OnPlatform Default='70,250,0,0', Android='40,52,0,0'}" FontSize="{OnPlatform Default=110,Android=23}" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.MainHeaderLine1C16 , TargetNullValue='RATRACE3 GAME IS'}"  WidthRequest="{OnPlatform Default=735,Android=300}" MaxLines="1"  FontFamily="TANharmoni"    TextColor="#404040" HorizontalOptions="Start" ></Label>
-                                <Label  Margin="{OnPlatform Default='70,345,0,0', Android='38,70,0,0'}" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.MainHeaderLine2C16 , TargetNullValue='GETTING POPULAR!'}"  FontSize="{OnPlatform Default=110,Android=23}"   WidthRequest="{OnPlatform Default=735,Android=300}" MaxLines="1"  FontFamily="TANharmoni"  HorizontalOptions="Start"  TextColor="#404040"  ></Label>
+                                <Label  Margin="{OnPlatform Default='55,250,0,0', Android='40,52,0,0'}" FontSize="{OnPlatform Default=110,Android=23}" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.MainHeaderLine1C16 , TargetNullValue='RATRACE3 GAME IS'}"  WidthRequest="{OnPlatform Default=735,Android=300}" MaxLines="1"  FontFamily="TANharmoni"    TextColor="#404040" HorizontalOptions="Start" ></Label>
+                                <Label  Margin="{OnPlatform Default='55,345,0,0', Android='38,70,0,0'}" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.MainHeaderLine2C16 , TargetNullValue='GETTING POPULAR!'}"  FontSize="{OnPlatform Default=110,Android=23}"   WidthRequest="{OnPlatform Default=735,Android=300}" MaxLines="1"  FontFamily="TANharmoni"  HorizontalOptions="Start"  TextColor="#404040"  ></Label>
 
                                 <Label Margin="{OnPlatform Default='0,310,0,0' , Android='0,67,-149,0'}" HorizontalOptions="End" FontSize="{OnPlatform Default=16, Android=6}" WidthRequest="190" FontFamily="CentaurMTStd-BoldItalic"  FontAttributes="Bold" TextColor="#404040" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.RightTopArtilceTable.Part1SubHeaderC15 ,TargetNullValue='From Aaron Loeb'}" ></Label>
                                 <Label Margin="{OnPlatform Default='0,330,45,0' , Android='0,72,4,0'}" FontSize="{OnPlatform Default=16, Android=4.8}" WidthRequest="{OnPlatform Default=190, Android=40 }"  HorizontalOptions="End"  FontFamily="CentaurMTStd-Italic"  TextColor="#404040" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.RightTopArtilceTable.Part1BodyC129}" ></Label>
@@ -866,8 +907,15 @@
                                 </Image>
                                 <Label Margin="{OnPlatform Default='0,-300,0,0' ,Android='92,114,0,0'}" FontSize="{OnPlatform Default=28,Android=6}" HorizontalOptions="{OnPlatform Default='Center', Android='Start'}" VerticalOptions="{OnPlatform Default='Center', Android='Start'}" x:Name="ImageHeader" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.ImageTitleC39}" FontFamily="TANharmoni"  TextColor="#404040"/>
                                 <Label FontSize="{OnPlatform Default=55, Android=12}" Margin="{OnPlatform Default='55,-310,0,0', Android='41,110,0,0'}" HorizontalOptions="Start" VerticalOptions="{OnPlatform Default='Center',Android='Start'}"  Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.BodyOldEngStartingCharC1 , TargetNullValue='B'}" FontFamily="EngraversOldEnglish"  FontAttributes="Bold" TextColor="#fdf9da" />
-                                <Label HorizontalOptions="Start" VerticalOptions="Center"  Margin="125,-305,0,0" FontSize="16" WidthRequest="140" LineHeight="1" FontFamily="CentaurMTStd-Italic"    TextColor="#404040" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.BodyMidPartC47 ,TargetNullValue='Born on September 25, 1944, in a small town, Eleanor grew up during'}" ></Label>
-                                <Label HorizontalOptions="Start" VerticalOptions="Center" VerticalTextAlignment="Start"  Margin="40,10,0,0" FontSize="15" WidthRequest="220" FontFamily="CentaurMTStd-Italic" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.BodyEndingPartC615}"   TextColor="#404040" ></Label>
+
+                                <VerticalStackLayout HorizontalOptions="Start" VerticalOptions="Start" Margin="80,505,0,0" >
+                                    <Label FontSize="16" WidthRequest="140" HeightRequest="100" LineHeight="1" FontFamily="CentaurMTStd-Italic" Margin="25,0,0,0"   TextColor="#404040" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.BodyMidPartC47 ,TargetNullValue='Born on September 25, 1944, in a small town, Eleanor grew up during'}" ></Label>
+                                    <Label HorizontalOptions="Start" VerticalOptions="Start" VerticalTextAlignment="Start" Margin="-30,0,0,0" FontSize="15" WidthRequest="220" FontFamily="CentaurMTStd-Italic" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.BodyEndingPartC615}"   TextColor="#404040" ></Label>
+                                </VerticalStackLayout>
+                               
+                                
+                              
+                                
                                 <Label HorizontalOptions="Center" VerticalOptions="Start"  Margin="-222,445,0,0" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.MainSubHeaderC29Cap,TargetNullValue='MORE VC INVESTED VALUEHUNTER!'}" FontFamily="Times New Roman" FontSize="32" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
                                 <Label  Margin="805,890,0,0" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.RightDownArtilceTable.HeaderC19Cap ,TargetNullValue='FUN FACTS'}" FontFamily="TANharmoni" FontSize="28" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
                                 <Label  HorizontalOptions="Start" VerticalOptions="End" Margin="47,0,0,340" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.SmallLeftArticleTable.HeaderC19Cap}" FontFamily="TANharmoni" FontSize="28" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
