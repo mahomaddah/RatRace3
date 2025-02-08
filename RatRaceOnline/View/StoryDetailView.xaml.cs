@@ -28,8 +28,14 @@ public partial class StoryDetailView : ContentPage
     private async void BackToGameButton_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("GameView");
-        var appShell = (AppShell)Shell.Current;
-        appShell.CurrentLevelModel.isStarted = true;
+        try
+        {
+           
+            var appShell = (AppShell)Shell.Current;
+            appShell.CurrentLevelModel.isStarted = true;
+        }
+        catch { }
+      
     }
 
     private void ContentPage_Loaded(object sender, EventArgs e)

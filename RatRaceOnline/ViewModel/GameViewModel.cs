@@ -261,6 +261,102 @@ namespace RatRace3.ViewModel
 
         public NewsPaperViewModel CurrentNewsPaperViewModel { get; set; }
 
+        public ObservableCollection<Company> IPOCompanies { get; set; } // Market Companies
+        public Company SelectedCompany { get; set; } // Selected Company from the Rotator
+        public ObservableCollection<PriceCandleModel> ChartData { get; set; } // Stock price candles
+        public ICommand BuyStockCommand { get; }
+        public ICommand SellStockCommand { get; }
+
+        public void LoadCompanyData(Company company)
+        {
+            if (company == null) return;
+
+            SelectedCompany = company;
+            ChartData.Clear();
+
+            foreach (var candle in company.PriceCandles)
+            {
+                ChartData.Add(new PriceCandleModel { Date = candle.Date, Value =  candle.Value });
+            }
+
+            OnPropertyChanged(nameof(SelectedCompany));
+            OnPropertyChanged(nameof(ChartData));
+        }
+
+        private async void BuyStock()
+        {
+            if (SelectedCompany != null) { 
+            var appShell = (AppShell)Shell.Current;
+            var player = appShell.CurrentLevelModel.Players.First();
+            
+            double purchaseAmount = SelectedCompany.StockPrice * 1; // Buy 1 share for now
+
+            if (player.Balance >= purchaseAmount)
+            {
+                player.Balance -= purchaseAmount;
+
+                var existingStock = player.Assets.FirstOrDefault(a => a.StockCompanySymbol == SelectedCompany.Symbol);
+
+                if (existingStock != null)
+                {
+                    existingStock.StockQuantity += 1;
+                    existingStock.StockAverageBuyCost = (existingStock.StockAverageBuyCost + SelectedCompany.StockPrice) / 2;
+                }
+                else
+                {
+                    player.Assets.Add(new AssetModel
+                    {
+                        StockCompanySymbol = SelectedCompany.Symbol,
+                        AssetName = SelectedCompany.Symbol + " @ $" + SelectedCompany.StockPrice,
+                        AssetType = AssetTypes.Stock.ToString(),
+                        StockQuantity = 1,
+                        StockAverageBuyCost = SelectedCompany.StockPrice,
+                        AssetValue = purchaseAmount
+                    });
+                }
+
+                OnPropertyChanged(nameof(player.Balance));
+                await Shell.Current.DisplayAlert("Stock Purchased", $"You bought 1 share of {SelectedCompany.Symbol} for {SelectedCompany.StockPrice:C2}", "OK");
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Insufficient Funds", "You do not have enough money to purchase this stock.", "OK");
+            }
+            }
+        }
+
+        private async void SellStock()
+        {
+            if (SelectedCompany != null)
+            {
+
+            
+            var appShell = (AppShell)Shell.Current;
+            var player = appShell.CurrentLevelModel.Players.First();
+
+            var existingStock = player.Assets.FirstOrDefault(a => a.StockCompanySymbol == SelectedCompany.Symbol);
+
+            if (SelectedCompany != null && existingStock != null && existingStock.StockQuantity > 0)
+            {
+                player.Balance += SelectedCompany.StockPrice * 1; // Sell 1 share for now
+                existingStock.StockQuantity -= 1;
+
+                if (existingStock.StockQuantity == 0)
+                {
+                    player.Assets.Remove(existingStock);
+                }
+
+                OnPropertyChanged(nameof(player.Balance));
+                await Shell.Current.DisplayAlert("Stock Sold", $"You sold 1 share of {SelectedCompany.Symbol} for {SelectedCompany.StockPrice:C2}", "OK");
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("No Shares Available", "You don't own any shares of this stock to sell.", "OK");
+            }
+            }
+        }
+
+
 
         CultureInfo USD_Formant = CultureInfo.CreateSpecificCulture("en-US"); // for forcing $1,234.56 Money format 
 
@@ -726,9 +822,37 @@ namespace RatRace3.ViewModel
                 Player.Balance += (Player.NetTotalIncome);
                 IsIncomeCollected = true;
                 CurrentBalance = Player.Balance.ToString("C2", USD_Formant);
+                //also if there any debts EMI ( Expance related to debts ) reduce the amounth of Expance model from related debt.RemaingAmounth  object 
 
+                foreach (var debt in Player.Liabilities) // 
+                {
+                    var relatedExpanceObject = Player.Expenses.Find(x => x.ExpenseModelID.Equals(debt.ExpenseModelID));
+                    if (relatedExpanceObject != null)
+                    {
+                      if(  debt.RemainingAmount >= relatedExpanceObject.Amount)
+                      {
+                            debt.RemainingAmount -= relatedExpanceObject.Amount;//paid one more EMI 
+
+
+                      }
+                      else
+                      {
+                            //Above lines breaking the game but latter debug after MVP : feature ... auto remove non_early paid debts... 
+                            //Para ustunu ver ozmn
+                            // Player.Balance += (relatedExpanceObject.Amount- debt.RemainingAmount); //ve 
+                            // Gerekebilir //
+                            try
+                            {
+                                SelectedLiability = debt; // if above goes to null ... 
+                                                          //Gerekirse Call
+                                PayDebt(debt.RemainingAmount); // for removing the debt object automaticlly 
+                            }
+                            catch { }
+                      }
+
+                    }
+                }
             }
-
             //  IsIncomeCollected = false;
             //  TotalIncome = "0"; // Reset total income after collection
         }
@@ -819,6 +943,14 @@ namespace RatRace3.ViewModel
             if (SelectedLiability != null && SelectedLiability.RemainingAmount <= 0.009)
             {
                 //Debt payment Complated...
+                try
+                {
+
+                }
+                catch (Exception ex)
+                {
+                    await Shell.Current.DisplayAlert("Issue Paying Debt",ex.Message  , "Ok");
+                }
 
                 DebtListViewItemModel.Remove(DebtListViewItemModel.First(x => x.ItemText.Equals(SelectedLiability.LiabilityName)));
                 //  var appShell = (AppShell)Shell.Current;
@@ -1007,6 +1139,8 @@ namespace RatRace3.ViewModel
             CollectIncomeCommand = new Command(CollectIncome);
             NextTurnCommand = new Command(NextTurn);
             PayDebtCommand = new Command<double>(PayDebt);
+            BuyStockCommand = new Command(BuyStock);
+            SellStockCommand = new Command(SellStock);
             //delete me ....
             //TODO: get correct object  from AppSell Or in ctor... and replace null...:
             CashFlowListViewItemModel = new ObservableCollection<ListViewItemModel>();
@@ -1015,6 +1149,10 @@ namespace RatRace3.ViewModel
             DebtListViewItemModel = new ObservableCollection<ListViewItemModel>();
             ExpencesListViewItemModels = new ObservableCollection<ListViewItemModel>();
             IncomeListViewItemModel = new ObservableCollection<ListViewItemModel>();
+
+            IPOCompanies = new ObservableCollection<Company> { };
+            ChartData = new ObservableCollection<PriceCandleModel> { };
+
 
 
 

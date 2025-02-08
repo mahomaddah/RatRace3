@@ -28,9 +28,6 @@
         
     </FlyoutItem>
 
-    <ShellContent Title="Single Player" ContentTemplate="{DataTemplate local:StoryModeView}"  
-    Route="StoryModeView"/>
-    
    
 
 </Shell>

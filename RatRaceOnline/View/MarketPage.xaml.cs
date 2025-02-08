@@ -1,5 +1,6 @@
 namespace RatRace3;
 using RatRace3.Models;
+using RatRace3.ViewModel;
 using Syncfusion.Maui.Charts;
 using System;
 using System.Data.SqlTypes;
@@ -12,6 +13,9 @@ public partial class MarketPage : ContentPage
     public List<object> ChartData { get; set; }
     public List<Brush> PaletteBrushes { get; set; }
     Random random = new Random();
+
+    GameViewModel gameViewModel;
+
     public MarketPage()
     {
 
@@ -23,31 +27,32 @@ public partial class MarketPage : ContentPage
 
         //    Chart.Series.Add(new ColumnSeries());
 
-      //Real Value investors (Lords) > Momentom investors (traders)> experted workers > workers
+        //Real Value investors (Lords) > Momentom investors (traders)> experted workers > workers
         //    Chart.Series.Clear();
 
-        
-           ChartData = new List<object>
-           {
-                new { Date = DateTime.Now.Date.AddMonths(-14).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(-13).ToString("MMM-yyyy"), Value = 45 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(-12).ToString("MMM-yyyy"), Value = 25 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(-11).ToString("MMM-yyyy"), Value = 40 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(-10).ToString("MMM-yyyy"), Value = 43 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(-9).ToString("MMM-yyyy"), Value = 44 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(-8).ToString("MMM-yyyy"), Value = 50 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(-7).ToString("MMM-yyyy"), Value = 48 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(-6).ToString("MMM-yyyy"), Value = 58 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(-5).ToString("MMM-yyyy"), Value = 158 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(-4).ToString("MMM-yyyy"), Value = 128 + random.Next(-50, 100) },                      
-                new { Date = DateTime.Now.Date.AddMonths(-3).ToString("MMM-yyyy"), Value = 178 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), Value = 178 + random.Next(-50, 100) },
-                new { Date = DateTime.Now.Date.ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) }
-           };
-                
+        var appShell = (AppShell)Shell.Current;
 
-            PaletteBrushes = new List<Brush>
+        //ChartData = new List<object>
+        //{
+        //     new { Date = DateTime.Now.Date.AddMonths(-14).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
+        //     new { Date = DateTime.Now.Date.AddMonths(-13).ToString("MMM-yyyy"), Value = 45 + random.Next(-50, 100) },
+        //     new { Date = DateTime.Now.Date.AddMonths(-12).ToString("MMM-yyyy"), Value = 25 + random.Next(-50, 100) },
+        //     new { Date = DateTime.Now.Date.AddMonths(-11).ToString("MMM-yyyy"), Value = 40 + random.Next(-50, 100) },
+        //     new { Date = DateTime.Now.Date.AddMonths(-10).ToString("MMM-yyyy"), Value = 43 + random.Next(-50, 100) },
+        //     new { Date = DateTime.Now.Date.AddMonths(-9).ToString("MMM-yyyy"), Value = 44 + random.Next(-50, 100) },
+        //     new { Date = DateTime.Now.Date.AddMonths(-8).ToString("MMM-yyyy"), Value = 50 + random.Next(-50, 100) },
+        //     new { Date = DateTime.Now.Date.AddMonths(-7).ToString("MMM-yyyy"), Value = 48 + random.Next(-50, 100) },
+        //     new { Date = DateTime.Now.Date.AddMonths(-6).ToString("MMM-yyyy"), Value = 58 + random.Next(-50, 100) },
+        //     new { Date = DateTime.Now.Date.AddMonths(-5).ToString("MMM-yyyy"), Value = 158 + random.Next(-50, 100) },
+        //     new { Date = DateTime.Now.Date.AddMonths(-4).ToString("MMM-yyyy"), Value = 128 + random.Next(-50, 100) },                      
+        //     new { Date = DateTime.Now.Date.AddMonths(-3).ToString("MMM-yyyy"), Value = 178 + random.Next(-50, 100) },
+        //     new { Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) },
+        //     new { Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), Value = 178 + random.Next(-50, 100) },
+        //     new { Date = DateTime.Now.Date.ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) }
+        //};
+
+
+        PaletteBrushes = new List<Brush>
             {
                 Color.FromArgb("#FF638A2D"),
                 Color.FromArgb("#FFE3AAD6"),
@@ -63,7 +68,7 @@ public partial class MarketPage : ContentPage
 
         var columnSeries = new ColumnSeries
         {
-            ItemsSource = ChartData,
+            ItemsSource = appShell.GameViewModel.ChartData,
             XBindingPath = "Date",
             YBindingPath = "Value",
             PaletteBrushes = PaletteBrushes // Use the bound brushes
@@ -72,8 +77,14 @@ public partial class MarketPage : ContentPage
 
         Chart.PaletteBrushes = PaletteBrushes;
         Chart.Series = new ChartSeriesCollection { columnSeries };
-        BindingContext = this;
- 
+        //BindingContext = this;
+
+        // BindingContext = new GameViewModel();
+     
+        BindingContext = appShell.GameViewModel;
+    //    gameViewModel = appShell.GameViewModel; //belki gerekli ise ama bence cok sikik bir tasarim MVVM olarak
+   //     appShell.GameViewModel.LoadCompanyData(CurrentCompany);
+
     }
 
     private void markerPointer_ValueChangeCompleted(object sender, Syncfusion.Maui.Gauges.ValueChangedEventArgs e)
