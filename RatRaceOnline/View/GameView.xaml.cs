@@ -8,6 +8,7 @@ using System.Net.NetworkInformation;
 using Syncfusion.Maui.Popup;
 using System.Linq;
 using System.Diagnostics.Metrics;
+using System.Xml.Linq;
 
 public partial class GameView : ContentPage
 {
@@ -93,6 +94,24 @@ public partial class GameView : ContentPage
         await Shell.Current.GoToAsync("StoryDetailView");
     }
 
+
+    private async void CompanyInvestRoter_SelectedIndexChanged(object sender, Syncfusion.Maui.Core.Rotator.SelectedIndexChangedEventArgs e)
+    {
+        ////Change Fundemental data...
+        //SfRotator router = new SfRotator();
+        //router = (SfRotator)sender;
+        //SfRotatorItem selectedCompany = IpoCompaniesVM.RotatorItems[router.SelectedIndex];
+        //var appShell = (AppShell)Shell.Current;
+        //Company SelectedObject = appShell.IPOcompanies.First(x => selectedCompany.Image.Contains(x.Symbol));
+        ////Bind Fundemental data.. in a better way ...
+        ////BindingContext = SelectedObject.StockFundementalData;
+        //FundementalDataLeftStack.BindingContext = SelectedObject;
+
+        var appShell = (AppShell)Shell.Current;
+        appShell.GameViewModel.Market.ChangeSelectedCompany((int)e.Index);
+
+      //  await Shell.Current.DisplayAlert("Fundemental data shoud be updated"+e.Index, "called : from GameView.xaml : CompanyInvestRoter_SelectedIndexChanged()", "OK");
+    }
 
     private async void CompanyInvestRoter_ItemTapped(object sender, EventArgs e)
     {
@@ -326,5 +345,6 @@ public partial class GameView : ContentPage
     {
 
     }
+
 }
 

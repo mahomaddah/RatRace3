@@ -11,6 +11,7 @@
         /// in Bilion USD
         /// </summary>
         public double TotalDebts { get; set; }
+
         /// <summary>
         /// in Bilion USD
         /// </summary>

@@ -12,7 +12,22 @@ namespace RatRace3.Models
         /// <summary>
         /// // can be user as primery key ... Example: GOOGL is symbol of alphabet company .....
         /// </summary>
-        public string Symbol { get; set; } 
+        public string Symbol
+        {
+            get { return symbol; }
+            set { symbol = value;
+                ImagePath = symbol.ToLower() + ".png";
+            }
+        }
+        private string symbol;
+
+        // public string Symbol { get; set; }
+
+
+        /// <summary>
+        /// Symbol.Tolower+".png" Is Image path.. this is onley used for binding data and and Setting to symbol auto set this...
+        /// </summary>
+        public string ImagePath { get;private set; }
 
         /// <summary>
         /// StockPrice = 125.51, //PriceCanldes.last ..
@@ -44,6 +59,7 @@ namespace RatRace3.Models
         public Company()
         {
             StockExchange = "NASDAQ";
+                
             StockFundementalData = new Models.StockFundementalData
             {
                 StockSymbol = this.Symbol
@@ -63,16 +79,16 @@ namespace RatRace3.Models
 
             PriceCandles = new List<PriceCandleModel>
             {
-                //new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-14).ToString("MMM-yyyy"), Value = 30 + random.Next(-50, 100) },
-                //new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-13).ToString("MMM-yyyy"), Value = 45 + random.Next(-50, 100) },
+                //new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-14).ToString("MM-yyyy"), Value = 30 + random.Next(-50, 100) },
+                //new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-13).ToString("MM-yyyy"), Value = 45 + random.Next(-50, 100) },
           
-                //new PriceCandleModel { Date = DateTime.Now.Date.ToString("MMM-yyyy"), Value = 188 + random.Next(-50, 100) }
+                //new PriceCandleModel { Date = DateTime.Now.Date.ToString("MM-yyyy"), Value = 188 + random.Next(-50, 100) }
             };
 
             StockOrders = new List<StockOrder>
             {
-                //new StockOrder{ StockSymbol="MSFT" , AmounthOfMoney = 123.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MMM-yyyy"), FillingStatus = "Filled", Opration = "Sell", ShareHolderID = 1 },
-                //new StockOrder{ StockSymbol="MSFT" , AmounthOfMoney = 103.56, Date = DateTime.Now.Date.AddMonths(-2).ToString("MMM-yyyy"), FillingStatus = "Filled", Opration = "Buy", ShareHolderID = 2 }
+                //new StockOrder{ StockSymbol="MSFT" , AmounthOfMoney = 123.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), FillingStatus = "Filled", Opration = "Sell", ShareHolderID = 1 },
+                //new StockOrder{ StockSymbol="MSFT" , AmounthOfMoney = 103.56, Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), FillingStatus = "Filled", Opration = "Buy", ShareHolderID = 2 }
 
             };
 

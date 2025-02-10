@@ -745,7 +745,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <VerticalStackLayout  HorizontalOptions="Center" Margin="3" Grid.Column="0">
+                            <VerticalStackLayout BindingContext="{Binding Market.SelectedCompanyFundamentals}"  x:Name="FundementalDataLeftStack" HorizontalOptions="Center" Margin="3" Grid.Column="0">
                                 <Label FontFamily="EngraversOldEnglish" TextColor="#9072C9" Padding="7"  Text="Balance Sheet Statement:" FontAttributes="Bold"/>
                                 <HorizontalStackLayout>
 
@@ -757,7 +757,7 @@
                                 
                                 <HorizontalStackLayout>
                                     <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" ToolTipProperties.Text="Debt financing is the cheapest one rather than issuing new stocks which investors hate and it has tax advantages." FontFamily="CentaurMTStd-BoldItalic">Total Debt =</Label>
-                                    <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic" Text="{Binding TotalDebt ,FallbackValue='$0.00 B'}" ></Label>
+                                    <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic" Text="{Binding TotalDebts , StringFormat='$ {0} B', TargetNullValue='0.00 B'}" ></Label>
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout>
 
@@ -780,6 +780,7 @@
                         NavigationDelay="5000"
                         EnableSwiping="False"              
                         EnableAutoPlay="True"
+                        SelectedIndexChanged="CompanyInvestRoter_SelectedIndexChanged"
                         ItemTapped="CompanyInvestRoter_ItemTapped"
                         ToolTipProperties.Text="Click on the Company's logo to start investing..."
                         ItemsSource="{Binding RotatorItems}" 
@@ -795,7 +796,8 @@
                                 
                             </Rotator:SfRotator>
 
-                            <VerticalStackLayout ToolTipProperties.Text="It's better to buy a Wonderful Company at a Fair price rather than buy a Fair company at a Wonderful price!  -Warren Buffett"  HorizontalOptions="Center" Grid.Column="2" Margin="3">
+                            <VerticalStackLayout x:Name="FundementalDataRightStack" ToolTipProperties.Text="It's better to buy a Wonderful Company at a Fair price rather than buy a Fair company at a Wonderful price!  -Warren Buffett"  HorizontalOptions="Center" Grid.Column="2" Margin="3">
+                            
                                 <Label FontFamily="EngraversOldEnglish" TextColor="#9072C9" Padding="7" Text="Stock Income Statement:" FontAttributes="Bold"/>
                                 <HorizontalStackLayout>
                                     <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="1.Consistent increase in Sales, Net income, and Free cash flow for last 5 years." FontFamily="CentaurMTStd-BoldItalic">EPS past 5Y</Label>
@@ -819,6 +821,7 @@
 
                                     </HorizontalStackLayout> 
                                 </VerticalStackLayout>
+                                
                             </VerticalStackLayout>
                         </Grid>
                     </Border>

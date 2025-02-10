@@ -6,6 +6,7 @@
              xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
              xmlns:local="clr-namespace:RatRace3;assembly=RatRace3"
              xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
+             BindingContext="{Binding GameViewModel}"
              Title="Market Page">
     
     
@@ -17,6 +18,11 @@
 
         <chart:SfCartesianChart Margin="10" x:Name="Chart"  >
             <!-- Define X and Y axes -->
+            <chart:SfCartesianChart.TrackballBehavior>
+                <chart:ChartTrackballBehavior ShowLine="True" 
+                                      DisplayMode="NearestPoint"/>
+            </chart:SfCartesianChart.TrackballBehavior>
+
             <chart:SfCartesianChart.ZoomPanBehavior>
                 <chart:ChartZoomPanBehavior EnablePinchZooming="True"/>
             </chart:SfCartesianChart.ZoomPanBehavior>
@@ -44,30 +50,52 @@
                     EnableAnimation="True"
                     AnimationDuration="10000" >
 
-                <chart:ColumnSeries ItemsSource="{Binding ChartData}"
+                <chart:ColumnSeries ItemsSource="{Binding Market.ChartData}"
                         EnableAnimation="True"  
                         Spacing="0.1"
+                                        ShowDataLabels="True"
                                       Label="USD"
+                                   
                                     EnableTooltip="True"
+                                    IsVisibleOnLegend="True"
                         Width="4.6"
-                        ShowDataLabels="True"
-                        PaletteBrushes="{Binding PaletteBrushes}" 
+                    
+                        PaletteBrushes="{Binding Market.PaletteBrushes}" 
                         XBindingPath="Date"
                         YBindingPath="Value"/>
                 
             </chart:SfCartesianChart.Series>
 
         </chart:SfCartesianChart>
-        <Image ToolTipProperties.Text="Company Details..." x:Name="StockIcon" Margin="1" Source="googl.png" HorizontalOptions="Center" WidthRequest="90" HeightRequest="90"/>
-        <Label x:Name="StockSymbol" Margin="0,5,0,0" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" >GOOGL</Label>
-       
+        <Image ToolTipProperties.Text="{Binding Market.SelectedCompany.StockDetail,TargetNullValue='Stock Details...'}" 
+
+               Source="{Binding Market.SelectedCompany.ImagePath}"
+
+               HorizontalOptions="Center" 
+
+               WidthRequest="90" 
+
+               HeightRequest="90"/>
+
+
+
+        <Label Text="{Binding Market.SelectedCompany.Symbol}" 
+
+               Margin="0,5,0,0"
+
+               FontSize="20" 
+
+               FontAttributes="Bold" 
+
+               HorizontalOptions="Center"/>
+
         <HorizontalStackLayout Margin="1" HorizontalOptions="Center" VerticalOptions="Center">
             <Label  Text="Current Stock Price:"></Label>
-            <Label Margin="5,0,0,0" x:Name="StockPriceLB" Text="53.44"></Label>
+            <Label Margin="5,0,0,0" x:Name="StockPriceLB" Text="{Binding Market.SelectedCompany.StockPrice}"></Label>
         </HorizontalStackLayout>
         <HorizontalStackLayout Margin="1" HorizontalOptions="Center" VerticalOptions="Center">
             <Label  Text="Position Value Owned:"></Label>
-            <Label x:Name="PostionValueOwnedLB" Margin="5,0,0,0" Text="53.44"></Label>
+            <Label x:Name="PostionValueOwnedLB" Margin="5,0,0,0" Text="{Binding Market.SelectedCompany.StockPrice}"></Label>
         </HorizontalStackLayout>
 
 
@@ -95,7 +123,7 @@
 
 
 
-                <gauge:LinearShapePointer   ValueChangeCompleted="markerPointer_ValueChangeCompleted"  x:Name="markerPointer"  IsInteractive="True" Fill="#FF6ECAB2" Value="5"/>
+                <gauge:LinearShapePointer   ValueChangeCompleted="markerPointer_ValueChangeCompleted"  x:Name="markerPointer"  IsInteractive="True" Fill="#FF6ECAB2" Value="{Binding SelectedCompany.Stock}"/>
 
              
             </gauge:SfLinearGauge.MarkerPointers>

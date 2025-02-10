@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using Microsoft.Maui.Controls.Platform;
 using System.Reflection.PortableExecutable;
+using RatRace3.ViewModels;
 
 namespace RatRace3.ViewModel
 {
@@ -258,29 +259,41 @@ namespace RatRace3.ViewModel
             }
         }
 
-
+       
         public NewsPaperViewModel CurrentNewsPaperViewModel { get; set; }
 
-        public ObservableCollection<Company> IPOCompanies { get; set; } // Market Companies
+   
+     
+
+        public MarketViewModel Market { get; set; }
+        public AssetModel GetMarketCurrentStocksAsset()
+        {
+            return Player.Assets.First(x => x.StockCompanySymbol.Equals(Market.SelectedCompany.Symbol));
+        }
         public Company SelectedCompany { get; set; } // Selected Company from the Rotator
+
+        #region MarketViewModel related...
+        public ObservableCollection<Company> IPOCompanies { get; set; } // Market Companies
         public ObservableCollection<PriceCandleModel> ChartData { get; set; } // Stock price candles
         public ICommand BuyStockCommand { get; }
         public ICommand SellStockCommand { get; }
 
         public void LoadCompanyData(Company company)
         {
-            if (company == null) return;
+            //if (company == null) return;
 
-            SelectedCompany = company;
-            ChartData.Clear();
+            //SelectedCompany = company;
+            //ChartData.Clear();
 
-            foreach (var candle in company.PriceCandles)
-            {
-                ChartData.Add(new PriceCandleModel { Date = candle.Date, Value =  candle.Value });
-            }
+            //foreach (var candle in company.PriceCandles)
+            //{
+            //    ChartData.Add(new PriceCandleModel { Date = candle.Date, Value =  candle.Value });
+            //}
 
-            OnPropertyChanged(nameof(SelectedCompany));
-            OnPropertyChanged(nameof(ChartData));
+            //OnPropertyChanged(nameof(SelectedCompany));
+            //OnPropertyChanged(nameof(ChartData));
+
+            Market.SelectedCompany = company;
         }
 
         private async void BuyStock()
@@ -356,7 +369,7 @@ namespace RatRace3.ViewModel
             }
         }
 
-
+        #endregion
 
         CultureInfo USD_Formant = CultureInfo.CreateSpecificCulture("en-US"); // for forcing $1,234.56 Money format 
 
@@ -901,8 +914,18 @@ namespace RatRace3.ViewModel
             }
         }
 
+        Random random = new Random();
+        void AddNewCandleToStocks()
+        {
+            foreach(var company in Market.IPOCompanies)
+            {
+                company.StockLastCandlePrice = company.StockPrice;
+                var newMonthCandle = new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(Player.CurrentMonth).ToString("MM-yyyy"), Value = 812.17 + (200* company.StockFundementalData.EPSnext5Y) + random.Next(-5, 9) };
+                company.PriceCandles.Add( newMonthCandle);
+                company.StockPrice = newMonthCandle.Value;
+            }
         
-
+        }
 
 
         private async void PayDebt(double amount)
@@ -996,7 +1019,7 @@ namespace RatRace3.ViewModel
 
                     IsIncomeCollected = false;//for new turn...
                     updateRDassetsValue();
-                  
+                    AddNewCandleToStocks();
 
 
                     //Checking Game Goals:
@@ -1153,7 +1176,7 @@ namespace RatRace3.ViewModel
             IPOCompanies = new ObservableCollection<Company> { };
             ChartData = new ObservableCollection<PriceCandleModel> { };
 
-
+            Market = new MarketViewModel();
 
 
         }
