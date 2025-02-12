@@ -99,20 +99,31 @@ public partial class GameView : ContentPage
     {
         ////Change Fundemental data...
         //SfRotator router = new SfRotator();
-        var router = (SfRotator)sender;
-        SfRotatorItem selectedCompany = IpoCompaniesVM.RotatorItems[router.SelectedIndex];
-        if (selectedCompany != null)
+        try
         {
-            var appShell = (AppShell)Shell.Current;
-            Company SelectedObject = appShell.IPOcompanies.First(x => selectedCompany.Image.Contains(x.Symbol));
-            ////Bind Fundemental data.. in a better way ...
-            ////BindingContext = SelectedObject.StockFundementalData;
-            //FundementalDataLeftStack.BindingContext = SelectedObject;
 
-            FundementalDataTotalCashLB.Text = SelectedObject.StockFundementalData.TotalCash.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
-            FundementalTotalDebts.Text = SelectedObject.StockFundementalData.TotalDebts.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
+            var router = (SfRotator)sender;
+            SfRotatorItem selectedCompany = IpoCompaniesVM.RotatorItems[router.SelectedIndex];
+            if (selectedCompany != null)
+            {
+                var appShell = (AppShell)Shell.Current;
+                Company SelectedObject = appShell.IPOcompanies.First(x => selectedCompany.Image.Contains(x.Symbol));
+                ////Bind Fundemental data.. in a better way ...
+                ////BindingContext = SelectedObject.StockFundementalData;
+                //FundementalDataLeftStack.BindingContext = SelectedObject;
 
+                FundementalDataTotalCashLB.Text = SelectedObject.StockFundementalData.TotalCash.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
+                FundementalTotalDebts.Text = SelectedObject.StockFundementalData.TotalDebts.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
+                CompetetiveAdvantageScoreLB.Text = SelectedObject.StockFundementalData.SustainableCompetitiveAdvantage.ToString();
+                EPSthisYrLB.Text = SelectedObject.StockFundementalData.EPSthisYr.ToString("P");
+                EPSpast5yrLB.Text = SelectedObject.StockFundementalData.EPSpast5Y.ToString("P");
+                EPSnext5yrLB.Text = SelectedObject.StockFundementalData.EPSnext5Y.ToString("P");
+                DCFvaluetionLB.Text = SelectedObject.StockFundementalData.DCFvaluation.ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
+                IncomeAnnualCompanyLB.Text = SelectedObject.StockFundementalData.AnnualIncome.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B";
+
+            }
         }
+        catch { }
 
 
         //appShell.GameViewModel.Market.ChangeSelectedCompany((int)e.Index); //for auto updating the shit DataContext of Fundemental Data... Comment lined for now to fix the bug i't aslo changing Market CurrentCompany as well :D ... in fact i'ts not even changing fundemental data in here :D

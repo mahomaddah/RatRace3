@@ -329,7 +329,7 @@ namespace RatRace3
                             new StockOrder{ StockSymbol="GOOGL" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
                        },
 
-                       PriceCandles = new List<PriceCandleModel>
+                       PriceCandles = new ObservableCollection<PriceCandleModel>
                        {
                              new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-8).ToString("MM-yyyy"), Value = 58 + random.Next(-5, 9) },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 74 + random.Next(-5, 9) },
@@ -375,7 +375,7 @@ namespace RatRace3
                             new StockOrder{ StockSymbol="AAPL" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
                        },
 
-                       PriceCandles = new List<PriceCandleModel>
+                       PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
                                  new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 100 + random.Next(-5, 9) },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 450 + random.Next(-5, 9) },
@@ -415,7 +415,7 @@ namespace RatRace3
                             new StockOrder{ StockSymbol="MSFT" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
                        },
 
-                       PriceCandles = new List<PriceCandleModel>
+                       PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 300 + random.Next(-5, 9) },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 450 + random.Next(-5, 9) },
@@ -457,7 +457,7 @@ namespace RatRace3
                             new StockOrder{ StockSymbol="WMT" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
                        },
 
-                       PriceCandles = new List<PriceCandleModel>
+                       PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 200 + random.Next(-5, 9) },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 250 + random.Next(-5, 9) },
@@ -502,7 +502,7 @@ namespace RatRace3
                             new StockOrder{ StockSymbol="TSLA" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
                        },
 
-                       PriceCandles = new List<PriceCandleModel>
+                       PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
                                    new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 200 + random.Next(-50, 9) },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 250 + random.Next(-50, 9) },
@@ -547,7 +547,7 @@ namespace RatRace3
                             new StockOrder{ StockSymbol="META" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
                        },
 
-                       PriceCandles = new List<PriceCandleModel>
+                       PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-15).ToString("MM-yyyy"), Value = 325.48 + random.Next(-5, 9) },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-14).ToString("MM-yyyy"), Value = 351.61 + random.Next(-5, 9) },
@@ -597,7 +597,7 @@ namespace RatRace3
                             new StockOrder{ StockSymbol="ADBE" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
                        },
 
-                       PriceCandles = new List<PriceCandleModel>
+                       PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 100 + random.Next(-8, 14) },
                           new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 200 + random.Next(-8, 14) },
@@ -641,7 +641,7 @@ namespace RatRace3
                             new StockOrder{ StockSymbol="NVDA" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
                        },
 
-                       PriceCandles = new List<PriceCandleModel>
+                       PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
                                        new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 100 + random.Next(-8, 14) },
                           new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 200 + random.Next(-8, 14) },
@@ -685,7 +685,7 @@ namespace RatRace3
                             new StockOrder{ StockSymbol="AMZN" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
                        },
 
-                       PriceCandles = new List<PriceCandleModel>
+                       PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 100 + random.Next(-8, 14) },
                                   new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 200 + random.Next(-8, 14) },

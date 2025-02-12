@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,19 +9,67 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RatRace3.Models
 {
-    public class Company
+    public class Company :INotifyPropertyChanged
     {
         /// <summary>
         /// // can be user as primery key ... Example: GOOGL is symbol of alphabet company .....
         /// </summary>
+        /// 
+        private string _symbol;
+        private double _stockPrice;
+        private double _stockLastCandlePrice;
+
         public string Symbol
         {
-            get { return symbol; }
-            set { symbol = value;
-                ImagePath = symbol.ToLower() + ".png";
+            get => _symbol;
+            set
+            {
+                if (_symbol != value)
+                {
+                    _symbol = value;
+                    ImagePath = _symbol.ToLower() + ".png";
+                    OnPropertyChanged(nameof(Symbol));
+                    OnPropertyChanged(nameof(ImagePath));
+                }
             }
         }
-        private string symbol;
+
+        public string ImagePath { get; private set; }
+
+        public double StockPrice
+        {
+            get => _stockPrice;
+            set
+            {
+                if (_stockPrice != value)
+                {
+                    _stockPrice = value;
+                    OnPropertyChanged(nameof(StockPrice));
+                }
+            }
+        }
+
+        public double StockLastCandlePrice
+        {
+            get => _stockLastCandlePrice;
+            set
+            {
+                if (_stockLastCandlePrice != value)
+                {
+                    _stockLastCandlePrice = value;
+                    OnPropertyChanged(nameof(StockLastCandlePrice));
+                }
+            }
+        }
+
+        //public string Symbol
+        //{
+        //    get { return symbol; }
+        //    set { symbol = value;
+        //        ImagePath = symbol.ToLower() + ".png";
+        //    }
+        //}
+        //private string symbol;
 
         // public string Symbol { get; set; }
 
@@ -27,20 +77,20 @@ namespace RatRace3.Models
         /// <summary>
         /// Symbol.Tolower+".png" Is Image path.. this is onley used for binding data and and Setting to symbol auto set this...
         /// </summary>
-        public string ImagePath { get;private set; }
+     //   public string ImagePath { get;private set; }
 
         /// <summary>
         /// StockPrice = 125.51, //PriceCanldes.last ..
         /// </summary>
-        public double StockPrice { get; set; }
+        //public double StockPrice { get; set; }
 
         /// <summary>
         /// StockLastCandlePrice =120.12,// USed for P&L...
         /// </summary>
-        public double StockLastCandlePrice { get; set; }
+       // public double StockLastCandlePrice { get; set; }
 
         public string StockDetail { get; set; }
-        public string StockExchange { get; set; }
+        public string StockExchange { get; set; } = "NASDAQ";
 
         /// <summary>
 
@@ -50,15 +100,22 @@ namespace RatRace3.Models
         //image paths are this.Symbol.ToLower()+".png"....
 
         public StockFundementalData StockFundementalData { get; set; }
-        public List<PriceCandleModel> PriceCandles { get; set; }
+        public ObservableCollection<PriceCandleModel> PriceCandles { get; set; } = new ObservableCollection<PriceCandleModel>();
+
         public List<StockOrder> StockOrders { get; set; }
 
 
         //  public AssetModel CompanyRelatedAsset { get; set; } 
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public Company()
         {
-            StockExchange = "NASDAQ";
+
                 
             StockFundementalData = new Models.StockFundementalData
             {
@@ -77,13 +134,7 @@ namespace RatRace3.Models
             };
             var random = new Random();
 
-            PriceCandles = new List<PriceCandleModel>
-            {
-                //new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-14).ToString("MM-yyyy"), Value = 30 + random.Next(-50, 100) },
-                //new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-13).ToString("MM-yyyy"), Value = 45 + random.Next(-50, 100) },
-          
-                //new PriceCandleModel { Date = DateTime.Now.Date.ToString("MM-yyyy"), Value = 188 + random.Next(-50, 100) }
-            };
+
 
             StockOrders = new List<StockOrder>
             {

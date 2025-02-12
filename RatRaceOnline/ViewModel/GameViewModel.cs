@@ -261,75 +261,75 @@ namespace RatRace3.ViewModel
 
         private async void BuyStock()
         {
-            if (SelectedCompany != null) { 
-            var appShell = (AppShell)Shell.Current;
-            var player = appShell.CurrentLevelModel.Players.First();
+            //if (SelectedCompany != null) { 
+            //var appShell = (AppShell)Shell.Current;
+            //var player = appShell.CurrentLevelModel.Players.First();
             
-            double purchaseAmount = SelectedCompany.StockPrice * 1; // Buy 1 share for now
+            //double purchaseAmount = SelectedCompany.StockPrice * 1; // Buy 1 share for now
 
-            if (player.Balance >= purchaseAmount)
-            {
-                player.Balance -= purchaseAmount;
+            //if (player.Balance >= purchaseAmount)
+            //{
+            //    player.Balance -= purchaseAmount;
 
-                var existingStock = player.Assets.FirstOrDefault(a => a.StockCompanySymbol == SelectedCompany.Symbol);
+            //    var existingStock = player.Assets.FirstOrDefault(a => a.StockCompanySymbol == SelectedCompany.Symbol);
 
-                if (existingStock != null)
-                {
-                    existingStock.StockQuantity += 1;
-                    existingStock.StockAverageBuyCost = (existingStock.StockAverageBuyCost + SelectedCompany.StockPrice) / 2;
-                }
-                else
-                {
-                    player.Assets.Add(new AssetModel
-                    {
-                        StockCompanySymbol = SelectedCompany.Symbol,
-                        AssetName = SelectedCompany.Symbol + " @ $" + SelectedCompany.StockPrice,
-                        AssetType = AssetTypes.Stock.ToString(),
-                        StockQuantity = 1,
-                        StockAverageBuyCost = SelectedCompany.StockPrice,
-                        AssetValue = purchaseAmount
-                    });
-                }
+            //    if (existingStock != null)
+            //    {
+            //        existingStock.StockQuantity += 1;
+            //        existingStock.StockAverageBuyCost = (existingStock.StockAverageBuyCost + SelectedCompany.StockPrice) / 2;
+            //    }
+            //    else
+            //    {
+            //        player.Assets.Add(new AssetModel
+            //        {
+            //            StockCompanySymbol = SelectedCompany.Symbol,
+            //            AssetName = SelectedCompany.Symbol + " @ $" + SelectedCompany.StockPrice,
+            //            AssetType = AssetTypes.Stock.ToString(),
+            //            StockQuantity = 1,
+            //            StockAverageBuyCost = SelectedCompany.StockPrice,
+            //            AssetValue = purchaseAmount
+            //        });
+            //    }
 
-                OnPropertyChanged(nameof(player.Balance));
-                await Shell.Current.DisplayAlert("Stock Purchased", $"You bought 1 share of {SelectedCompany.Symbol} for {SelectedCompany.StockPrice:C2}", "OK");
-            }
-            else
-            {
-                await Shell.Current.DisplayAlert("Insufficient Funds", "You do not have enough money to purchase this stock.", "OK");
-            }
-            }
+            //    OnPropertyChanged(nameof(player.Balance));
+            //    await Shell.Current.DisplayAlert("Stock Purchased", $"You bought 1 share of {SelectedCompany.Symbol} for {SelectedCompany.StockPrice:C2}", "OK");
+            //}
+            //else
+            //{
+            //    await Shell.Current.DisplayAlert("Insufficient Funds", "You do not have enough money to purchase this stock.", "OK");
+            //}
+            //}
         }
 
         private async void SellStock()
         {
-            if (SelectedCompany != null)
-            {
+            //if (SelectedCompany != null)
+            //{
 
             
-            var appShell = (AppShell)Shell.Current;
-            var player = appShell.CurrentLevelModel.Players.First();
+            //var appShell = (AppShell)Shell.Current;
+            //var player = appShell.CurrentLevelModel.Players.First();
 
-            var existingStock = player.Assets.FirstOrDefault(a => a.StockCompanySymbol == SelectedCompany.Symbol);
+            //var existingStock = player.Assets.FirstOrDefault(a => a.StockCompanySymbol == SelectedCompany.Symbol);
 
-            if (SelectedCompany != null && existingStock != null && existingStock.StockQuantity > 0)
-            {
-                player.Balance += SelectedCompany.StockPrice * 1; // Sell 1 share for now
-                existingStock.StockQuantity -= 1;
+            //if (SelectedCompany != null && existingStock != null && existingStock.StockQuantity > 0)
+            //{
+            //    player.Balance += SelectedCompany.StockPrice * 1; // Sell 1 share for now
+            //    existingStock.StockQuantity -= 1;
 
-                if (existingStock.StockQuantity == 0)
-                {
-                    player.Assets.Remove(existingStock);
-                }
+            //    if (existingStock.StockQuantity == 0)
+            //    {
+            //        player.Assets.Remove(existingStock);
+            //    }
 
-                OnPropertyChanged(nameof(player.Balance));
-                await Shell.Current.DisplayAlert("Stock Sold", $"You sold 1 share of {SelectedCompany.Symbol} for {SelectedCompany.StockPrice:C2}", "OK");
-            }
-            else
-            {
-                await Shell.Current.DisplayAlert("No Shares Available", "You don't own any shares of this stock to sell.", "OK");
-            }
-            }
+            //    OnPropertyChanged(nameof(player.Balance));
+            //    await Shell.Current.DisplayAlert("Stock Sold", $"You sold 1 share of {SelectedCompany.Symbol} for {SelectedCompany.StockPrice.ToString("C2",USD_Formant)}", "OK");
+            //}
+            //else
+            //{
+            //    await Shell.Current.DisplayAlert("No Shares Available", "You don't own any shares of this stock to sell.", "OK");
+            //}
+            //}
         }
 
         #endregion
@@ -586,11 +586,15 @@ namespace RatRace3.ViewModel
             foreach(var company in Market.IPOCompanies)
             {
                 company.StockLastCandlePrice = company.StockPrice;
-                var newMonthCandle = new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(Player.CurrentMonth).ToString("MM-yyyy"), Value = 812.17 + (200* company.StockFundementalData.EPSnext5Y) + random.Next(-5, 9) };
+                var newMonthCandle = new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(Player.CurrentMonth).ToString("MM-yyyy"), Value = company.StockPrice + (200* (1+company.StockFundementalData.EPSnext5Y)) + random.Next(-5, 9) };
                 company.PriceCandles.Add( newMonthCandle);
                 company.StockPrice = newMonthCandle.Value;
+                Market.LoadCompanyData(company);
             }
-        
+
+         
+
+
         }
 
 

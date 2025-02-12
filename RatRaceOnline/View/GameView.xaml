@@ -757,17 +757,17 @@
                                 
                                 <HorizontalStackLayout>
                                     <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" ToolTipProperties.Text="Debt financing is the cheapest one rather than issuing new stocks which investors hate and it has tax advantages." FontFamily="CentaurMTStd-BoldItalic">Total Debt =</Label>
-                                    <Label TextColor="#9072C9" Padding="5" x:Name="FundementalTotalDebts" HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic" Text="{Binding TotalDebts , StringFormat='$ {0} B', TargetNullValue='0.00 B'}" ></Label>
+                                    <Label TextColor="#9072C9" Padding="5" x:Name="FundementalTotalDebts" HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic" Text="{Binding TotalDebts , StringFormat='$ {0} B', TargetNullValue='0.00 B' ,FallbackValue='$95.00 B USD'}" ></Label>
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout>
 
                                     <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" ToolTipProperties.Text="When you buy a Stock, you are not buying a lottery ticket! You are one of the owners of the underlying business, The Stronger the business, the lower the risk of default! Businesses are money-making machines the more money they print the more value they have!" FontFamily="CentaurMTStd-BoldItalic">Annual Income =</Label>
-                                    <Label Text="$63.07 B" TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic"></Label>
+                                    <Label x:Name="IncomeAnnualCompanyLB" Text="$63.07 B" TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic"></Label>
                                 </HorizontalStackLayout> 
                                 <HorizontalStackLayout> <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" Text="DCF Valuation =" ToolTipProperties.Text="'Discounted cash flow (DCF) is a valuation method that estimates the value of an investment using its expected future cash flows.'-Investopedia 
                         
                                         'Price is What you pay. Value is what you get.' -WarrenBuffett" FontFamily="CentaurMTStd-BoldItalic"></Label>
-                                    <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" Text="$230.94" FontFamily="CentaurMTStd-BoldItalic"></Label>
+                                    <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" x:Name="DCFvaluetionLB" Text="$230.94" FontFamily="CentaurMTStd-BoldItalic"></Label>
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
 
@@ -801,22 +801,22 @@
                                 <Label FontFamily="EngraversOldEnglish" TextColor="#9072C9" Padding="7" Text="Stock Income Statement:" FontAttributes="Bold"/>
                                 <HorizontalStackLayout>
                                     <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="1.Consistent increase in Sales, Net income, and Free cash flow for last 5 years." FontFamily="CentaurMTStd-BoldItalic">EPS past 5Y</Label>
-                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" Text="48.40%" ></Label>
+                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" x:Name="EPSpast5yrLB" Text="48.40%" ></Label>
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout>
                                     <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="Buy the best fundamental businesses on the worst news,Profit from the Panic! While everyone is panicking and selling like an aimlessly repeating monkey, if you have a strong fundamental checklist and fundamental research, you can even buy more when it is cheaper!!" FontFamily="CentaurMTStd-BoldItalic">EPS this Yr </Label>
-                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" Text="128.05%" ></Label>
+                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" x:Name="EPSthisYrLB"  Text="128.05%" ></Label>
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout>
                                     <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="Big tech companies usually manage growth projects that give them high future cash flow growth that's why P/E-like valuation rates can be misleading for calculating NVDA, AAPL, and GOOGL-like companies! that's why we usually use Discounted Cash Flow (DCF) calculations to check if tech companies are undervalued, Remember: Even if a company has great fundamentals when you buy cheap u can buy more!" FontFamily="CentaurMTStd-BoldItalic">EPS next 5Y </Label>
-                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="Big tech companies usually manage growth projects that give them high future cash flow growth that's why P/E-like valuation rates can be misleading for calculating NVDA, AAPL, and GOOGL-like companies! that's why we usually use Discounted Cash Flow (DCF) calculations to check if tech companies are undervalued, Remember: Even if a company has great fundamentals when you buy cheap u can buy more!" FontFamily="CentaurMTStd-BoldItalic" Text=" 35.00%" ></Label>
+                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" x:Name="EPSnext5yrLB" ToolTipProperties.Text="Big tech companies usually manage growth projects that give them high future cash flow growth that's why P/E-like valuation rates can be misleading for calculating NVDA, AAPL, and GOOGL-like companies! that's why we usually use Discounted Cash Flow (DCF) calculations to check if tech companies are undervalued, Remember: Even if a company has great fundamentals when you buy cheap u can buy more!" FontFamily="CentaurMTStd-BoldItalic" Text=" 35.00%" ></Label>
                                 </HorizontalStackLayout>
 
                                 <VerticalStackLayout>
                                     <Label TextColor="#9072C9" Padding="4" HorizontalOptions="Start" ToolTipProperties.Text="Warren Buffett’s Wide Economic Moat: 1.Brand Loyalty and Pricing Power 2.High Barriers to Entry 3.High Customer Switching Costs 4.Network Effect 5.Economies of Scale 6.Brand Monopoly 7.Cost Advantage 8.Intangible Assets 9.Efficient Scale"  FontFamily="CentaurMTStd-BoldItalic">Sustainable Competitive advantage : </Label>
                                     <HorizontalStackLayout>
 
-                                        <Label TextColor="#9072C9" Padding="4" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" Text="5" ></Label>
+                                        <Label TextColor="#9072C9" Padding="4" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" x:Name="CompetetiveAdvantageScoreLB" Text="5" ></Label>
                                         <Label TextColor="#9072C9" Padding="4" HorizontalOptions="Start" ToolTipProperties.Text="Warren Buffett’s Wide Economic Moat: 1.Brand Loyalty and Pricing Power 2.High Barriers to Entry 3.High Customer Switching Costs 4.Network Effect 5.Economies of Scale 6.Brand Monopoly 7.Cost Advantage 8.Intangible Assets 9.Efficient Scale"  FontFamily="CentaurMTStd-BoldItalic"> of 9 (wide economic moat)</Label>
 
                                     </HorizontalStackLayout> 
