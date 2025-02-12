@@ -33,5 +33,6 @@
         /// </summary>
         public int SustainableCompetitiveAdvantage { get; set; }
         public double DCFvaluation { get; set; }
+        public double Beta { get; internal set; }
     }
 }

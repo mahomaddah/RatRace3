@@ -750,14 +750,14 @@
                                 <HorizontalStackLayout>
 
                                     <Label TextColor="#9072C9" Padding="5"  ToolTipProperties.Text="high cash low-debt Companies Have better Financial health and are better businesses to own !!" HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic">Total Cash =</Label>
-                                    <Label TextColor="#9072C9" Padding="5"  ToolTipProperties.Text="high cash low-debt Companies Have better Financial health and are better businesses to own !!" HorizontalOptions="Center" Text="$380.23 B USD" FontFamily="CentaurMTStd-BoldItalic"></Label>
+                                    <Label x:Name="FundementalDataTotalCashLB" TextColor="#9072C9" Padding="5"  ToolTipProperties.Text="high cash low-debt Companies Have better Financial health and are better businesses to own !!" HorizontalOptions="Center" Text="$380.23 B USD" FontFamily="CentaurMTStd-BoldItalic"></Label>
 
                                 </HorizontalStackLayout>           
                                 
                                 
                                 <HorizontalStackLayout>
                                     <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" ToolTipProperties.Text="Debt financing is the cheapest one rather than issuing new stocks which investors hate and it has tax advantages." FontFamily="CentaurMTStd-BoldItalic">Total Debt =</Label>
-                                    <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic" Text="{Binding TotalDebts , StringFormat='$ {0} B', TargetNullValue='0.00 B'}" ></Label>
+                                    <Label TextColor="#9072C9" Padding="5" x:Name="FundementalTotalDebts" HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic" Text="{Binding TotalDebts , StringFormat='$ {0} B', TargetNullValue='0.00 B'}" ></Label>
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout>
 

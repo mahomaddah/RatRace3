@@ -11,7 +11,10 @@ public partial class MarketPage : ContentPage
     public AssetModel CurrentAssetModel { get; set; }
     public Company CurrentCompany { get; set; }
     //   public List<object> ChartData { get; set; }
-     List<Brush> PaletteBrushes = new List<Brush>
+    
+   
+ 
+     List<Brush> PaletteBrushes = new List<Brush> //TODO: Duplicated code Should be deleted... after Refactoring ... 
      {
                 Color.FromArgb("#FF638A2D"),
                 Color.FromArgb("#FFE3AAD6"),
@@ -130,50 +133,50 @@ public partial class MarketPage : ContentPage
     private async void SellAssetPosition_Clicked(object sender, EventArgs e)
     {
 
-        ////User SHould be ablae to sell their MSFT by Double clicking on asset this page should show up and msft postion should come here...
-        ////ready to sell! bind gameViewModel and This Logics here also make sure double click on asset postion work well ... DONE
-        ////aslo a tooltip like : stock market is currentlly at holyday i't will open after Level 1 was Complated and After Post Demo Update.....
+        //////User SHould be ablae to sell their MSFT by Double clicking on asset this page should show up and msft postion should come here...
+        //////ready to sell! bind gameViewModel and This Logics here also make sure double click on asset postion work well ... DONE
+        //////aslo a tooltip like : stock market is currentlly at holyday i't will open after Level 1 was Complated and After Post Demo Update.....
         
-        var appShell = (AppShell)Shell.Current;
-        var Player = appShell.CurrentLevelModel.Players.First();
-        if(markerPointer.Value <= CurrentAssetModel.StockQuantity && markerPointer.Value!=0)
-        {
-            //Sell amonth ...
-            CurrentAssetModel.StockQuantity -= markerPointer.Value;
+        //var appShell = (AppShell)Shell.Current;
+        //var Player = appShell.CurrentLevelModel.Players.First();
+        //if(markerPointer.Value <= CurrentAssetModel.StockQuantity && markerPointer.Value!=0)
+        //{
+        //    //Sell amonth ...
+        //    CurrentAssetModel.StockQuantity -= markerPointer.Value;
 
-            Player.Balance += Math.Round(CurrentCompany.StockPrice * markerPointer.Value, 2);
+        //    Player.Balance += Math.Round(CurrentCompany.StockPrice * markerPointer.Value, 2);
 
-            if (CurrentAssetModel.StockQuantity == 0)
-                appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentAssetModel);
-        }
-        else // Ya adam da Okadar yok ya elimdeki nekadar varsa onu sat kast etmistir...
-        {
-            if (CurrentAssetModel.StockQuantity > 0.009)
-            {
-                //daha buyuktur ? 
-                bool result = await DisplayAlert("Stock Market", "The value you want to sell is higher than the total amount you hold! Did you mean to  sell all ?", "Yes, All In..", "No!!");
-                if (result)
-                {
-                    //sell all...
-                    Player.Balance += Math.Round(CurrentCompany.StockPrice * CurrentAssetModel.StockQuantity, 2);
+        //    if (CurrentAssetModel.StockQuantity == 0)
+        //        appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentAssetModel);
+        //}
+        //else // Ya adam da Okadar yok ya elimdeki nekadar varsa onu sat kast etmistir...
+        //{
+        //    if (CurrentAssetModel.StockQuantity > 0.009)
+        //    {
+        //        //daha buyuktur ? 
+        //        bool result = await DisplayAlert("Stock Market", "The value you want to sell is higher than the total amount you hold! Did you mean to  sell all ?", "Yes, All In..", "No!!");
+        //        if (result)
+        //        {
+        //            //sell all...
+        //            Player.Balance += Math.Round(CurrentCompany.StockPrice * CurrentAssetModel.StockQuantity, 2);
 
-                    appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentAssetModel);
+        //            appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentAssetModel);
                     
 
-                }
-            }
-        }
-        updateAssetValue();
+        //        }
+        //    }
+        //}
+        //updateAssetValue();
 
-        ContentPage_Loaded(this, new EventArgs());//Work like magic...
+        //ContentPage_Loaded(this, new EventArgs());//Work like magic...
 
-        //Update GUI for this page and Statment page ... IF not work with functins than run above code...
+        ////Update GUI for this page and Statment page ... IF not work with functins than run above code...
 
-        appShell.GameViewModel.LoadPlayerData(Player);
+        //appShell.GameViewModel.LoadPlayerData(Player);
 
-        await Shell.Current.GoToAsync("GameView");
+        //await Shell.Current.GoToAsync("GameView");
 
-        ////Orders System li yapmaliyiz Aslinda ileride Gercek economy gibi...
+        //////Orders System li yapmaliyiz Aslinda ileride Gercek economy gibi...
 
     }
    void updateAssetValue()
@@ -186,55 +189,55 @@ public partial class MarketPage : ContentPage
     {
 
 
-        var appShell = (AppShell)Shell.Current;
-        var Player = appShell.CurrentLevelModel.Players.First();
+        //var appShell = (AppShell)Shell.Current;
+        //var Player = appShell.CurrentLevelModel.Players.First();
 
-        double purchaseAmount = Math.Round(CurrentCompany.StockPrice * markerPointer.Value, 2);
+        //double purchaseAmount = Math.Round(CurrentCompany.StockPrice * markerPointer.Value, 2);
 
-        // Step 1: Check if Player has enough balance to buy the stocks
-        if (Player.Balance >= purchaseAmount && markerPointer.Value > 0)
-        {
-            Player.Balance -= purchaseAmount; // Deduct balance
+        //// Step 1: Check if Player has enough balance to buy the stocks
+        //if (Player.Balance >= purchaseAmount && markerPointer.Value > 0)
+        //{
+        //    Player.Balance -= purchaseAmount; // Deduct balance
 
-            var existingStock = Player.Assets.FirstOrDefault(a => a.StockCompanySymbol == CurrentCompany.Symbol);
+        //    var existingStock = Player.Assets.FirstOrDefault(a => a.StockCompanySymbol == CurrentCompany.Symbol);
 
-            if (existingStock != null)
-            {
-                // Step 2: Update existing stock's quantity and average buy cost
-                double totalCostBefore = existingStock.StockAverageBuyCost * existingStock.StockQuantity;
-                double newTotalCost = totalCostBefore + purchaseAmount;
+        //    if (existingStock != null)
+        //    {
+        //        // Step 2: Update existing stock's quantity and average buy cost
+        //        double totalCostBefore = existingStock.StockAverageBuyCost * existingStock.StockQuantity;
+        //        double newTotalCost = totalCostBefore + purchaseAmount;
 
-                existingStock.StockQuantity += markerPointer.Value;
-                existingStock.StockAverageBuyCost = Math.Round(newTotalCost / existingStock.StockQuantity, 2);
-            }
-            else
-            {
-                // Step 3: Create a new stock position
-                Player.Assets.Add(new AssetModel
-                {
-                    StockCompanySymbol = CurrentCompany.Symbol,                   
-                    AssetName = CurrentCompany.Symbol +" @ $" + CurrentCompany.StockPrice,
-                    AssetType = AssetTypes.Stock.ToString(),
-                    StockQuantity = markerPointer.Value,
-                    StockAverageBuyCost = CurrentCompany.StockPrice,
-                    AssetValue = purchaseAmount
-                });
-            }
+        //        existingStock.StockQuantity += markerPointer.Value;
+        //        existingStock.StockAverageBuyCost = Math.Round(newTotalCost / existingStock.StockQuantity, 2);
+        //    }
+        //    else
+        //    {
+        //        // Step 3: Create a new stock position
+        //        Player.Assets.Add(new AssetModel
+        //        {
+        //            StockCompanySymbol = CurrentCompany.Symbol,                   
+        //            AssetName = CurrentCompany.Symbol +" @ $" + CurrentCompany.StockPrice,
+        //            AssetType = AssetTypes.Stock.ToString(),
+        //            StockQuantity = markerPointer.Value,
+        //            StockAverageBuyCost = CurrentCompany.StockPrice,
+        //            AssetValue = purchaseAmount
+        //        });
+        //    }
 
-            updateAssetValue();
+        //    updateAssetValue();
 
-            // Step 4: Update UI and player data
-            ContentPage_Loaded(this, new EventArgs());
-            appShell.GameViewModel.LoadPlayerData(Player);
+        //    // Step 4: Update UI and player data
+        //    ContentPage_Loaded(this, new EventArgs());
+        //    appShell.GameViewModel.LoadPlayerData(Player);
 
-            await Shell.Current.GoToAsync("GameView");
-        }
-        else
-        {
-            await DisplayAlert("Stock Market",
-                "Insufficient balance! You need at least " + purchaseAmount.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) +
-                " to complete this purchase.", "Try Again");
-        }
+        //    await Shell.Current.GoToAsync("GameView");
+        //}
+        //else
+        //{
+        //    await DisplayAlert("Stock Market",
+        //        "Insufficient balance! You need at least " + purchaseAmount.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) +
+        //        " to complete this purchase.", "Try Again");
+        //}
     }
 
 }

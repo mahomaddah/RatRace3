@@ -99,18 +99,25 @@ public partial class GameView : ContentPage
     {
         ////Change Fundemental data...
         //SfRotator router = new SfRotator();
-        //router = (SfRotator)sender;
-        //SfRotatorItem selectedCompany = IpoCompaniesVM.RotatorItems[router.SelectedIndex];
-        //var appShell = (AppShell)Shell.Current;
-        //Company SelectedObject = appShell.IPOcompanies.First(x => selectedCompany.Image.Contains(x.Symbol));
-        ////Bind Fundemental data.. in a better way ...
-        ////BindingContext = SelectedObject.StockFundementalData;
-        //FundementalDataLeftStack.BindingContext = SelectedObject;
+        var router = (SfRotator)sender;
+        SfRotatorItem selectedCompany = IpoCompaniesVM.RotatorItems[router.SelectedIndex];
+        if (selectedCompany != null)
+        {
+            var appShell = (AppShell)Shell.Current;
+            Company SelectedObject = appShell.IPOcompanies.First(x => selectedCompany.Image.Contains(x.Symbol));
+            ////Bind Fundemental data.. in a better way ...
+            ////BindingContext = SelectedObject.StockFundementalData;
+            //FundementalDataLeftStack.BindingContext = SelectedObject;
 
-        var appShell = (AppShell)Shell.Current;
-        appShell.GameViewModel.Market.ChangeSelectedCompany((int)e.Index);
+            FundementalDataTotalCashLB.Text = SelectedObject.StockFundementalData.TotalCash.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
+            FundementalTotalDebts.Text = SelectedObject.StockFundementalData.TotalDebts.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
 
-      //  await Shell.Current.DisplayAlert("Fundemental data shoud be updated"+e.Index, "called : from GameView.xaml : CompanyInvestRoter_SelectedIndexChanged()", "OK");
+        }
+
+
+        //appShell.GameViewModel.Market.ChangeSelectedCompany((int)e.Index); //for auto updating the shit DataContext of Fundemental Data... Comment lined for now to fix the bug i't aslo changing Market CurrentCompany as well :D ... in fact i'ts not even changing fundemental data in here :D
+
+        //  await Shell.Current.DisplayAlert("Fundemental data shoud be updated"+e.Index, "called : from GameView.xaml : CompanyInvestRoter_SelectedIndexChanged()", "OK");
     }
 
     private async void CompanyInvestRoter_ItemTapped(object sender, EventArgs e)
@@ -320,18 +327,16 @@ public partial class GameView : ContentPage
                 {
                     var appShell = (AppShell)Shell.Current;
                     Company SelectedObject = appShell.IPOcompanies.First(x => assetModel.StockCompanySymbol.Equals(x.Symbol));
-                    appShell.CurrentCompany = new Company
-                    {
-                        Symbol = SelectedObject.Symbol,
-                        StockPrice = SelectedObject.StockPrice,
-                        StockDetail = SelectedObject.StockDetail,
-                        StockExchange = SelectedObject.StockExchange
-                    };
+                    appShell.CurrentCompany = SelectedObject;
+
                     appShell.CurrentCompanyAsset = assetModel;
 
+                    appShell.GameViewModel.LoadCompanyData(SelectedObject);
+
+                    await Shell.Current.GoToAsync("MarketPage");
                 }
 
-                await Shell.Current.GoToAsync("MarketPage");
+              
 
             }
             else if (assetModel.AssetType == AssetTypes.RealEstate.ToString())
