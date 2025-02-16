@@ -322,6 +322,7 @@ public partial class GameView : ContentPage
 
     private async void AssetLV_ItemDoubleTapped(object sender, Syncfusion.Maui.ListView.ItemDoubleTappedEventArgs e)
     {
+        try{
         var assetModel = GameViewModel.Player.Assets.Find(x => x.AssetName.Contains(((ListViewItemModel)e.DataItem).ItemText));
 
             if(assetModel != null)
@@ -340,11 +341,12 @@ public partial class GameView : ContentPage
                     Company SelectedObject = appShell.IPOcompanies.First(x => assetModel.StockCompanySymbol.Equals(x.Symbol));
                     appShell.CurrentCompany = SelectedObject;
 
-                    appShell.CurrentCompanyAsset = assetModel;
+                        appShell.GameViewModel.Market.CurrentCompanyAsset = assetModel;
 
-                    appShell.GameViewModel.LoadCompanyData(SelectedObject);
+                    appShell.GameViewModel.Market.SelectedCompany = (SelectedObject);
+                        //this line make it break after clicking on back button becuse of parelel processing probebbly...
 
-                    await Shell.Current.GoToAsync("MarketPage");
+                     Shell.Current.GoToAsync("MarketPage");
                 }
 
               
@@ -354,7 +356,8 @@ public partial class GameView : ContentPage
             {
                 GameViewModel.VisibleIndex = 5;//for bank....
             }
-        
+        }
+        catch { }
     }
 
     private void GetALoanOrder_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)

@@ -91,11 +91,11 @@
 
         <HorizontalStackLayout Margin="1" HorizontalOptions="Center" VerticalOptions="Center">
             <Label  Text="Current Stock Price:"></Label>
-            <Label Margin="5,0,0,0" x:Name="StockPriceLB" Text="{Binding Market.SelectedCompany.StockPrice}"></Label>
+            <Label Margin="5,0,0,0" x:Name="StockPriceLB" Text="{Binding Market.SelectedCompany.StockPrice ,StringFormat='${0:F2} USD'}"></Label>
         </HorizontalStackLayout>
         <HorizontalStackLayout Margin="1" HorizontalOptions="Center" VerticalOptions="Center">
             <Label  Text="Position Value Owned:"></Label>
-            <Label x:Name="PostionValueOwnedLB" Margin="5,0,0,0" Text="{Binding Market.SelectedCompany.StockPrice}"></Label>
+            <Label x:Name="PostionValueOwnedLB" Margin="5,0,0,0" Text="{Binding Market.PositionValue,StringFormat='${0:F2} USD'}"></Label>
         </HorizontalStackLayout>
 
 
@@ -123,7 +123,7 @@
 
 
 
-                <gauge:LinearShapePointer   ValueChangeCompleted="markerPointer_ValueChangeCompleted"  x:Name="markerPointer"  IsInteractive="True" Fill="#FF6ECAB2" Value="{Binding SelectedCompany.Stock}"/>
+                <gauge:LinearShapePointer  x:Name="markerPointer"  IsInteractive="True" Fill="#FF6ECAB2"  Value="{Binding Market.SelectedQuantity}"/>
 
              
             </gauge:SfLinearGauge.MarkerPointers>
@@ -137,13 +137,13 @@
 
         <HorizontalStackLayout Margin="4" HorizontalOptions="Center" VerticalOptions="Center" >
             <Label  FontSize="Subtitle" Text="Total Price:"></Label>
-            <Label Margin="5,0,0,0" x:Name="TotalPriceLB" FontSize="Subtitle" Text="$641.32"></Label>
+            <Label Margin="5,0,0,0" x:Name="TotalPriceLB" FontSize="Subtitle" TextColor="{Binding Market.TotalPriceColor ,FallbackValue='LimeGreen'}" Text="{Binding Market.TotalPrice ,StringFormat='${0:F2} USD'}"></Label>
         </HorizontalStackLayout>
 
         <HorizontalStackLayout Margin="4" HorizontalOptions="Center" VerticalOptions="Center">
-            <Button Margin="0,0,10,0" Text="Buy" Command="{Binding BuyStockCommand}" Clicked="BuyMoreAsset_Clicked"
+            <Button Margin="0,0,10,0" Text="Buy" Command="{Binding Market.BuyStockCommand}" Clicked="BuyMoreAsset_Clicked"
                     x:Name="BuyMoreAsset"></Button>
-            <Button  x:Name="SellAssetPosition" Command="{Binding SellStockCommand}" Clicked="SellAssetPosition_Clicked" Text="Sell"></Button>
+            <Button  x:Name="SellAssetPositionBtn" Command="{Binding Market.SellStockCommand}" Clicked="SellAssetPosition_Clicked"  ToolTipProperties.Text="Short Selling feature is not available yet but No worry We will add it in the next Versions :D" Text="Sell"></Button>
         </HorizontalStackLayout>
       
 

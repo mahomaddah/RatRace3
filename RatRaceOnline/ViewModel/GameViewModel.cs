@@ -233,28 +233,28 @@ namespace RatRace3.ViewModel
         {
             return Player.Assets.First(x => x.StockCompanySymbol.Equals(Market.SelectedCompany.Symbol));
         }
-        public Company SelectedCompany { get; set; } // Selected Company from the Rotator
+       // public Company SelectedCompany { get; set; } // Selected Company from the Rotator
 
         #region MarketViewModel related...
-        public ObservableCollection<Company> IPOCompanies { get; set; } // Market Companies
-        public ObservableCollection<PriceCandleModel> ChartData { get; set; } // Stock price candles
-        public ICommand BuyStockCommand { get; }
-        public ICommand SellStockCommand { get; }
+   //     public ObservableCollection<Company> IPOCompanies { get; set; } // Market Companies
+    //    public ObservableCollection<PriceCandleModel> ChartData { get; set; } // Stock price candles
+   //     public ICommand BuyStockCommand { get; }
+    //    public ICommand SellStockCommand { get; }
 
         public void LoadCompanyData(Company company)
         {
-            if (company == null) return;
+            //if (company == null) return;
 
-            SelectedCompany = company;
-            ChartData.Clear();
+            //SelectedCompany = company;
+            //ChartData.Clear();
 
-            foreach (var candle in company.PriceCandles)
-            {
-                ChartData.Add(new PriceCandleModel { Date = candle.Date, Value = candle.Value });
-            }
+            //foreach (var candle in company.PriceCandles)
+            //{
+            //    ChartData.Add(new PriceCandleModel { Date = candle.Date, Value = candle.Value });
+            //}
 
-            OnPropertyChanged(nameof(SelectedCompany));
-            OnPropertyChanged(nameof(ChartData));
+            //OnPropertyChanged(nameof(SelectedCompany));
+            //OnPropertyChanged(nameof(ChartData));
 
             Market.SelectedCompany = company;
         }
@@ -330,6 +330,7 @@ namespace RatRace3.ViewModel
             //    await Shell.Current.DisplayAlert("No Shares Available", "You don't own any shares of this stock to sell.", "OK");
             //}
             //}
+
         }
 
         #endregion
@@ -581,15 +582,16 @@ namespace RatRace3.ViewModel
         }
 
         Random random = new Random();
+    
         void AddNewCandleToStocks()
         {
             foreach(var company in Market.IPOCompanies)
             {
                 company.StockLastCandlePrice = company.StockPrice;
-                var newMonthCandle = new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(Player.CurrentMonth).ToString("MM-yyyy"), Value = company.StockPrice + (200* (1+company.StockFundementalData.EPSnext5Y)) + random.Next(-5, 9) };
+                var newMonthCandle = new PriceCandleModel { Date = (DateTime.Now.AddMonths(Player.CurrentMonth-1).Date.ToString("MM-yyyy")), Value = Math.Round(company.StockPrice + (200* (1+company.StockFundementalData.EPSnext5Y)) + random.Next(-5, 9),2) };
                 company.PriceCandles.Add( newMonthCandle);
                 company.StockPrice = newMonthCandle.Value;
-                Market.LoadCompanyData(company);
+                Market.SelectedCompany = (company);
             }
 
          
@@ -801,7 +803,14 @@ namespace RatRace3.ViewModel
             {
                 //game won...
                 appShell.CurrentLevelModel.IsGameFinishable = true;
-                await Shell.Current.GoToAsync("StoryDetailView");
+                try
+                {
+                    await Shell.Current.DisplayAlert("Let's Review Your Victory!",
+                    "\"Before we celebrate, let's check how you played this level! We'll review your achievements, see how well you performed!\"",
+                    "Show My Progress!");
+                    await Shell.Current.GoToAsync("StoryDetailView");
+                }
+                catch { }
             }
         }
 
@@ -832,8 +841,8 @@ namespace RatRace3.ViewModel
             CollectIncomeCommand = new Command(CollectIncome);
             NextTurnCommand = new Command(NextTurn);
             PayDebtCommand = new Command<double>(PayDebt);
-            BuyStockCommand = new Command(BuyStock);
-            SellStockCommand = new Command(SellStock);
+         //   BuyStockCommand = new Command(BuyStock);
+           // SellStockCommand = new Command(SellStock);
             //delete me ....
             //TODO: get correct object  from AppSell Or in ctor... and replace null...:
             CashFlowListViewItemModel = new ObservableCollection<ListViewItemModel>();
@@ -843,8 +852,8 @@ namespace RatRace3.ViewModel
             ExpencesListViewItemModels = new ObservableCollection<ListViewItemModel>();
             IncomeListViewItemModel = new ObservableCollection<ListViewItemModel>();
 
-            IPOCompanies = new ObservableCollection<Company> { };
-            ChartData = new ObservableCollection<PriceCandleModel> { };
+           // IPOCompanies = new ObservableCollection<Company> { };
+            //ChartData = new ObservableCollection<PriceCandleModel> { };
 
             Market = new MarketViewModel();
 

@@ -14,39 +14,41 @@ public partial class MarketPage : ContentPage
     
    
  
-     List<Brush> PaletteBrushes = new List<Brush> //TODO: Duplicated code Should be deleted... after Refactoring ... 
-     {
-                Color.FromArgb("#FF638A2D"),
-                Color.FromArgb("#FFE3AAD6"),
-                Color.FromArgb("#FFFF7D7D"),
-                Color.FromArgb("#FF007C9C"),
-                Color.FromArgb("#FF019FCC"),
-                Color.FromArgb("#FF94652B"),
-                Color.FromArgb("#FF89D9A8"),
-                Color.FromArgb("#FF71CBB1"),
-                Color.FromArgb("#FF4DB7BE"),
-                Color.FromArgb("#FF4EB7BD")
-     };
+     //List<Brush> PaletteBrushes = new List<Brush> //TODO: Duplicated code Should be deleted... after Refactoring ... 
+     //{
+     //           Color.FromArgb("#FF638A2D"),
+     //           Color.FromArgb("#FFE3AAD6"),
+     //           Color.FromArgb("#FFFF7D7D"),
+     //           Color.FromArgb("#FF007C9C"),
+     //           Color.FromArgb("#FF019FCC"),
+     //           Color.FromArgb("#FF94652B"),
+     //           Color.FromArgb("#FF89D9A8"),
+     //           Color.FromArgb("#FF71CBB1"),
+     //           Color.FromArgb("#FF4DB7BE"),
+     //           Color.FromArgb("#FF4EB7BD")
+     //};
 
-    Random random = new Random();
+ //   Random random = new Random();
 
-    GameViewModel gameViewModel;
+   // GameViewModel gameViewModel;
 
     public MarketPage()
     {
 
-      this.CurrentCompany = new Company { Symbol = "NVDA", StockPrice = 141.34, StockDetail = "Technology company Internet Search Monopoly..." };
+     // this.CurrentCompany = new Company { Symbol = "NVDA", StockPrice = 141.34, StockDetail = "Technology company Internet Search Monopoly..." };
 
 
-      InitializeComponent();
+        InitializeComponent();
         // Set BindingContext
+
+        var appShell = (AppShell)Shell.Current;
+        BindingContext = appShell.GameViewModel;
 
         //    Chart.Series.Add(new ColumnSeries());
 
         //Real Value investors (Lords) > Momentom investors (traders)> experted workers > workers
         //    Chart.Series.Clear();
 
-        var appShell = (AppShell)Shell.Current;
 
         //ChartData = new List<object>
         //{
@@ -82,31 +84,32 @@ public partial class MarketPage : ContentPage
         //        Color.FromArgb("#FF4EB7BD")
         //    };
 
-        var columnSeries = new ColumnSeries
-        {
-            ItemsSource = appShell.GameViewModel.Market.ChartData,
-            XBindingPath = "Date",
-            YBindingPath = "Value",
-            PaletteBrushes = PaletteBrushes // Use the bound brushes
-        };
+        //var columnSeries = new ColumnSeries
+        //{
+        //    ItemsSource = appShell.GameViewModel.Market.ChartData,
+        //    XBindingPath = "Date",
+        //    YBindingPath = "Value",
+        //    PaletteBrushes = PaletteBrushes // Use the bound brushes
+        //};
 
 
-        Chart.PaletteBrushes = PaletteBrushes;
-        Chart.Series = new ChartSeriesCollection { columnSeries };
-        //BindingContext = this;
+        //Chart.PaletteBrushes = PaletteBrushes;
+        //Chart.Series = new ChartSeriesCollection { columnSeries };
+        ////BindingContext = this;
 
         // BindingContext = new GameViewModel();
-     
-        BindingContext = appShell.GameViewModel;
-    //    gameViewModel = appShell.GameViewModel; //belki gerekli ise ama bence cok sikik bir tasarim MVVM olarak
-   //     appShell.GameViewModel.LoadCompanyData(CurrentCompany);
+
+
+        //    gameViewModel = appShell.GameViewModel; //belki gerekli ise ama bence cok sikik bir tasarim MVVM olarak
+        //     appShell.GameViewModel.LoadCompanyData(CurrentCompany);
 
     }
 
-    private void markerPointer_ValueChangeCompleted(object sender, Syncfusion.Maui.Gauges.ValueChangedEventArgs e)
-    {
-           TotalPriceLB.Text = (e.Value * CurrentCompany.StockPrice).ToString("C2" , CultureInfo.CreateSpecificCulture("en-US"));
-    }
+    //private void markerPointer_ValueChangeCompleted(object sender, Syncfusion.Maui.Gauges.ValueChangedEventArgs e)
+    //{
+    //       TotalPriceLB.Text = (e.Value * CurrentCompany.StockPrice).ToString("C2" , CultureInfo.CreateSpecificCulture("en-US"));
+    //bind   ValueChangeCompleted="markerPointer_ValueChangeCompleted"  if you need active again....
+    //}
 
     private void ContentPage_Loaded(object sender, EventArgs e)
     {
@@ -133,112 +136,19 @@ public partial class MarketPage : ContentPage
     private async void SellAssetPosition_Clicked(object sender, EventArgs e)
     {
 
-        ////User SHould be ablae to sell their MSFT by Double clicking on asset this page should show up and msft postion should come here...
-        ////ready to sell! bind gameViewModel and This Logics here also make sure double click on asset postion work well ... DONE
-        ////aslo a tooltip like : stock market is currentlly at holyday i't will open after Level 1 was Complated and After Post Demo Update.....
-        if (CurrentAssetModel == null) return;// Breaking code...
-
-        var appShell = (AppShell)Shell.Current;
-        var Player = appShell.CurrentLevelModel.Players.First();
-        if (markerPointer.Value <= CurrentAssetModel.StockQuantity && markerPointer.Value != 0)
-        {
-            //Sell amonth ...
-            CurrentAssetModel.StockQuantity -= markerPointer.Value;
-
-            Player.Balance += Math.Round(CurrentCompany.StockPrice * markerPointer.Value, 2);
-
-            if (CurrentAssetModel.StockQuantity == 0)
-                appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentAssetModel);
-        }
-        else // Ya adam da Okadar yok ya elimdeki nekadar varsa onu sat kast etmistir...
-        {
-            if (CurrentAssetModel.StockQuantity > 0.009)
-            {
-                //daha buyuktur ? 
-                bool result = await DisplayAlert("Stock Market", "The value you want to sell is higher than the total amount you hold! Did you mean to  sell all ?", "Yes, All In..", "No!!");
-                if (result)
-                {
-                    //sell all...
-                    Player.Balance += Math.Round(CurrentCompany.StockPrice * CurrentAssetModel.StockQuantity, 2);
-
-                    appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentAssetModel);
-
-
-                }
-            }
-        }
-        updateAssetValue();
-
-        ContentPage_Loaded(this, new EventArgs());//Work like magic...
-
-        //Update GUI for this page and Statment page ... IF not work with functins than run above code...
-
-        appShell.GameViewModel.LoadPlayerData(Player);
-
-        await Shell.Current.GoToAsync("GameView");
-
-        ////Orders System li yapmaliyiz Aslinda ileride Gercek economy gibi...
-
+     
     }
-    void updateAssetValue()
-    {
-        if(CurrentAssetModel!=null)
-        CurrentAssetModel.AssetValue = Math.Round(CurrentAssetModel.StockQuantity * CurrentCompany.StockPrice,2);
-        //for updating also on Statment page... 
-    }
+    //void updateAssetValue()
+    //{
+    //    if(CurrentAssetModel!=null)
+    //    CurrentAssetModel.AssetValue = Math.Round(CurrentAssetModel.StockQuantity * CurrentCompany.StockPrice,2);
+    //    //for updating also on Statment page... 
+    //}
     private async void BuyMoreAsset_Clicked(object sender, EventArgs e)
     {
 
 
-        var appShell = (AppShell)Shell.Current;
-        var Player = appShell.CurrentLevelModel.Players.First();
-
-        double purchaseAmount = Math.Round(CurrentCompany.StockPrice * markerPointer.Value, 2);
-
-        // Step 1: Check if Player has enough balance to buy the stocks
-        if (Player.Balance >= purchaseAmount && markerPointer.Value > 0)
-        {
-            Player.Balance -= purchaseAmount; // Deduct balance
-
-            var existingStock = Player.Assets.FirstOrDefault(a => a.StockCompanySymbol == CurrentCompany.Symbol);
-
-            if (existingStock != null)
-            {
-                // Step 2: Update existing stock's quantity and average buy cost
-                double totalCostBefore = existingStock.StockAverageBuyCost * existingStock.StockQuantity;
-                double newTotalCost = totalCostBefore + purchaseAmount;
-
-                existingStock.StockQuantity += markerPointer.Value;
-                existingStock.StockAverageBuyCost = Math.Round(newTotalCost / existingStock.StockQuantity, 2);
-            }
-            else
-            {
-                // Step 3: Create a new stock position
-                Player.Assets.Add(new AssetModel
-                {
-                    StockCompanySymbol = CurrentCompany.Symbol,
-                    AssetName = CurrentCompany.Symbol + " @ $" + CurrentCompany.StockPrice,
-                    AssetType = AssetTypes.Stock.ToString(),
-                    StockQuantity = markerPointer.Value,
-                    StockAverageBuyCost = CurrentCompany.StockPrice,
-                    AssetValue = purchaseAmount
-                });
-            }
-
-            updateAssetValue();
-
-            // Step 4: Update UI and player data
-            ContentPage_Loaded(this, new EventArgs());
-            appShell.GameViewModel.LoadPlayerData(Player);
-
-            await Shell.Current.GoToAsync("GameView");
-        }
-        else
-        {
-            await DisplayAlert("Stock Market",
-                "Insufficient balance! You need at least " + purchaseAmount.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) +
-                " to complete this purchase.", "Try Again");
-        }
+       
     }
 
 }

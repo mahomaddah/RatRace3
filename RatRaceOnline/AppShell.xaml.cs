@@ -16,7 +16,7 @@ namespace RatRace3
         /// <summary>
         /// For stock market : CurrentCompanyAsset Contain Quantity of stock ,Avreage Purchesed Price and etc... example:StockCompanySymbol = "MSFT",StockQuantity = 1.1,StockAverageBuyCost =100.23, AssetValue = 200.00, 
         /// </summary>
-        public AssetModel CurrentCompanyAsset { get; set; }
+      //  public AssetModel CurrentCompanyAsset { get; set; }
 
         public ObservableCollection<Company> IPOcompanies { get; set; }
         public SelectLevelViewModel SelectLevelViewModel { get; set; }
@@ -32,7 +32,7 @@ namespace RatRace3
             InitializeComponent(); 
             GameViewModel = new GameViewModel();
             getAnewGameData();
-        
+            
 
 
 
@@ -49,9 +49,9 @@ namespace RatRace3
 
 
         }
-      
-     
-     
+
+       
+
         public void getAnewGameData()
         {
 
@@ -86,7 +86,7 @@ namespace RatRace3
                 Assets = new List<AssetModel>
                 {
                     new AssetModel {AssetName = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 1300.00, IntrestRate= 0.0412, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 53.56, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = 2.ToString()},
-                    new AssetModel {AssetName = "MSFT P&L 28% @ $128.12",  AssetType = AssetTypes.Stock.ToString(),StockCompanySymbol = "MSFT",StockQuantity = 1.1,StockAverageBuyCost =100.23, AssetValue = 200.00, IntrestRate= 0.25, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2}
+                    new AssetModel {AssetName = "MSFT P&L 28%",  AssetType = AssetTypes.Stock.ToString(),StockCompanySymbol = "MSFT",StockQuantity = 1.1,StockAverageBuyCost =888.23, AssetValue = 976.7, IntrestRate= 0.25, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2}
                 },
                 Expenses = new List<ExpenseModel>
                 {
@@ -331,15 +331,15 @@ namespace RatRace3
 
                        PriceCandles = new ObservableCollection<PriceCandleModel>
                        {
-                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-8).ToString("MM-yyyy"), Value = 58 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 74 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 88 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 140 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 180 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 200 + random.Next(-5, 9) },
-                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 300 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 450 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(0).ToString("MM-yyyy"), Value = 500 + random.Next(-5, 9) }
+                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-8).ToString("MM-yyyy"), Value = 58 + random.Next(-5, 9)*35 },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 74 + random.Next(-5, 9)*35 },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 88 + random.Next(-5, 9)*35 },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 140 + random.Next(-5, 9)*35 },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 180 + random.Next(-5, 9)*35 },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 200 + random.Next(-5, 9)*35 },
+                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 300 + random.Next(-5, 9)*35 },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 450 + random.Next(-5, 9)*35 },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(0).ToString("MM-yyyy"), Value = 500 + random.Next(-5, 9)*35 }
                        },
 
 
@@ -708,7 +708,7 @@ namespace RatRace3
             //    LoadDataFromLiteDB();
 
             CurrentLevelModel = SelectLevelViewModel.ImageCollection.FirstOrDefault();//TODO ... DELET ME 
-            CurrentCompanyAsset = new AssetModel { AssetName = "GOOG P&L 31% @ $128.12", AssetType = AssetTypes.Stock.ToString(), StockCompanySymbol = "GOOGL", StockQuantity = 0, StockAverageBuyCost = 100.23, AssetValue = 200.00, IntrestRate = 0.25, IsBankDeposit = false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2 };
+
 
             //Saving Data... method...
             //  SaveDataToLiteDB();
