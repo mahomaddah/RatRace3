@@ -73,7 +73,6 @@ namespace RatRace3.ViewModels
         }
 
         private double totalPrice;
-
         public double TotalPrice
         {
             get { return totalPrice; }
@@ -105,7 +104,6 @@ namespace RatRace3.ViewModels
             }
         }
         private string totalPriceColor;
-
         public string TotalPriceColor
         {
             get { return totalPriceColor; }
@@ -116,7 +114,6 @@ namespace RatRace3.ViewModels
 
 
         private double positionValue;
-
         public double PositionValue
         {
             get { return positionValue; }
@@ -126,7 +123,6 @@ namespace RatRace3.ViewModels
         }
 
         private double selectedQuantity;
-
         public double SelectedQuantity
         {
             get { return selectedQuantity; }
@@ -182,6 +178,7 @@ namespace RatRace3.ViewModels
 
           
         
+
             
 
             var appShell = (AppShell)Shell.Current;

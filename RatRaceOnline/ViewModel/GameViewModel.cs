@@ -18,7 +18,8 @@ namespace RatRace3.ViewModel
   
     public class GameViewModel : INotifyPropertyChanged
     {
-
+        #region GameViewModelProperties:
+       
         private ObservableCollection<ListViewItemModel> incomeListViewItemModel;
 
         public ObservableCollection<ListViewItemModel> IncomeListViewItemModel
@@ -223,8 +224,8 @@ namespace RatRace3.ViewModel
                 OnPropertyChanged();
             }
         }
+        #endregion
 
-       
         public NewsPaperViewModel CurrentNewsPaperViewModel { get; set; }
 
 
@@ -232,108 +233,7 @@ namespace RatRace3.ViewModel
         public AssetModel GetMarketCurrentStocksAsset()
         {
             return Player.Assets.First(x => x.StockCompanySymbol.Equals(Market.SelectedCompany.Symbol));
-        }
-       // public Company SelectedCompany { get; set; } // Selected Company from the Rotator
-
-        #region MarketViewModel related...
-   //     public ObservableCollection<Company> IPOCompanies { get; set; } // Market Companies
-    //    public ObservableCollection<PriceCandleModel> ChartData { get; set; } // Stock price candles
-   //     public ICommand BuyStockCommand { get; }
-    //    public ICommand SellStockCommand { get; }
-
-        public void LoadCompanyData(Company company)
-        {
-            //if (company == null) return;
-
-            //SelectedCompany = company;
-            //ChartData.Clear();
-
-            //foreach (var candle in company.PriceCandles)
-            //{
-            //    ChartData.Add(new PriceCandleModel { Date = candle.Date, Value = candle.Value });
-            //}
-
-            //OnPropertyChanged(nameof(SelectedCompany));
-            //OnPropertyChanged(nameof(ChartData));
-
-            Market.SelectedCompany = company;
-        }
-
-        private async void BuyStock()
-        {
-            //if (SelectedCompany != null) { 
-            //var appShell = (AppShell)Shell.Current;
-            //var player = appShell.CurrentLevelModel.Players.First();
-            
-            //double purchaseAmount = SelectedCompany.StockPrice * 1; // Buy 1 share for now
-
-            //if (player.Balance >= purchaseAmount)
-            //{
-            //    player.Balance -= purchaseAmount;
-
-            //    var existingStock = player.Assets.FirstOrDefault(a => a.StockCompanySymbol == SelectedCompany.Symbol);
-
-            //    if (existingStock != null)
-            //    {
-            //        existingStock.StockQuantity += 1;
-            //        existingStock.StockAverageBuyCost = (existingStock.StockAverageBuyCost + SelectedCompany.StockPrice) / 2;
-            //    }
-            //    else
-            //    {
-            //        player.Assets.Add(new AssetModel
-            //        {
-            //            StockCompanySymbol = SelectedCompany.Symbol,
-            //            AssetName = SelectedCompany.Symbol + " @ $" + SelectedCompany.StockPrice,
-            //            AssetType = AssetTypes.Stock.ToString(),
-            //            StockQuantity = 1,
-            //            StockAverageBuyCost = SelectedCompany.StockPrice,
-            //            AssetValue = purchaseAmount
-            //        });
-            //    }
-
-            //    OnPropertyChanged(nameof(player.Balance));
-            //    await Shell.Current.DisplayAlert("Stock Purchased", $"You bought 1 share of {SelectedCompany.Symbol} for {SelectedCompany.StockPrice:C2}", "OK");
-            //}
-            //else
-            //{
-            //    await Shell.Current.DisplayAlert("Insufficient Funds", "You do not have enough money to purchase this stock.", "OK");
-            //}
-            //}
-        }
-
-        private async void SellStock()
-        {
-            //if (SelectedCompany != null)
-            //{
-
-            
-            //var appShell = (AppShell)Shell.Current;
-            //var player = appShell.CurrentLevelModel.Players.First();
-
-            //var existingStock = player.Assets.FirstOrDefault(a => a.StockCompanySymbol == SelectedCompany.Symbol);
-
-            //if (SelectedCompany != null && existingStock != null && existingStock.StockQuantity > 0)
-            //{
-            //    player.Balance += SelectedCompany.StockPrice * 1; // Sell 1 share for now
-            //    existingStock.StockQuantity -= 1;
-
-            //    if (existingStock.StockQuantity == 0)
-            //    {
-            //        player.Assets.Remove(existingStock);
-            //    }
-
-            //    OnPropertyChanged(nameof(player.Balance));
-            //    await Shell.Current.DisplayAlert("Stock Sold", $"You sold 1 share of {SelectedCompany.Symbol} for {SelectedCompany.StockPrice.ToString("C2",USD_Formant)}", "OK");
-            //}
-            //else
-            //{
-            //    await Shell.Current.DisplayAlert("No Shares Available", "You don't own any shares of this stock to sell.", "OK");
-            //}
-            //}
-
-        }
-
-        #endregion
+        } 
 
         CultureInfo USD_Formant = CultureInfo.CreateSpecificCulture("en-US"); // for forcing $1,234.56 Money format 
 
@@ -347,11 +247,9 @@ namespace RatRace3.ViewModel
         {
          
             //We can change For MVP news payper to Quaterlly (mevsimde 1 (3 ayda 1 )) ... instead of monthly !...
-            CurrentNewsPaperViewModel = new NewsPaperViewModel{};
+          //  CurrentNewsPaperViewModel = new NewsPaperViewModel{};
            
-            int newsPayperRandomseed = rand.Next(0, 4);
-            //Selecting The News payper for this turn...
-            CurrentNewsPaperViewModel.CurrentNewsPaperModel = CurrentNewsPaperViewModel.NewsPaperModels[newsPayperRandomseed];// [0-4] of 4 index
+          
          //   CurrentNewsPaperViewModel.CurrentNewsPaperModel.ImageSource = CurrentNewsPaperViewModel.NewsPaperModels{ }
            // BringRandomNewsPaper();//TODO : NOT WORKING Well ... 
 
@@ -477,20 +375,6 @@ namespace RatRace3.ViewModel
             Player.NetTotalIncome = totalCashFlowSum;
         }
 
-        /// <summary>
-        /// game Brock when calling this line so i removed the featre
-        /// </summary>
-        void updatePlayeBlanceAsAssetObject()
-        {
-            var toRemove = Player.Assets.Find(x => x.AssetName.Equals("Cash Balance"));
-            if (toRemove != null)
-                Player.Assets.Remove(toRemove);
-            Player.Assets.Add(new AssetModel { AssetName = "Cash Balance", AssetValue = Player.Balance });
-
-            // AssetsListViewItemModel.First(x => x.ItemText.Equals("Cash Balance")).ItemValue = Player.Balance.ToString(); //shity brocking line...
-
-
-        }
 
         private void CollectIncome()
         {

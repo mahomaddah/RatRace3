@@ -149,7 +149,7 @@ public partial class GameView : ContentPage
                 StockExchange = SelectedObject.StockExchange
             };
 
-            appShell.GameViewModel.LoadCompanyData(SelectedObject);
+            appShell.GameViewModel.Market.SelectedCompany = SelectedObject;
         }
         await Shell.Current.GoToAsync("MarketPage");
     }
