@@ -21,6 +21,8 @@ namespace RatRace3
         public ObservableCollection<Company> IPOcompanies { get; set; }
         public SelectLevelViewModel SelectLevelViewModel { get; set; }
         public UIsettingsModel UIsettingsModel { get; set; }
+
+        public NewsPaperViewModel CurrentNewsPaperViewModel { get; set; }
         public AppShell()
         {
 
@@ -55,7 +57,7 @@ namespace RatRace3
         public void getAnewGameData()
         {
 
-
+           
 
             UIsettingsModel = new Models.UIsettingsModel
             {
@@ -709,7 +711,7 @@ namespace RatRace3
 
             CurrentLevelModel = SelectLevelViewModel.ImageCollection.FirstOrDefault();//TODO ... DELET ME 
 
-            GameViewModel.CurrentNewsPaperViewModel = new NewsPaperViewModel 
+            CurrentNewsPaperViewModel = new NewsPaperViewModel 
             {
                 NewsPaperModels = new List<NewsPaperModel>
                 {//...C16 means 16 charecter is max lenth of content... Cap means All capital ABCD ...small Mean abcd..
@@ -1005,11 +1007,8 @@ namespace RatRace3
                 }
 
             };
+     
 
-            int newsPayperRandomseed = random.Next(0, 4);
-            //Selecting The News payper for this turn...
-            GameViewModel.CurrentNewsPaperViewModel.CurrentNewsPaperModel = GameViewModel.CurrentNewsPaperViewModel.NewsPaperModels[newsPayperRandomseed];// [0-4] of 4 index
-            
             //Saving Data... method...
             //  SaveDataToLiteDB();
             //  LoadDataFromLiteDB();

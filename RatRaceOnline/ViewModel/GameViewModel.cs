@@ -226,7 +226,17 @@ namespace RatRace3.ViewModel
         }
         #endregion
 
-        public NewsPaperViewModel CurrentNewsPaperViewModel { get; set; }
+       // public NewsPaperViewModel CurrentNewsPaperViewModel { get; set; }
+        private NewsPaperViewModel currentNewsPaperViewModel;
+            
+        public NewsPaperViewModel CurrentNewsPaperViewModel
+        {
+            get { return currentNewsPaperViewModel; }
+            set {
+                currentNewsPaperViewModel = value;
+                OnPropertyChanged();
+            }
+        }
 
 
         public MarketViewModel Market { get; set; }
@@ -245,13 +255,19 @@ namespace RatRace3.ViewModel
         Random rand = new Random();
         public async void LoadPlayerData(Models.PlayerModel playerModel)
         {
-         
+        
+
             //We can change For MVP news payper to Quaterlly (mevsimde 1 (3 ayda 1 )) ... instead of monthly !...
-          //  CurrentNewsPaperViewModel = new NewsPaperViewModel{};
+            //  CurrentNewsPaperViewModel = new NewsPaperViewModel{};
            
-          
-         //   CurrentNewsPaperViewModel.CurrentNewsPaperModel.ImageSource = CurrentNewsPaperViewModel.NewsPaperModels{ }
-           // BringRandomNewsPaper();//TODO : NOT WORKING Well ... 
+
+            int newsPayperRandomseed = random.Next(0, 4);
+            //Selecting The News payper for this turn...
+            var appShell = (AppShell)Shell.Current;
+            //CurrentNewsPaperViewModel.CurrentNewsPaperModel = appShell.GameViewModel.CurrentNewsPaperViewModel.NewsPaperModels[newsPayperRandomseed];// [0-4] of 4 index
+
+            //   CurrentNewsPaperViewModel.CurrentNewsPaperModel.ImageSource = CurrentNewsPaperViewModel.NewsPaperModels{ }
+            // BringRandomNewsPaper();//TODO : NOT WORKING Well ... 
 
             //   CurrentNewsPaperViewModel.CurrentNewsPaperModel.EconomicDataSetterC80(0.037 , 0.04232 , 0.3167); //for 2.7% CPI , 4.232% Tbond, 31.67% SPY.Yr.
             //Expecting Result :  ":U.S. INFLATION:2.7%▽ U.S.10-YR. TREAS. yield:4.232%△ S&amp;P500(SPY)yr.+31.67%△",
@@ -571,7 +587,10 @@ namespace RatRace3.ViewModel
                     CurrentMonth = (Player.CurrentMonth + " / " + Player.MaximumMonth).ToString();
 
                     //Bring Random NewsPaper: //TODO.. improvemnts...
-                   // BringRandomNewsPaper();
+                     BringRandomNewsPaper();
+                  
+                
+
 
                     IsIncomeCollected = false;//for new turn...
                     updateRDassetsValue();
@@ -620,8 +639,9 @@ namespace RatRace3.ViewModel
         void BringRandomNewsPaper()
         {
             int seed = rand.Next(0, 4);
-        
+
             CurrentNewsPaperViewModel.CurrentNewsPaperModel = CurrentNewsPaperViewModel.NewsPaperModels[seed];
+           // OnPropertyChanged(nameof(CurrentNewsPaperViewModel.CurrentNewsPaperModel));
         }
 
         async void LastMonthCame()
@@ -740,8 +760,17 @@ namespace RatRace3.ViewModel
             //ChartData = new ObservableCollection<PriceCandleModel> { };
 
             Market = new MarketViewModel();
+            var appShell = (AppShell)Shell.Current;
+            if(appShell != null)
+            {
+                CurrentNewsPaperViewModel = new NewsPaperViewModel();
+                CurrentNewsPaperViewModel.NewsPaperModels = appShell.CurrentNewsPaperViewModel.NewsPaperModels;
 
+                CurrentNewsPaperViewModel.CurrentNewsPaperModel = CurrentNewsPaperViewModel.NewsPaperModels[random.Next(0,4)];
+               // OnPropertyChanged(nameof(CurrentNewsPaperViewModel.CurrentNewsPaperModel));
+            }
 
+            // CurrentNewsPaperViewModel.CurrentNewsPaperModel
         }
 
         private int _visibleIndex;

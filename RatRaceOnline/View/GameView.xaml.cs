@@ -44,7 +44,18 @@ public partial class GameView : ContentPage
         //}
 
         appShell.GameViewModel = GameViewModel;//Referancing object there to call it latter form Market page... Maybe move all these GamesViewmodels Codes to Appsell after MVP or refactor in a better way :)
-      
+
+        if (appShell.CurrentLevelModel.IsNewGameStarted)
+        {
+            //NotLoad saved game New game 
+        }
+        else
+        {
+            //Load Saved game ... 
+            //Note: you can call auto-save function every turn on nextTurn()
+
+        }
+        
         GameViewModel.LoadPlayerData(appShell.CurrentLevelModel.Players.First());
 
         // var playerModel = appShell.CurrentLevelModel.Players.First();
