@@ -12,6 +12,7 @@ using System.Globalization;
 using Microsoft.Maui.Controls.Platform;
 using System.Reflection.PortableExecutable;
 using RatRace3.ViewModels;
+using RatRace3.DAL;
 
 namespace RatRace3.ViewModel
 {
@@ -253,6 +254,14 @@ namespace RatRace3.ViewModel
         double totalNetworth;
         double totalCashFlowSum;
         Random rand = new Random();
+        public async void SavePlayerData(PlayerModel playerModel)
+        {
+            DataAccessService dal = new DataAccessService();
+            dal.SavePlayerData(playerModel,playerModel.StoryLevelID);
+        }
+
+     
+
         public async void LoadPlayerData(Models.PlayerModel playerModel)
         {
         
@@ -569,7 +578,7 @@ namespace RatRace3.ViewModel
             LoadPlayerData(Player);
         }
 
-        void NextTurn()
+        async void NextTurn()
         {
             if (Player != null)
             {
@@ -599,6 +608,9 @@ namespace RatRace3.ViewModel
 
                     //Checking Game Goals:
                     reCalcluteGameGoals();
+
+                    //Auto-Saving Game : 
+                    SavePlayerData(Player);
 
                 }
                 else //finishing mounth... Checking game goals...

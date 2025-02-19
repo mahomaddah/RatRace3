@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace RatRace3.Models
     //}
 
 
-
+    [Table("LevelModels")]
     public class LevelModel
     {
         /// <summary>
@@ -52,7 +53,7 @@ namespace RatRace3.Models
         {
             IsGameFinishable=false;
 
-            Players = new List<PlayerModel> { new PlayerModel { PlayerModelID = 1, Balance = 1.1, TotalExpences = 1.1 } };
+            Players = new List<PlayerModel> { new PlayerModel { PlayerModelID = 1, Balance = 1.1, TotalExpences = 1.1 , StoryLevelID= StoryLevelID } };
             
             StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 3 } };
 

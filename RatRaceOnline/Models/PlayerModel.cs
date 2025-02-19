@@ -1,17 +1,24 @@
-﻿using System.ComponentModel;
+﻿using SQLite;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace RatRace3.Models
 {
+    [Table("Players")]
     public class PlayerModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        [PrimaryKey, AutoIncrement]
         public int PlayerModelID { get; set; }
         public double TotalExpences { get; set; }
-    
+
+        /// <summary>
+        /// Player 's realated levelModel 's storyLevelID ( forgin key)...
+        /// </summary>
+        public string StoryLevelID { get; set; }
 
         private double balance;
-
         public double Balance
         {
             get { return balance; }

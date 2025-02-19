@@ -9,8 +9,11 @@ namespace RatRace3
 {
     public partial class AppShell : Shell
     {
-
-        public LevelModel CurrentLevelModel { get; set; }
+        /// <summary>
+        /// CurrentLevelModel is Original Data of brand new game which is hard coded ,, Used Saved data will be applied on this on load ...
+        /// this usefull for creating a new game ... not for load game...
+        /// </summary>
+        public LevelModel CurrentLevelModel { get; set; } 
         public GameViewModel GameViewModel { get; set; }
         public Company CurrentCompany { get; set; }//For Stock Market...
         /// <summary>
@@ -73,10 +76,11 @@ namespace RatRace3
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
                 Players = new List<PlayerModel> { new PlayerModel{
+                     StoryLevelID = "A",
                 Balance = 50.00,
                 NetTotalIncome = 2200,
                 CurrentMonth = 1,
-                MaximumMonth = 24,
+                MaximumMonth = 24,             
                 Liabilities = new List<LiabilityModel>
                 {
                     new LiabilityModel{LiabilityName ="Ducati Bike Debt", RemainingAmount=3600, TotalAmount = 3600.00, MonthsRemaining = 12, InterestRate = 0.02 , LiabilityModelID = 1 ,  ExpenseModelID = 1},
@@ -135,7 +139,8 @@ namespace RatRace3
                     new ExpenseModel{ Name = "KUBA TK03 Bike Debt EMI", Amount = 300.00, ExpenseModelID = 1, RelatedLiabilityID = 1},
                     new ExpenseModel{ Name = "Motorcycle Safe Jacket Debt EMI", Amount = 200.00, ExpenseModelID = 2 ,RelatedLiabilityID = 2},
                     new ExpenseModel{ Name = "Motorcycle Helmet Debt EMI", Amount = 100.00, ExpenseModelID = 3, RelatedLiabilityID = 3}
-                }
+                },
+                  StoryLevelID = "2",
             }},
                 StoryLevelID = "2",
                 Image = "undraw_investing.png",
@@ -173,7 +178,7 @@ namespace RatRace3
                     new ExpenseModel{ Name = "Car Loan EMI", Amount = 300.00, ExpenseModelID = 2 , RelatedLiabilityID = 2},
                     new ExpenseModel{ Name = "Groceries", Amount = 150.00, ExpenseModelID = 3},
                     new ExpenseModel{ Name = "Transportation", Amount = 100.00, ExpenseModelID = 4}
-                }
+                },   StoryLevelID = "3",
             }},
 
                 StoryLevelID = "3",
@@ -211,6 +216,7 @@ namespace RatRace3
                     new ExpenseModel{ Name = "Rent", Amount = 800.00, ExpenseModelID = 3},
                     new ExpenseModel{ Name = "Utilities", Amount = 200.00, ExpenseModelID = 4}
                 }
+                ,     StoryLevelID = "4",
             }},
                 StoryLevelID = "4",
                 Image = "interview.png",
@@ -246,7 +252,8 @@ namespace RatRace3
                     new ExpenseModel{ Name = "Startup Loan EMI", Amount = 500.00, ExpenseModelID = 1, RelatedLiabilityID = 1},
                     new ExpenseModel{ Name = "Team Salaries", Amount = 1000.00, ExpenseModelID = 2},
                     new ExpenseModel{ Name = "Office Rent", Amount = 800.00, ExpenseModelID = 3}
-                }
+                },
+                  StoryLevelID = "5",
             }},
                 StoryLevelID = "5",
                 Image = "dotnet_bot.png",
@@ -283,7 +290,8 @@ namespace RatRace3
                     new ExpenseModel{ Name = "Office Loan EMI", Amount = 500.00, ExpenseModelID = 1, RelatedLiabilityID = 1},
                     new ExpenseModel{ Name = "Team Resources", Amount = 1000.00, ExpenseModelID = 2},
                     new ExpenseModel{ Name = "Miscellaneous Expenses", Amount = 300.00, ExpenseModelID = 3}
-                }
+                },
+                 StoryLevelID = "6",
             }},
                 StoryLevelID = "6",
                 Image = "shared_goals.png",
@@ -1013,11 +1021,11 @@ namespace RatRace3
             //  SaveDataToLiteDB();
             //  LoadDataFromLiteDB();
 
-            var dal = new DataAccessService();
+              var dal = new DataAccessService();
             // dal.SaveUISettings(UIsettingsModel);
 
             UIsettingsModel = dal.GetUISettings();
-
+          //  CurrentLevelModel.Players[0] = dal.LoadPlayerData(CurrentLevelModel.Players.First().PlayerModelID, CurrentLevelModel.StoryLevelID);
         }
 
 

@@ -9,6 +9,7 @@ using Syncfusion.Maui.Popup;
 using System.Linq;
 using System.Diagnostics.Metrics;
 using System.Xml.Linq;
+using RatRace3.DAL;
 
 public partial class GameView : ContentPage
 {
@@ -19,6 +20,8 @@ public partial class GameView : ContentPage
      
 
     }
+
+   
 
     public GameView()
 	{
@@ -31,32 +34,35 @@ public partial class GameView : ContentPage
         // Set default card index to open first 
         GameViewModel.VisibleIndex = 1;
         var appShell = (AppShell)Shell.Current;
-        //if (appShell.CurrentLevelModel.IsNewGameStarted)
-        //{
-        //    //come for new game ... 
-        //    appShell.getAnewGameData();//Get First Day data...
-         
-        //}
-        //else
-        //{
-        //    //come for Load last game
-          
-        //}
 
-        appShell.GameViewModel = GameViewModel;//Referancing object there to call it latter form Market page... Maybe move all these GamesViewmodels Codes to Appsell after MVP or refactor in a better way :)
+        appShell.GameViewModel = GameViewModel;
+
+        var levelPlayer1 = appShell.CurrentLevelModel.Players.First();
 
         if (appShell.CurrentLevelModel.IsNewGameStarted)
         {
             //NotLoad saved game New game 
+
+
+            GameViewModel.LoadPlayerData(levelPlayer1);
         }
         else
         {
             //Load Saved game ... 
             //Note: you can call auto-save function every turn on nextTurn()
+            var dal = new DataAccessService();
+            var savedPlayer = dal.LoadPlayerData(levelPlayer1.StoryLevelID, levelPlayer1.PlayerModelID);
+
+            if (savedPlayer != null) levelPlayer1= savedPlayer;
+            //    appShell.CurrentLevelModel.Players[0] = savedPlayer;//if needed (search for appShell.CurrentLevelModel.Players.First() uses)
+            GameViewModel.LoadPlayerData(levelPlayer1);//secound // TODO : after MVP can refactor it with one if No IS game started and one LoadPlayerData()...
+
+
+          
 
         }
         
-        GameViewModel.LoadPlayerData(appShell.CurrentLevelModel.Players.First());
+        
 
         // var playerModel = appShell.CurrentLevelModel.Players.First();
         BindingContext = GameViewModel;
