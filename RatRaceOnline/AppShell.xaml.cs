@@ -60,17 +60,26 @@ namespace RatRace3
         public void getAnewGameData()
         {
 
-           
 
             UIsettingsModel = new Models.UIsettingsModel
             {
                 IsMusicPlaying = false, //TODO : return to true befroe MVP releseing ....
-                LastPlayedLevelIndex = 1
+                LastPlayedLevelIndex = 2
             };
+            try
+            {
+                var dal = new DataAccessService();
+                var data= dal.GetUISettings();
+                if(data!=null)
+                UIsettingsModel = data;
+            }
+            catch { }
+
 
             SelectLevelViewModel = new SelectLevelViewModel
             {
-                ImageCollection = new List<LevelModel>()
+                ImageCollection = new List<LevelModel>(),
+
             };
             //dammy data ...
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
@@ -1017,15 +1026,10 @@ namespace RatRace3
             };
      
 
-            //Saving Data... method...
-            //  SaveDataToLiteDB();
-            //  LoadDataFromLiteDB();
+           
 
-              var dal = new DataAccessService();
-            // dal.SaveUISettings(UIsettingsModel);
-
-            UIsettingsModel = dal.GetUISettings();
-          //  CurrentLevelModel.Players[0] = dal.LoadPlayerData(CurrentLevelModel.Players.First().PlayerModelID, CurrentLevelModel.StoryLevelID);
+          
+          
         }
 
 

@@ -62,7 +62,7 @@
 
         <Button IsEnabled="{Binding IsGameFinishable }"  x:Name="FinishGameButton" Clicked="FinishGameButton_Clicked"  Margin="5" Text="Finish the Game" HeightRequest="40" WidthRequest="{OnIdiom Phone=150 , Default=300}"></Button>
         <Button  x:Name="BackToGameButton" Clicked="BackToGameButton_Clicked" Margin="5" Text="Back to the Game" HeightRequest="40" WidthRequest="{OnIdiom Phone=150 , Default=300}"></Button>
-            
+        <Button IsVisible="{Binding IsGameFinishable }"   x:Name="TryAgainGameButton" Clicked="TryAgainGameButton_Clicked"  Margin="5" Text="Try Again..." HeightRequest="40" WidthRequest="{OnIdiom Phone=150 , Default=300}"></Button>       
         </VerticalStackLayout>
   
 </ContentPage>

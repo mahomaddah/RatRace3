@@ -45,4 +45,9 @@ public partial class StoryDetailView : ContentPage
         this.BindingContext = appShell.CurrentLevelModel;
         GameGoalsListV.ItemsSource = appShell.CurrentLevelModel.StoryGoalModels;
     }
+
+    private void TryAgainGameButton_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }

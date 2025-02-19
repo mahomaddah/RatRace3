@@ -64,10 +64,10 @@ namespace RatRace3.DAL
             return null; // Kayıt yoksa null dön
         }
 
-        public void DeletePlayerData(string storyLevelID)
+        public void DeletePlayerData(string storyLevelID, int playerID)
         {
             var existingSave = SQLiteConnection.Table<SaveGameData>()
-                .FirstOrDefault(s => s.StoryLevelID == storyLevelID);
+                .FirstOrDefault(s => s.StoryLevelID == storyLevelID && s.PlayerID == playerID);
 
             if (existingSave != null)
             {

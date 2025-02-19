@@ -1,6 +1,7 @@
 namespace RatRace3;
 
 using Microsoft.Maui.Graphics;
+using RatRace3.DAL;
 using RatRace3.ViewModel;
 
 public partial class StoryModeView : ContentPage
@@ -26,7 +27,10 @@ public partial class StoryModeView : ContentPage
     private async void StartGameClicked(object sender, EventArgs e)
     {
        var appShell = (AppShell)Shell.Current;
-       var model= appShell.SelectLevelViewModel.ImageCollection.ElementAtOrDefault(storyLevelsCarousel.SelectedIndex);
+        int playingLevelIndex = storyLevelsCarousel.SelectedIndex;
+        //try to save last played index...
+        SaveLastPlayedIndexD(playingLevelIndex);
+       var model= appShell.SelectLevelViewModel.ImageCollection.ElementAtOrDefault(playingLevelIndex);
         if (model != null)
         {
             model.IsNewGameStarted = false;
@@ -35,7 +39,18 @@ public partial class StoryModeView : ContentPage
         }
         await Shell.Current.GoToAsync("StoryDetailView");
     }
-
+    private void SaveLastPlayedIndexD(int index)
+    {
+        //try to save last played index...
+        try
+        {
+            var appShell = (AppShell)Shell.Current;
+            appShell.UIsettingsModel.LastPlayedLevelIndex = index;
+            var dal = new DataAccessService();
+            dal.SaveUISettings(appShell.UIsettingsModel);
+        }
+        catch { }
+    }
     private async void RestartGameClicked(object sender, EventArgs e)
     {
         bool result =  await Shell.Current.DisplayAlert("New Game?", "Are you sure you want to restart? Your old save will be overwritten!", "Yes" , "No" );
@@ -45,8 +60,10 @@ public partial class StoryModeView : ContentPage
 
 
         var appShell = (AppShell)Shell.Current;
-        var model = appShell.SelectLevelViewModel.ImageCollection.ElementAtOrDefault(storyLevelsCarousel.SelectedIndex);
-        if (model != null)
+            int playingLevelIndex = storyLevelsCarousel.SelectedIndex;
+            SaveLastPlayedIndexD(playingLevelIndex);
+            var model = appShell.SelectLevelViewModel.ImageCollection.ElementAtOrDefault(playingLevelIndex);
+            if (model != null)
         {
             model.IsNewGameStarted = true;
             appShell.CurrentLevelModel = model;
