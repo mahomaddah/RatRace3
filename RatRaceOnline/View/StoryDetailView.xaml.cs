@@ -46,8 +46,26 @@ public partial class StoryDetailView : ContentPage
         GameGoalsListV.ItemsSource = appShell.CurrentLevelModel.StoryGoalModels;
     }
 
-    private void TryAgainGameButton_Clicked(object sender, EventArgs e)
+    private async void TryAgainGameButton_Clicked(object sender, EventArgs e)
     {
+        bool result = await Shell.Current.DisplayAlert("New Game?", "Are you sure you want to restart? Your old save will be overwritten!", "Yes", "No");
 
+        if (result)
+        {
+
+
+            var appShell = (AppShell)Shell.Current;
+            string currentPlayingLevelID = appShell.CurrentLevelModel.StoryLevelID;
+
+
+            var model = appShell.SelectLevelViewModel.ImageCollection.Find(x => x.StoryLevelID == currentPlayingLevelID);
+            if (model != null)
+            {
+                appShell.GameViewModel = new ViewModel.GameViewModel();
+                model.IsNewGameStarted = true;//for opening new and not loading...
+                appShell.CurrentLevelModel = model;
+            }
+            await Shell.Current.GoToAsync("GameView");
+        }
     }
 }
