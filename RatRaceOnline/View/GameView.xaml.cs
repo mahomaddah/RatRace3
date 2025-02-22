@@ -37,13 +37,16 @@ public partial class GameView : ContentPage
 
         appShell.GameViewModel = GameViewModel;
 
+        //for creating a new game data every time GameViewLoad...
+    
+
         var levelPlayer1 = appShell.CurrentLevelModel.Players.First();
 
         if (appShell.CurrentLevelModel.IsNewGameStarted)
         {
             //NotLoad saved game New game 
 
-
+            appShell.getAnewGameData();//without this user can onley get new game 2 time and after 2. all restart games will be the same until he close and re open the game :D lol but with it bug has solved..
             GameViewModel.LoadPlayerData(levelPlayer1);
         }
         else

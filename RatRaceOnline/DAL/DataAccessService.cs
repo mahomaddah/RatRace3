@@ -25,7 +25,7 @@ namespace RatRace3.DAL
         void InitializeDatabase()
         {
              SQLiteConnection.CreateTable<UIsettingsModel>();
-            //     SQLiteConnection.DropTable<PlayerModel>();
+            //      SQLiteConnection.DropTable<PlayerModel>();
             //      SQLiteConnection.CreateTable<PlayerModel>();
             //      SQLiteConnection.CreateTable<LevelModel>();
             SQLiteConnection.CreateTable<SaveGameData>();
@@ -76,44 +76,6 @@ namespace RatRace3.DAL
         }
 
 
-        #region OldNonJsonBasedArchitureCodes... 
-        //public void SavePlayerData(PlayerModel player, string storyLevelID)
-        //{
-        //    var existingData = SQLiteConnection.Table<PlayerModel>()
-        //        .FirstOrDefault(p => p.StoryLevelID == storyLevelID);
-
-        //    if (existingData != null)
-        //    {
-        //        player.PlayerModelID = existingData.PlayerModelID; // Preserve ID for update
-        //        SQLiteConnection.Update(player);
-        //    }
-        //    else
-        //    {
-        //        SQLiteConnection.Insert(player); // Auto-increments PlayerModelID
-        //    }
-        //}
-
-        //public PlayerModel LoadPlayerData(int playerID, string storyLevelID)
-        //{
-        //    return SQLiteConnection.Table<PlayerModel>()
-        //        .FirstOrDefault(p => p.StoryLevelID == storyLevelID && p.PlayerModelID == playerID);
-        //}
-
-        //public void DeletePlayerData(int playerID, string storyLevelID)
-        //{
-        //    var existingData = SQLiteConnection.Table<PlayerModel>()
-        //        .FirstOrDefault(p => p.StoryLevelID == storyLevelID && p.PlayerModelID == playerID);
-
-        //    if (existingData != null)
-        //    {
-        //        SQLiteConnection.Delete(existingData);
-        //    }
-        //}
-
-       #endregion
-
-
-
         public void SaveUISettings(UIsettingsModel settings)
         {
             
@@ -139,76 +101,7 @@ namespace RatRace3.DAL
                 LastPlayedLevelIndex = 3
             };
         }
-
-
-
-        #region DeleteOldLiteDBcodes
-
-        //private readonly string _dbPath;
-
-        //    public DataAccessService(string dbPath)
-        //    {
-        //        _dbPath = dbPath;
-        //    }
-
-        //    private LiteDatabase GetDatabase()
-        //    {
-        //        return new LiteDatabase(_dbPath);
-
-
-        //    }
-
-        //    // Genel veri ekleme veya güncelleme
-        //    public void SaveData<T>(T data, string collectionName) where T : class
-        //    {
-        //        using (var db = GetDatabase())
-        //        {
-        //            var collection = db.GetCollection<T>(collectionName);
-        //            collection.Upsert(data);
-        //        }
-        //    }
-
-        //    public List<LevelModel> GetAllLevelModels()
-        //    {
-        //        using (var db = GetDatabase())
-        //        {
-        //            return db.GetCollection("Levels").FindAll<LevelModel>().ToList();
-
-        //        }
-        //    }
-
-        //    // Tüm verileri yükleme
-        //    public List<T> GetAllData<T>(string collectionName) where T : class
-        //    {
-        //        using (var db = GetDatabase())
-        //        {
-
-        //            var collection = db.GetCollection<T>(collectionName);
-        //            return collection.FindAll().ToList();
-        //        }
-        //    }
-
-        //    // Tek bir veri yükleme
-        //    public T GetDataById<T>(int id, string collectionName) where T : class
-        //    {
-        //        using (var db = GetDatabase())
-        //        {
-        //            var collection = db.GetCollection<T>(collectionName);
-        //            return collection.FindById(id);
-        //        }
-        //    }
-
-        //    // Veri silme
-        //    public void DeleteData<T>(int id, string collectionName) where T : class
-        //    {
-        //        using (var db = GetDatabase())
-        //        {
-        //            var collection = db.GetCollection<T>(collectionName);
-        //            collection.Delete(id);
-        //        }
-        //    }
-        //
-        #endregion
+     
     }
 }
 

@@ -270,9 +270,9 @@ namespace RatRace3.ViewModel
             //  CurrentNewsPaperViewModel = new NewsPaperViewModel{};
            
 
-            int newsPayperRandomseed = random.Next(0, 4);
+        //    int newsPayperRandomseed = random.Next(0, 4);
             //Selecting The News payper for this turn...
-            var appShell = (AppShell)Shell.Current;
+       //     var appShell = (AppShell)Shell.Current;
             //CurrentNewsPaperViewModel.CurrentNewsPaperModel = appShell.GameViewModel.CurrentNewsPaperViewModel.NewsPaperModels[newsPayperRandomseed];// [0-4] of 4 index
 
             //   CurrentNewsPaperViewModel.CurrentNewsPaperModel.ImageSource = CurrentNewsPaperViewModel.NewsPaperModels{ }
