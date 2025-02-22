@@ -6,19 +6,22 @@
              Title="{Binding Header}" >
 
     <VerticalStackLayout Padding="5">
-     
+
+        <ScrollView MaximumHeightRequest="300">
+            
+       
             <Label x:Name="StoryDetailLB"
-             
+                  
                    Margin="5"
                    FontSize="{OnIdiom Phone=12 , Default=18}"
-                         MaximumWidthRequest="1000" MaximumHeightRequest="500"
+                         MaximumWidthRequest="1000" 
                     Text="{Binding DetailStory}"             
-                VerticalOptions="Center" 
+                VerticalOptions="Start" 
                 HorizontalOptions="Center" 
             />
+        </ScrollView>
 
-        
-            <ListView x:Name="GameGoalsListV"
+        <ListView x:Name="GameGoalsListV"
                      VerticalOptions="CenterAndExpand"
                      ItemsSource="{Binding StoryGoalModels}"
                      HeightRequest="100"

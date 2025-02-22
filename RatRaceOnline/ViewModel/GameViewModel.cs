@@ -550,16 +550,10 @@ namespace RatRace3.ViewModel
                 try
                 {
 
-                }
-                catch (Exception ex)
-                {
-                    await Shell.Current.DisplayAlert("Issue Paying Debt",ex.Message  , "Ok");
-                }
-
-                DebtListViewItemModel.Remove(DebtListViewItemModel.First(x => x.ItemText.Equals(SelectedLiability.LiabilityName)));
+              
                 //  var appShell = (AppShell)Shell.Current;
 
-                var RelatedExpenceOnject = Player.Expenses.First(x => x.RelatedLiabilityID.Equals(SelectedLiability.LiabilityModelID) || x.ExpenseModelID.Equals(SelectedLiability.ExpenseModelID));
+                var RelatedExpenceOnject = Player.Expenses.First(x => x.RelatedLiabilityID.Equals(SelectedLiability.LiabilityModelID) );
                 if (RelatedExpenceOnject != null)
                 {  //Delete Expences related to that liability if there is any ....
                     var item = ExpencesListViewItemModels.First(x => x.ItemText.Equals(RelatedExpenceOnject.Name));
@@ -568,11 +562,20 @@ namespace RatRace3.ViewModel
                     Player.Expenses.Remove(RelatedExpenceOnject);
 
                 }
-                Player.Liabilities.Remove(SelectedLiability);
+                 DebtListViewItemModel.Remove(DebtListViewItemModel.First(x => x.ItemText.Equals(SelectedLiability.LiabilityName)));
+                 Player.Liabilities.Remove(SelectedLiability);
 
 
                 IsPopupOpen = false;
                 await Shell.Current.DisplayAlert(SelectedLiability.LiabilityName.ToString(), "Debt Payments successful!!", "Cool");
+
+
+                }
+                catch (Exception ex)
+                {
+                    await Shell.Current.DisplayAlert("Issue Paying Debt", ex.Message, "Ok");
+                }
+
             }
 
             LoadPlayerData(Player);

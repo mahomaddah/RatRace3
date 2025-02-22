@@ -19,7 +19,7 @@ namespace RatRace3
         /// <summary>
         /// For stock market : CurrentCompanyAsset Contain Quantity of stock ,Avreage Purchesed Price and etc... example:StockCompanySymbol = "MSFT",StockQuantity = 1.1,StockAverageBuyCost =100.23, AssetValue = 200.00, 
         /// </summary>
-      //  public AssetModel CurrentCompanyAsset { get; set; }
+        //public AssetModel CurrentCompanyAsset { get; set; }
 
         public ObservableCollection<Company> IPOcompanies { get; set; }
         public SelectLevelViewModel SelectLevelViewModel { get; set; }
@@ -108,7 +108,7 @@ namespace RatRace3
                     new ExpenseModel{ Name = "Ducati Bike Debt EMI", Amount = 300.00, ExpenseModelID = 1 ,RelatedLiabilityID = 1 },
                     new ExpenseModel{ Name = "Expensive Drone Debt EMI", Amount = 200.00, ExpenseModelID = 2  ,RelatedLiabilityID = 2},
                     new ExpenseModel{ Name = "Motorcycle Camping Gear Debt EMI", Amount = 100.00, ExpenseModelID = 3  ,RelatedLiabilityID = 3},
-                    new ExpenseModel{ Name = "Minimum Surviving Expenses", Amount = 1072.33, ExpenseModelID = 4}
+                    new ExpenseModel{ Name = "Minimum Surviving Expenses", Amount = 1072.33, ExpenseModelID = 4, RelatedLiabilityID = -1}
                 }
             }},
                 StoryLevelID = "A",
@@ -147,7 +147,7 @@ namespace RatRace3
                 {
                     new ExpenseModel{ Name = "KUBA TK03 Bike Debt EMI", Amount = 300.00, ExpenseModelID = 1, RelatedLiabilityID = 1},
                     new ExpenseModel{ Name = "Motorcycle Safe Jacket Debt EMI", Amount = 200.00, ExpenseModelID = 2 ,RelatedLiabilityID = 2},
-                    new ExpenseModel{ Name = "Motorcycle Helmet Debt EMI", Amount = 100.00, ExpenseModelID = 3, RelatedLiabilityID = 3}
+                    new ExpenseModel{ Name = "Motorcycle Helmet Debt EMI", Amount = 100.00, ExpenseModelID = 3, RelatedLiabilityID = 3 }
                 },
                   StoryLevelID = "2",
             }},
@@ -167,7 +167,7 @@ namespace RatRace3
                 Balance = 2000.00,
                 NetTotalIncome = 2100,
                 CurrentMonth = 1,
-                MaximumMonth = 12,
+                MaximumMonth = 48,
                 Liabilities = new List<LiabilityModel>
                 {
                     new LiabilityModel{LiabilityName ="Student Loan", TotalAmount = 5000.00, MonthsRemaining = 24, InterestRate = 0.05, LiabilityModelID = 1 ,ExpenseModelID = 1},
@@ -185,8 +185,8 @@ namespace RatRace3
                 {
                     new ExpenseModel{ Name = "Student Loan EMI", Amount = 220.00, ExpenseModelID = 1, RelatedLiabilityID = 1},
                     new ExpenseModel{ Name = "Car Loan EMI", Amount = 300.00, ExpenseModelID = 2 , RelatedLiabilityID = 2},
-                    new ExpenseModel{ Name = "Groceries", Amount = 150.00, ExpenseModelID = 3},
-                    new ExpenseModel{ Name = "Transportation", Amount = 100.00, ExpenseModelID = 4}
+                    new ExpenseModel{ Name = "Groceries", Amount = 150.00, ExpenseModelID = 3, RelatedLiabilityID = -1},
+                    new ExpenseModel{ Name = "Transportation", Amount = 100.00, ExpenseModelID = 4 , RelatedLiabilityID = -1}
                 },   StoryLevelID = "3",
             }},
 
@@ -203,113 +203,190 @@ namespace RatRace3
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
                 Players = new List<PlayerModel> { new PlayerModel{
-                Balance = 1500.00,
-                NetTotalIncome = 500,
+                Balance = 31500.00,
+                NetTotalIncome = 0,
                 CurrentMonth = 1,
                 MaximumMonth = 24,
                 Liabilities = new List<LiabilityModel>
                 {
-                    new LiabilityModel{LiabilityName ="Credit Card Debt", TotalAmount = 7000.00, MonthsRemaining = 12, InterestRate = 0.18, LiabilityModelID = 1 , ExpenseModelID =1},
-                    new LiabilityModel{LiabilityName="Payday Loan", TotalAmount=3000.00, MonthsRemaining = 6, InterestRate=0.25, LiabilityModelID = 2 , ExpenseModelID = 2}
+                    new LiabilityModel{LiabilityName ="Credit Card Debt", TotalAmount = 6000.00, MonthsRemaining = 24, InterestRate = 0.03, LiabilityModelID = 1 , ExpenseModelID =1},
+                    new LiabilityModel{LiabilityName="Payday Loan", TotalAmount=4000.00, MonthsRemaining = 12, InterestRate=0.15, LiabilityModelID = 2 , ExpenseModelID = 2}
                 },
-                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Full-Time Job", Amount = 2500.00 } },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Teaching C# on Skype ", Amount = 375.00 },
+                                                               new IncomeSourceModel { Name = "FD Retirement deposit", Amount = 25.00 , AssetIncomeSourseRelatingGUID = "947f4fae-0cff-4e61-a7cf-8706b76fd91d" }
+                },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "Retirement Fund", AssetType = AssetTypes.MutualFund.ToString(), AssetValue = 5000.00, IntrestRate= 0.06, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 25.00, AssetModelID = 1}
+                    new AssetModel {AssetName = "Retirement Fund", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 5000.00, IntrestRate= 0.06, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 25.00, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID ="947f4fae-0cff-4e61-a7cf-8706b76fd91d"}
                 },
                 Expenses = new List<ExpenseModel>
                 {
                     new ExpenseModel{ Name = "Credit Card Minimum Payment", Amount = 200.00, ExpenseModelID = 1 , RelatedLiabilityID=1},
                     new ExpenseModel{ Name = "Payday Loan EMI", Amount = 500.00, ExpenseModelID = 2, RelatedLiabilityID = 2},
 
-                    new ExpenseModel{ Name = "Rent", Amount = 800.00, ExpenseModelID = 3},
-                    new ExpenseModel{ Name = "Utilities", Amount = 200.00, ExpenseModelID = 4}
+                    new ExpenseModel{ Name = "Rent", Amount = 600.00, ExpenseModelID = 3 , RelatedLiabilityID = -1},
+                    new ExpenseModel{ Name = "Utilities and Food", Amount = 300.00, ExpenseModelID = 4 , RelatedLiabilityID = -1}
                 }
                 ,     StoryLevelID = "4",
             }},
                 StoryLevelID = "4",
                 Image = "interview.png",
-                Header = "The Interview Gauntlet",
-                DetailStory = "You've landed a series of interviews for your dream job, but the competition is fierce. Each question tests not only your knowledge but also your ability to think on your feet. Nail the interviews and secure a position that will change your financial future forever.",
+                Header = "Survive to Get a Job!",
+                DetailStory = "Alex just graduated with a master's degree as the top foreign student at his university. However, he still has two more years before his citizenship application is processed. Without a work permit, keeping his cash flow positive is a struggle, and most of the companies he interviews with don’t hire employees who require work permit sponsorship.\r\n\r\nDetermined to survive, he decides to borrow $30K from his sister until he secures a job from one of his interviews—giving himself a maximum of two years to pay it back. In the meantime, he realizes he must improve his money management skills, learning to differentiate between good debt and bad debt, and ensure he can repay both his debts and his sister’s $30K before time runs out.\r\n\r\nTo generate some income, Alex starts teaching C# on Skype, earning $375 per session. However, his cash flow is still negative, and he must carefully navigate his financial decisions to survive until he lands a stable job.💼",
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,
-                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 30000, YouHave = 1500 },
+                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 30000, YouHave = 31500 },
                                                              new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 24, YouHave = 1 },
-                                                             new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 3 }
+                                                             new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 2 }
                 }
             });
 
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
                 Players = new List<PlayerModel> { new PlayerModel{
-                Balance = 1000.00,
-                NetTotalIncome = 2000,
+                Balance = 5000.00, // Increased initial balance to reflect savings & early investment
+                NetTotalIncome = 2800, // Adjusted for improved revenue from classes
                 CurrentMonth = 1,
                 MaximumMonth = 24,
+
                 Liabilities = new List<LiabilityModel>
                 {
-                    new LiabilityModel{LiabilityName ="Startup Loan", TotalAmount = 10000.00, MonthsRemaining = 24, InterestRate = 0.10, LiabilityModelID = 1 ,ExpenseModelID =1 }
+                    new LiabilityModel{LiabilityName = "Startup Loan", TotalAmount = 12000.00, MonthsRemaining = 24, InterestRate = 0.08, LiabilityModelID = 1, ExpenseModelID = 1 },
+                    new LiabilityModel{LiabilityName = "Equipment Lease", TotalAmount = 5000.00, MonthsRemaining = 12, InterestRate = 0.05, LiabilityModelID = 2, ExpenseModelID = 2 }
                 },
-                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Side Hustle", Amount = 1000.00 }, new IncomeSourceModel { Name = "Savings Interest", Amount = 200.00, AssetIncomeSourseRelatingGUID="2" } },
+
+                IncomeSources = new List<IncomeSourceModel>
+                {
+                    new IncomeSourceModel { Name = "Patient Treatment Fees", Amount = 1800.00 },
+                    new IncomeSourceModel { Name = "Pilates Group Sessions", Amount = 700.00 },
+                    new IncomeSourceModel { Name = "Savings Interest", Amount = 300.00, AssetIncomeSourseRelatingGUID = "2" }
+                },
+
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "Startup Equity", AssetType = AssetTypes.Other.ToString(), AssetValue = 20000.00, IntrestRate= 0.01, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome =200.00, AssetModelID = 1 , AssetIncomeSourseRelatingGUID = "2"}
+                    new AssetModel { AssetName = "Physiotherapy Equipment", AssetType = AssetTypes.Other.ToString(), AssetValue = 10000.00, IntrestRate = 0.02, IsBankDeposit = false, IsRecursiveDepositRD = false, PassiveIncome = 0, AssetModelID = 1 },
+                    new AssetModel { AssetName = "Business Bank Account", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 5000.00, IntrestRate = 0.03, IsBankDeposit = true, IsRecursiveDepositRD = false, PassiveIncome = 300.00, AssetModelID = 2, AssetIncomeSourseRelatingGUID = "2" }
                 },
+
                 Expenses = new List<ExpenseModel>
                 {
-                    new ExpenseModel{ Name = "Startup Loan EMI", Amount = 500.00, ExpenseModelID = 1, RelatedLiabilityID = 1},
-                    new ExpenseModel{ Name = "Team Salaries", Amount = 1000.00, ExpenseModelID = 2},
-                    new ExpenseModel{ Name = "Office Rent", Amount = 800.00, ExpenseModelID = 3}
+                    new ExpenseModel { Name = "Studio Rent", Amount = 1000.00, ExpenseModelID = 1, RelatedLiabilityID = -1 },
+                    new ExpenseModel { Name = "Medical Equipment Leasing", Amount = 500.00, ExpenseModelID = 2, RelatedLiabilityID = 2 },
+                    new ExpenseModel { Name = "Marketing & Advertising", Amount = 300.00, ExpenseModelID = 3, RelatedLiabilityID = -1 },
+                    new ExpenseModel { Name = "Startup Loan EMI", Amount = 600.00, ExpenseModelID = 4, RelatedLiabilityID = 1 }
                 },
-                  StoryLevelID = "5",
-            }},
+
                 StoryLevelID = "5",
-                Image = "dotnet_bot.png",
-                Header = "Launching Your Dreams",
-                DetailStory = "After years of planning, you're ready to launch your startup, a metaphorical rocket aimed at financial freedom. But the launch is risky—your team is depending on you, and any miscalculation could lead to failure. Will you soar to new heights, or will gravity pull you back into the rat race?",
+            }},
+
+                        StoryLevelID = "5",
+                Image = "pilates.png",
+                Header = "Launching Your Dreams: Reformation",
+                DetailStory = "Mira is a physiotherapist who suffered from a herniated disc while in university. Battling through her own recovery made her realize the power of Pilates techniques in physical therapy. Now, she is determined to open her Reformation Fizyopilates Studio, where she can train a skilled team and help patients in their rehabilitation journey.\r\n\r\nTo bring her vision to life, Mira has taken out a $10,000 startup loan, giving herself two years to build a successful business and become financially stable. She currently has $1,000 in savings, with a net income of $2,000 per month, but running the studio comes with significant expenses—including team salaries, rent, and loan repayments.\r\n\r\nMira must carefully manage her finances, balance business growth with sustainability, and ensure that she can eliminate her liabilities while achieving her dream of creating a thriving physiotherapy center. Can she successfully navigate the challenges of entrepreneurship, build a profitable studio, and make a lasting impact on her patients' lives?",
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,
-                StoryGoalModels = new List<StoryGoalModel> {
-                new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 4000, YouHave = 1000 },
-                new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 24, YouHave = 1 },
-                new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 1 }
-            }
+                StoryGoalModels = new List<StoryGoalModel> 
+                {  new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 30000, YouHave = 5000 },
+                   new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 24, YouHave = 1 },
+                   new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 2 }
+                }
             });
 
             SelectLevelViewModel.ImageCollection.Add(new LevelModel
             {
                 Players = new List<PlayerModel> { new PlayerModel{
-                Balance = 3000.00,
-                NetTotalIncome = 3000,
+                Balance = 5000.00, // Increased initial balance for better early-stage survival
+                NetTotalIncome = 4500, // Increased to reflect higher earnings potential
                 CurrentMonth = 1,
                 MaximumMonth = 36,
+
                 Liabilities = new List<LiabilityModel>
                 {
-                    new LiabilityModel{LiabilityName ="Shared Office Loan", TotalAmount = 15000.00, MonthsRemaining = 36, InterestRate = 0.08, LiabilityModelID = 1 ,ExpenseModelID =1}
+                    new LiabilityModel{LiabilityName = "Shared Office Loan", TotalAmount = 15000.00, MonthsRemaining = 36, InterestRate = 0.08, LiabilityModelID = 1 ,ExpenseModelID = 1 },
+                    new LiabilityModel{LiabilityName = "Initial Tech Investment", TotalAmount = 7000.00, MonthsRemaining = 24, InterestRate = 0.06, LiabilityModelID = 2 ,ExpenseModelID = 2 }
                 },
-                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Team Project Revenue", Amount = 3000.00 ,AssetIncomeSourseRelatingGUID="1" } },
+
+                IncomeSources = new List<IncomeSourceModel>
+                {
+                    new IncomeSourceModel { Name = "Tech Subscription Revenue", Amount = 2500.00, AssetIncomeSourseRelatingGUID="1" },
+                    new IncomeSourceModel { Name = "Consulting Services", Amount = 1200.00 },
+                    new IncomeSourceModel { Name = "Freelance Graphic Design", Amount = 800.00 }
+                },
+
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "Shared Project Assets", AssetType = AssetTypes.Other.ToString(), AssetValue = 5000.00, IntrestRate= 0.00, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 0.00, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = "1"}
+                    new AssetModel {AssetName = "Shared Office Equipment", AssetType = AssetTypes.Other.ToString(), AssetValue = 8000.00, IntrestRate= 0.00, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 0.00, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = "1"},
+                    new AssetModel {AssetName = "Company Bank Reserve", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 5000.00, IntrestRate= 0.02, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 100.00, AssetModelID = 2}
                 },
+
                 Expenses = new List<ExpenseModel>
                 {
                     new ExpenseModel{ Name = "Office Loan EMI", Amount = 500.00, ExpenseModelID = 1, RelatedLiabilityID = 1},
-                    new ExpenseModel{ Name = "Team Resources", Amount = 1000.00, ExpenseModelID = 2},
-                    new ExpenseModel{ Name = "Miscellaneous Expenses", Amount = 300.00, ExpenseModelID = 3}
+                    new ExpenseModel{ Name = "Tech Investment Loan EMI", Amount = 400.00, ExpenseModelID = 2, RelatedLiabilityID = 2},
+                    new ExpenseModel{ Name = "Team Resources", Amount = 1500.00, ExpenseModelID = 3, RelatedLiabilityID = -1},
+                    new ExpenseModel{ Name = "Marketing & Outreach", Amount = 700.00, ExpenseModelID = 4, RelatedLiabilityID = -1},
+                    new ExpenseModel{ Name = "Miscellaneous Expenses", Amount = 400.00, ExpenseModelID = 5 , RelatedLiabilityID = -1}
                 },
-                 StoryLevelID = "6",
+
+                StoryLevelID = "6",
             }},
                 StoryLevelID = "6",
                 Image = "shared_goals.png",
-                Header = "Shared Goals, Shared Dreams",
-                DetailStory = "You team up with like-minded individuals who share your vision for escaping the rat race. Together, you pool resources, divide tasks, and strategize your next big move. Can you unite to achieve greatness, or will the team fall apart under pressure?",
+                Header = "Shared Goals, Shared Dreams, Story of Atlassian",
+                DetailStory = "Shared Goals, Shared Dreams\r\nIn the heart of San Francisco, four ambitious entrepreneurs—Alex, Jordan, Taylor, and Morgan—each harbored a vision to revolutionize their respective industries. However, the soaring costs of individual ventures and the competitive startup ecosystem posed significant challenges.\r\n\r\nAlex, a software developer, had conceptualized an innovative project management tool but lacked the funds to bring it to market. Jordan, a graphic designer, sought a professional space to collaborate with clients but was constrained by budget limitations. Taylor, a digital marketer, needed a conducive environment to conduct workshops and strategy sessions, while Morgan, a financial analyst, aimed to develop a fintech platform but faced financial hurdles.\r\n\r\nRecognizing their shared challenges, they decided to collaborate, pooling their resources to establish a shared workspace. This strategic move not only reduced individual expenses but also fostered a synergistic environment where creativity and innovation thrived.\r\n\r\nTo finance this endeavor, they collectively secured a $15,000 loan, agreeing to repay it over 36 months at an 8% interest rate. Their combined monthly income from various projects totaled $3,000, with recurring expenses including:\r\n\r\nOffice Loan EMI: $500\r\nTeam Resources: $1,000\r\nMiscellaneous Expenses: $300\r\nDespite these financial commitments, their collaborative approach led to increased client acquisition and revenue growth. By leveraging each other's strengths, they transformed their shared workspace into a hub of innovation, attracting attention from investors and industry leaders.\r\n\r\nTheir journey mirrors the experiences of entrepreneurs like Scott Farquhar and Mike Cannon-Brookes, who co-founded Atlassian by bootstrapping their startup with a $10,000 credit card debt. Through collaboration and strategic resource management, they built a multi-billion-dollar enterprise.\r\n\r\nYour Challenge: Step into the shoes of these entrepreneurs. Manage shared resources effectively, ensure timely loan repayments, and navigate the complexities of collaborative business operations. Can you lead the team to financial stability and collective success?\r\n\r\nGame Objectives:\r\n\r\nEliminate Liabilities: Repay the shared office loan within the agreed timeframe.\r\nAchieve Financial Stability: Increase the collective balance to secure future endeavors.\r\nFoster Collaboration: Encourage teamwork to unlock new income opportunities and reduce expenses.\r\nEmbark on this journey of shared goals and dreams, and experience firsthand the power of collaborative entrepreneurship.",
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,
-                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = "Liabilities", Target = 0, YouHave = 1 } }
+                StoryGoalModels = new List<StoryGoalModel> 
+                {
+                new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 2 },
+                new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 8000, YouHave = 5000 },
+                new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 36, YouHave = 1 }
+                }
+            });
+
+            SelectLevelViewModel.ImageCollection.Add(new LevelModel
+            {
+                Players = new List<PlayerModel> { new PlayerModel{
+                Balance = 75500.00,
+                NetTotalIncome = 0,
+                CurrentMonth = 1,
+                MaximumMonth = 720,
+                Liabilities = new List<LiabilityModel>
+                {
+                    new LiabilityModel{LiabilityName ="Credit Card Debt", TotalAmount = 600.00, MonthsRemaining = 24, InterestRate = 0.03, LiabilityModelID = 1 , ExpenseModelID =1},
+                   
+                },
+                IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Playing Sax on a Jazz Group", Amount = 675.00 },
+                                                               new IncomeSourceModel { Name = "FD Retirement deposit", Amount = 25.00 , AssetIncomeSourseRelatingGUID = "947f4fae-0cff-4e61-a7cf-8706b76fd91d" }
+                },
+                Assets = new List<AssetModel>
+                {
+                    new AssetModel {AssetName = "Retirement Fund", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 5000.00, IntrestRate= 0.06, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 25.00, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID ="947f4fae-0cff-4e61-a7cf-8706b76fd91d"}
+                },
+                Expenses = new List<ExpenseModel>
+                {
+                    new ExpenseModel{ Name = "Credit Card Minimum Payment", Amount = 200.00, ExpenseModelID = 1 , RelatedLiabilityID=1},
+                    
+
+                    new ExpenseModel{ Name = "Painting tools", Amount = 300.00, ExpenseModelID = 3 , RelatedLiabilityID = -1},
+                    new ExpenseModel{ Name = "Utilities and Food", Amount = 300.00, ExpenseModelID = 4 , RelatedLiabilityID = -1}
+                }
+                ,     StoryLevelID = "7",
+            }},
+                StoryLevelID = "7",
+                Image = "fatihpaintssvg.png",
+                Header = "Fatih's Dilemma!",
+                DetailStory = "Fatih is 42 years old and has recently sold his business for $70K. He lives in his father’s small apartment, so he doesn’t have to pay rent. However, he has a deep passion for painting and spends a significant amount each month on painting tools and supplies.\r\n\r\nNow, he faces a critical financial challenge—he must manage his funds wisely to ensure they last for the next 60 years, covering all his expenses for the rest of his life. His ultimate goal is to grow his savings to $200K, which would allow him to generate $10K per year in passive income by investing in U.S. Treasury Bonds—widely considered the Risk-Free Rate of Return in finance.\r\n\r\nFatih must decide how to invest and allocate his capital. Should he:\r\n\r\nInvest a portion in great U.S. stocks, benefiting from long-term growth?\r\nHold part of his money in cash as insurance against market downturns?\r\nConvert his savings to Turkish Lira, earning a tempting 50% interest per year but exposing himself to 68% inflation and extreme risk?\r\nWhich path should he take to secure his future without running out of money too soon?",
+                isStarted = false,
+                isUnlocked = false,
+                HighestMounthScore = 0,
+                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 200000, YouHave = 75500 },
+                                                             new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 720, YouHave = 1 },
+                                                             new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 2 }
+                }
             });
 
             var random = new Random();
@@ -344,19 +421,19 @@ namespace RatRace3
                             new StockOrder{ StockSymbol="GOOGL" , AmounthOfMoney = 123.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), FillingStatus = "Filled", Opration = "Sell", ShareHolderID = 1 },
                             new StockOrder{ StockSymbol="GOOGL" , AmounthOfMoney = 103.56, Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), FillingStatus = "Filled", Opration = "Buy", ShareHolderID = 2 },
                             new StockOrder{ StockSymbol="GOOGL" , AmounthOfMoney = 103.56, Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), FillingStatus = "Requested", Opration = "Sell", ShareHolderID = 2 },
-                            new StockOrder{ StockSymbol="GOOGL" , AmounthOfMoney = 23.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), FillingStatus = "Requested", Opration = "Sell", ShareHolderID = 2 },
-                            new StockOrder{ StockSymbol="GOOGL" , AmounthOfMoney = 43.56, Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
+                            new StockOrder{ StockSymbol="GOOGL" , AmounthOfMoney = 23.56,  Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), FillingStatus = "Requested", Opration = "Sell", ShareHolderID = 2 },
+                            new StockOrder{ StockSymbol="GOOGL" , AmounthOfMoney = 43.56,  Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), FillingStatus = "Failed", Opration = "Buy", ShareHolderID = 1 }
                        },
 
                        PriceCandles = new ObservableCollection<PriceCandleModel>
                        {
-                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-8).ToString("MM-yyyy"), Value = 58 + random.Next(-5, 9)*35 },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-8).ToString("MM-yyyy"), Value = 58 + random.Next(-5, 9)*35 },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 74 + random.Next(-5, 9)*35 },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 88 + random.Next(-5, 9)*35 },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 140 + random.Next(-5, 9)*35 },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 180 + random.Next(-5, 9)*35 },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 200 + random.Next(-5, 9)*35 },
-                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 300 + random.Next(-5, 9)*35 },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 300 + random.Next(-5, 9)*35 },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 450 + random.Next(-5, 9)*35 },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(0).ToString("MM-yyyy"), Value = 500 + random.Next(-5, 9)*35 }
                        },
