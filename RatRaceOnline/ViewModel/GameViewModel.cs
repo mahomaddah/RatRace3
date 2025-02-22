@@ -258,6 +258,8 @@ namespace RatRace3.ViewModel
         {
             DataAccessService dal = new DataAccessService();
             dal.SavePlayerData(playerModel,playerModel.StoryLevelID);
+            dal.SaveCompaniesData(Market.IPOCompanies.ToList(), playerModel.StoryLevelID);
+            dal.SaveNewsPapersData(CurrentNewsPaperViewModel.NewsPaperModels, playerModel.StoryLevelID);
         }
 
      
@@ -651,6 +653,7 @@ namespace RatRace3.ViewModel
 
         }
 
+         
         void BringRandomNewsPaper()
         {
             int seed = rand.Next(0, 4);
@@ -780,9 +783,11 @@ namespace RatRace3.ViewModel
             {
                 CurrentNewsPaperViewModel = new NewsPaperViewModel();
                 CurrentNewsPaperViewModel.NewsPaperModels = appShell.CurrentNewsPaperViewModel.NewsPaperModels;
-
-                CurrentNewsPaperViewModel.CurrentNewsPaperModel = CurrentNewsPaperViewModel.NewsPaperModels[random.Next(0,4)];
-               // OnPropertyChanged(nameof(CurrentNewsPaperViewModel.CurrentNewsPaperModel));
+               // currentNewsPayperSeed = random.Next(0, 4);
+               if(CurrentNewsPaperViewModel.CurrentNewsPaperModel==null)
+                CurrentNewsPaperViewModel.CurrentNewsPaperModel = CurrentNewsPaperViewModel.NewsPaperModels[random.Next(0, 4)];
+                //TODO : Code duplication with BringRandomNewsPaper() replace and reuse same function ... in top ...
+                // OnPropertyChanged(nameof(CurrentNewsPaperViewModel.CurrentNewsPaperModel));
             }
 
             // CurrentNewsPaperViewModel.CurrentNewsPaperModel

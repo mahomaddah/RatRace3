@@ -1109,40 +1109,6 @@ namespace RatRace3
           
         }
 
-
-        #region Save&LoadPlayerGameData:
-        //void LoadDataFromLiteDB()//TODO: load needed to be fixed ... load have problem...
-        //{
-        //    var dbPath = Path.Combine(FileSystem.AppDataDirectory, "GameData.db");
-        //    var localDb = new DataAccessService(dbPath);
-
-        //    // UISettingsModel verisini yükleme
-        //    //   UIsettingsModel = localDb.GetDataById<UIsettingsModel>(1, "UISettings");
-
-        //    // Tüm seviyeleri yükleme
-        //    SelectLevelViewModel = new SelectLevelViewModel();
-
-        //    SelectLevelViewModel = new SelectLevelViewModel
-        //    {
-        //        ImageCollection = localDb.GetAllData<LevelModel>("Levels").ToList()
-        //    };
-
-        //}
-        //void SaveDataToLiteDB()
-        //{
-        //    var dbPath = Path.Combine(FileSystem.AppDataDirectory, "GameData.db");
-        //    var localDb = new DataAccessService(dbPath);
-        //    localDb.SaveData(UIsettingsModel, "UISettings");
-
-        //    // SelectLevelViewModel verisini kaydetme
-        //    foreach (var level in SelectLevelViewModel.ImageCollection)
-        //    {
-        //        localDb.SaveData(level, "Levels");
-        //    }
-
-        //}
-        #endregion
-
         #region Music Codes
 
         private void TurnMusicBtn_Clicked(object sender, EventArgs e)

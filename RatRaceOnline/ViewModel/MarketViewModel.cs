@@ -208,13 +208,6 @@ namespace RatRace3.ViewModels
            
         }
 
-        //public void ChangeSelectedCompany(int index)
-        //{
-        //    if (index >= 0 && index < IPOCompanies.Count)
-        //    {
-        //        SelectedCompany = IPOCompanies[index];
-        //    }
-        //}
 
         private async void BuyStock()
         {

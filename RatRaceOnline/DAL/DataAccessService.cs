@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json;
 using SQLite;
 using RatRace3.Models;
-using Dapper;
 using RatRace3.DAL.DbModels;
-using System.Text.Json;
-
+using System.IO;
+using Microsoft.Maui.Storage;
 
 namespace RatRace3.DAL
 {
@@ -16,6 +14,7 @@ namespace RatRace3.DAL
     {
         private static string dbPath = Path.Combine(FileSystem.AppDataDirectory, "SaveGameData.db");
         SQLiteConnection SQLiteConnection { get; set; }
+
         public DataAccessService()
         {
             SQLiteConnection = new SQLiteConnection(dbPath);
@@ -24,16 +23,13 @@ namespace RatRace3.DAL
 
         void InitializeDatabase()
         {
-             SQLiteConnection.CreateTable<UIsettingsModel>();
-            //      SQLiteConnection.DropTable<PlayerModel>();
-            //      SQLiteConnection.CreateTable<PlayerModel>();
-            //      SQLiteConnection.CreateTable<LevelModel>();
+            SQLiteConnection.CreateTable<UIsettingsModel>();
             SQLiteConnection.CreateTable<SaveGameData>();
-
-
+            SQLiteConnection.CreateTable<SaveGameExtendedData>();  // Yeni tablo: Companies ve NewsPaper'ları kaydetmek için
         }
 
-
+        // === SAVE PLAYER DATA ===
+        #region Player Data Service:
         public void SavePlayerData(PlayerModel player, string storyLevelID)
         {
             var jsonData = JsonSerializer.Serialize(player);
@@ -48,7 +44,12 @@ namespace RatRace3.DAL
             }
             else
             {
-                SQLiteConnection.Insert(new SaveGameData { StoryLevelID = storyLevelID, PlayerJsonData = jsonData ,PlayerID =player.PlayerModelID});
+                SQLiteConnection.Insert(new SaveGameData
+                {
+                    StoryLevelID = storyLevelID,
+                    PlayerJsonData = jsonData,
+                    PlayerID = player.PlayerModelID
+                });
             }
         }
 
@@ -61,7 +62,7 @@ namespace RatRace3.DAL
             {
                 return JsonSerializer.Deserialize<PlayerModel>(savedGame.PlayerJsonData);
             }
-            return null; // Kayıt yoksa null dön
+            return null;
         }
 
         public void DeletePlayerData(string storyLevelID, int playerID)
@@ -74,13 +75,79 @@ namespace RatRace3.DAL
                 SQLiteConnection.Delete(existingSave);
             }
         }
+        #endregion
 
+        // === SAVE & LOAD COMPANIES DATA ===
+        #region Companies Data Service :
+        public void SaveCompaniesData(List<Company> companies, string storyLevelID)
+        {
+            var jsonData = JsonSerializer.Serialize(companies);
+            var existingSave = SQLiteConnection.Table<SaveGameExtendedData>()
+                .FirstOrDefault(s => s.DataType == "Companies" && s.StoryLevelID == storyLevelID);
 
+            if (existingSave != null)
+            {
+                existingSave.JsonData = jsonData;
+                SQLiteConnection.Update(existingSave);
+            }
+            else
+            {
+                SQLiteConnection.Insert(new SaveGameExtendedData
+                {
+                    StoryLevelID = storyLevelID,
+                    DataType = "Companies",
+                    JsonData = jsonData
+                });
+            }
+        }
+
+        public List<Company> LoadCompaniesData(string storyLevelID)
+        {
+            var savedData = SQLiteConnection.Table<SaveGameExtendedData>()
+                .FirstOrDefault(s => s.DataType == "Companies" && s.StoryLevelID == storyLevelID);
+
+            return savedData != null ? JsonSerializer.Deserialize<List<Company>>(savedData.JsonData) : new List<Company>();
+        }
+        #endregion
+
+        // === SAVE & LOAD NEWSPAPER DATA ===
+        #region NewsPapers Data Service:
+        public void SaveNewsPapersData(List<NewsPaperModel> newspapers, string storyLevelID)
+        {
+            var jsonData = JsonSerializer.Serialize(newspapers);
+            var existingSave = SQLiteConnection.Table<SaveGameExtendedData>()
+                .FirstOrDefault(s => s.DataType == "NewsPapers" && s.StoryLevelID == storyLevelID);
+
+            if (existingSave != null)
+            {
+                existingSave.JsonData = jsonData;
+                SQLiteConnection.Update(existingSave);
+            }
+            else
+            {
+                SQLiteConnection.Insert(new SaveGameExtendedData
+                {
+                    StoryLevelID = storyLevelID,
+                    DataType = "NewsPapers",
+                    JsonData = jsonData
+                });
+            }
+        }
+
+        public List<NewsPaperModel> LoadNewsPapersData(string storyLevelID)
+        {
+            var savedData = SQLiteConnection.Table<SaveGameExtendedData>()
+                .FirstOrDefault(s => s.DataType == "NewsPapers" && s.StoryLevelID == storyLevelID);
+
+            return savedData != null ? JsonSerializer.Deserialize<List<NewsPaperModel>>(savedData.JsonData) : new List<NewsPaperModel>();
+        }
+        #endregion
+
+        // === SAVE & LOAD UI SETTINGS ===
+        #region UI settings Data Service:
         public void SaveUISettings(UIsettingsModel settings)
         {
-            
             var existingSettings = SQLiteConnection.Table<UIsettingsModel>().FirstOrDefault();
-
             if (existingSettings != null)
             {
                 settings.Id = existingSettings.Id;
@@ -94,14 +161,12 @@ namespace RatRace3.DAL
 
         public UIsettingsModel GetUISettings()
         {
-
             return SQLiteConnection.Table<UIsettingsModel>().FirstOrDefault() ?? new UIsettingsModel
             {
                 IsMusicPlaying = true,
                 LastPlayedLevelIndex = 3
             };
         }
-     
+        #endregion
     }
 }
-

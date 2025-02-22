@@ -10,6 +10,7 @@ using System.Linq;
 using System.Diagnostics.Metrics;
 using System.Xml.Linq;
 using RatRace3.DAL;
+using System.Collections.ObjectModel;
 
 public partial class GameView : ContentPage
 {
@@ -55,8 +56,15 @@ public partial class GameView : ContentPage
             //Note: you can call auto-save function every turn on nextTurn()
             var dal = new DataAccessService();
             var savedPlayer = dal.LoadPlayerData(levelPlayer1.StoryLevelID, levelPlayer1.PlayerModelID);
+            var savedNews = dal.LoadNewsPapersData(levelPlayer1.StoryLevelID);
+            var savedCompanies = dal.LoadCompaniesData(levelPlayer1.StoryLevelID);
 
             if (savedPlayer != null) levelPlayer1= savedPlayer;
+            if (savedNews != null) appShell.CurrentNewsPaperViewModel = new NewsPaperViewModel {NewsPaperModels = savedNews, CurrentNewsPaperModel = savedNews.LastOrDefault()};
+            if (savedCompanies != null)
+            {
+                appShell.IPOcompanies = new ObservableCollection<Company>(savedCompanies);
+            }
             //    appShell.CurrentLevelModel.Players[0] = savedPlayer;//if needed (search for appShell.CurrentLevelModel.Players.First() uses)
             GameViewModel.LoadPlayerData(levelPlayer1);//secound // TODO : after MVP can refactor it with one if No IS game started and one LoadPlayerData()...
 
