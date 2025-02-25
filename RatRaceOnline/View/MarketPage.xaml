@@ -141,9 +141,9 @@
         </HorizontalStackLayout>
 
         <HorizontalStackLayout Margin="4" HorizontalOptions="Center" VerticalOptions="Center">
-            <Button Margin="0,0,10,0" Text="Buy" Command="{Binding Market.BuyStockCommand}" Clicked="BuyMoreAsset_Clicked"
+            <Button Margin="0,0,10,0" Text="Buy" Command="{Binding Market.BuyStockCommand}"
                     x:Name="BuyMoreAsset"></Button>
-            <Button  x:Name="SellAssetPositionBtn" Command="{Binding Market.SellStockCommand}" Clicked="SellAssetPosition_Clicked"  ToolTipProperties.Text="Short Selling feature is not available yet but No worry We will add it in the next Versions :D" Text="Sell"></Button>
+            <Button  x:Name="SellAssetPositionBtn" Command="{Binding Market.SellStockCommand}"   ToolTipProperties.Text="Short Selling feature is not available yet but No worry We will add it in the next Versions :D" Text="Sell"></Button>
         </HorizontalStackLayout>
       
 

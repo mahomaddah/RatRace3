@@ -16,20 +16,20 @@ public partial class GameView : ContentPage
 {
     public GameViewModel GameViewModel { get; set; }
     public IPOcompaniesRotatorViewModel IpoCompaniesVM { get; set; }
-    private void GameStarted(object sender, EventArgs e)
-    {
-     
-
-    }
+  
 
    
 
     public GameView()
 	{
-		InitializeComponent();
-        
+        try
+        {
 
-        GameViewModel = new GameViewModel();
+            InitializeComponent();
+
+
+    
+            GameViewModel = new GameViewModel();
       
 
         // Set default card index to open first 
@@ -52,6 +52,7 @@ public partial class GameView : ContentPage
         }
         else
         {
+
             //Load Saved game ... 
             //Note: you can call auto-save function every turn on nextTurn()
             var dal = new DataAccessService();
@@ -77,7 +78,7 @@ public partial class GameView : ContentPage
 
         // var playerModel = appShell.CurrentLevelModel.Players.First();
         BindingContext = GameViewModel;
-      
+
 
         UpdateOrientation();
 
@@ -90,7 +91,9 @@ public partial class GameView : ContentPage
 
         CompanyInvestRoter.ItemsSource = IpoCompaniesVM.RotatorItems;
 
-
+        }
+        catch (Exception ex)
+        { Clipboard.SetTextAsync(ex.Message + " \n\n" + ex.StackTrace); }
     }
     private void UpdateOrientation()
     {

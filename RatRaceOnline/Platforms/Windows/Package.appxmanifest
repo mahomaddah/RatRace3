@@ -6,13 +6,13 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap rescap">
 
-  <Identity Name="maui-package-name-placeholder" Publisher="CN=User Name" Version="0.0.0.0" />
+  <Identity Name="25777Glasssoftware.RatRace3" Publisher="CN= 25777Glasssoftware.RatRace3" Version="1.1.5.0" />
 
-  <mp:PhoneIdentity PhoneProductId="1F7A5069-FAC7-4A74-AC00-139498DF15FF" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="83c32c02-9367-4aef-82e0-da0340795159" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>$placeholder$</DisplayName>
-    <PublisherDisplayName>User Name</PublisherDisplayName>
+    <DisplayName>RatRace3</DisplayName>
+    <PublisherDisplayName>Glasssoftware</PublisherDisplayName>
     <Logo>$placeholder$.png</Logo>
   </Properties>
 
@@ -28,7 +28,7 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="$placeholder$"
+        DisplayName="RatRace3"
         Description="$placeholder$"
         Square150x150Logo="$placeholder$.png"
         Square44x44Logo="$placeholder$.png"

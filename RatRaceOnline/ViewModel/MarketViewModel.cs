@@ -130,6 +130,7 @@ namespace RatRace3.ViewModels
                 OnPropertyChanged();
                 try 
                 {
+                    if(SelectedCompany!= null)
                     TotalPrice = SelectedCompany.StockPrice * selectedQuantity;
                 }
                 catch{}

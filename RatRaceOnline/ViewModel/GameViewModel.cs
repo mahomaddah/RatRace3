@@ -503,6 +503,7 @@ namespace RatRace3.ViewModel
                 company.PriceCandles.Add( newMonthCandle);
                 company.StockPrice = newMonthCandle.Value;
                 Market.SelectedCompany = (company);
+         
             }
 
          
