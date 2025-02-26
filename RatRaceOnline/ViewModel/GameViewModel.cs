@@ -496,14 +496,27 @@ namespace RatRace3.ViewModel
     
         void AddNewCandleToStocks()
         {
-            foreach(var company in Market.IPOCompanies)
+            var appShell = (AppShell)Shell.Current;
+            var Player = appShell.CurrentLevelModel.Players.First();
+
+            foreach (var company in Market.IPOCompanies)
             {
                 company.StockLastCandlePrice = company.StockPrice;
                 var newMonthCandle = new PriceCandleModel { Date = (DateTime.Now.AddMonths(Player.CurrentMonth-1).Date.ToString("MM-yyyy")), Value = Math.Round(company.StockPrice + (200* (1+company.StockFundementalData.EPSnext5Y)) + random.Next(-5, 9),2) };
                 company.PriceCandles.Add( newMonthCandle);
                 company.StockPrice = newMonthCandle.Value;
-                Market.SelectedCompany = (company);
-         
+             
+
+                var existingStock = Player.Assets.FirstOrDefault(a => a.StockCompanySymbol == company.Symbol);
+
+                if (existingStock != null && existingStock.StockQuantity > 0)
+                {
+                    //Update... 
+                     existingStock.AssetValue = company.StockPrice * existingStock.StockQuantity;
+                     //update gamview.listofAssets...
+                }
+                //    Market.SelectedCompany = (company);
+
             }
 
          

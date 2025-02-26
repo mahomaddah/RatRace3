@@ -26,6 +26,35 @@ namespace RatRace3
         public UIsettingsModel UIsettingsModel { get; set; }
 
         public NewsPaperViewModel CurrentNewsPaperViewModel { get; set; }
+
+        private bool isNavigatingBack = false; // Döngüyü önlemek için flag
+
+        private async void Shell_Navigating(object sender, ShellNavigatingEventArgs e)
+        {
+            if (e.Source == ShellNavigationSource.Pop) // Geri gitme işlemi mi?
+            {
+                if (isNavigatingBack) return; // Eğer zaten geri gidiliyorsa, tekrar işlem yapma
+                isNavigatingBack = true; // Flag'i aktif et
+
+                e.Cancel(); // Varsayılan geri gitmeyi engelle
+
+                bool shouldGoBack = await Application.Current.MainPage.DisplayAlert(
+                    "Going Back?", "Do you want to return to the last page?", "Yes", "No");
+
+                if (shouldGoBack)
+                {
+                    await MainThread.InvokeOnMainThreadAsync(async () =>
+                    {
+                        await Shell.Current.GoToAsync("..", true); // Geri git
+                    });
+                }
+
+                await Task.Delay(500); // UI'nin tam güncellenmesi için küçük bir bekleme süresi ekle
+                isNavigatingBack = false; // Flag'i sıfırla
+            }
+        }
+
+
         public AppShell()
         {
 
@@ -1155,6 +1184,11 @@ namespace RatRace3
 
         }
 
+
+
+
         #endregion
+
+        
     }
 }

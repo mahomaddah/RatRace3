@@ -341,12 +341,21 @@ namespace RatRace3.ViewModels
 
                     }
                 }
+                
             }
             updateAssetValue();
+
+
 
             LoadCompanyData(SelectedCompany);    //Work like magic... for updating valuess..
 
             //Update GUI for this page and Statment page ... IF not work with functins than run above code...
+
+            if (CurrentCompanyAsset.AssetValue <= 0.009)
+            {
+                //asset is now 0 quantity... 
+                appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentCompanyAsset);
+            }
 
             appShell.GameViewModel.LoadPlayerData(Player);
 
