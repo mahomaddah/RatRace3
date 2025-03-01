@@ -43,10 +43,16 @@ namespace RatRace3
 
                 if (shouldGoBack)
                 {
+                    try
+                    {
+
+                    
                     await MainThread.InvokeOnMainThreadAsync(async () =>
                     {
                         await Shell.Current.GoToAsync("..", true); // Geri git
                     });
+                    }
+                    catch { }
                 }
 
                 await Task.Delay(500); // UI'nin tam güncellenmesi için küçük bir bekleme süresi ekle

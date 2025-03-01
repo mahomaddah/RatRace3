@@ -87,7 +87,7 @@ namespace RatRace3.ViewModels
                 try
                 {
                             var appShell = (AppShell)Shell.Current;
-                            var Player = appShell.CurrentLevelModel.Players.First();
+                            var Player = appShell.GameViewModel.Player;
 
                     if (Player != null)
                         if (Player.Balance > TotalPrice)
@@ -182,8 +182,8 @@ namespace RatRace3.ViewModels
 
             
 
-            var appShell = (AppShell)Shell.Current;
-            var Player = appShell.CurrentLevelModel.Players.First();
+         
+            var Player = ((AppShell)Shell.Current).GameViewModel.Player;
 
             var existingStock = Player.Assets.FirstOrDefault(a => a.StockCompanySymbol == SelectedCompany.Symbol);
 
@@ -215,7 +215,7 @@ namespace RatRace3.ViewModels
             if (SelectedCompany == null) return;
 
             var appShell = (AppShell)Shell.Current;
-            var Player = appShell.CurrentLevelModel.Players.First();
+            var Player = appShell.GameViewModel.Player;
 
             double purchaseAmount = Math.Round(SelectedCompany.StockPrice * SelectedQuantity, 2);
 
@@ -269,7 +269,7 @@ namespace RatRace3.ViewModels
             }
 
             //var appShell = (AppShell)Shell.Current;
-            //var player = appShell.CurrentLevelModel.Players.First();
+            //var player = a((AppShell)Shell.Current).GameViewModel.Player;
             //double purchaseAmount = SelectedCompany.StockPrice;
 
             //if (player.Balance >= purchaseAmount)
@@ -314,7 +314,7 @@ namespace RatRace3.ViewModels
             if (SelectedCompany == null) return;
 
             var appShell = (AppShell)Shell.Current;
-            var Player = appShell.CurrentLevelModel.Players.First();
+            var Player = ((AppShell)Shell.Current).GameViewModel.Player;
             if (SelectedQuantity <= CurrentCompanyAsset.StockQuantity && SelectedQuantity != 0)
             {
                 //Sell amonth ...
@@ -323,7 +323,7 @@ namespace RatRace3.ViewModels
                 Player.Balance += Math.Round(SelectedCompany.StockPrice * SelectedQuantity, 2);
 
                 if (CurrentCompanyAsset.StockQuantity == 0)
-                    appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentCompanyAsset);
+                    ((AppShell)Shell.Current).GameViewModel.Player.Assets.Remove(CurrentCompanyAsset);
             }
             else // Ya adam da Okadar yok ya elimdeki nekadar varsa onu sat kast etmistir...
             {
@@ -336,7 +336,7 @@ namespace RatRace3.ViewModels
                         //sell all...
                         Player.Balance += Math.Round(SelectedCompany.StockPrice * CurrentCompanyAsset.StockQuantity, 2);
 
-                        appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentCompanyAsset);
+                        ((AppShell)Shell.Current).GameViewModel.Player.Assets.Remove(CurrentCompanyAsset);
 
 
                     }
@@ -353,8 +353,8 @@ namespace RatRace3.ViewModels
 
             if (CurrentCompanyAsset.AssetValue <= 0.009)
             {
-                //asset is now 0 quantity... 
-                appShell.CurrentLevelModel.Players.First().Assets.Remove(CurrentCompanyAsset);
+                //asset is now 0 quantity...    
+                ((AppShell)Shell.Current).GameViewModel.Player.Assets.Remove(CurrentCompanyAsset);
             }
 
             appShell.GameViewModel.LoadPlayerData(Player);
@@ -365,7 +365,7 @@ namespace RatRace3.ViewModels
 
 
             //var appShell = (AppShell)Shell.Current;
-            //var player = appShell.CurrentLevelModel.Players.First();
+            //var player =((AppShell)Shell.Current).GameViewModel.Player;
             //var existingStock = player.Assets.FirstOrDefault(a => a.StockCompanySymbol == SelectedCompany.Symbol);
 
             //if (existingStock != null && existingStock.StockQuantity > 0)

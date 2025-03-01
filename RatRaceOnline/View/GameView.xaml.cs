@@ -75,8 +75,6 @@ public partial class GameView : ContentPage
         }
         
         
-
-        // var playerModel = appShell.CurrentLevelModel.Players.First();
         BindingContext = GameViewModel;
 
 
@@ -243,7 +241,7 @@ public partial class GameView : ContentPage
             GameViewModel.Player.Assets.Remove(SelectedBankAsset);
 
 
-            GameViewModel.LoadPlayerData(GameViewModel.Player);
+            GameViewModel.LoadPlayerData(GameViewModel.Player); //updates ViewModel by Player View 
 
         }
     }

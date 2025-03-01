@@ -496,8 +496,7 @@ namespace RatRace3.ViewModel
     
         void AddNewCandleToStocks()
         {
-            var appShell = (AppShell)Shell.Current;
-            var Player = appShell.CurrentLevelModel.Players.First();
+            var Player = ((AppShell)Shell.Current).GameViewModel.Player;
 
             foreach (var company in Market.IPOCompanies)
             {

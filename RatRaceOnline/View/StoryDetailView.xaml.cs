@@ -17,7 +17,7 @@ public partial class StoryDetailView : ContentPage
         appShell.CurrentLevelModel.IsGameFinished = true;
         //save... data month number ... score etc... TODO..
 
-        appShell.CurrentLevelModel.HighestMounthScore = appShell.CurrentLevelModel.Players.FirstOrDefault().CurrentMonth;
+        appShell.CurrentLevelModel.HighestMounthScore = appShell.GameViewModel.Player.CurrentMonth;
         //unlock next ...
 
         await Shell.Current.DisplayAlert("Congratulations!", "\"You have successfully achieved all the goals required to complete this level of game. Great job!\"", "Victory, Baby!????");
@@ -29,14 +29,14 @@ public partial class StoryDetailView : ContentPage
     {
 
 
-        var appShell = (AppShell)Shell.Current;
-        appShell.CurrentLevelModel.isStarted = true;
-        appShell.GoToAsync("GameView");
+
 
         try
         {
-           
-         
+            var appShell = (AppShell)Shell.Current;
+            appShell.CurrentLevelModel.isStarted = true;
+           await appShell.GoToAsync("GameView");
+
         }
         catch(Exception ex) { await Shell.Current.DisplayAlert(ex.Message,ex.StackTrace,"OK"); }
       

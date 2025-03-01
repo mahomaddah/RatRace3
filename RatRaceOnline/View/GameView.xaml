@@ -535,7 +535,7 @@
 
                                     <sfslider:SfSlider
                                       x:Name="SelectDebtDetailValueSlider"
-                                      Maximum="{Binding SelectedLiability.MaximumPayable}"
+                                      Maximum="{Binding SelectedLiability.MaximumPayable ,FallbackValue=SelectedLiability.RemainingAmount, TargetNullValue=2000}"
                                  
             
                                       ShowDividers="True"
@@ -925,10 +925,10 @@
                                 <Label  Margin="805,890,0,0" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.RightDownArtilceTable.HeaderC19Cap ,TargetNullValue='FUN FACTS'}" FontFamily="TANharmoni" FontSize="28" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
                                 <Label  HorizontalOptions="Start" VerticalOptions="End" Margin="47,0,0,340" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.SmallLeftArticleTable.HeaderC19Cap}" FontFamily="TANharmoni" FontSize="28" FontAttributes="Bold" TextColor="#fdf9da"  ></Label>
 
-                                <Label HorizontalOptions="Center" VerticalOptions="End"  Margin="0,0,-20,250" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.DownTwoPartArticle.Title2LineC33Cap }" MaxLines="2" WidthRequest="400" FontFamily="Times New Roman" FontSize="40" FontAttributes="Bold" TextColor="#404040"  ></Label>
+                                <Label HorizontalOptions="Center" VerticalOptions="End"  Margin="0,0,-20,250" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.DownTwoPartArticle.Title2LineC33Cap ,TargetNullValue='NULL! NON BINDING DATA' }" MaxLines="2" WidthRequest="400" FontFamily="Times New Roman" FontSize="40" FontAttributes="Bold" TextColor="#404040"  ></Label>
                                 <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="End" >
-                                    <Label  Margin="0,0,25,70" HorizontalTextAlignment="Justify" FontSize="14" WidthRequest="180" LineHeight="1" FontFamily="CentaurMTStd-Italic"    TextColor="#404040" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.DownTwoPartArticle.LeftBodyPart1C201 }" ></Label>
-                                    <Label  Margin="0,0,0,0" FontSize="14" HorizontalTextAlignment="Justify"  WidthRequest="180" LineHeight="1" FontFamily="CentaurMTStd-Italic"    TextColor="#404040" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.DownTwoPartArticle.RightBodyPart2C206 }" ></Label>
+                                    <Label  Margin="0,0,25,70" HorizontalTextAlignment="Justify" FontSize="14" WidthRequest="180" LineHeight="1" FontFamily="CentaurMTStd-Italic"    TextColor="#404040" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.DownTwoPartArticle.LeftBodyPart1C201 ,TargetNullValue='NULL! NON BINDING DATA' }" ></Label>
+                                    <Label  Margin="0,0,0,0" FontSize="14" HorizontalTextAlignment="Justify"  WidthRequest="180" LineHeight="1" FontFamily="CentaurMTStd-Italic"    TextColor="#404040" Text="{Binding CurrentNewsPaperViewModel.CurrentNewsPaperModel.DownTwoPartArticle.RightBodyPart2C206 ,TargetNullValue='NULL! NON BINDING DATA' }" ></Label>
                                 </HorizontalStackLayout>
                             </Grid>
                           </Border>
