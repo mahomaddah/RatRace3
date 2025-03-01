@@ -126,14 +126,18 @@ namespace RatRace3.ViewModels
         public double SelectedQuantity
         {
             get { return selectedQuantity; }
-            set { selectedQuantity = value;
-                OnPropertyChanged();
+            set {
                 try 
                 {
                     if(SelectedCompany!= null)
-                    TotalPrice = SelectedCompany.StockPrice * selectedQuantity;
+                    {
+                        selectedQuantity = value;
+                        TotalPrice = SelectedCompany.StockPrice * selectedQuantity;
+                        OnPropertyChanged();
+                    }
+                    
                 }
-                catch{}
+                catch(Exception ex){ Clipboard.SetTextAsync("Eror RatRace3: MarketViewModel.SelectedQuantity.Setter: \n"+ex.Message + " \n StackTrace: " + ex.StackTrace); }
             }
         }
 
