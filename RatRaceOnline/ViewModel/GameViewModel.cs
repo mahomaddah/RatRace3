@@ -359,6 +359,7 @@ namespace RatRace3.ViewModel
             //adding user Total cash Blance as user's asset : 
             //updatePlayeBlanceAsAssetObject();
 
+
             foreach (var asset in playerModel.Assets)
             {
                 totalNetworth += asset.AssetValue;
@@ -496,16 +497,17 @@ namespace RatRace3.ViewModel
     
         void AddNewCandleToStocks()
         {
-            var Player = ((AppShell)Shell.Current).GameViewModel.Player;
+            var appshell = ((AppShell)Shell.Current);
+            var Player = appshell.GameViewModel.Player;
 
-            foreach (var company in Market.IPOCompanies)
+            foreach (var company in appshell.IPOcompanies)
             {
                 company.StockLastCandlePrice = company.StockPrice;
-                var newMonthCandle = new PriceCandleModel { Date = (DateTime.Now.AddMonths(Player.CurrentMonth-1).Date.ToString("MM-yyyy")), Value = Math.Round(company.StockPrice + (200* (1+company.StockFundementalData.EPSnext5Y)) + random.Next(-5, 9),2) };
+                var newMonthCandle = new PriceCandleModel { Date = (DateTime.Now.AddMonths(Player.CurrentMonth-1).Date.ToString("MM-yyyy")), Value = Math.Round( ( company.StockPrice *  (1+company.StockFundementalData.EPSnext5Y/12)) + company.StockFundementalData.Beta * random.Next(-9, 9),2) };//u can use also company.StockFundementalData.DCFvaluation for value investors and a part for news.. 
                 company.PriceCandles.Add( newMonthCandle);
                 company.StockPrice = newMonthCandle.Value;
-             
 
+                
                 var existingStock = Player.Assets.FirstOrDefault(a => a.StockCompanySymbol == company.Symbol);
 
                 if (existingStock != null && existingStock.StockQuantity > 0)
@@ -514,11 +516,16 @@ namespace RatRace3.ViewModel
                      existingStock.AssetValue = company.StockPrice * existingStock.StockQuantity;
                      //update gamview.listofAssets...
                 }
-                //    Market.SelectedCompany = (company);
-
+                //test if this code helps gui to update or delete it if not ...
+                Market.SelectedCompany = (company);
+           
+               
             }
+            //try saving company...
+            //   DAL.DataAccessService dataAccessService = new DAL.DataAccessService();
+            //  dataAccessService.SaveCompaniesData(Market.IPOCompanies.ToList(),Player.StoryLevelID);
 
-         
+
 
 
         }
@@ -789,15 +796,19 @@ namespace RatRace3.ViewModel
 
            // IPOCompanies = new ObservableCollection<Company> { };
             //ChartData = new ObservableCollection<PriceCandleModel> { };
-
+            if(Market==null)
             Market = new MarketViewModel();
+
             var appShell = (AppShell)Shell.Current;
             if(appShell != null)
             {
+                if (CurrentNewsPaperViewModel == null)
+                {
                 CurrentNewsPaperViewModel = new NewsPaperViewModel();
                 CurrentNewsPaperViewModel.NewsPaperModels = appShell.CurrentNewsPaperViewModel.NewsPaperModels;
-               // currentNewsPayperSeed = random.Next(0, 4);
-               if(CurrentNewsPaperViewModel.CurrentNewsPaperModel==null)
+                }
+                // currentNewsPayperSeed = random.Next(0, 4);
+                if (CurrentNewsPaperViewModel.CurrentNewsPaperModel==null)
                 CurrentNewsPaperViewModel.CurrentNewsPaperModel = CurrentNewsPaperViewModel.NewsPaperModels[random.Next(0, 4)];
                 //TODO : Code duplication with BringRandomNewsPaper() replace and reuse same function ... in top ...
                 // OnPropertyChanged(nameof(CurrentNewsPaperViewModel.CurrentNewsPaperModel));

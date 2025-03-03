@@ -29,6 +29,7 @@ namespace RatRace3.Models
     [Table("LevelModels")]
     public class LevelModel
     {
+
         /// <summary>
         /// is IsGameFinishable means if the use won the game or reached all the levels's list of goals:  StoryGoalModels
         /// </summary>

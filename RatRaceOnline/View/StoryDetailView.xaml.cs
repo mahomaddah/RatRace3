@@ -36,6 +36,7 @@ public partial class StoryDetailView : ContentPage
             var appShell = (AppShell)Shell.Current;
             appShell.CurrentLevelModel.isStarted = true;
            await appShell.GoToAsync("GameView");
+         
 
         }
         catch(Exception ex) { await Shell.Current.DisplayAlert(ex.Message,ex.StackTrace,"OK"); }

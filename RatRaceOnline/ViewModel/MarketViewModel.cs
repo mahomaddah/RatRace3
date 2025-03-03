@@ -147,19 +147,28 @@ namespace RatRace3.ViewModels
 
         public MarketViewModel()
         {
-            IPOCompanies = new ObservableCollection<Company>();
+           
             var appShell = (AppShell)Shell.Current;
-            if(appShell != null)
-            foreach (var company in appShell.IPOcompanies)
+            if(appShell != null && IPOCompanies==null)
             {
-                IPOCompanies.Add(company);
+
+                IPOCompanies = new ObservableCollection<Company>(appShell.IPOcompanies);
+                //foreach (var company in appShell.IPOcompanies)
+                //{
+                //     IPOCompanies.Add(company);
+                    
+                //}
+                SelectedCompany = IPOCompanies.FirstOrDefault();
             }
 
-            SelectedCompany = IPOCompanies.FirstOrDefault();
-            ChartData = new ObservableCollection<PriceCandleModel>();
+            if(ChartData == null)
+            {
+                ChartData = new ObservableCollection<PriceCandleModel>();
 
-            BuyStockCommand = new Command(BuyStock);
-            SellStockCommand = new Command(SellStock);
+                BuyStockCommand = new Command(BuyStock);
+                SellStockCommand = new Command(SellStock);
+            }
+ 
         }
 
         /// <summary>
@@ -175,18 +184,21 @@ namespace RatRace3.ViewModels
             foreach (var candle in company.PriceCandles)
             {
                 ChartData.Add(new PriceCandleModel { Date = candle.Date, Value = candle.Value });
-              
+        
               
             }
             //update price
             company.StockPrice = company.PriceCandles.Last().Value;
+            if(company.PriceCandles.Count>2)
+            company.StockLastCandlePrice = company.PriceCandles[company.PriceCandles.Count - 2].Value;//test this code check and uncomment if needed... for P&L ... 
 
-          
-        
 
-            
 
-         
+
+
+
+
+
             var Player = ((AppShell)Shell.Current).GameViewModel.Player;
 
             var existingStock = Player.Assets.FirstOrDefault(a => a.StockCompanySymbol == SelectedCompany.Symbol);
@@ -260,7 +272,11 @@ namespace RatRace3.ViewModels
 
                 // Step 4: Update UI and player data
                 //      ContentPage_Loaded(this, new EventArgs());
-                LoadCompanyData(SelectedCompany);
+
+                LoadCompanyData(SelectedCompany); //Seams like stupid and not needed or can call 1 or 2 sub opreations as ortak methods! latter Refactor :TODO...
+
+                OnPropertyChanged(nameof(Player));
+           //     OnPropertyChanged(nameof(Player.Balance));
                 appShell.GameViewModel.LoadPlayerData(Player);
 
                 await Shell.Current.GoToAsync("GameView");
@@ -324,7 +340,7 @@ namespace RatRace3.ViewModels
                 //Sell amonth ...
                 CurrentCompanyAsset.StockQuantity -= SelectedQuantity;
 
-                Player.Balance += Math.Round(SelectedCompany.StockPrice * SelectedQuantity, 2);
+                ((AppShell)Shell.Current).GameViewModel.Player.Balance += Math.Round(SelectedCompany.StockPrice * SelectedQuantity, 2);
 
                 if (CurrentCompanyAsset.StockQuantity == 0)
                     ((AppShell)Shell.Current).GameViewModel.Player.Assets.Remove(CurrentCompanyAsset);
@@ -351,15 +367,15 @@ namespace RatRace3.ViewModels
 
 
 
-            LoadCompanyData(SelectedCompany);    //Work like magic... for updating valuess..
+           // LoadCompanyData(SelectedCompany);    //Work like magic... for updating valuess..
 
             //Update GUI for this page and Statment page ... IF not work with functins than run above code...
 
-            if (CurrentCompanyAsset.AssetValue <= 0.009)
-            {
-                //asset is now 0 quantity...    
-                ((AppShell)Shell.Current).GameViewModel.Player.Assets.Remove(CurrentCompanyAsset);
-            }
+            //if (CurrentCompanyAsset.AssetValue <= 0.009)
+            //{
+            //    //asset is now 0 quantity...    
+            //    ((AppShell)Shell.Current).GameViewModel.Player.Assets.Remove(CurrentCompanyAsset);
+            //}
 
             appShell.GameViewModel.LoadPlayerData(Player);
 
@@ -393,7 +409,8 @@ namespace RatRace3.ViewModels
 
         void updateAssetValue()
         {
-            if (CurrentCompanyAsset != null)
+            if (CurrentCompanyAsset != null && SelectedCompany.StockPrice!=0)
+                if(CurrentCompanyAsset.StockQuantity!=0)
                 CurrentCompanyAsset.AssetValue = Math.Round(CurrentCompanyAsset.StockQuantity * SelectedCompany.StockPrice, 2);
             //for updating also on Statment page... 
         }

@@ -13,7 +13,8 @@ namespace RatRace3
         /// CurrentLevelModel is Original Data of brand new game which is hard coded ,, Used Saved data will be applied on this on load ...
         /// this usefull for creating a new game ... not for load game...
         /// </summary>
-        public LevelModel CurrentLevelModel { get; set; } 
+        public LevelModel CurrentLevelModel { get; set; }
+
         public GameViewModel GameViewModel { get; set; }
         public Company CurrentCompany { get; set; }//For Stock Market...
         /// <summary>
@@ -31,33 +32,33 @@ namespace RatRace3
 
         private async void Shell_Navigating(object sender, ShellNavigatingEventArgs e)
         {
-            if (e.Source == ShellNavigationSource.Pop) // Geri gitme işlemi mi?
-            {
-                if (isNavigatingBack) return; // Eğer zaten geri gidiliyorsa, tekrar işlem yapma
-                isNavigatingBack = true; // Flag'i aktif et
+            //if (e.Source == ShellNavigationSource.Pop) // Geri gitme işlemi mi?
+            //{
+            //    if (isNavigatingBack) return; // Eğer zaten geri gidiliyorsa, tekrar işlem yapma
+            //    isNavigatingBack = true; // Flag'i aktif et
 
-                e.Cancel(); // Varsayılan geri gitmeyi engelle
+            //    e.Cancel(); // Varsayılan geri gitmeyi engelle
 
-                bool shouldGoBack = await Application.Current.MainPage.DisplayAlert(
-                    "Going Back?", "Do you want to return to the last page?", "Yes", "No");
+            //    bool shouldGoBack = await Application.Current.MainPage.DisplayAlert(
+            //        "Going Back?", "Do you want to return to the last page?", "Yes", "No");
 
-                if (shouldGoBack)
-                {
-                    try
-                    {
+            //    if (shouldGoBack)
+            //    {
+            //        try
+            //        {
 
                     
-                    await MainThread.InvokeOnMainThreadAsync(async () =>
-                    {
-                        await Shell.Current.GoToAsync("..", true); // Geri git
-                    });
-                    }
-                    catch { }
-                }
+            //        await MainThread.InvokeOnMainThreadAsync(async () =>
+            //        {
+            //            await Shell.Current.GoToAsync("..", true); // Geri git
+            //        });
+            //        }
+            //        catch { }
+            //    }
 
-                await Task.Delay(500); // UI'nin tam güncellenmesi için küçük bir bekleme süresi ekle
-                isNavigatingBack = false; // Flag'i sıfırla
-            }
+            //    await Task.Delay(5); // UI'nin tam güncellenmesi için küçük bir bekleme süresi ekle
+            //    isNavigatingBack = false; // Flag'i sıfırla
+            //}
         }
 
 
@@ -72,7 +73,7 @@ namespace RatRace3
             InitializeComponent(); 
             GameViewModel = new GameViewModel();
             getAnewGameData();
-            
+           
 
 
 

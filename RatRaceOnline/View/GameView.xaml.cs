@@ -16,78 +16,121 @@ public partial class GameView : ContentPage
 {
     public GameViewModel GameViewModel { get; set; }
     public IPOcompaniesRotatorViewModel IpoCompaniesVM { get; set; }
+
+
+  // const bool isFirstTimeToGameViewCtor = true; // for  avoiding to load and override player while coming form Market or GameDetils similir Views in the same game 
   
-
-   
-
     public GameView()
 	{
         try
         {
 
             InitializeComponent();
-
-
-    
-            GameViewModel = new GameViewModel();
-      
-
-        // Set default card index to open first 
-        GameViewModel.VisibleIndex = 1;
-        var appShell = (AppShell)Shell.Current;
-
-        appShell.GameViewModel = GameViewModel;
-
-        //for creating a new game data every time GameViewLoad...
-    
-
-        var levelPlayer1 = appShell.CurrentLevelModel.Players.First();
-
-        if (appShell.CurrentLevelModel.IsNewGameStarted)
-        {
-            //NotLoad saved game New game 
-
-            appShell.getAnewGameData();//without this user can onley get new game 2 time and after 2. all restart games will be the same until he close and re open the game :D lol but with it bug has solved..
-            GameViewModel.LoadPlayerData(levelPlayer1);
-        }
-        else
-        {
-
-            //Load Saved game ... 
-            //Note: you can call auto-save function every turn on nextTurn()
-            var dal = new DataAccessService();
-            var savedPlayer = dal.LoadPlayerData(levelPlayer1.StoryLevelID, levelPlayer1.PlayerModelID);
-            var savedNews = dal.LoadNewsPapersData(levelPlayer1.StoryLevelID);
-            var savedCompanies = dal.LoadCompaniesData(levelPlayer1.StoryLevelID);
-
-            if (savedPlayer != null) levelPlayer1= savedPlayer;
-            if (savedNews != null) appShell.CurrentNewsPaperViewModel = new NewsPaperViewModel {NewsPaperModels = savedNews, CurrentNewsPaperModel = savedNews.LastOrDefault()};
-            if (savedCompanies != null)
-            {
-                appShell.IPOcompanies = new ObservableCollection<Company>(savedCompanies);
-            }
-            //    appShell.CurrentLevelModel.Players[0] = savedPlayer;//if needed (search for appShell.CurrentLevelModel.Players.First() uses)
-            GameViewModel.LoadPlayerData(levelPlayer1);//secound // TODO : after MVP can refactor it with one if No IS game started and one LoadPlayerData()...
-
+            var appShell = (AppShell)Shell.Current;
 
           
 
-        }
+            if ( appShell.GameViewModel.Player==null)  //&& appShell.GameViewModel.Player.CurrentMonth==1) //sadece ilk aydaysa ve oyun yeni basladiysa ... contrat etsin view modeli Load yada Create new game yapsin deger turlu hic birsey yapmasin AppShell  Deki veriler kalsin cunku deger Panellerden gelmistir Market yada gamedetail gibi ...
+            {
+                //Loading old game or come for a clean new game ... so Set Player Object ...
+
+                GameViewModel = new GameViewModel();
+
+
+             
+
+                appShell.GameViewModel = GameViewModel;
+
+                //for creating a new game data every time GameViewLoad...
+
+
+                var levelPlayer1 = appShell.CurrentLevelModel.Players.First();
+
+                if (appShell.CurrentLevelModel.IsNewGameStarted)
+                {
+                    //NotLoad saved game New game 
+
+                    appShell.getAnewGameData();//without this user can onley get new game 2 time and after 2. all restart games will be the same until he close and re open the game :D lol but with it bug has solved..
+                    GameViewModel.LoadPlayerData(levelPlayer1);
+                }
+                else
+                {
+
+                    //Load Saved game ... 
+                    //Note: you can call auto-save function every turn on nextTurn()
+                    var dal = new DataAccessService();
+                    var savedPlayer = dal.LoadPlayerData(levelPlayer1.StoryLevelID, levelPlayer1.PlayerModelID);
+                    var savedNews = dal.LoadNewsPapersData(levelPlayer1.StoryLevelID);
+                    var savedCompanies = dal.LoadCompaniesData(levelPlayer1.StoryLevelID);
+
+                    if (savedPlayer != null) levelPlayer1 = savedPlayer;
+                    if (savedNews != null) appShell.CurrentNewsPaperViewModel = new NewsPaperViewModel { NewsPaperModels = savedNews, CurrentNewsPaperModel = savedNews.LastOrDefault() };
+                    if (savedCompanies != null)
+                    {
+                        appShell.IPOcompanies = new ObservableCollection<Company>(savedCompanies);
+                    }
+                    //    appShell.CurrentLevelModel.Players[0] = savedPlayer;//if needed (search for appShell.CurrentLevelModel.Players.First() uses)
+                    GameViewModel.LoadPlayerData(levelPlayer1);//secound // TODO : after MVP can refactor it with one if No IS game started and one LoadPlayerData()...
+
+
+
+
+                }
+
+            }
+            else
+            {
+                //Coming from the same game's market panel or story detail panels etc... So No Ovveride Player Object...
+         
+
+                //Short term solution for fixing Null Companies and null News bug for now ( latter will refactor ) ...
+
+                //Load Saved game ... 
+                //Note: you can call auto-save function every turn on nextTurn()
+                var dal = new DataAccessService();
         
-        
-        BindingContext = GameViewModel;
+                var savedNews = dal.LoadNewsPapersData(appShell.GameViewModel.Player.StoryLevelID);
+                var savedCompanies = dal.LoadCompaniesData(appShell.GameViewModel.Player.StoryLevelID);
 
 
-        UpdateOrientation();
+                if (savedNews != null) appShell.CurrentNewsPaperViewModel = new NewsPaperViewModel { NewsPaperModels = savedNews, CurrentNewsPaperModel = savedNews.LastOrDefault() };
+                if (savedCompanies != null)
+                {
+                    appShell.IPOcompanies = new ObservableCollection<Company>(savedCompanies);
+                }
+                //    appShell.CurrentLevelModel.Players[0] = savedPlayer;//if needed (search for appShell.CurrentLevelModel.Players.First() uses)
+      //          GameViewModel.LoadPlayerData(levelPlayer1);//secound // TODO : after MVP can refactor it with one if No IS game started and one LoadPlayerData()...
+                appShell.GameViewModel.LoadPlayerData(appShell.GameViewModel.Player);
+                GameViewModel = appShell.GameViewModel;
+            }
 
-        // Event to detect orientation change
-        DeviceDisplay.MainDisplayInfoChanged += (s, e) => UpdateOrientation();
+
+            // Set default card index to open first 
+            GameViewModel.VisibleIndex = 1;
+
+            BindingContext = GameViewModel;
+
 
         //binding VM to Listview ....
         //   LVcompaiesMarket.ItemsSource = GameViewModel.StockMarketCompanys;
-        IpoCompaniesVM = new IPOcompaniesRotatorViewModel();
+        
 
-        CompanyInvestRoter.ItemsSource = IpoCompaniesVM.RotatorItems;
+                IpoCompaniesVM = new IPOcompaniesRotatorViewModel();
+
+                CompanyInvestRoter.ItemsSource = IpoCompaniesVM.RotatorItems;
+            if (IpoCompaniesVM == null)
+            {
+            }
+
+
+
+
+            UpdateOrientation();
+
+            // Event to detect orientation change
+            DeviceDisplay.MainDisplayInfoChanged += (s, e) => UpdateOrientation();
+
+
 
         }
         catch (Exception ex)
@@ -130,9 +173,14 @@ public partial class GameView : ContentPage
         //SfRotator router = new SfRotator();
         try
         {
+           await MainThread.InvokeOnMainThreadAsync(async () =>
+           {
+               
+          
+            if (e.Rotator.SelectedIndex == null || e.Rotator.SelectedIndex < 0) return;
 
-            var router = (SfRotator)sender;
-            SfRotatorItem selectedCompany = IpoCompaniesVM.RotatorItems[router.SelectedIndex];
+          // var router = (SfRotator)sender;
+            SfRotatorItem selectedCompany = IpoCompaniesVM.RotatorItems[e.Rotator.SelectedIndex];
             if (selectedCompany != null)
             {
                 var appShell = (AppShell)Shell.Current;
@@ -151,8 +199,11 @@ public partial class GameView : ContentPage
                 IncomeAnnualCompanyLB.Text = SelectedObject.StockFundementalData.AnnualIncome.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B";
 
             }
+
+           });
+
         }
-        catch { }
+        catch (Exception exep) { await DisplayAlert(exep.Message,exep.StackTrace , "RotarIndex erorr catched.."); }
 
 
         //appShell.GameViewModel.Market.ChangeSelectedCompany((int)e.Index); //for auto updating the shit DataContext of Fundemental Data... Comment lined for now to fix the bug i't aslo changing Market CurrentCompany as well :D ... in fact i'ts not even changing fundemental data in here :D
