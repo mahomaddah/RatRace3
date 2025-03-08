@@ -194,24 +194,26 @@ public partial class GameView : ContentPage
                // var router = (SfRotator)sender;
 
                SfRotatorItem selectedCompany = GameViewModel.IpoCompaniesVM.RotatorItems[e.Rotator.SelectedIndex];
-
+                
             if (selectedCompany != null)
             {
-                var appShell = (AppShell)Shell.Current;
-                Company SelectedObject = appShell.IPOcompanies.First(x => selectedCompany.Image.Contains(x.Symbol));
+                //        var appShell = (AppShell)Shell.Current;
+                // Company SelectedObject = appShell.IPOcompanies.FirstOrDefault(x => selectedCompany.Image.ToLower().Contains(x.Symbol.ToLower()));
+                Company SelectedObject = GameViewModel.IpoCompaniesVM.IPOcompanies.First(x => selectedCompany.Image.ToLower().Contains(x.Symbol.ToLower()));
                 ////Bind Fundemental data.. in a better way ...
                 ////BindingContext = SelectedObject.StockFundementalData;
                 //FundementalDataLeftStack.BindingContext = SelectedObject;
-
-                FundementalDataTotalCashLB.Text = SelectedObject.StockFundementalData.TotalCash.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
-                FundementalTotalDebts.Text = SelectedObject.StockFundementalData.TotalDebts.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
-                CompetetiveAdvantageScoreLB.Text = SelectedObject.StockFundementalData.SustainableCompetitiveAdvantage.ToString();
-                EPSthisYrLB.Text = SelectedObject.StockFundementalData.EPSthisYr.ToString("P");
-                EPSpast5yrLB.Text = SelectedObject.StockFundementalData.EPSpast5Y.ToString("P");
-                EPSnext5yrLB.Text = SelectedObject.StockFundementalData.EPSnext5Y.ToString("P");
-                DCFvaluetionLB.Text = SelectedObject.StockFundementalData.DCFvaluation.ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
-                IncomeAnnualCompanyLB.Text = SelectedObject.StockFundementalData.AnnualIncome.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B";
-
+                if (SelectedObject != null)
+                { 
+                    FundementalDataTotalCashLB.Text = SelectedObject.StockFundementalData.TotalCash.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
+                    FundementalTotalDebts.Text = SelectedObject.StockFundementalData.TotalDebts.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
+                    CompetetiveAdvantageScoreLB.Text = SelectedObject.StockFundementalData.SustainableCompetitiveAdvantage.ToString();
+                    EPSthisYrLB.Text = SelectedObject.StockFundementalData.EPSthisYr.ToString("P");
+                    EPSpast5yrLB.Text = SelectedObject.StockFundementalData.EPSpast5Y.ToString("P");
+                    EPSnext5yrLB.Text = SelectedObject.StockFundementalData.EPSnext5Y.ToString("P");
+                    DCFvaluetionLB.Text = SelectedObject.StockFundementalData.DCFvaluation.ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
+                    IncomeAnnualCompanyLB.Text = SelectedObject.StockFundementalData.AnnualIncome.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B";
+                }
             }
 
            //});
@@ -240,7 +242,11 @@ public partial class GameView : ContentPage
         if(selectedCompany!= null)
         {
             var appShell = (AppShell)Shell.Current;
-            Company SelectedObject = appShell.IPOcompanies.First(x => selectedCompany.Image.Contains(x.Symbol));
+         //   Company SelectedObject = appShell.IPOcompanies.First(x => selectedCompany.Image.ToLower().Contains(x.Symbol.ToLower()));
+            Company SelectedObject = GameViewModel.IpoCompaniesVM.IPOcompanies.First(x => selectedCompany.Image.ToLower().Contains(x.Symbol.ToLower()));
+            if (SelectedObject != null)
+            {
+
             appShell.CurrentCompany = new Company
             {
                 Symbol = SelectedObject.Symbol,
@@ -250,6 +256,8 @@ public partial class GameView : ContentPage
             };
 
             appShell.GameViewModel.Market.SelectedCompany = SelectedObject;
+
+            }
         }
         await Shell.Current.GoToAsync("MarketPage");
     }
@@ -438,7 +446,7 @@ public partial class GameView : ContentPage
                 if (assetModel != null)
                 {
                     var appShell = (AppShell)Shell.Current;
-                    Company SelectedObject = appShell.IPOcompanies.First(x => assetModel.StockCompanySymbol.Equals(x.Symbol));
+                    Company SelectedObject = appShell.IPOcompanies.First(x => assetModel.StockCompanySymbol.ToLower().Contains(x.Symbol.ToLower()));
                     appShell.CurrentCompany = SelectedObject;
 
                         appShell.GameViewModel.Market.CurrentCompanyAsset = assetModel;
@@ -446,7 +454,7 @@ public partial class GameView : ContentPage
                     appShell.GameViewModel.Market.SelectedCompany = (SelectedObject);
                         //this line make it break after clicking on back button becuse of parelel processing probebbly...
 
-                     Shell.Current.GoToAsync("MarketPage");
+                  await   Shell.Current.GoToAsync("MarketPage");
                 }
 
               

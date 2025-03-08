@@ -783,7 +783,7 @@
                         NavigationDelay="5000"
                         EnableSwiping="False"   
                                 
-                        EnableAutoPlay="False"
+                        EnableAutoPlay="True"
                            
                         SelectedIndex="0"
                                 

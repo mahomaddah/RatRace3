@@ -17,7 +17,7 @@ namespace RatRace3.ViewModel
     {
         // ViewModel class for Rotator.
 
-        private ObservableCollection<Company> IPOcompanies;
+        public ObservableCollection<Company> IPOcompanies { get; set; }
         public ObservableCollection<SfRotatorItem> RotatorItems { get; set; }
 
         public void SyncIPOcompaniesItems()
