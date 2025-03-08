@@ -15,11 +15,13 @@ using System.Collections.ObjectModel;
 public partial class GameView : ContentPage
 {
     public GameViewModel GameViewModel { get; set; }
-    public IPOcompaniesRotatorViewModel IpoCompaniesVM { get; set; }
 
 
-  // const bool isFirstTimeToGameViewCtor = true; // for  avoiding to load and override player while coming form Market or GameDetils similir Views in the same game 
-  
+
+    //
+    //const bool isFirstTimeToGameViewCtor = true; // for  avoiding to load and override player while coming form Market or GameDetils similir Views in the same game 
+
+
     public GameView()
 	{
         try
@@ -71,7 +73,7 @@ public partial class GameView : ContentPage
                     }
                     //    appShell.CurrentLevelModel.Players[0] = savedPlayer;//if needed (search for appShell.CurrentLevelModel.Players.First() uses)
                     GameViewModel.LoadPlayerData(levelPlayer1);//secound // TODO : after MVP can refactor it with one if No IS game started and one LoadPlayerData()...
-
+                   
 
 
 
@@ -105,6 +107,12 @@ public partial class GameView : ContentPage
             }
 
 
+          
+
+            if (GameViewModel.IpoCompaniesVM.RotatorItems != null && GameViewModel.IpoCompaniesVM.RotatorItems.Count > 0)
+               CompanyInvestRoter.ItemsSource = GameViewModel.IpoCompaniesVM.RotatorItems;
+           
+
             // Set default card index to open first 
             GameViewModel.VisibleIndex = 1;
 
@@ -115,12 +123,6 @@ public partial class GameView : ContentPage
         //   LVcompaiesMarket.ItemsSource = GameViewModel.StockMarketCompanys;
         
 
-                IpoCompaniesVM = new IPOcompaniesRotatorViewModel();
-
-                CompanyInvestRoter.ItemsSource = IpoCompaniesVM.RotatorItems;
-            if (IpoCompaniesVM == null)
-            {
-            }
 
 
 
@@ -173,14 +175,26 @@ public partial class GameView : ContentPage
         //SfRotator router = new SfRotator();
         try
         {
-           await MainThread.InvokeOnMainThreadAsync(async () =>
-           {
-               
-          
-            if (e.Rotator.SelectedIndex == null || e.Rotator.SelectedIndex < 0) return;
+           //await MainThread.InvokeOnMainThreadAsync(async () =>
+           //{
 
-          // var router = (SfRotator)sender;
-            SfRotatorItem selectedCompany = IpoCompaniesVM.RotatorItems[e.Rotator.SelectedIndex];
+
+               if (GameViewModel.IpoCompaniesVM.RotatorItems == null || GameViewModel.IpoCompaniesVM.RotatorItems.Count == 0)
+               {
+                   return; // Boþ koleksiyon hatasýný önler
+               }
+
+               if (e.Rotator.SelectedIndex < 0 || e.Rotator.SelectedIndex >= GameViewModel.IpoCompaniesVM.RotatorItems.Count)
+               {
+                   return; // Hatalý index eriþimini önler
+               }
+
+               if (e.Rotator.SelectedIndex == null || e.Rotator.SelectedIndex < 0) return;
+
+               // var router = (SfRotator)sender;
+
+               SfRotatorItem selectedCompany = GameViewModel.IpoCompaniesVM.RotatorItems[e.Rotator.SelectedIndex];
+
             if (selectedCompany != null)
             {
                 var appShell = (AppShell)Shell.Current;
@@ -200,7 +214,7 @@ public partial class GameView : ContentPage
 
             }
 
-           });
+           //});
 
         }
         catch (Exception exep) { await DisplayAlert(exep.Message,exep.StackTrace , "RotarIndex erorr catched.."); }
@@ -216,7 +230,13 @@ public partial class GameView : ContentPage
         SfRotator router = new SfRotator();
         router = (SfRotator)sender;
 
-        SfRotatorItem selectedCompany = IpoCompaniesVM.RotatorItems[router.SelectedIndex];
+        if (router.SelectedIndex < 0 || router.SelectedIndex >= GameViewModel.IpoCompaniesVM.RotatorItems.Count)
+        {
+            return; // Hatalý index eriþimini önler
+        }
+
+
+        var selectedCompany = GameViewModel.IpoCompaniesVM.RotatorItems[router.SelectedIndex];
         if(selectedCompany!= null)
         {
             var appShell = (AppShell)Shell.Current;
@@ -445,5 +465,6 @@ public partial class GameView : ContentPage
 
     }
 
+  
 }
 

@@ -18,6 +18,7 @@
              xmlns:sflistview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
              xmlns:sfpopup="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
              xmlns:sfslider="clr-namespace:Syncfusion.Maui.Sliders;assembly=Syncfusion.Maui.Sliders"
+ 
           
              
              >
@@ -774,20 +775,27 @@
                             </VerticalStackLayout>
 
                             <Rotator:SfRotator
-                            Grid.Column="1"
+                        Grid.Column="1"
                             
-                             Margin="3"
-                            x:Name="CompanyInvestRoter" 
-                            IsTextVisible="True"
+                        Margin="3"
+                        x:Name="CompanyInvestRoter" 
+                        IsTextVisible="True"
                         NavigationDelay="5000"
-                        EnableSwiping="False"              
-                        EnableAutoPlay="True"
+                        EnableSwiping="False"   
+                                
+                        EnableAutoPlay="False"
+                           
+                        SelectedIndex="0"
+                                
+                                
+                        ItemsSource="{Binding IpoCompaniesVM.RotatorItems}"
                         SelectedIndexChanged="CompanyInvestRoter_SelectedIndexChanged"
                         ItemTapped="CompanyInvestRoter_ItemTapped"
+                                
                         ToolTipProperties.Text="Click on the Company's logo to start investing..."
-                        ItemsSource="{Binding RotatorItems}" 
+                       
                         NavigationButtonBackgroundColor="#9072C9"
-                    NavigationButtonIconColor="White"
+                        NavigationButtonIconColor="White"
                         SelectedThumbnailStroke="#9072C9"
                         NavigationDirection="Horizontal"
                         NavigationStripMode="Thumbnail" 
@@ -795,7 +803,8 @@
                         
                             
                         BackgroundColor="#4C9072C9">
-                                
+                            
+
                             </Rotator:SfRotator>
 
                             <VerticalStackLayout x:Name="FundementalDataRightStack" ToolTipProperties.Text="It's better to buy a Wonderful Company at a Fair price rather than buy a Fair company at a Wonderful price!  -Warren Buffett"  HorizontalOptions="Center" Grid.Column="2" Margin="3">

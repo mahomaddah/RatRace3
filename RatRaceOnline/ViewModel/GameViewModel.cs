@@ -13,6 +13,7 @@ using Microsoft.Maui.Controls.Platform;
 using System.Reflection.PortableExecutable;
 using RatRace3.ViewModels;
 using RatRace3.DAL;
+using Syncfusion.Maui.Graphics.Internals;
 
 namespace RatRace3.ViewModel
 {
@@ -228,6 +229,7 @@ namespace RatRace3.ViewModel
         #endregion
 
        // public NewsPaperViewModel CurrentNewsPaperViewModel { get; set; }
+
         private NewsPaperViewModel currentNewsPaperViewModel;
             
         public NewsPaperViewModel CurrentNewsPaperViewModel
@@ -503,7 +505,26 @@ namespace RatRace3.ViewModel
             foreach (var company in appshell.IPOcompanies)
             {
                 company.StockLastCandlePrice = company.StockPrice;
-                var newMonthCandle = new PriceCandleModel { Date = (DateTime.Now.AddMonths(Player.CurrentMonth-1).Date.ToString("MM-yyyy")), Value = Math.Round( ( company.StockPrice *  (1+company.StockFundementalData.EPSnext5Y/12)) + company.StockFundementalData.Beta * random.Next(-9, 9),2) };//u can use also company.StockFundementalData.DCFvaluation for value investors and a part for news.. 
+
+                //Profitability , Growth ,dcfValuetion , FinancalStrenght , Momentom ... Price Factors...
+                double voletility = company.StockFundementalData.Beta * random.Next(-40, 40);//Tesla Beta and month tested with real data...
+                double valueInvestorsEfect = company.StockPrice/12;
+                if (company.StockFundementalData.DCFvaluation > company.StockPrice)
+                {
+                    // UnderValue...
+                    voletility += valueInvestorsEfect;
+                }
+                else
+                {
+                    //overValue...
+                    voletility -= valueInvestorsEfect;
+                }
+
+                double price = Math.Abs(Math.Round(
+                    (company.StockPrice * (1 + (company.StockFundementalData.EPSnext5Y / 12))) + voletility
+                    , 2));
+
+                var newMonthCandle = new PriceCandleModel { Date = (DateTime.Now.AddMonths(Player.CurrentMonth-1).Date.ToString("MM-yyyy")), Value = price };//u can use also company.StockFundementalData.DCFvaluation for value investors and a part for news.. 
                 company.PriceCandles.Add( newMonthCandle);
                 company.StockPrice = newMonthCandle.Value;
 
@@ -775,7 +796,9 @@ namespace RatRace3.ViewModel
         public ICommand CollectIncomeCommand { get; }
         public ICommand ChangeCardIndexCommand { get; }
         // public ICommand MarkerValueChangedCommand { get; }
-    
+
+        public IPOcompaniesRotatorViewModel IpoCompaniesVM { get; set; }
+
         public GameViewModel()
         {
             //  MarkerValueChangedCommand = new Command<ValueChangedEventArgs>(OnMarkerValueChanged);
@@ -812,6 +835,11 @@ namespace RatRace3.ViewModel
                 CurrentNewsPaperViewModel.CurrentNewsPaperModel = CurrentNewsPaperViewModel.NewsPaperModels[random.Next(0, 4)];
                 //TODO : Code duplication with BringRandomNewsPaper() replace and reuse same function ... in top ...
                 // OnPropertyChanged(nameof(CurrentNewsPaperViewModel.CurrentNewsPaperModel));
+
+                if (IpoCompaniesVM == null)
+                {
+                    IpoCompaniesVM = new IPOcompaniesRotatorViewModel();
+                }
             }
 
             // CurrentNewsPaperViewModel.CurrentNewsPaperModel

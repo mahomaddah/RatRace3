@@ -463,15 +463,15 @@ namespace RatRace3
 
                        PriceCandles = new ObservableCollection<PriceCandleModel>
                        {
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-8).ToString("MM-yyyy"), Value = 58 + random.Next(-5, 9)*35 },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 74 + random.Next(-5, 9)*35 },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 88 + random.Next(-5, 9)*35 },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 140 + random.Next(-5, 9)*35 },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 180 + random.Next(-5, 9)*35 },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 200 + random.Next(-5, 9)*35 },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 300 + random.Next(-5, 9)*35 },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 450 + random.Next(-5, 9)*35 },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(0).ToString("MM-yyyy"), Value = 500 + random.Next(-5, 9)*35 }
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-8).ToString("MM-yyyy"), Value = Math.Abs( 58 + random.Next(-5, 9)*35) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = Math.Abs(  74 + random.Next(-5, 9)*35) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = Math.Abs( 88 + random.Next(-5, 9)*35 )},
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = Math.Abs( 140 + random.Next(-5, 9)*35 )},
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = Math.Abs( 180 + random.Next(-5, 9)*35 )},
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = Math.Abs(  165 + random.Next(-5, 9)*35 )},
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = Math.Abs( 178 + random.Next(-5, 9)*35 )},
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = Math.Abs( 190 + random.Next(-5, 9)*35 )},
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(0).ToString("MM-yyyy"), Value = Math.Abs( 202 + random.Next(-5, 9)*35 )}
                        },
 
 
@@ -509,9 +509,10 @@ namespace RatRace3
 
                        PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
-                                 new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 100 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 450 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(0).ToString("MM-yyyy"), Value = 888 + random.Next(-5, 9) }
+                                 new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 187 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 200 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 241 + random.Next(-5, 9) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(0).ToString("MM-yyyy"), Value = 232 + random.Next(-5, 9) }
                        }
 
 
@@ -532,7 +533,7 @@ namespace RatRace3
 
                           EPSpast5Y=0.1840, //48.40%
                           EPSthisYr= 0.1382,//128.05%
-                          EPSnext5Y=1.14,
+                          EPSnext5Y=0.14,
 
                           DCFvaluation = 370.53,//Undervalue ...
                           	Beta  =  0.91,
@@ -549,12 +550,12 @@ namespace RatRace3
 
                        PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 300 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 450 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 550 + random.Next(-5, 9) },
-                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 670 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 700 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(0).ToString("MM-yyyy"), Value = 888 + random.Next(-5, 9) }
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 329 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 360 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 380 + random.Next(-5, 9) },
+                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 390 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 410 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(0).ToString("MM-yyyy"), Value = 439 + random.Next(-5, 9) }
                        }
 
 
@@ -575,7 +576,7 @@ namespace RatRace3
 
                           EPSpast5Y=0.2049, //48.40%
                           EPSthisYr= 0.1216,//128.05%
-                          EPSnext5Y=1.12,
+                          EPSnext5Y=0.10,
                           DCFvaluation = 28.27,//Undervalue ...
                           Beta= 0.53,
                           SustainableCompetitiveAdvantage=1//5 of 9 
@@ -591,9 +592,12 @@ namespace RatRace3
 
                        PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 200 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 250 + random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 240 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 77 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 87 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 91 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 100 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 99 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(0).ToString("MM-yyyy"), Value = 102 + random.Next(-5, 9) },
                        }
 
 
@@ -636,14 +640,14 @@ namespace RatRace3
 
                        PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
-                                   new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 200 + random.Next(-50, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 250 + random.Next(-50, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 240 + random.Next(-50, 9) },
-                                      new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 200 + random.Next(-50, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 250 + random.Next(-50, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 340 + random.Next(-50, 9) },
-                              new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 250 + random.Next(-50, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(0).ToString("MM-yyyy"), Value = 440 + random.Next(-50, 9) },
+                                   new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 200 + random.Next(-15, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 250 + random.Next(-15, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 240 + random.Next(-15, 9) },
+                                      new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 200 + random.Next(-15, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 250 + random.Next(-15, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 340 + random.Next(-15, 9) },
+                              new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 250 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(0).ToString("MM-yyyy"), Value = 328 + random.Next(-15, 9) },
                        }
 
 
@@ -664,8 +668,8 @@ namespace RatRace3
                           AnnualIncome=62.36,//from Finviz or Google Finance or yahoo fin
 
                           EPSpast5Y=0.30, //30%//from Finviz
-                          EPSthisYr= 1.1372, //from Finviz
-                          EPSnext5Y=1.1147,//from Finviz
+                          EPSthisYr= 0.1372, //from Finviz
+                          EPSnext5Y=0.1147,//from Finviz
 
                           DCFvaluation = 746.06,//Undervalue ...// from Gruefocus or 
 
@@ -695,7 +699,7 @@ namespace RatRace3
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 567.61 + random.Next(-5, 9) },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 577.50 + random.Next(-5, 9) },
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 589.72 +  random.Next(-5, 9) },
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 716.55 + random.Next(-5, 9) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 616.55 + random.Next(-5, 9) },
                        },
 
                 },
@@ -715,7 +719,7 @@ namespace RatRace3
 
                           EPSpast5Y=0.1554, //48.40%
                           EPSthisYr= 0.1294,//12
-                          EPSnext5Y=1.1181,
+                          EPSnext5Y=0.1181,
 
                           DCFvaluation = 575.63,//Undervalue ...
 
@@ -731,14 +735,14 @@ namespace RatRace3
 
                        PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
-                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 100 + random.Next(-8, 14) },
-                          new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 200 + random.Next(-8, 14) },
+                            new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 230 + random.Next(-8, 14) },
+                          new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 240 + random.Next(-8, 14) },
                              new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 300 + random.Next(-8, 14) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 500 + random.Next(-8, 10) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 800 + random.Next(-8, 10) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 1300 + random.Next(-8, 10) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 2100 + random.Next(-8, 10) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-0).ToString("MM-yyyy"), Value = 3400 + random.Next(-8, 10) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 360 + random.Next(-8, 10) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 390 + random.Next(-8, 10) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 420 + random.Next(-8, 10) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 400 + random.Next(-8, 10) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-0).ToString("MM-yyyy"), Value = 447 + random.Next(-8, 10) },
                        }
 
                 },
@@ -775,14 +779,14 @@ namespace RatRace3
 
                        PriceCandles =  new ObservableCollection<PriceCandleModel>
                        {
-                                       new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 100 + random.Next(-8, 14) },
-                          new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 200 + random.Next(-8, 14) },
-                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 300 + random.Next(-8, 140) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 500 + random.Next(-8, 100) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 800 + random.Next(-8, 100) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 1300 + random.Next(-8, 100) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 2100 + random.Next(-8, 100) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-0).ToString("MM-yyyy"), Value = 3400 + random.Next(-8, 100) },
+                                       new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 60 + random.Next(-8, 14) },
+                          new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 85 + random.Next(-8, 14) },
+                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 91 + random.Next(-8, 14) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 100 + random.Next(-8, 10) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 110 + random.Next(-8, 10) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 125 + random.Next(-8, 10) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 130 + random.Next(-8, 10) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-0).ToString("MM-yyyy"), Value = 140 + random.Next(-8, 10) },
                        }
 
 
@@ -821,12 +825,12 @@ namespace RatRace3
                        {
                             new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-7).ToString("MM-yyyy"), Value = 100 + random.Next(-8, 14) },
                                   new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-6).ToString("MM-yyyy"), Value = 200 + random.Next(-8, 14) },
-                                  new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 300 + random.Next(-8, 14) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 500 + random.Next(-8, 10) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 800 + random.Next(-8, 10) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 1300 + random.Next(-8, 10) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 2100 + random.Next(-8, 10) },
-                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-0).ToString("MM-yyyy"), Value = 3400 + random.Next(-8, 10) },
+                                  new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-5).ToString("MM-yyyy"), Value = 201.05 + random.Next(-8, 14) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-4).ToString("MM-yyyy"), Value = 211.05 + random.Next(-8, 10) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-3).ToString("MM-yyyy"), Value = 222.05 + random.Next(-8, 10) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-2).ToString("MM-yyyy"), Value = 225.65 + random.Next(-8, 10) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-1).ToString("MM-yyyy"), Value = 231.05 + random.Next(-8, 10) },
+                                new PriceCandleModel { Date = DateTime.Now.Date.AddMonths(-0).ToString("MM-yyyy"), Value = 229.05 + random.Next(-8, 10) },
                        }
 
 
