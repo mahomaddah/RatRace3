@@ -748,7 +748,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <VerticalStackLayout BindingContext="{Binding Market.SelectedCompanyFundamentals}"  x:Name="FundementalDataLeftStack" HorizontalOptions="Center" Margin="3" Grid.Column="0">
+                            <VerticalStackLayout BindingContext="{Binding Market.SelectedCompanyFundamentals ,FallbackValue='fallbackCompany'}"  x:Name="FundementalDataLeftStack" HorizontalOptions="Center" Margin="3" Grid.Column="0">
                                 <Label FontFamily="EngraversOldEnglish" TextColor="#9072C9" Padding="7"  Text="Balance Sheet Statement:" FontAttributes="Bold"/>
                                 <HorizontalStackLayout>
 

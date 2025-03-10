@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:RatRace3"
+    xmlns:View="clr-namespace:RatRace3.View"
     Navigating="Shell_Navigating"
   
     
@@ -24,13 +25,15 @@
       Title="Home"
       ContentTemplate="{DataTemplate local:MainPage}"
       Route="MainPage" />
-    
+
+    <ShellContent IsVisible="True" Title="Game Page" ContentTemplate="{DataTemplate View:GameView}" Route="gameview" />
+
     <FlyoutItem Title="Market Page">
-        <ShellContent IsVisible="True" Title="Market Page" ContentTemplate="{DataTemplate local:MarketPage}"  
+        <ShellContent IsVisible="True" Title="Market Page" ContentTemplate="{DataTemplate local:MarketPage} "  
       Route="MarketPage"/>
         
     </FlyoutItem>
+    
 
-   
 
 </Shell>

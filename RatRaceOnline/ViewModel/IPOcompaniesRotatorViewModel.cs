@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using RatRace3.View;
 using System.Globalization;
 using System.ComponentModel;
+using Microsoft.Extensions.Logging;
 
 namespace RatRace3.ViewModel
 {
@@ -17,27 +18,44 @@ namespace RatRace3.ViewModel
     {
         // ViewModel class for Rotator.
 
-        public ObservableCollection<Company> IPOcompanies { get; set; }
-        public ObservableCollection<SfRotatorItem> RotatorItems { get; set; }
+   //     public ObservableCollection<Company> IPOcompanies 
+        private ObservableCollection<Company> iPOcompanies;
 
-        public void SyncIPOcompaniesItems()
+        public ObservableCollection<Company> IPOcompanies
+        {
+            get { return iPOcompanies; }
+            set { iPOcompanies = value;
+                SyncIPOcompaniesItems();
+                Thread.Sleep(10);
+            }
+        }
+
+        public ObservableCollection<SfRotatorItem> RotatorItems { get; private set; }
+
+        private void SyncIPOcompaniesItems()
         {
             RotatorItems = new ObservableCollection<SfRotatorItem>();
+            if(iPOcompanies != null)
             foreach (var company in IPOcompanies)
             {
-                RotatorItems.Add(new SfRotatorItem
-                {
-                    Image = company.Symbol + ".png",
-                    ItemText = company.Symbol + " " + company.StockPrice.ToString("C2", CultureInfo.CreateSpecificCulture("en-US"))
-                });
+                var image = new Image { Source = company.Symbol + ".png" ,WidthRequest=300,HeightRequest=300  };
+              
+
+                var SymbolPricetext = company.Symbol + " " + company.StockPrice.ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
+
+                RotatorItems.Add(new SfRotatorItem(image, SymbolPricetext));
+                //{ 
+                //    Image = company.Symbol + ".png",
+                //    ItemText = SymbolPricetext
+                //});
             }
+            else { Shell.Current.DisplayAlert("Error from IPOCompanyViewmodel.CS.SyncIPOCompaniesItems()", "ipo companies was null","OK"); }
         }
         public IPOcompaniesRotatorViewModel()
         {
             var appShell = (AppShell)Shell.Current;
             IPOcompanies = appShell.IPOcompanies;
 
-            SyncIPOcompaniesItems();
         }
 
 

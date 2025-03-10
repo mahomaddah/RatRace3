@@ -21,8 +21,10 @@ public partial class StoryDetailView : ContentPage
         //unlock next ...
 
         await Shell.Current.DisplayAlert("Congratulations!", "\"You have successfully achieved all the goals required to complete this level of game. Great job!\"", "Victory, Baby!????");
-        await Shell.Current.GoToAsync("StoryModeView");
-    
+      //  await Shell.Current.GoToAsync("StoryModeView");
+        await Shell.Current.GoToAsync("//storydetailview");
+
+
     }
 
     private async void BackToGameButton_Clicked(object sender, EventArgs e)
@@ -35,8 +37,8 @@ public partial class StoryDetailView : ContentPage
         {
             var appShell = (AppShell)Shell.Current;
             appShell.CurrentLevelModel.isStarted = true;
-           await appShell.GoToAsync("GameView");
-         
+       //    await appShell.GoToAsync("GameView");
+            await Shell.Current.GoToAsync("//gameview");
 
         }
         catch(Exception ex) { await Shell.Current.DisplayAlert(ex.Message,ex.StackTrace,"OK"); }
@@ -69,7 +71,8 @@ public partial class StoryDetailView : ContentPage
                 model.IsNewGameStarted = true;//for opening new and not loading...
                 appShell.CurrentLevelModel = model;
             }
-            await Shell.Current.GoToAsync("GameView");
+     //       await Shell.Current.GoToAsync("GameView");
+            await Shell.Current.GoToAsync("//gameview");
         }
     }
 }

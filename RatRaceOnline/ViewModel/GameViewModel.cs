@@ -709,7 +709,9 @@ namespace RatRace3.ViewModel
 
             await Shell.Current.DisplayAlert("Game Over", "Month is " + Player.CurrentMonth + ". Unfortunately, Fund Manager! You couldn’t achieve all the goals needed to win!", "Not Again!");
 
-            await Shell.Current.GoToAsync("StoryDetailView");
+         //   await Shell.Current.GoToAsync("StoryDetailView");
+            await Shell.Current.GoToAsync("//storydetailview");
+
 
         }
         async void reCalcluteGameGoals()
@@ -771,7 +773,9 @@ namespace RatRace3.ViewModel
                     await Shell.Current.DisplayAlert("Let's Review Your Victory!",
                     "\"Before we celebrate, let's check how you played this level! We'll review your achievements, see how well you performed!\"",
                     "Show My Progress!");
-                    await Shell.Current.GoToAsync("StoryDetailView");
+                //    await Shell.Current.GoToAsync("StoryDetailView");
+                    await Shell.Current.GoToAsync("//storydetailview");
+
                 }
                 catch { }
             }

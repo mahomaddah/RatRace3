@@ -11,6 +11,7 @@ using System.Diagnostics.Metrics;
 using System.Xml.Linq;
 using RatRace3.DAL;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 public partial class GameView : ContentPage
 {
@@ -28,16 +29,20 @@ public partial class GameView : ContentPage
         {
 
             InitializeComponent();
-            var appShell = (AppShell)Shell.Current;
+
+        }
+        catch (Exception ex)
+        { Clipboard.SetTextAsync(ex.Message + " \n\n" + ex.StackTrace); }
+
+        var appShell = (AppShell)Shell.Current;
 
           
-
+        //Level Just Started... 
             if ( appShell.GameViewModel.Player==null)  //&& appShell.GameViewModel.Player.CurrentMonth==1) //sadece ilk aydaysa ve oyun yeni basladiysa ... contrat etsin view modeli Load yada Create new game yapsin deger turlu hic birsey yapmasin AppShell  Deki veriler kalsin cunku deger Panellerden gelmistir Market yada gamedetail gibi ...
             {
                 //Loading old game or come for a clean new game ... so Set Player Object ...
 
                 GameViewModel = new GameViewModel();
-
 
              
 
@@ -114,29 +119,36 @@ public partial class GameView : ContentPage
            
 
             // Set default card index to open first 
-            GameViewModel.VisibleIndex = 1;
+          
 
-            BindingContext = GameViewModel;
+            if (GameViewModel != null)
+            {
+                GameViewModel.VisibleIndex = 1;
+                BindingContext = GameViewModel;
+            }
+            else
+            {
+                
+                Debug.WriteLine("GameViewModel is NULL in GameView.xaml.cs");
+            }
 
 
-        //binding VM to Listview ....
-        //   LVcompaiesMarket.ItemsSource = GameViewModel.StockMarketCompanys;
-        
+            //binding VM to Listview ....
+            //   LVcompaiesMarket.ItemsSource = GameViewModel.StockMarketCompanys;
 
 
 
 
+            #region codes for mobiles landscape mode: 
 
             UpdateOrientation();
 
             // Event to detect orientation change
             DeviceDisplay.MainDisplayInfoChanged += (s, e) => UpdateOrientation();
 
+            #endregion
 
-
-        }
-        catch (Exception ex)
-        { Clipboard.SetTextAsync(ex.Message + " \n\n" + ex.StackTrace); }
+      
     }
     private void UpdateOrientation()
     {
@@ -157,7 +169,7 @@ public partial class GameView : ContentPage
 
     private async void cardNavBtn_Clicked(object sender, EventArgs e)
     {
-		if(sender!=null)
+		if(sender!=null && GameViewModel!=null)
 		{ 
           GameViewModel.VisibleIndex = Convert.ToInt16(((Button)sender).CommandParameter);
         }
@@ -165,7 +177,9 @@ public partial class GameView : ContentPage
 
     private async void GameProgressBtn_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("StoryDetailView");
+        // await Shell.Current.GoToAsync("StoryDetailView");
+        await Shell.Current.GoToAsync("//storydetailview");
+
     }
 
 
@@ -191,15 +205,18 @@ public partial class GameView : ContentPage
 
                if (e.Rotator.SelectedIndex == null || e.Rotator.SelectedIndex < 0) return;
 
-               // var router = (SfRotator)sender;
+            // var router = (SfRotator)sender;
+            //SfRotator router = new SfRotator();
+            //router = (SfRotator)sender;
+ 
+            SfRotatorItem selectedCompany = GameViewModel.IpoCompaniesVM.RotatorItems[e.Rotator.SelectedIndex];
 
-               SfRotatorItem selectedCompany = GameViewModel.IpoCompaniesVM.RotatorItems[e.Rotator.SelectedIndex];
-                
+
             if (selectedCompany != null)
             {
                 //        var appShell = (AppShell)Shell.Current;
                 // Company SelectedObject = appShell.IPOcompanies.FirstOrDefault(x => selectedCompany.Image.ToLower().Contains(x.Symbol.ToLower()));
-                Company SelectedObject = GameViewModel.IpoCompaniesVM.IPOcompanies.First(x => selectedCompany.Image.ToLower().Contains(x.Symbol.ToLower()));
+                Company SelectedObject = GameViewModel.IpoCompaniesVM.IPOcompanies.First(x => selectedCompany.ItemText.ToLower().Contains(x.Symbol.ToLower()));
                 ////Bind Fundemental data.. in a better way ...
                 ////BindingContext = SelectedObject.StockFundementalData;
                 //FundementalDataLeftStack.BindingContext = SelectedObject;
@@ -239,27 +256,29 @@ public partial class GameView : ContentPage
 
 
         var selectedCompany = GameViewModel.IpoCompaniesVM.RotatorItems[router.SelectedIndex];
-        if(selectedCompany!= null)
+        if (selectedCompany != null)
         {
             var appShell = (AppShell)Shell.Current;
-         //   Company SelectedObject = appShell.IPOcompanies.First(x => selectedCompany.Image.ToLower().Contains(x.Symbol.ToLower()));
-            Company SelectedObject = GameViewModel.IpoCompaniesVM.IPOcompanies.First(x => selectedCompany.Image.ToLower().Contains(x.Symbol.ToLower()));
+            //   Company SelectedObject = appShell.IPOcompanies.First(x => selectedCompany.Image.ToLower().Contains(x.Symbol.ToLower()));
+            Company SelectedObject = GameViewModel.IpoCompaniesVM.IPOcompanies.First(x => selectedCompany.ItemText.ToLower().Contains(x.Symbol.ToLower()));
             if (SelectedObject != null)
             {
 
-            appShell.CurrentCompany = new Company
-            {
-                Symbol = SelectedObject.Symbol,
-                StockPrice = SelectedObject.StockPrice,
-                StockDetail = SelectedObject.StockDetail,
-                StockExchange = SelectedObject.StockExchange
-            };
+                appShell.CurrentCompany = new Company
+                {
+                    Symbol = SelectedObject.Symbol,
+                    StockPrice = SelectedObject.StockPrice,
+                    StockDetail = SelectedObject.StockDetail,
+                    StockExchange = SelectedObject.StockExchange,
 
-            appShell.GameViewModel.Market.SelectedCompany = SelectedObject;
+                };
+
+                appShell.GameViewModel.Market.SelectedCompany = SelectedObject;
 
             }
         }
-        await Shell.Current.GoToAsync("MarketPage");
+      //  await Shell.Current.GoToAsync("MarketPage");
+        await Shell.Current.GoToAsync("//marketpage");
     }
 
     double IntrestRate = 0.041;//simdilik yuzde 4.1% olsun ilerie belki gazete deki TBon ile baglariz.....
@@ -454,8 +473,9 @@ public partial class GameView : ContentPage
                     appShell.GameViewModel.Market.SelectedCompany = (SelectedObject);
                         //this line make it break after clicking on back button becuse of parelel processing probebbly...
 
-                  await   Shell.Current.GoToAsync("MarketPage");
-                }
+               //   await   Shell.Current.GoToAsync("MarketPage");
+                        await Shell.Current.GoToAsync("//marketpage");
+                    }
 
               
 

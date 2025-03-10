@@ -228,7 +228,8 @@ namespace RatRace3.ViewModels
 
         private async void BuyStock()
         {
-            if (SelectedCompany == null) return;
+
+            if (SelectedCompany == null || CurrentCompanyAsset == null) return;
 
             var appShell = (AppShell)Shell.Current;
             var Player = appShell.GameViewModel.Player;
@@ -279,7 +280,8 @@ namespace RatRace3.ViewModels
            //     OnPropertyChanged(nameof(Player.Balance));
                 appShell.GameViewModel.LoadPlayerData(Player);
 
-                await Shell.Current.GoToAsync("GameView");
+         //       await Shell.Current.GoToAsync("GameView");
+                await Shell.Current.GoToAsync("//gameview");
             }
             else
             {
@@ -331,7 +333,7 @@ namespace RatRace3.ViewModels
             ////aslo a tooltip like : stock market is currentlly at holyday i't will open after Level 1 was Complated and After Post Demo Update.....
             //  if (CurrentCompanyAsset == null) return;// Breaking code...
 
-            if (SelectedCompany == null) return;
+            if (SelectedCompany == null || CurrentCompanyAsset == null) return;
 
             var appShell = (AppShell)Shell.Current;
             var Player = ((AppShell)Shell.Current).GameViewModel.Player;
@@ -379,7 +381,8 @@ namespace RatRace3.ViewModels
 
             appShell.GameViewModel.LoadPlayerData(Player);
 
-            await Shell.Current.GoToAsync("GameView");
+            //await Shell.Current.GoToAsync("GameView");
+            await Shell.Current.GoToAsync("//gameview");
 
             ////Orders System li yapmaliyiz Aslinda ileride Gercek economy gibi...
 

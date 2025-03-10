@@ -37,7 +37,9 @@ public partial class StoryModeView : ContentPage
             appShell.CurrentLevelModel = model;
          // await Shell.Current.DisplayAlert("Delete me ", model.StoryLevelID.ToString(),"OK" );//textcode...
         }
-        await Shell.Current.GoToAsync("StoryDetailView");
+     //   await Shell.Current.GoToAsync("StoryDetailView");
+        await Shell.Current.GoToAsync("//storydetailview");
+
     }
     private void SaveLastPlayedIndexD(int index)
     {
@@ -68,7 +70,9 @@ public partial class StoryModeView : ContentPage
             model.IsNewGameStarted = true;
             appShell.CurrentLevelModel = model;
         }
-        await Shell.Current.GoToAsync("StoryDetailView");
+      //  await Shell.Current.GoToAsync("StoryDetailView");
+        await Shell.Current.GoToAsync("//storydetailview");
+
 
         }
     }

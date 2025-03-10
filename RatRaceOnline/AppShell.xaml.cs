@@ -65,10 +65,10 @@ namespace RatRace3
         public AppShell()
         {
 
-            Routing.RegisterRoute("MarketPage", typeof(MarketPage));
-            Routing.RegisterRoute("StoryModeView", typeof(StoryModeView));
-            Routing.RegisterRoute("StoryDetailView", typeof(StoryDetailView));
-            Routing.RegisterRoute("GameView", typeof(GameView));
+            Routing.RegisterRoute("marketpage", typeof(MarketPage));
+            Routing.RegisterRoute("storymodeview", typeof(StoryModeView));
+            Routing.RegisterRoute("storydetailview", typeof(StoryDetailView));
+            Routing.RegisterRoute("gameview", typeof(GameView));
 
             InitializeComponent(); 
             GameViewModel = new GameViewModel();

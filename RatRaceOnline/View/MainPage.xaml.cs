@@ -11,27 +11,32 @@ namespace RatRace3
 
         private async void MarketPageBtn_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("MarketPage");
+            await Shell.Current.GoToAsync("//marketpage");
         }
 
         private async void SinglePlayerBtn_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("StoryModeView");
+            await Shell.Current.GoToAsync("//storymodeview");
         }
 
         private async void RealEconomyClicked(object sender, EventArgs e)
         {
             //print Wait for it ... :D 
-            await Shell.Current.DisplayAlert("Wait for it...", "Have Any Ideas to improve ? Have any personal Financial story to share ? We can create your level :D Please mail us: support@getValueHunter.com", "Set to clipboard!I can't memorize it!");
-            await Clipboard.SetTextAsync("support@getValueHunter.com");
+            comingsoonmessage();
 
         }
         private async void MultiplayerClicked(object sender, EventArgs e)
         {
+            comingsoonmessage();
+
+            //print Wait for it ...
+        }
+
+        async void comingsoonmessage()
+        {
             await Shell.Current.DisplayAlert("Wait for it...", "Have Any Ideas to improve ? Have any personal Financial story to share ? We can create your level :D Please mail us: support@getValueHunter.com", "Set to clipboard!I can't memorize it!");
             await Clipboard.SetTextAsync("support@getValueHunter.com");
-            
-            //print Wait for it ...
+
         }
     }
 
