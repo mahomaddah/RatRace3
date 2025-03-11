@@ -1,7 +1,7 @@
 ﻿
 namespace RatRace3
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : ContentView
     {
     
         public MainPage()
@@ -9,14 +9,12 @@ namespace RatRace3
             InitializeComponent();
         }
 
-        private async void MarketPageBtn_Clicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("//marketpage");
-        }
 
         private async void SinglePlayerBtn_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//storymodeview");
+            //   await Shell.Current.GoToAsync("/storymodeview");
+            var appShell = (AppShell)Shell.Current;
+            ((MotherView)appShell.CurrentPage).Show("storymodeview");
         }
 
         private async void RealEconomyClicked(object sender, EventArgs e)

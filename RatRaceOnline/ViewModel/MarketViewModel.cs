@@ -281,7 +281,10 @@ namespace RatRace3.ViewModels
                 appShell.GameViewModel.LoadPlayerData(Player);
 
          //       await Shell.Current.GoToAsync("GameView");
-                await Shell.Current.GoToAsync("//gameview");
+              //  await Shell.Current.GoToAsync("/gameview");
+             //  // await Shell.Current.GoToAsync("gameview");
+              //  await Shell.Current.GoToAsync("..");
+                ((MotherView)(appShell).CurrentPage).Show("gameview");
             }
             else
             {
@@ -382,7 +385,11 @@ namespace RatRace3.ViewModels
             appShell.GameViewModel.LoadPlayerData(Player);
 
             //await Shell.Current.GoToAsync("GameView");
-            await Shell.Current.GoToAsync("//gameview");
+            //  await Shell.Current.GoToAsync("/gameview");
+            //   await Shell.Current.GoToAsync("//gameview");
+            //  appShell.CurrentPage = new StoryDetailView();
+            //await Shell.Current.GoToAsync("..");
+            ((MotherView)(appShell).CurrentPage).Show("gameview");
 
             ////Orders System li yapmaliyiz Aslinda ileride Gercek economy gibi...
 
@@ -408,6 +415,7 @@ namespace RatRace3.ViewModels
             //{
             //    await Shell.Current.DisplayAlert("No Shares Available", "You don't own any shares of this stock to sell.", "OK");
             //}
+
         }
 
         void updateAssetValue()

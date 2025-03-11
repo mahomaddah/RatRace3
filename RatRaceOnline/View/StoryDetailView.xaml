@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RatRace3.View.StoryDetailView"
              Loaded="ContentPage_Loaded"
-             Title="{Binding Header}" >
+             >
 
     <VerticalStackLayout Padding="5">
 
-        <ScrollView MaximumHeightRequest="300">
-            
+          <Label x:Name="StoryHeaderLB"
        
+                   Margin="5"
+                   FontSize="{OnIdiom Phone=14 , Default=25}"
+            MaximumWidthRequest="1000" 
+           Text="{Binding Header}"             
+                VerticalOptions="Start" 
+                HorizontalOptions="Center" 
+            />
+
+        <ScrollView MaximumHeightRequest="300">
+          
+
             <Label x:Name="StoryDetailLB"
                   
                    Margin="5"
@@ -19,6 +29,7 @@
                 VerticalOptions="Start" 
                 HorizontalOptions="Center" 
             />
+            
         </ScrollView>
 
         <ListView x:Name="GameGoalsListV"
@@ -68,5 +79,5 @@
         <Button IsVisible="{Binding isStarted ,FallbackValue=true, TargetNullValue=ture}"   x:Name="TryAgainGameButton" Clicked="TryAgainGameButton_Clicked"  Margin="5" Text="Restart the Game" HeightRequest="40" WidthRequest="{OnIdiom Phone=150 , Default=300}"></Button>       
         </VerticalStackLayout>
   
-</ContentPage>
+</ContentView>
     

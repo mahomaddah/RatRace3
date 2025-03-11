@@ -27,6 +27,7 @@ namespace RatRace3
         public UIsettingsModel UIsettingsModel { get; set; }
 
         public NewsPaperViewModel CurrentNewsPaperViewModel { get; set; }
+      
 
         private bool isNavigatingBack = false; // Döngüyü önlemek için flag
 
@@ -41,16 +42,16 @@ namespace RatRace3
 
             //    bool shouldGoBack = await Application.Current.MainPage.DisplayAlert(
             //        "Going Back?", "Do you want to return to the last page?", "Yes", "No");
-
+         
             //    if (shouldGoBack)
             //    {
             //        try
             //        {
 
-                    
+
             //        await MainThread.InvokeOnMainThreadAsync(async () =>
             //        {
-            //            await Shell.Current.GoToAsync("..", true); // Geri git
+            //           
             //        });
             //        }
             //        catch { }
@@ -59,16 +60,19 @@ namespace RatRace3
             //    await Task.Delay(5); // UI'nin tam güncellenmesi için küçük bir bekleme süresi ekle
             //    isNavigatingBack = false; // Flag'i sıfırla
             //}
+
+
         }
 
 
         public AppShell()
         {
-
+            Routing.RegisterRoute("mainpage", typeof(MainPage));
             Routing.RegisterRoute("marketpage", typeof(MarketPage));
             Routing.RegisterRoute("storymodeview", typeof(StoryModeView));
             Routing.RegisterRoute("storydetailview", typeof(StoryDetailView));
             Routing.RegisterRoute("gameview", typeof(GameView));
+            Routing.RegisterRoute("motherview", typeof(MotherView));
 
             InitializeComponent(); 
             GameViewModel = new GameViewModel();
@@ -91,7 +95,7 @@ namespace RatRace3
 
         }
 
-       
+      
 
         public void getAnewGameData()
         {
@@ -1194,6 +1198,7 @@ namespace RatRace3
          
 
         }
+
 
 
 

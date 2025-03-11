@@ -4,7 +4,7 @@ using Microsoft.Maui.Graphics;
 using RatRace3.DAL;
 using RatRace3.ViewModel;
 
-public partial class StoryModeView : ContentPage
+public partial class StoryModeView : ContentView
 {
 	public StoryModeView()
 	{
@@ -37,9 +37,11 @@ public partial class StoryModeView : ContentPage
             appShell.CurrentLevelModel = model;
          // await Shell.Current.DisplayAlert("Delete me ", model.StoryLevelID.ToString(),"OK" );//textcode...
         }
-     //   await Shell.Current.GoToAsync("StoryDetailView");
-        await Shell.Current.GoToAsync("//storydetailview");
-
+        //   await Shell.Current.GoToAsync("StoryDetailView");
+        //   await Shell.Current.GoToAsync("storydetailview");
+    //    ((AppShell)Shell.Current).CurrentMotherView.Show("storydetail");
+      //  (MotherView)AppShell.Current.CurrentPage;
+         ((MotherView)(appShell).CurrentPage).Show("storydetailview");
     }
     private void SaveLastPlayedIndexD(int index)
     {
@@ -71,8 +73,10 @@ public partial class StoryModeView : ContentPage
             appShell.CurrentLevelModel = model;
         }
       //  await Shell.Current.GoToAsync("StoryDetailView");
-        await Shell.Current.GoToAsync("//storydetailview");
+      //  await Shell.Current.GoToAsync("storydetailview");
 
+        
+            ((MotherView)(appShell).CurrentPage).Show("storydetailview");
 
         }
     }

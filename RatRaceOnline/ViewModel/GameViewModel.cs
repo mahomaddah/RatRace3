@@ -710,7 +710,9 @@ namespace RatRace3.ViewModel
             await Shell.Current.DisplayAlert("Game Over", "Month is " + Player.CurrentMonth + ". Unfortunately, Fund Manager! You couldn’t achieve all the goals needed to win!", "Not Again!");
 
          //   await Shell.Current.GoToAsync("StoryDetailView");
-            await Shell.Current.GoToAsync("//storydetailview");
+        //    await Shell.Current.GoToAsync("/storydetailview");
+            var appShell = (AppShell)Shell.Current;
+            ((MotherView)(appShell).CurrentPage).Show("storydetailview");
 
 
         }
@@ -774,8 +776,9 @@ namespace RatRace3.ViewModel
                     "\"Before we celebrate, let's check how you played this level! We'll review your achievements, see how well you performed!\"",
                     "Show My Progress!");
                 //    await Shell.Current.GoToAsync("StoryDetailView");
-                    await Shell.Current.GoToAsync("//storydetailview");
-
+                  //  await Shell.Current.GoToAsync("/storydetailview");
+              
+                    ((MotherView)(appShell).CurrentPage).Show("storydetailview");
                 }
                 catch { }
             }

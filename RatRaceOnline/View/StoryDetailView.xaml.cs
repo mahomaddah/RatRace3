@@ -2,13 +2,13 @@ using RatRace3.Models;
 
 namespace RatRace3.View;
 
-public partial class StoryDetailView : ContentPage
+public partial class StoryDetailView : ContentView
 {
     public StoryDetailView()
 	{
 		InitializeComponent();
 
-        
+     
     }
 
     private async void FinishGameButton_Clicked(object sender, EventArgs e)
@@ -22,7 +22,9 @@ public partial class StoryDetailView : ContentPage
 
         await Shell.Current.DisplayAlert("Congratulations!", "\"You have successfully achieved all the goals required to complete this level of game. Great job!\"", "Victory, Baby!????");
       //  await Shell.Current.GoToAsync("StoryModeView");
-        await Shell.Current.GoToAsync("//storydetailview");
+     //   await Shell.Current.GoToAsync("/storymodeview");
+      //  var appShell = (AppShell)Shell.Current;
+        ((MotherView)(appShell).CurrentPage).Show("storymodeview");
 
 
     }
@@ -37,8 +39,17 @@ public partial class StoryDetailView : ContentPage
         {
             var appShell = (AppShell)Shell.Current;
             appShell.CurrentLevelModel.isStarted = true;
-       //    await appShell.GoToAsync("GameView");
-            await Shell.Current.GoToAsync("//gameview");
+           
+         
+           //     await appShell.GoToAsync("/gameview");
+           //     var appShell = (AppShell)Shell.Current;
+                ((MotherView)(appShell).CurrentPage).Show("gameview");
+          //      AppJustStarted = false;
+        
+           
+                   
+
+         
 
         }
         catch(Exception ex) { await Shell.Current.DisplayAlert(ex.Message,ex.StackTrace,"OK"); }
@@ -72,7 +83,9 @@ public partial class StoryDetailView : ContentPage
                 appShell.CurrentLevelModel = model;
             }
      //       await Shell.Current.GoToAsync("GameView");
-            await Shell.Current.GoToAsync("//gameview");
+          //  await Shell.Current.GoToAsync("/gameview");
+          //  var appShell = (AppShell)Shell.Current;
+            ((MotherView)(appShell).CurrentPage).Show("gameview");
         }
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="RatRace3.MarketPage"
              Loaded="ContentPage_Loaded"
@@ -7,14 +7,21 @@
              xmlns:local="clr-namespace:RatRace3;assembly=RatRace3"
              xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
              BindingContext="{Binding GameViewModel}"
-             Title="Market Page">
+  
+            >
     
     
     <VerticalStackLayout>
-        <Label Margin="2,2,2,10" 
+     
+
+       
+            <Label Margin="2,2,2,10" 
             Text="Welcome to Market..."
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+            
+ 
+      
 
         <chart:SfCartesianChart Margin="10" x:Name="Chart"  >
             <!-- Define X and Y axes -->
@@ -144,8 +151,10 @@
             <Button Margin="0,0,10,0" Text="Buy" Command="{Binding Market.BuyStockCommand}"
                     x:Name="BuyMoreAsset"></Button>
             <Button  x:Name="SellAssetPositionBtn" Command="{Binding Market.SellStockCommand}"   ToolTipProperties.Text="Short Selling feature is not available yet but No worry We will add it in the next Versions :D" Text="Sell"></Button>
+            <Button Margin="10,0,0,0" Text="Back" FontSize="10" Clicked="BackfromMarketBtn_Clicked"
+           x:Name="BackFromMarketBtn"></Button>
         </HorizontalStackLayout>
       
 
     </VerticalStackLayout>
-</ContentPage>
+</ContentView>

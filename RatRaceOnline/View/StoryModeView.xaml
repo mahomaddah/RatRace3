@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"         
              xmlns:syncfusionCaro="clr-namespace:Syncfusion.Maui.Carousel;assembly=Syncfusion.Maui.Carousel"
               xmlns:local="clr-namespace:RatRace3"
@@ -7,13 +7,13 @@
              Loaded="ContentPage_Loaded"
     
              x:Class="RatRace3.StoryModeView"
-             Title="Escape Rat Race:">
+            >
     
-    <ContentPage.BindingContext>
+    <ContentView.BindingContext>
         <ViewModel:SelectLevelViewModel/>
-    </ContentPage.BindingContext>
+    </ContentView.BindingContext>
 
-    <ContentPage.Resources>
+    <ContentView.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="itemTemplate">
                 
@@ -71,8 +71,8 @@
                 </Border>
             </DataTemplate>
         </ResourceDictionary>
-    </ContentPage.Resources>
-    <ContentPage.Content>
+    </ContentView.Resources>
+    <ContentView.Content>
         <syncfusionCaro:SfCarousel
                                    x:Name="storyLevelsCarousel" 
             
@@ -86,6 +86,6 @@
 
 
         </syncfusionCaro:SfCarousel>
-    </ContentPage.Content>
+    </ContentView.Content>
     
-</ContentPage>
+</ContentView>

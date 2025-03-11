@@ -6,7 +6,7 @@ using System;
 using System.Data.SqlTypes;
 using System.Globalization;
 
-public partial class MarketPage : ContentPage
+public partial class MarketPage : ContentView
 {
     public AssetModel CurrentAssetModel { get; set; }
     public Company CurrentCompany { get; set; }
@@ -151,6 +151,14 @@ public partial class MarketPage : ContentPage
        
     }
 
+    private void BackfromMarketBtn_Clicked(object sender, EventArgs e)
+    {
+        AppShell appShell = (AppShell)Shell.Current;
+       // appShell.GoToAsync("..");
+        ((MotherView)(appShell).CurrentPage).Show("gameview"); 
+    }
+
+   
 }
 
 //Note : After MVP:  ileride gradient e gecmek istersek ... chartlar icin ...

@@ -13,7 +13,7 @@ using RatRace3.DAL;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
-public partial class GameView : ContentPage
+public partial class GameView : ContentView
 {
     public GameViewModel GameViewModel { get; set; }
 
@@ -141,31 +141,31 @@ public partial class GameView : ContentPage
 
             #region codes for mobiles landscape mode: 
 
-            UpdateOrientation();
+            //UpdateOrientation();
 
-            // Event to detect orientation change
-            DeviceDisplay.MainDisplayInfoChanged += (s, e) => UpdateOrientation();
+            //// Event to detect orientation change
+            //DeviceDisplay.MainDisplayInfoChanged += (s, e) => UpdateOrientation();
 
             #endregion
 
       
     }
-    private void UpdateOrientation()
-    {
+    //private void UpdateOrientation()
+    //{
        
-        // for fixin radial Menu button's ( flower bank button android rotation bug..)
-        if (  (DeviceInfo.Platform == DevicePlatform.Android || DeviceInfo.Platform == DevicePlatform.iOS) && DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Landscape)
-        {
-            //change button point change the 0,0 to a real working tested button location ...
-            BankRadialMenu.Point = new Point(0,0);
-        }
-        else if ((DeviceInfo.Platform == DevicePlatform.Android || DeviceInfo.Platform == DevicePlatform.iOS) && DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Portrait)
-        {
-            //return button point 83,125 which tested for a
-            BankRadialMenu.Point = new Point(83, 125);
-        }
+    //    // for fixin radial Menu button's ( flower bank button android rotation bug..)
+    //    if (  (DeviceInfo.Platform == DevicePlatform.Android || DeviceInfo.Platform == DevicePlatform.iOS) && DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Landscape)
+    //    {
+    //        //change button point change the 0,0 to a real working tested button location ...
+    //        BankRadialMenu.Point = new Point(0,0);
+    //    }
+    //    else if ((DeviceInfo.Platform == DevicePlatform.Android || DeviceInfo.Platform == DevicePlatform.iOS) && DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Portrait)
+    //    {
+    //        //return button point 83,125 which tested for a
+    //        BankRadialMenu.Point = new Point(83, 125);
+    //    }
 
-    }
+    //}
 
     private async void cardNavBtn_Clicked(object sender, EventArgs e)
     {
@@ -178,8 +178,10 @@ public partial class GameView : ContentPage
     private async void GameProgressBtn_Clicked(object sender, EventArgs e)
     {
         // await Shell.Current.GoToAsync("StoryDetailView");
-        await Shell.Current.GoToAsync("//storydetailview");
-
+        //await Shell.Current.GoToAsync("/storydetailview");
+        //  await Shell.Current.GoToAsync("..");
+        var appShell = (AppShell)Shell.Current;
+        ((MotherView)(appShell).CurrentPage).Show("storydetailview");
     }
 
 
@@ -236,7 +238,7 @@ public partial class GameView : ContentPage
            //});
 
         }
-        catch (Exception exep) { await DisplayAlert(exep.Message,exep.StackTrace , "RotarIndex erorr catched.."); }
+        catch (Exception exep) { await AppShell.Current.DisplayAlert(exep.Message,exep.StackTrace , "RotarIndex erorr catched.."); }
 
 
         //appShell.GameViewModel.Market.ChangeSelectedCompany((int)e.Index); //for auto updating the shit DataContext of Fundemental Data... Comment lined for now to fix the bug i't aslo changing Market CurrentCompany as well :D ... in fact i'ts not even changing fundemental data in here :D
@@ -254,11 +256,11 @@ public partial class GameView : ContentPage
             return; // Hatalý index eriþimini önler
         }
 
-
+        var appShell = (AppShell)Shell.Current;
         var selectedCompany = GameViewModel.IpoCompaniesVM.RotatorItems[router.SelectedIndex];
         if (selectedCompany != null)
         {
-            var appShell = (AppShell)Shell.Current;
+         
             //   Company SelectedObject = appShell.IPOcompanies.First(x => selectedCompany.Image.ToLower().Contains(x.Symbol.ToLower()));
             Company SelectedObject = GameViewModel.IpoCompaniesVM.IPOcompanies.First(x => selectedCompany.ItemText.ToLower().Contains(x.Symbol.ToLower()));
             if (SelectedObject != null)
@@ -278,7 +280,9 @@ public partial class GameView : ContentPage
             }
         }
       //  await Shell.Current.GoToAsync("MarketPage");
-        await Shell.Current.GoToAsync("//marketpage");
+        //await Shell.Current.GoToAsync("/marketpage");
+       // await Shell.Current.GoToAsync("marketpage");
+        ((MotherView)(appShell).CurrentPage).Show("marketpage");
     }
 
     double IntrestRate = 0.041;//simdilik yuzde 4.1% olsun ilerie belki gazete deki TBon ile baglariz.....
@@ -306,7 +310,7 @@ public partial class GameView : ContentPage
             }
             else
             {
-                await DisplayAlert("Bank:" , "Please Enter a Valid Amounth of fund", "Hony No$");
+                await AppShell.Current.DisplayAlert("Bank:" , "Please Enter a Valid Amounth of fund", "Hony No$");
             }
 
         }
@@ -413,12 +417,12 @@ public partial class GameView : ContentPage
             }
             else
             {
-                await DisplayAlert("Bank Alert", $"Invalid amount entered! You currently have only {GameViewModel.Player.NetTotalIncome.ToString("C2", USD)} in free cash flow. Please enter a valid amount within your budget.or increase you FCF at first.", "Let's Try Again");
+                await AppShell.Current.DisplayAlert("Bank Alert", $"Invalid amount entered! You currently have only {GameViewModel.Player.NetTotalIncome.ToString("C2", USD)} in free cash flow. Please enter a valid amount within your budget.or increase you FCF at first.", "Let's Try Again");
             }
         }
         catch
         {
-            await DisplayAlert("Bank Alert", "An issue occurred while creating the new RD position. Please try again.", "OK");
+            await AppShell.Current.DisplayAlert("Bank Alert", "An issue occurred while creating the new RD position. Please try again.", "OK");
         }
     }
 
@@ -474,7 +478,9 @@ public partial class GameView : ContentPage
                         //this line make it break after clicking on back button becuse of parelel processing probebbly...
 
                //   await   Shell.Current.GoToAsync("MarketPage");
-                        await Shell.Current.GoToAsync("//marketpage");
+                       // await Shell.Current.GoToAsync("/marketpage");
+                     
+                        ((MotherView)appShell.CurrentPage).Show("marketpage");
                     }
 
               

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RatRace3.View.GameView"
-             Title="1/24  $295.04"
+             
              Shell.NavBarIsVisible="False"
               xmlns:local="clr-namespace:RatRace3"
              xmlns:cards="clr-namespace:Syncfusion.Maui.Cards;assembly=Syncfusion.Maui.Cards"
              xmlns:sfavatar="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
-             
+                
              xmlns:expander="clr-namespace:Syncfusion.Maui.Expander;assembly=Syncfusion.Maui.Expander"
              xmlns:radialMenu="clr-namespace:Syncfusion.Maui.RadialMenu;assembly=Syncfusion.Maui.RadialMenu"
              xmlns:sunburst="clr-namespace:Syncfusion.Maui.SunburstChart;assembly=Syncfusion.Maui.SunburstChart"
@@ -23,9 +23,9 @@
              
              >
 
-    <ContentPage.BindingContext>
+    <ContentView.BindingContext>
         <ViewModels:GameViewModel />
-    </ContentPage.BindingContext>
+    </ContentView.BindingContext>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -37,7 +37,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <VerticalStackLayout VerticalOptions="Start"  Grid.Column="0" Grid.Row="0">
+        <VerticalStackLayout VerticalOptions="Start" Margin="0,-25,0,0"  Grid.Column="0" Grid.Row="0">
             <Label 
                 Margin="0,0,0,-5"
                Text="Month:"
@@ -50,7 +50,7 @@
 
         </VerticalStackLayout>
 
-        <VerticalStackLayout  Margin="0,0,0,0"  VerticalOptions="Start" Grid.Row="0" Grid.Column="1">
+        <VerticalStackLayout Margin="0,-25,0,0"  VerticalOptions="Start" Grid.Row="0" Grid.Column="1">
 
 
             <Label    Margin="0,0,0,-5"
@@ -65,7 +65,7 @@
         </VerticalStackLayout>
 
 
-        <cards:SfCardLayout VisibleIndex="{Binding VisibleIndex, Mode=TwoWay}"  x:Name="CardGamesLayout" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,10,0"  SwipeDirection="Right"  BackgroundColor="#339072C9">
+        <cards:SfCardLayout VisibleIndex="{Binding VisibleIndex, Mode=TwoWay}"  x:Name="CardGamesLayout" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,-20,10,0"  SwipeDirection="Right"  BackgroundColor="#339072C9">
 
             <cards:SfCardView  BorderColor="#9072C9" BorderWidth="10" CornerRadius="10"   BackgroundColor="#CCCD3370">
                 <Grid ToolTipProperties.Text="Life Quality Managment Will Unlock after Level 5 and Next Version..." >
@@ -1158,6 +1158,6 @@
 
     </Grid>
  
-</ContentPage>
+</ContentView>
              
     
