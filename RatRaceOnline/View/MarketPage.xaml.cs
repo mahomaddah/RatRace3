@@ -111,28 +111,6 @@ public partial class MarketPage : ContentView
     //bind   ValueChangeCompleted="markerPointer_ValueChangeCompleted"  if you need active again....
     //}
 
-    private void ContentPage_Loaded(object sender, EventArgs e)
-    {
-        //var appShell = (AppShell)Shell.Current;
-
-        //CurrentCompany = appShell.CurrentCompany;
-        //StockIcon.Source = CurrentCompany.Symbol.ToLower() + ".png";
-        //StockSymbol.Text = CurrentCompany.Symbol;
-        //ToolTipProperties.SetText(StockIcon, CurrentCompany.StockDetail);
-        //StockPriceLB.Text = (CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
-        //CurrentAssetModel = appShell.CurrentCompanyAsset;
-        //PostionValueOwnedLB.Text = (CurrentAssetModel.StockQuantity * CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
-        ////CurrentAssetModel.StockAverageBuyCost;//for P&L after MVP...
-        ////CurrentAssetModel.StockCompanySymbol;//Not needed here ...
-        //if (markerPointer.Value != null && TotalPriceLB.Text != null)
-        //{
-        //    markerPointer.Value = CurrentAssetModel.StockQuantity;
-        //    TotalPriceLB.Text = (markerPointer.Value * CurrentCompany.StockPrice).ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
-        //}
-
-        //updateAssetValue();
-    }
-
     private async void SellAssetPosition_Clicked(object sender, EventArgs e)
     {
 
@@ -158,7 +136,12 @@ public partial class MarketPage : ContentView
         ((MotherView)(appShell).CurrentPage).Show("gameview"); 
     }
 
-   
+    private void ContentView_Loaded(object sender, EventArgs e)
+    {
+        var appShell = (AppShell)Shell.Current;
+
+        appShell.GameViewModel.Market.IPOCompanies = appShell.IPOcompanies;
+    }
 }
 
 //Note : After MVP:  ileride gradient e gecmek istersek ... chartlar icin ...

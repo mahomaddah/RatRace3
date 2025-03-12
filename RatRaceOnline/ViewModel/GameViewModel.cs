@@ -14,6 +14,7 @@ using System.Reflection.PortableExecutable;
 using RatRace3.ViewModels;
 using RatRace3.DAL;
 using Syncfusion.Maui.Graphics.Internals;
+using System.Runtime.ExceptionServices;
 
 namespace RatRace3.ViewModel
 {
@@ -507,16 +508,31 @@ namespace RatRace3.ViewModel
                 company.StockLastCandlePrice = company.StockPrice;
 
                 //Profitability , Growth ,dcfValuetion , FinancalStrenght , Momentom ... Price Factors...
-                double voletility = company.StockFundementalData.Beta * random.Next(-40, 40);//Tesla Beta and month tested with real data...
-                double valueInvestorsEfect = company.StockPrice/12;
+                int maxSnP500Effect = Convert.ToInt32(company.StockPrice * (+0.1)); //0.1 for 10% S&P 500 effect ...
+                int minSnP500Effect = Convert.ToInt32(company.StockPrice * (-0.1));
+                double voletility = company.StockFundementalData.Beta * random.Next(minSnP500Effect,maxSnP500Effect);//Tesla Beta and month tested with real data...
+                double valueInvestorsEfect = company.StockPrice/9;// /12 vardi eski dan daha cok yukselen bir sey yaptik ...
                 if (company.StockFundementalData.DCFvaluation > company.StockPrice)
                 {
                     // UnderValue...
+
+                    var fundementalComboHit = company.StockFundementalData.SustainableCompetitiveAdvantage*random.Next(1, 9); //1.1% ve 1.81% arasinda bir rastgele bir growth olur ...  1 ve 81 arasinda bir sayi cikar 
+
+                    valueInvestorsEfect *= (1+ fundementalComboHit);
                     voletility += valueInvestorsEfect;
                 }
                 else
                 {
+                    var bolunen = 1;
+                    if(company.StockFundementalData.SustainableCompetitiveAdvantage!=0)
+                    {
+                        bolunen = company.StockFundementalData.SustainableCompetitiveAdvantage;
+                    }   
+
+                    var zararlisayi =  random.Next(1, 9)/ bolunen; //1% ve 1.81% arasinda bir rastgele bir growth olur ... 
+
                     //overValue...
+                    valueInvestorsEfect *= (1 + zararlisayi);
                     voletility -= valueInvestorsEfect;
                 }
 

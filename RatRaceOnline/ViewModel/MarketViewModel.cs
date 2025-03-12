@@ -163,6 +163,7 @@ namespace RatRace3.ViewModels
 
             if(ChartData == null)
             {
+                // ChartData = new ObservableCollection<PriceCandleModel>(appShell.IPOcompanies.First().PriceCandles);
                 ChartData = new ObservableCollection<PriceCandleModel>();
 
                 BuyStockCommand = new Command(BuyStock);

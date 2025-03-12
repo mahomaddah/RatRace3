@@ -44,6 +44,7 @@ public partial class StoryDetailView : ContentView
            //     await appShell.GoToAsync("/gameview");
            //     var appShell = (AppShell)Shell.Current;
                 ((MotherView)(appShell).CurrentPage).Show("gameview");
+                
           //      AppJustStarted = false;
         
            
@@ -75,17 +76,18 @@ public partial class StoryDetailView : ContentView
             string currentPlayingLevelID = appShell.CurrentLevelModel.StoryLevelID;
 
 
-            var model = appShell.SelectLevelViewModel.ImageCollection.Find(x => x.StoryLevelID == currentPlayingLevelID);
+            var model = appShell.SelectLevelViewModel.ImageCollection.FirstOrDefault(x => x.StoryLevelID == currentPlayingLevelID);
             if (model != null)
             {
-                appShell.GameViewModel = new ViewModel.GameViewModel();
-                model.IsNewGameStarted = true;//for opening new and not loading...
+                model.IsNewGameStarted = true;
                 appShell.CurrentLevelModel = model;
-            }
-     //       await Shell.Current.GoToAsync("GameView");
-          //  await Shell.Current.GoToAsync("/gameview");
-          //  var appShell = (AppShell)Shell.Current;
+         
+            appShell.GameViewModel.Player = appShell.CurrentLevelModel.Players.First();
+            appShell.GameViewModel.LoadPlayerData(appShell.GameViewModel.Player);
+
+            ((MotherView)(appShell).CurrentPage).Show("storydetailview");
             ((MotherView)(appShell).CurrentPage).Show("gameview");
+            }
         }
     }
 }

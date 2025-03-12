@@ -330,7 +330,9 @@ namespace RatRace3
                 StoryGoalModels = new List<StoryGoalModel> 
                 {  new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 30000, YouHave = 5000 },
                    new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 24, YouHave = 1 },
-                   new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 2 }
+                   new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 2 },
+               
+
                 }
             });
 
