@@ -30,6 +30,11 @@ namespace RatRace3.Models
     public class LevelModel
     {
 
+
+        public string LearnedByWinMessage { get; set; }
+        public string LearnedByLoseMessage { get; set; }
+
+
         /// <summary>
         /// is IsGameFinishable means if the use won the game or reached all the levels's list of goals:  StoryGoalModels
         /// </summary>

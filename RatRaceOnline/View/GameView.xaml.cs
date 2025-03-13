@@ -59,6 +59,7 @@ public partial class GameView : ContentView
 
                     appShell.getAnewGameData();//without this user can onley get new game 2 time and after 2. all restart games will be the same until he close and re open the game :D lol but with it bug has solved..
                     GameViewModel.LoadPlayerData(levelPlayer1);
+                    
                 }
                 else
                 {
@@ -112,17 +113,18 @@ public partial class GameView : ContentView
             }
 
 
-          
 
-            if (GameViewModel.IpoCompaniesVM.RotatorItems != null && GameViewModel.IpoCompaniesVM.RotatorItems.Count > 0)
-               CompanyInvestRoter.ItemsSource = GameViewModel.IpoCompaniesVM.RotatorItems;
-           
 
-            // Set default card index to open first 
-          
+  
+
+            appShell.IPOcompaniesSfCarouselViewModel = new IPOcompaniesSfCarouselViewModel { ImageCollection = appShell.IPOcompanies.ToList() };
+        FundementalDataRightStack.BindingContext = appShell.IPOcompaniesSfCarouselViewModel;
+        FundementalDataLeftStack.BindingContext = appShell.IPOcompaniesSfCarouselViewModel;
+        IPOcompaniesSfCarousel.BindingContext = appShell.IPOcompaniesSfCarouselViewModel;
 
             if (GameViewModel != null)
             {
+                // Set default card index to open first     
                 GameViewModel.VisibleIndex = 1;
                 BindingContext = appShell.GameViewModel;
             }
@@ -133,26 +135,27 @@ public partial class GameView : ContentView
             }
 
 
-            //binding VM to Listview ....
-            //   LVcompaiesMarket.ItemsSource = GameViewModel.StockMarketCompanys;
+        //binding VM to Listview ....
+        //   LVcompaiesMarket.ItemsSource = GameViewModel.StockMarketCompanys;
+        //   if (GameViewModel.IpoCompaniesVM.RotatorItems != null && GameViewModel.IpoCompaniesVM.RotatorItems.Count > 0)
+        // IPOcompaniesSfCarousel.ItemsSource = GameViewModel.IpoCompaniesVM.RotatorItems;... old codes... 
 
 
 
+        #region codes for mobiles landscape mode: 
 
-            #region codes for mobiles landscape mode: 
+        //UpdateOrientation();
 
-            //UpdateOrientation();
+        //// Event to detect orientation change
+        //DeviceDisplay.MainDisplayInfoChanged += (s, e) => UpdateOrientation();
 
-            //// Event to detect orientation change
-            //DeviceDisplay.MainDisplayInfoChanged += (s, e) => UpdateOrientation();
+        #endregion
 
-            #endregion
 
-      
     }
     //private void UpdateOrientation()
     //{
-       
+
     //    // for fixin radial Menu button's ( flower bank button android rotation bug..)
     //    if (  (DeviceInfo.Platform == DevicePlatform.Android || DeviceInfo.Platform == DevicePlatform.iOS) && DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Landscape)
     //    {
@@ -260,6 +263,30 @@ public partial class GameView : ContentView
         //  await Shell.Current.DisplayAlert("Fundemental data shoud be updated"+e.Index, "called : from GameView.xaml : CompanyInvestRoter_SelectedIndexChanged()", "OK");
     }
 
+    private void CompanyLogo_Clicked(object sender, EventArgs e)
+    {
+        var appShell = (AppShell)Shell.Current;
+
+        Company SelectedObject = appShell.IPOcompanies.ElementAtOrDefault(appShell.IPOcompaniesSfCarouselViewModel.VisibleCompanyindex);
+        if (SelectedObject != null)
+        {
+
+            appShell.CurrentCompany = new Company
+            {
+                Symbol = SelectedObject.Symbol,
+                StockPrice = SelectedObject.StockPrice,
+                StockDetail = SelectedObject.StockDetail,
+                StockExchange = SelectedObject.StockExchange,
+
+            };
+
+            appShell.GameViewModel.Market.SelectedCompany = SelectedObject;
+
+        }
+
+        ((MotherView)(appShell).CurrentPage).Show("marketpage");
+
+    }
     private async void CompanyInvestRoter_ItemTapped(object sender, EventArgs e)
     {
         SfRotator router = new SfRotator();
@@ -513,6 +540,6 @@ public partial class GameView : ContentView
 
     }
 
-  
+   
 }
 

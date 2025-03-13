@@ -14,7 +14,7 @@ namespace RatRace3
         /// this usefull for creating a new game ... not for load game...
         /// </summary>
         public LevelModel CurrentLevelModel { get; set; }
-
+        public IPOcompaniesSfCarouselViewModel IPOcompaniesSfCarouselViewModel { get; set; }
         public GameViewModel GameViewModel { get; set; }
         public Company CurrentCompany { get; set; }//For Stock Market...
         /// <summary>
@@ -137,10 +137,10 @@ namespace RatRace3
                     new LiabilityModel{LiabilityName="Motorcycle Camping Gear Debt", TotalAmount=1200.00, MonthsRemaining = 12, InterestRate=0.01, LiabilityModelID = 3 , ExpenseModelID = 3}
                 },
                 IncomeSources = new List<IncomeSourceModel>{ new IncomeSourceModel { Name = "Salary", Amount = 2800.00  } ,
-                                                             new IncomeSourceModel { Name = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank" ,Amount =53.56  ,AssetIncomeSourseRelatingGUID = 2.ToString() } },
+                                                             new IncomeSourceModel { Name = "FD 5020.63 @4.12% Interest Rate | JP Morgan Bank" ,Amount =53.56  ,AssetIncomeSourseRelatingGUID = 2.ToString() } },
                 Assets = new List<AssetModel>
                 {
-                    new AssetModel {AssetName = "FD $5020.63 @4.12% Interest Rate | JP Morgan Bank", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 1300.00, IntrestRate= 0.0412, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 53.56, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = 2.ToString()},
+                    new AssetModel {AssetName = "FD 5020.63 @4.12% Interest Rate | JP Morgan Bank", AssetType = AssetTypes.FixedDeposit.ToString(), AssetValue = 1300.00, IntrestRate= 0.0412, IsBankDeposit= true, IsRecursiveDepositRD = false, PassiveIncome = 53.56, AssetModelID = 1 ,AssetIncomeSourseRelatingGUID = 2.ToString()},
                     new AssetModel {AssetName = "MSFT P&L 28%",  AssetType = AssetTypes.Stock.ToString(),StockCompanySymbol = "MSFT",StockQuantity = 1.1,StockAverageBuyCost =888.23, AssetValue = 976.7, IntrestRate= 0.25, IsBankDeposit= false, IsRecursiveDepositRD = false, PassiveIncome = 5.00, AssetModelID = 2}
                 },
                 Expenses = new List<ExpenseModel>
@@ -156,6 +156,12 @@ namespace RatRace3
                 Header = "The System Engineer's Breakthrough",
                 DetailStory = "Erdem is a Principal System Engineer @ Huawei Tech. Ltd., receives a 100% salary hike and splurges on luxury items such as a brand-new Ducati bike!, an expensive drone, and motorcycle camping gear on EMI. Help him pay off his debts within a year.",
                 isStarted = false,
+
+
+                LearnedByWinMessage = "Mira Learned: A little of Something good is better than all of nothing.. if not have an investing plan and not start with small money. Small money will never become big money!",
+                LearnedByLoseMessage = "Mira Learned: Never Never user Debt Or leverage on long term Investing (on trading is ok, never use more than 3% of entire capital on any trade as well) ",
+
+
                 isUnlocked = false,
                 HighestMounthScore = 0,
                 StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 3 },
@@ -194,6 +200,12 @@ namespace RatRace3
                 StoryLevelID = "2",
                 Image = "undraw_investing.png",
                 Header = "Investing Adventure",
+
+
+                LearnedByWinMessage = "Mira Learned: A little of Something good is better than all of nothing.. if not have an investing plan and not start with small money. Small money will never become big money!",
+                LearnedByLoseMessage = "Mira Learned: Never Never user Debt Or leverage on long term Investing (on trading is ok, never use more than 3% of entire capital on any trade as well) ",
+
+
                 DetailStory = "You start your journey as a novice investor, barely making ends meet. One day, you stumble upon a hidden gem in the stock market that others have overlooked. Will you risk your savings on this company, or play it safe with traditional investments? Your choices will decide if you break free from the rat race or fall further into it.You also bought your friend Erdem's old Motorcycle with debt so you need to handle them.",
                 isStarted = false,
                 isUnlocked = true,
@@ -232,6 +244,12 @@ namespace RatRace3
 
                 StoryLevelID = "3",
                 Image = "exams.png",
+
+
+                LearnedByWinMessage = "Mira Learned: A little of Something good is better than all of nothing.. if not have an investing plan and not start with small money. Small money will never become big money!",
+                LearnedByLoseMessage = "Mira Learned: Never Never user Debt Or leverage on long term Investing (on trading is ok, never use more than 3% of entire capital on any trade as well) ",
+
+
                 Header = "The Exam Hustle",
                 DetailStory = "You're back in school, juggling part-time jobs while preparing for the toughest exams of your life. Your goal? A scholarship that could open doors to a better life. But the stress of it all threatens to derail you. Can you manage your time and mental health, or will you succumb to burnout?",
                 isStarted = false,
@@ -271,8 +289,14 @@ namespace RatRace3
             }},
                 StoryLevelID = "4",
                 Image = "interview.png",
+
+
+                LearnedByWinMessage = "Mira Learned: A little of Something good is better than all of nothing.. if not have an investing plan and not start with small money. Small money will never become big money!",
+                LearnedByLoseMessage = "Mira Learned: Never Never user Debt Or leverage on long term Investing (on trading is ok, never use more than 3% of entire capital on any trade as well) ",
+
+
                 Header = "Survive to Get a Job!",
-                DetailStory = "Alex just graduated with a master's degree as the top foreign student at his university. However, he still has two more years before his citizenship application is processed. Without a work permit, keeping his cash flow positive is a struggle, and most of the companies he interviews with don’t hire employees who require work permit sponsorship.\r\n\r\nDetermined to survive, he decides to borrow $30K from his sister until he secures a job from one of his interviews—giving himself a maximum of two years to pay it back. In the meantime, he realizes he must improve his money management skills, learning to differentiate between good debt and bad debt, and ensure he can repay both his debts and his sister’s $30K before time runs out.\r\n\r\nTo generate some income, Alex starts teaching C# on Skype, earning $375 per session. However, his cash flow is still negative, and he must carefully navigate his financial decisions to survive until he lands a stable job.💼",
+                DetailStory = "Alex just graduated with a master's degree as the top foreign student at his university. However, he still has two more years before his citizenship application is processed. Without a work permit, keeping his cash flow positive is a struggle, and most of the companies he interviews with don’t hire employees who require work permit sponsorship.\r\n\r\nDetermined to survive, he decides to borrow 30K from his sister until he secures a job from one of his interviews—giving himself a maximum of two years to pay it back. In the meantime, he realizes he must improve his money management skills, learning to differentiate between good debt and bad debt, and ensure he can repay both his debts and his sister’s 30K before time runs out.\r\n\r\nTo generate some income, Alex starts teaching C# on Skype, earning 375 per session. However, his cash flow is still negative, and he must carefully navigate his financial decisions to survive until he lands a stable job.💼",
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,
@@ -323,12 +347,16 @@ namespace RatRace3
                         StoryLevelID = "5",
                 Image = "pilates.png",
                 Header = "Launching Your Dreams: Reformation",
-                DetailStory = "Mira is a physiotherapist who suffered from a herniated disc while in university. Battling through her own recovery made her realize the power of Pilates techniques in physical therapy. Now, she is determined to open her Reformation Fizyopilates Studio, where she can train a skilled team and help patients in their rehabilitation journey.\r\n\r\nTo bring her vision to life, Mira has taken out a $10,000 startup loan, giving herself two years to build a successful business and become financially stable. She currently has $1,000 in savings, with a net income of $2,000 per month, but running the studio comes with significant expenses—including team salaries, rent, and loan repayments.\r\n\r\nMira must carefully manage her finances, balance business growth with sustainability, and ensure that she can eliminate her liabilities while achieving her dream of creating a thriving physiotherapy center. Can she successfully navigate the challenges of entrepreneurship, build a profitable studio, and make a lasting impact on her patients' lives?",
+                DetailStory = "Mira is a physiotherapist who suffered from a herniated disc while in university. Battling through her own recovery made her realize the power of Pilates techniques in physical therapy. Now, she is determined to open her Reformation Fizyopilates Studio, where she can train a skilled team and help patients in their rehabilitation journey.\r\n\r\nTo bring her vision to life, Mira has taken out a 10,000 startup loan, giving herself two years to build a successful business and become financially stable. She currently has 5,000 in savings, with a net income of 2,800 per month, but running the studio comes with significant expenses—including team salaries, rent, and loan repayments.\r\n\r\nMira must carefully manage her finances, balance business growth with sustainability, and ensure that she can eliminate her liabilities while achieving her dream of creating a thriving physiotherapy center. Can she successfully navigate the challenges of entrepreneurship, build a profitable studio, and make a lasting impact on her patients' lives?",
+                LearnedByWinMessage = "Mira Learned: A little of Something good is better than all of nothing.. if not have an investing plan and not start with small money. Small money will never become big money!",
+                LearnedByLoseMessage = "Mira Learned: Never Never user Debt Or leverage on long term Investing (on trading is ok, never use more than 3% of entire capital on any trade as well) ",
+
+
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,
                 StoryGoalModels = new List<StoryGoalModel> 
-                {  new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 30000, YouHave = 5000 },
+                {  new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 55000, YouHave = 5000 },
                    new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 24, YouHave = 1 },
                    new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 2 },
                
@@ -377,13 +405,17 @@ namespace RatRace3
                 StoryLevelID = "6",
                 Image = "shared_goals.png",
                 Header = "Shared Goals, Shared Dreams, Story of Atlassian",
-                DetailStory = "Shared Goals, Shared Dreams\r\nIn the heart of San Francisco, four ambitious entrepreneurs—Alex, Jordan, Taylor, and Morgan—each harbored a vision to revolutionize their respective industries. However, the soaring costs of individual ventures and the competitive startup ecosystem posed significant challenges.\r\n\r\nAlex, a software developer, had conceptualized an innovative project management tool but lacked the funds to bring it to market. Jordan, a graphic designer, sought a professional space to collaborate with clients but was constrained by budget limitations. Taylor, a digital marketer, needed a conducive environment to conduct workshops and strategy sessions, while Morgan, a financial analyst, aimed to develop a fintech platform but faced financial hurdles.\r\n\r\nRecognizing their shared challenges, they decided to collaborate, pooling their resources to establish a shared workspace. This strategic move not only reduced individual expenses but also fostered a synergistic environment where creativity and innovation thrived.\r\n\r\nTo finance this endeavor, they collectively secured a $15,000 loan, agreeing to repay it over 36 months at an 8% interest rate. Their combined monthly income from various projects totaled $3,000, with recurring expenses including:\r\n\r\nOffice Loan EMI: $500\r\nTeam Resources: $1,000\r\nMiscellaneous Expenses: $300\r\nDespite these financial commitments, their collaborative approach led to increased client acquisition and revenue growth. By leveraging each other's strengths, they transformed their shared workspace into a hub of innovation, attracting attention from investors and industry leaders.\r\n\r\nTheir journey mirrors the experiences of entrepreneurs like Scott Farquhar and Mike Cannon-Brookes, who co-founded Atlassian by bootstrapping their startup with a $10,000 credit card debt. Through collaboration and strategic resource management, they built a multi-billion-dollar enterprise.\r\n\r\nYour Challenge: Step into the shoes of these entrepreneurs. Manage shared resources effectively, ensure timely loan repayments, and navigate the complexities of collaborative business operations. Can you lead the team to financial stability and collective success?\r\n\r\nGame Objectives:\r\n\r\nEliminate Liabilities: Repay the shared office loan within the agreed timeframe.\r\nAchieve Financial Stability: Increase the collective balance to secure future endeavors.\r\nFoster Collaboration: Encourage teamwork to unlock new income opportunities and reduce expenses.\r\nEmbark on this journey of shared goals and dreams, and experience firsthand the power of collaborative entrepreneurship.",
+                DetailStory = "Shared Goals, Shared Dreams\r\nIn the heart of San Francisco, four ambitious entrepreneurs—Alex, Jordan, Taylor, and Morgan—each harbored a vision to revolutionize their respective industries. However, the soaring costs of individual ventures and the competitive startup ecosystem posed significant challenges.\r\n\r\nAlex, a software developer, had conceptualized an innovative project management tool but lacked the funds to bring it to market. Jordan, a graphic designer, sought a professional space to collaborate with clients but was constrained by budget limitations. Taylor, a digital marketer, needed a conducive environment to conduct workshops and strategy sessions, while Morgan, a financial analyst, aimed to develop a fintech platform but faced financial hurdles.\r\n\r\nRecognizing their shared challenges, they decided to collaborate, pooling their resources to establish a shared workspace. This strategic move not only reduced individual expenses but also fostered a synergistic environment where creativity and innovation thrived.\r\n\r\nTo finance this endeavor, they collectively secured a 15,000 loan, agreeing to repay it over 36 months at an 8% interest rate. Their combined monthly income from various projects totaled 3,000, with recurring expenses including:\r\n\r\nOffice Loan EMI: 500\r\nTeam Resources: IPOcompaniesSfCarouselViewModel,000\r\nMiscellaneous Expenses: 300\r\nDespite these financial commitments, their collaborative approach led to increased client acquisition and revenue growth. By leveraging each other's strengths, they transformed their shared workspace into a hub of innovation, attracting attention from investors and industry leaders.\r\n\r\nTheir journey mirrors the experiences of entrepreneurs like Scott Farquhar and Mike Cannon-Brookes, who co-founded Atlassian by bootstrapping their startup with a 10,000 credit card debt. Through collaboration and strategic resource management, they built a multi-billion-dollar enterprise.\r\n\r\nYour Challenge: Step into the shoes of these entrepreneurs. Manage shared resources effectively, ensure timely loan repayments, and navigate the complexities of collaborative business operations. Can you lead the team to financial stability and collective success?\r\n\r\nGame Objectives:\r\n\r\nEliminate Liabilities: Repay the shared office loan within the agreed timeframe.\r\nAchieve Financial Stability: Increase the collective balance to secure future endeavors.\r\nFoster Collaboration: Encourage teamwork to unlock new income opportunities and reduce expenses.\r\nEmbark on this journey of shared goals and dreams, and experience firsthand the power of collaborative entrepreneurship.",
+              
+                LearnedByWinMessage = "Mira Learned: A little of Something good is better than all of nothing.. if not have an investing plan and not start with small money. Small money will never become big money!",
+                LearnedByLoseMessage = "Mira Learned: Never Never user Debt Or leverage on long term Investing (on trading is ok, never use more than 3% of entire capital on any trade as well) ",
+               
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,
                 StoryGoalModels = new List<StoryGoalModel> 
                 {
-                new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 2 },
+                new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 1, YouHave = 2 },
                 new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 8000, YouHave = 5000 },
                 new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 36, YouHave = 1 }
                 }
@@ -421,7 +453,11 @@ namespace RatRace3
                 StoryLevelID = "7",
                 Image = "fatihpaintssvg.png",
                 Header = "Fatih's Dilemma!",
-                DetailStory = "Fatih is 42 years old and has recently sold his business for $70K. He lives in his father’s small apartment, so he doesn’t have to pay rent. However, he has a deep passion for painting and spends a significant amount each month on painting tools and supplies.\r\n\r\nNow, he faces a critical financial challenge—he must manage his funds wisely to ensure they last for the next 60 years, covering all his expenses for the rest of his life. His ultimate goal is to grow his savings to $200K, which would allow him to generate $10K per year in passive income by investing in U.S. Treasury Bonds—widely considered the Risk-Free Rate of Return in finance.\r\n\r\nFatih must decide how to invest and allocate his capital. Should he:\r\n\r\nInvest a portion in great U.S. stocks, benefiting from long-term growth?\r\nHold part of his money in cash as insurance against market downturns?\r\nConvert his savings to Turkish Lira, earning a tempting 50% interest per year but exposing himself to 68% inflation and extreme risk?\r\nWhich path should he take to secure his future without running out of money too soon?",
+
+                LearnedByWinMessage = "Mira Learned: A little of Something good is better than all of nothing.. if not have an investing plan and not start with small money. Small money will never become big money!",
+                LearnedByLoseMessage = "Mira Learned: Never Never user Debt Or leverage on long term Investing (on trading is ok, never use more than 3% of entire capital on any trade as well) ",
+
+                DetailStory = "Fatih is 42 years old and has recently sold his business for 70K. He lives in his father’s small apartment, so he doesn’t have to pay rent. However, he has a deep passion for painting and spends a significant amount each month on painting tools and supplies.\r\n\r\nNow, he faces a critical financial challenge—he must manage his funds wisely to ensure they last for the next 60 years, covering all his expenses for the rest of his life. His ultimate goal is to grow his savings to 200K, which would allow him to generate 10K per year in passive income by investing in U.S. Treasury Bonds—widely considered the Risk-Free Rate of Return in finance.\r\n\r\nFatih must decide how to invest and allocate his capital. Should he:\r\n\r\nInvest a portion in great U.S. stocks, benefiting from long-term growth?\r\nHold part of his money in cash as insurance against market downturns?\r\nConvert his savings to Turkish Lira, earning a tempting 50% interest per year but exposing himself to 68% inflation and extreme risk?\r\nWhich path should he take to secure his future without running out of money too soon?",
                 isStarted = false,
                 isUnlocked = false,
                 HighestMounthScore = 0,

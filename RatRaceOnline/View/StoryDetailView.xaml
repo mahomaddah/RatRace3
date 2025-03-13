@@ -40,44 +40,59 @@
                       MaximumWidthRequest="1000"
                       Margin="10,30,10,5"
                       HorizontalOptions="CenterAndExpand">
-                <ListView.Header>
-                    <Grid BackgroundColor="#9880E5" Padding="5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="1" Background="Grey"></Grid>
-                        <Label Text="Goals" Grid.Column="0" HorizontalOptions="Center" />
-                        <Label  Text="Target" Grid.Column="1" HorizontalOptions="Center" />
-                      
-                        <Label Text="You Have" Grid.Column="2" HorizontalOptions="Center" />
-                     
-                    </Grid>
-                </ListView.Header>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid Padding="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="1" Background="Gray"></Grid>
-                                <Label Text="{Binding Goal}" Grid.Column="0" VerticalTextAlignment="Center" HorizontalOptions="Center" />
+            <ListView.Header>
+                <Grid BackgroundColor="#9880E5" Padding="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="1" Background="Grey"></Grid>
+                    <Label Text="Goals" Grid.Column="0" HorizontalOptions="Center" />
+                    <Label  Text="Target" Grid.Column="1" HorizontalOptions="Center" />
+
+                    <Label Text="You Have" Grid.Column="2" HorizontalOptions="Center" />
+
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="1" Background="Gray"></Grid>
+                            <Label Text="{Binding Goal}" Grid.Column="0" VerticalTextAlignment="Center" HorizontalOptions="Center" />
                             <Label Text="{Binding Target}" Grid.Column="1" VerticalTextAlignment="Center" HorizontalOptions="Center" />
                             <Label Text="{Binding YouHave}" Grid.Column="2" HorizontalOptions="Center" VerticalTextAlignment="Center" />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <ScrollView>
+        <VerticalStackLayout>
+    
         <Button IsEnabled="{Binding IsGameFinishable }"  x:Name="FinishGameButton" Clicked="FinishGameButton_Clicked"  Margin="5" Text="Finish the Game" HeightRequest="40" WidthRequest="{OnIdiom Phone=150 , Default=300}"></Button>
         <Button  x:Name="BackToGameButton" Clicked="BackToGameButton_Clicked" Margin="5" Text="Back to the Game" HeightRequest="40" WidthRequest="{OnIdiom Phone=150 , Default=300}"></Button>
-        <Button IsVisible="{Binding isStarted ,FallbackValue=false, TargetNullValue=false}"   x:Name="TryAgainGameButton" Clicked="TryAgainGameButton_Clicked"  Margin="5" Text="Restart the Game" HeightRequest="40" WidthRequest="{OnIdiom Phone=150 , Default=300}"></Button>       
+        <Button IsVisible="{Binding isStarted ,FallbackValue=true, TargetNullValue=true}"   x:Name="TryAgainGameButton" Clicked="TryAgainGameButton_Clicked"  Margin="5" Text="Restart the Game" HeightRequest="40" WidthRequest="{OnIdiom Phone=150 , Default=300}"></Button>
+
+                <Label IsVisible="{Binding IsGameFinishable,FallbackValue=false, TargetNullValue=false}" Text="{Binding LearnedByLoseMessage}"  Margin="5"
+                FontSize="{OnIdiom Phone=12 , Default=17}"
+                MaximumWidthRequest="1000"  />
+
+                <Label IsVisible="{Binding IsGameFinishable,FallbackValue=false, TargetNullValue=false}" Text="{Binding LearnedByWinMessage  }"  Margin="5"
+                FontSize="{OnIdiom Phone=12 , Default=17}"
+                MaximumWidthRequest="1000"  />
+
         </VerticalStackLayout>
+        </ScrollView>
+
+    </VerticalStackLayout>
   
 </ContentView>
     
