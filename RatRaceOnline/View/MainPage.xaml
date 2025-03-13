@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:sfavatar="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              x:Class="RatRace3.MainPage">
@@ -41,9 +41,9 @@
 
 
             <Button
-            x:Name="MarketPageBtn"
+         
             Text="Tournament (soon)"            
-            Clicked="MarketPageBtn_Clicked"
+            Clicked="MultiplayerClicked"
             WidthRequest="200"
     
             MaximumWidthRequest="300"
@@ -64,11 +64,19 @@
                 Style="{StaticResource SubHeadline}"              
                 />
 
+                <Label
+                TextColor="#9072C9"
+                Text="We promise an ad-free gaming experience, with occasional resources like free webinars to support financial literacy and a fairer economy."
+                HorizontalOptions="Center"
+                 Padding="10"
+                HorizontalTextAlignment="Center"
+                FontSize="12"            
+               />
             </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
 
-</ContentPage>
+</ContentView>
 
     

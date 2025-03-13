@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="RatRace3.MarketPage"
              xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
              xmlns:local="clr-namespace:RatRace3;assembly=RatRace3"
              xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
-             Title="Market Page">
+             BindingContext="{Binding GameViewModel}"
+             Loaded="ContentView_Loaded"
+  
+            >
+    
     
     <VerticalStackLayout>
-        <Label Margin="2,2,2,10" 
+     
+
+       
+            <Label Margin="2,2,2,10" 
             Text="Welcome to Market..."
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+            
+ 
+      
 
         <chart:SfCartesianChart Margin="10" x:Name="Chart"  >
             <!-- Define X and Y axes -->
+            <chart:SfCartesianChart.TrackballBehavior>
+                <chart:ChartTrackballBehavior ShowLine="True" 
+                                      DisplayMode="NearestPoint"/>
+            </chart:SfCartesianChart.TrackballBehavior>
+
             <chart:SfCartesianChart.ZoomPanBehavior>
                 <chart:ChartZoomPanBehavior EnablePinchZooming="True"/>
             </chart:SfCartesianChart.ZoomPanBehavior>
@@ -42,24 +57,57 @@
                     EnableAnimation="True"
                     AnimationDuration="10000" >
 
-                <chart:ColumnSeries ItemsSource="{Binding ChartData}"
+                <chart:ColumnSeries ItemsSource="{Binding Market.ChartData}"
                         EnableAnimation="True"  
                         Spacing="0.1"
+                                        ShowDataLabels="True"
                                       Label="USD"
+                                   
                                     EnableTooltip="True"
+                                    IsVisibleOnLegend="True"
                         Width="4.6"
-                        ShowDataLabels="True"
-                        PaletteBrushes="{Binding PaletteBrushes}" 
+                    
+                        PaletteBrushes="{Binding Market.PaletteBrushes}" 
                         XBindingPath="Date"
                         YBindingPath="Value"/>
                 
             </chart:SfCartesianChart.Series>
 
         </chart:SfCartesianChart>
-        <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" Text="Current Stock Price: $53.44"></Label>
-        <Label Margin="10,0,10,10" HorizontalOptions="Center" VerticalOptions="Center"  FontSize="Subtitle" Text="Total Price: $641.32"></Label>
-        <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Body" Text="Use the slider to select the number of shares you want to trade."></Label>
+        <Image ToolTipProperties.Text="{Binding Market.SelectedCompany.StockDetail,TargetNullValue='Stock Details...'}" 
 
+               Source="{Binding Market.SelectedCompany.ImagePath}"
+
+               HorizontalOptions="Center" 
+
+               WidthRequest="90" 
+
+               HeightRequest="90"/>
+
+
+
+        <Label Text="{Binding Market.SelectedCompany.Symbol}" 
+
+               Margin="0,5,0,0"
+
+               FontSize="20" 
+
+               FontAttributes="Bold" 
+
+               HorizontalOptions="Center"/>
+
+        <HorizontalStackLayout Margin="1" HorizontalOptions="Center" VerticalOptions="Center">
+            <Label  Text="Current Stock Price:"></Label>
+            <Label Margin="5,0,0,0" x:Name="StockPriceLB" Text="{Binding Market.SelectedCompany.StockPrice ,StringFormat='${0:F2} USD'}"></Label>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Margin="1" HorizontalOptions="Center" VerticalOptions="Center">
+            <Label  Text="Position Value Owned:"></Label>
+            <Label x:Name="PostionValueOwnedLB" Margin="5,0,0,0" Text="{Binding Market.PositionValue,StringFormat='${0:F2} USD'}"></Label>
+        </HorizontalStackLayout>
+
+
+        <Label Margin="7" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Body" Text="Use the slider to select the number of shares you want to trade."></Label>
+        
         <gauge:SfLinearGauge EnableAxisAnimation="True" AnimationDuration="500" Interval="5" TickPosition="Outside" LabelPosition="Outside" Background="Transparent"  ShowLabels="True" UseRangeColorForAxis="True" Margin="1" WidthRequest="430">
 
             <gauge:SfLinearGauge.LabelStyle>
@@ -82,25 +130,31 @@
 
 
 
-                <gauge:LinearShapePointer     x:Name="markerPointer"  IsInteractive="True" Fill="#FF6ECAB2" Value="5"/>
+                <gauge:LinearShapePointer  x:Name="markerPointer"  IsInteractive="True" Fill="#FF6ECAB2"  Value="{Binding Market.SelectedQuantity}"/>
 
              
             </gauge:SfLinearGauge.MarkerPointers>
 
             <gauge:SfLinearGauge.BarPointers>
 
-                <gauge:BarPointer IsInteractive="True" PointerSize="3" Fill="#ff73ab"      Value="{Binding Source={x:Reference markerPointer}, Path=Value ,Mode=TwoWay}" CornerStyle="BothCurve" EnableAnimation="True"  AnimationDuration="500"  />
+                <gauge:BarPointer IsInteractive="True" PointerSize="3" Fill="#ff73ab" Value="{Binding Source={x:Reference markerPointer}, Path=Value ,Mode=TwoWay}" CornerStyle="BothCurve" EnableAnimation="True"  AnimationDuration="500"  />
             </gauge:SfLinearGauge.BarPointers>
 
         </gauge:SfLinearGauge>
-        
-        
-        <HorizontalStackLayout Margin="10" HorizontalOptions="Center" VerticalOptions="Center">
-          
-            <Button Margin="0,0,10,0" Text="Buy"></Button>
-              <Button Text="Sell"></Button>
+
+        <HorizontalStackLayout Margin="4" HorizontalOptions="Center" VerticalOptions="Center" >
+            <Label  FontSize="Subtitle" Text="Total Price:"></Label>
+            <Label Margin="5,0,0,0" x:Name="TotalPriceLB" FontSize="Subtitle" TextColor="{Binding Market.TotalPriceColor ,FallbackValue='LimeGreen'}" Text="{Binding Market.TotalPrice ,StringFormat='${0:F2} USD'}"></Label>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Margin="4" HorizontalOptions="Center" VerticalOptions="Center">
+            <Button Margin="0,0,10,0" Text="Buy" Command="{Binding Market.BuyStockCommand}"
+                    x:Name="BuyMoreAsset"></Button>
+            <Button  x:Name="SellAssetPositionBtn" Command="{Binding Market.SellStockCommand}"   ToolTipProperties.Text="Short Selling feature is not available yet but No worry We will add it in the next Versions :D" Text="Sell"></Button>
+            <Button Margin="10,0,0,0" Text="Back" FontSize="10" Clicked="BackfromMarketBtn_Clicked"
+           x:Name="BackFromMarketBtn"></Button>
         </HorizontalStackLayout>
       
 
     </VerticalStackLayout>
-</ContentPage>
+</ContentView>

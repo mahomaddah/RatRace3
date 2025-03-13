@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"         
              xmlns:syncfusionCaro="clr-namespace:Syncfusion.Maui.Carousel;assembly=Syncfusion.Maui.Carousel"
-             xmlns:local="clr-namespace:RatRace3"
+              xmlns:local="clr-namespace:RatRace3"
+             xmlns:ViewModel="clr-namespace:RatRace3.ViewModel"
              Loaded="ContentPage_Loaded"
-             x:Class="RatRace3.StoryModeView"
-             Title="Escape Rat Race:">
     
-    <ContentPage.BindingContext>
-        <local:CarouselViewModel/>
-    </ContentPage.BindingContext>
+             x:Class="RatRace3.StoryModeView"
+            >
+    
+    <ContentView.BindingContext>
+        <ViewModel:SelectLevelViewModel/>
+    </ContentView.BindingContext>
 
-    <ContentPage.Resources>
+    <ContentView.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="itemTemplate">
                 
@@ -55,10 +57,11 @@
                                 <Label TextColor="Grey"  HorizontalOptions="Start" FontSize="Micro"
                                  Text=" Months" ></Label>
                             </HorizontalStackLayout>
-                        
+
                             <HorizontalStackLayout Padding="0"   HorizontalOptions="Center" Margin="0,5,0,5">
+
                                 <Button Clicked="StartGameClicked" Padding="1" FontSize="Small"  BackgroundColor="#6600FFFF" BorderWidth="1" BorderColor="LimeGreen" TextColor="LimeGreen" Text="Play" HeightRequest="20" WidthRequest="70" Margin="0,0,10,0"></Button>
-                                <Button Clicked="RestartGameClicked" Padding="1" FontSize="Small"  BackgroundColor="#33808080"
+                                <Button  Clicked="RestartGameClicked" Padding="1" FontSize="Small"  BackgroundColor="#33808080"
                                             BorderWidth="1" BorderColor="MediumVioletRed" TextColor="MediumVioletRed" Text="Restart" HeightRequest="20" WidthRequest="70" ></Button>
                             </HorizontalStackLayout>
 
@@ -68,8 +71,8 @@
                 </Border>
             </DataTemplate>
         </ResourceDictionary>
-    </ContentPage.Resources>
-    <ContentPage.Content>
+    </ContentView.Resources>
+    <ContentView.Content>
         <syncfusionCaro:SfCarousel
                                    x:Name="storyLevelsCarousel" 
             
@@ -83,6 +86,6 @@
 
 
         </syncfusionCaro:SfCarousel>
-    </ContentPage.Content>
+    </ContentView.Content>
     
-</ContentPage>
+</ContentView>

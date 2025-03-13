@@ -4,22 +4,68 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:RatRace3"
+    xmlns:View="clr-namespace:RatRace3.View"
+    Navigating="Shell_Navigating"
+  
+    
+    
 
     Title="RatRace3">
 
+    <Shell.ToolbarItems>
+
+
+        <ToolbarItem 
+          x:Name="TurnMusicBtn"
+          Text="Music"
+          IconImageSource="music_off.png"
+          Clicked="TurnMusicBtn_Clicked" />
+        
+        
+       
+
+
+    </Shell.ToolbarItems>
+
+    <ShellContent 
+     ContentTemplate="{DataTemplate local:MotherView}"
+    Route="motherview" FlyoutItemIsVisible="False" />
     
+
     <ShellContent
       Title="Home"
       ContentTemplate="{DataTemplate local:MainPage}"
-      Route="MainPage" />
-    
-    <FlyoutItem Title="Market Page">
-        <ShellContent IsVisible="True" Title="Market Page" ContentTemplate="{DataTemplate local:MarketPage}"  
-      Route="MarketPage"/>
+      Route="mainpage" FlyoutItemIsVisible="False" />
+
+    <FlyoutItem Title="Check Story Goals" IsVisible="False" FlyoutItemIsVisible="False" >
         
+        <ShellContent
+  Title="Check Story Goals"
+      IsVisible="False"
+      FlyoutItemIsVisible="False"
+  ContentTemplate="{DataTemplate View:StoryDetailView}"
+  Route="storydetailview" />
+        
+
     </FlyoutItem>
 
-    <ShellContent Title="Single Player" ContentTemplate="{DataTemplate local:StoryModeView}"  
-    Route="StoryModeView"/>
+
+
+
+    <ShellContent IsVisible="True" FlyoutItemIsVisible="False"  Title="Game Page" ContentTemplate="{DataTemplate View:GameView}" Route="gameview" />
+
+    <ShellContent 
+    Title="Select Level"
+  
+    ContentTemplate="{DataTemplate local:StoryModeView}" 
+    Route="storymodeview" FlyoutItemIsVisible="False"/>
+
+    <FlyoutItem Title="Market Page"  FlyoutItemIsVisible="False" >
+        <ShellContent FlyoutItemIsVisible="False" IsVisible="True"  Title="Market Page" ContentTemplate="{DataTemplate local:MarketPage} "  
+      Route="marketpage"/>
+        
+    </FlyoutItem>
+    
+
 
 </Shell>
