@@ -14,7 +14,7 @@ namespace RatRace3
         /// this usefull for creating a new game ... not for load game...
         /// </summary>
         public LevelModel CurrentLevelModel { get; set; }
-        public IPOcompaniesSfCarouselViewModel IPOcompaniesSfCarouselViewModel { get; set; }
+       
         public GameViewModel GameViewModel { get; set; }
         public Company CurrentCompany { get; set; }//For Stock Market...
         /// <summary>
@@ -67,12 +67,12 @@ namespace RatRace3
 
         public AppShell()
         {
-            Routing.RegisterRoute("mainpage", typeof(MainPage));
-            Routing.RegisterRoute("marketpage", typeof(MarketPage));
-            Routing.RegisterRoute("storymodeview", typeof(StoryModeView));
-            Routing.RegisterRoute("storydetailview", typeof(StoryDetailView));
-            Routing.RegisterRoute("gameview", typeof(GameView));
-            Routing.RegisterRoute("motherview", typeof(MotherView));
+            //Routing.RegisterRoute("mainpage", typeof(MainPage));
+            //Routing.RegisterRoute("marketpage", typeof(MarketPage));
+            //Routing.RegisterRoute("storymodeview", typeof(StoryModeView));
+            //Routing.RegisterRoute("storydetailview", typeof(StoryDetailView));
+            //Routing.RegisterRoute("gameview", typeof(GameView));
+            //Routing.RegisterRoute("motherview", typeof(MotherView));
 
             InitializeComponent(); 
             GameViewModel = new GameViewModel();

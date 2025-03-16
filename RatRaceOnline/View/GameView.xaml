@@ -729,10 +729,7 @@
                         <ColumnDefinition Width="*"   />
                     </Grid.ColumnDefinitions>
 
-                    <Grid.BindingContext>
-                        <ViewModels:IPOcompaniesRotatorViewModel/>
-                    </Grid.BindingContext>
-
+                 
                     <Label Grid.Row="0" FontFamily="EngraversOldEnglish" Grid.ColumnSpan="1"  Margin="2" VerticalOptions="Start" FontAttributes="Bold" TextColor="#9072C9" FontSize="{OnPlatform Default='10',MacCatalyst='Subtitle', WinUI='Subtitle'}"  HorizontalOptions="Start" Text="Invest in US Companies : Analyze, Buy and Sell"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                     <Image Grid.Row="{OnIdiom Phone=0,Default=1}" Grid.Column="1" Margin="{OnIdiom Phone=2 , Default=10}" Source="projections.png" HorizontalOptions="End" MaximumHeightRequest="{OnPlatform iOS='120',Android='120', Default='390', WinUI='490', MacCatalyst='490'}"  />
 
@@ -748,40 +745,38 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <Grid.BindingContext>
-                                <ViewModels:IPOcompaniesSfCarouselViewModel/>
-                            </Grid.BindingContext>
+                     
 
-                            <HorizontalStackLayout BindingContext="{Binding Market.SelectedCompanyFundamentals ,FallbackValue='fallbackCompany'}"  x:Name="FundementalDataLeftStack" HorizontalOptions="Center" Margin="3" Grid.Row="0">
+                            <HorizontalStackLayout  x:Name="FundementalDataLeftStack" HorizontalOptions="Center" Margin="3" Grid.Row="0">
                                 <Label FontFamily="EngraversOldEnglish" TextColor="#9072C9" Padding="0" Margin="2,0,2,0"   Text="Balance Sheet Statement:" FontAttributes="Bold"/>
                                 <HorizontalStackLayout>
 
                                     <Label TextColor="#9072C9" Padding="5"  ToolTipProperties.Text="high cash low-debt Companies Have better Financial health and are better businesses to own !!" HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic">Total Cash =</Label>
-                                    <Label x:Name="FundementalDataTotalCashLB" TextColor="#9072C9" Padding="5"  ToolTipProperties.Text="high cash low-debt Companies Have better Financial health and are better businesses to own !!" HorizontalOptions="Center" Text="{Binding SelectedCompanyFundemental.TotalCash, StringFormat='${0:N2} B USD' , FallbackValue='$380.23 B USD' ,TargetNullValue='$0.0'}" FontFamily="CentaurMTStd-BoldItalic"></Label>
+                                    <Label x:Name="FundementalDataTotalCashLB" TextColor="#9072C9" Padding="5"  ToolTipProperties.Text="high cash low-debt Companies Have better Financial health and are better businesses to own !!" HorizontalOptions="Center" Text="{Binding IPOcompaniesSfCarouselViewModel.SelectedCompanyFundemental.TotalCash, StringFormat='${0:N2} B USD' , FallbackValue='$380.23 B USD' ,TargetNullValue='$0.0'}" FontFamily="CentaurMTStd-BoldItalic"></Label>
 
                                 </HorizontalStackLayout>           
                                 
                                 
                                 <HorizontalStackLayout>
                                     <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" ToolTipProperties.Text="Debt financing is the cheapest one rather than issuing new stocks which investors hate and it has tax advantages." FontFamily="CentaurMTStd-BoldItalic">Total Debt =</Label>
-                                    <Label TextColor="#9072C9" Padding="5" x:Name="FundementalTotalDebts" HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic" Text="{Binding SelectedCompanyFundemental.TotalDebts , StringFormat='${0:N2} B USD', TargetNullValue='0.00 B' ,FallbackValue='$95.00 B USD'}" ></Label>
+                                    <Label TextColor="#9072C9" Padding="5" x:Name="FundementalTotalDebts" HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic" Text="{Binding IPOcompaniesSfCarouselViewModel.SelectedCompanyFundemental.TotalDebts , StringFormat='${0:N2} B USD', TargetNullValue='0.00 B' ,FallbackValue='$95.00 B USD'}" ></Label>
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout>
 
                                     <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" ToolTipProperties.Text="When you buy a Stock, you are not buying a lottery ticket! You are one of the owners of the underlying business, The Stronger the business, the lower the risk of default! Businesses are money-making machines the more money they print the more value they have!" FontFamily="CentaurMTStd-BoldItalic">Annual Income =</Label>
-                                    <Label x:Name="IncomeAnnualCompanyLB" Text="{Binding SelectedCompanyFundemental.AnnualIncome , StringFormat='${0:N2} B USD', TargetNullValue='0.00 B' ,FallbackValue='$63.07 B'}" TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic"></Label>
+                                    <Label x:Name="IncomeAnnualCompanyLB" Text="{Binding IPOcompaniesSfCarouselViewModel.SelectedCompanyFundemental.AnnualIncome , StringFormat='${0:N2} B USD', TargetNullValue='0.00 B' ,FallbackValue='$63.07 B'}" TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" FontFamily="CentaurMTStd-BoldItalic"></Label>
                                 </HorizontalStackLayout> 
                                 <HorizontalStackLayout> <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" Text="DCF Valuation =" ToolTipProperties.Text="'Discounted cash flow (DCF) is a valuation method that estimates the value of an investment using its expected future cash flows.'-Investopedia 
                         
                                         'Price is What you pay. Value is what you get.' -WarrenBuffett" FontFamily="CentaurMTStd-BoldItalic"></Label>
-                                    <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" x:Name="DCFvaluetionLB" Text="{Binding SelectedCompanyFundemental.DCFvaluation, StringFormat='${0:N2} USD' , FallbackValue='$230.94 USD' ,TargetNullValue='$0.0 USD'}" FontFamily="CentaurMTStd-BoldItalic"></Label>
+                                    <Label TextColor="#9072C9" Padding="5"  HorizontalOptions="Center" x:Name="DCFvaluetionLB" Text="{Binding IPOcompaniesSfCarouselViewModel.SelectedCompanyFundemental.DCFvaluation, StringFormat='${0:N2} USD' , FallbackValue='$230.94 USD' ,TargetNullValue='$0.0 USD'}" FontFamily="CentaurMTStd-BoldItalic"></Label>
                                 </HorizontalStackLayout>
                             </HorizontalStackLayout>
 
                             <Carousel:SfCarousel x:Name="IPOcompaniesSfCarousel" Grid.Row="1"
-                             SelectedIndex="{Binding VisibleCompanyindex, FallbackValue=0,TargetNullValue=0}"  Duration="700" RotationAngle="-42" 
+                             SelectedIndex="{Binding IPOcompaniesSfCarouselViewModel.VisibleCompanyindex, FallbackValue=0,TargetNullValue=0}"  Duration="700" RotationAngle="-42" 
                                SelectedItemOffset="70" Offset="70"  ItemSpacing="5" 
-                            ItemsSource="{Binding ImageCollection}" >
+                            ItemsSource="{Binding Market.IPOCompanies}" >
                               
                                 
                                 <Carousel:SfCarousel.ItemTemplate>
@@ -816,22 +811,22 @@
                                 <Label FontFamily="EngraversOldEnglish" TextColor="#9072C9" Padding="0" Margin="2,0,2,0" Text="Stock Income Statement:"  FontAttributes="Bold"/>
                                 <HorizontalStackLayout>
                                     <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="1.Consistent increase in Sales, Net income, and Free cash flow for last 5 years." FontFamily="CentaurMTStd-BoldItalic">EPS past 5Y</Label>
-                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" x:Name="EPSpast5yrLB" Text="{Binding SelectedCompanyFundemental.EPSpast5Y, FallbackValue='28.40%', TargetNullValue='00.00%', StringFormat='{}{0:P2}'}"></Label>
+                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" x:Name="EPSpast5yrLB" Text="{Binding IPOcompaniesSfCarouselViewModel.SelectedCompanyFundemental.EPSpast5Y, FallbackValue='28.40%', TargetNullValue='00.00%', StringFormat='{}{0:P2}'}"></Label>
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout>
                                     <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="Buy the best fundamental businesses on the worst news,Profit from the Panic! While everyone is panicking and selling like an aimlessly repeating monkey, if you have a strong fundamental checklist and fundamental research, you can even buy more when it is cheaper!!" FontFamily="CentaurMTStd-BoldItalic">EPS this Yr </Label>
-                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" x:Name="EPSthisYrLB"  Text="{Binding SelectedCompanyFundemental.EPSthisYr, FallbackValue='128.05%', TargetNullValue='00.00%', StringFormat='{}{0:P2}'}" ></Label>
+                                    <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" x:Name="EPSthisYrLB"  Text="{Binding IPOcompaniesSfCarouselViewModel.SelectedCompanyFundemental.EPSthisYr, FallbackValue='128.05%', TargetNullValue='00.00%', StringFormat='{}{0:P2}'}" ></Label>
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout>
                                     <Label TextColor="#9072C9" Padding="5" HorizontalOptions="Start" ToolTipProperties.Text="Big tech companies usually manage growth projects that give them high future cash flow growth that's why P/E-like valuation rates can be misleading for calculating NVDA, AAPL, and GOOGL-like companies! that's why we usually use Discounted Cash Flow (DCF) calculations to check if tech companies are undervalued, Remember: Even if a company has great fundamentals when you buy cheap u can buy more!" FontFamily="CentaurMTStd-BoldItalic">EPS next 5Y </Label>
-                                    <Label TextColor="#9072C9" Margin="1,0,0,0" Padding="5" HorizontalOptions="Start" x:Name="EPSnext5yrLB" ToolTipProperties.Text="Big tech companies usually manage growth projects that give them high future cash flow growth that's why P/E-like valuation rates can be misleading for calculating NVDA, AAPL, and GOOGL-like companies! that's why we usually use Discounted Cash Flow (DCF) calculations to check if tech companies are undervalued, Remember: Even if a company has great fundamentals when you buy cheap u can buy more!" FontFamily="CentaurMTStd-BoldItalic" Text="{Binding SelectedCompanyFundemental.EPSnext5Y, FallbackValue='128.05%', TargetNullValue='00.00%', StringFormat='{}{0:P2}'}" ></Label>
+                                    <Label TextColor="#9072C9" Margin="1,0,0,0" Padding="5" HorizontalOptions="Start" x:Name="EPSnext5yrLB" ToolTipProperties.Text="Big tech companies usually manage growth projects that give them high future cash flow growth that's why P/E-like valuation rates can be misleading for calculating NVDA, AAPL, and GOOGL-like companies! that's why we usually use Discounted Cash Flow (DCF) calculations to check if tech companies are undervalued, Remember: Even if a company has great fundamentals when you buy cheap u can buy more!" FontFamily="CentaurMTStd-BoldItalic" Text="{Binding IPOcompaniesSfCarouselViewModel.SelectedCompanyFundemental.EPSnext5Y, FallbackValue='128.05%', TargetNullValue='00.00%', StringFormat='{}{0:P2}'}" ></Label>
                                 </HorizontalStackLayout>
 
                                 <HorizontalStackLayout>
                                     <Label TextColor="#9072C9" Padding="4" HorizontalOptions="Start" ToolTipProperties.Text="Warren Buffett’s Wide Economic Moat: 1.Brand Loyalty and Pricing Power 2.High Barriers to Entry 3.High Customer Switching Costs 4.Network Effect 5.Economies of Scale 6.Brand Monopoly 7.Cost Advantage 8.Intangible Assets 9.Efficient Scale"  FontFamily="CentaurMTStd-BoldItalic">Sustainable Competitive advantage : </Label>
                                     <HorizontalStackLayout>
 
-                                        <Label TextColor="#9072C9" Padding="4" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" x:Name="CompetetiveAdvantageScoreLB" Text="{Binding SelectedCompanyFundemental.SustainableCompetitiveAdvantage, FallbackValue='5', TargetNullValue='3'}" ></Label>
+                                        <Label TextColor="#9072C9" Padding="4" HorizontalOptions="Start" FontFamily="CentaurMTStd-BoldItalic" x:Name="CompetetiveAdvantageScoreLB" Text="{Binding IPOcompaniesSfCarouselViewModel.SelectedCompanyFundemental.SustainableCompetitiveAdvantage, FallbackValue='5', TargetNullValue='3'}" ></Label>
                                         <Label TextColor="#9072C9" Padding="4" HorizontalOptions="Start" ToolTipProperties.Text="Warren Buffett’s Wide Economic Moat: 1.Brand Loyalty and Pricing Power 2.High Barriers to Entry 3.High Customer Switching Costs 4.Network Effect 5.Economies of Scale 6.Brand Monopoly 7.Cost Advantage 8.Intangible Assets 9.Efficient Scale"  FontFamily="CentaurMTStd-BoldItalic"> of 9 (wide economic moat)</Label>
 
                                     </HorizontalStackLayout> 

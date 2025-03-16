@@ -821,7 +821,7 @@ namespace RatRace3.ViewModel
         // public ICommand MarkerValueChangedCommand { get; }
 
         public IPOcompaniesRotatorViewModel IpoCompaniesVM { get; set; }
-
+        public IPOcompaniesSfCarouselViewModel IPOcompaniesSfCarouselViewModel { get; set; }
         public GameViewModel()
         {
             //  MarkerValueChangedCommand = new Command<ValueChangedEventArgs>(OnMarkerValueChanged);
@@ -863,6 +863,9 @@ namespace RatRace3.ViewModel
                 {
                     IpoCompaniesVM = new IPOcompaniesRotatorViewModel();
                 }
+
+                if (IPOcompaniesSfCarouselViewModel == null)
+                    IPOcompaniesSfCarouselViewModel = new IPOcompaniesSfCarouselViewModel();
             }
 
             // CurrentNewsPaperViewModel.CurrentNewsPaperModel

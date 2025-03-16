@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using RatRace3.DAL;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Syncfusion.Maui.Carousel;
 
 public partial class GameView : ContentView
 {
@@ -117,10 +118,10 @@ public partial class GameView : ContentView
 
   
 
-            appShell.IPOcompaniesSfCarouselViewModel = new IPOcompaniesSfCarouselViewModel { ImageCollection = appShell.IPOcompanies.ToList() };
-        FundementalDataRightStack.BindingContext = appShell.IPOcompaniesSfCarouselViewModel;
-        FundementalDataLeftStack.BindingContext = appShell.IPOcompaniesSfCarouselViewModel;
-        IPOcompaniesSfCarousel.BindingContext = appShell.IPOcompaniesSfCarouselViewModel;
+        //    appShell.IPOcompaniesSfCarouselViewModel = new IPOcompaniesSfCarouselViewModel { ImageCollection = appShell.IPOcompanies.ToList() };
+        //FundementalDataRightStack.BindingContext = appShell.IPOcompaniesSfCarouselViewModel;
+        //FundementalDataLeftStack.BindingContext = appShell.IPOcompaniesSfCarouselViewModel;
+        //IPOcompaniesSfCarousel.BindingContext = appShell.IPOcompaniesSfCarouselViewModel;
 
             if (GameViewModel != null)
             {
@@ -266,8 +267,10 @@ public partial class GameView : ContentView
     private void CompanyLogo_Clicked(object sender, EventArgs e)
     {
         var appShell = (AppShell)Shell.Current;
+        Company SelectedObject = null;
 
-        Company SelectedObject = appShell.IPOcompanies.ElementAtOrDefault(appShell.IPOcompaniesSfCarouselViewModel.VisibleCompanyindex);
+        if(IPOcompaniesSfCarousel.SelectedIndex>=0)
+         SelectedObject = appShell.IPOcompanies.ElementAtOrDefault(IPOcompaniesSfCarousel.SelectedIndex);
         if (SelectedObject != null)
         {
 

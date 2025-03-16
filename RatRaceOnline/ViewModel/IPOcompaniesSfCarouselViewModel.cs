@@ -32,25 +32,34 @@ namespace RatRace3.ViewModel
         public StockFundementalData SelectedCompanyFundemental
         {
             get { return selectedCompanyFundemental; }
-           private set { selectedCompanyFundemental = value;
+            set { selectedCompanyFundemental = value;
                          OnPropertyChanged();
              }
         }
 
-
+        void fillDataFromAppShell()
+        {
+            var appShell = (AppShell)Shell.Current;
+            if(appShell.IPOcompanies.Count>0)
+            ImageCollection = appShell.IPOcompanies.ToList();
+            OnPropertyChanged(nameof(ImageCollection));
+        }
 
         public IPOcompaniesSfCarouselViewModel()
         {
 
             imageCollection = new List<Company>();
-
-
+            
+            fillDataFromAppShell();
+          
         }
         private List<Company> imageCollection = new List<Company>();
         public List<Company> ImageCollection
         {
             get { return imageCollection; }
-            set { imageCollection = value; }
+            set { imageCollection = value;
+                OnPropertyChanged();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
