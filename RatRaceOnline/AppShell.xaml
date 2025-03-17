@@ -30,22 +30,22 @@
     <ShellContent 
      ContentTemplate="{DataTemplate local:MotherView}"
     Route="motherview" FlyoutItemIsVisible="False" />
-    
+
 
     <ShellContent
-      Title="Home"
-      ContentTemplate="{DataTemplate local:MainPage}"
-      Route="mainpage" FlyoutItemIsVisible="False" />
+    Title="Home"
+    ContentTemplate="{DataTemplate local:MainPage}"
+    Route="mainpage" FlyoutItemIsVisible="False" />
 
     <FlyoutItem Title="Check Story Goals" IsVisible="False" FlyoutItemIsVisible="False" >
-        
+
         <ShellContent
-  Title="Check Story Goals"
-      IsVisible="False"
-      FlyoutItemIsVisible="False"
-  ContentTemplate="{DataTemplate View:StoryDetailView}"
-  Route="storydetailview" />
-        
+Title="Check Story Goals"
+    IsVisible="False"
+    FlyoutItemIsVisible="False"
+ContentTemplate="{DataTemplate View:StoryDetailView}"
+Route="storydetailview" />
+
 
     </FlyoutItem>
 
@@ -55,17 +55,17 @@
     <ShellContent IsVisible="True" FlyoutItemIsVisible="False"  Title="Game Page" ContentTemplate="{DataTemplate View:GameView}" Route="gameview" />
 
     <ShellContent 
-    Title="Select Level"
-  
-    ContentTemplate="{DataTemplate local:StoryModeView}" 
-    Route="storymodeview" FlyoutItemIsVisible="False"/>
+  Title="Select Level"
+
+  ContentTemplate="{DataTemplate local:StoryModeView}" 
+  Route="storymodeview" FlyoutItemIsVisible="False"/>
 
     <FlyoutItem Title="Market Page"  FlyoutItemIsVisible="False" >
         <ShellContent FlyoutItemIsVisible="False" IsVisible="True"  Title="Market Page" ContentTemplate="{DataTemplate local:MarketPage} "  
-      Route="marketpage"/>
-        
+    Route="marketpage"/>
+
     </FlyoutItem>
-    
+
 
 
 </Shell>
