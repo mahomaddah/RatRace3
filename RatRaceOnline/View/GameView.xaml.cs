@@ -73,8 +73,8 @@ public partial class GameView : ContentView
                     var savedCompanies = dal.LoadCompaniesData(levelPlayer1.StoryLevelID);
 
                     if (savedPlayer != null) levelPlayer1 = savedPlayer;
-                    if (savedNews != null) appShell.CurrentNewsPaperViewModel = new NewsPaperViewModel { NewsPaperModels = savedNews, CurrentNewsPaperModel = savedNews.LastOrDefault() };
-                    if (savedCompanies != null)
+                    if (savedNews != null && savedNews.Count>0) appShell.CurrentNewsPaperViewModel = new NewsPaperViewModel { NewsPaperModels = savedNews, CurrentNewsPaperModel = savedNews.LastOrDefault() };
+                    if (savedCompanies != null && savedCompanies.Count>0)
                     {
                         appShell.IPOcompanies = new ObservableCollection<Company>(savedCompanies);
                     }
@@ -103,8 +103,8 @@ public partial class GameView : ContentView
 
 
                 if (savedNews != null) appShell.CurrentNewsPaperViewModel = new NewsPaperViewModel { NewsPaperModels = savedNews, CurrentNewsPaperModel = savedNews.LastOrDefault() };
-                if (savedCompanies != null)
-                {
+            if (savedCompanies != null && savedCompanies.Count > 0)
+            {
                     appShell.IPOcompanies = new ObservableCollection<Company>(savedCompanies);
                 }
                 //    appShell.CurrentLevelModel.Players[0] = savedPlayer;//if needed (search for appShell.CurrentLevelModel.Players.First() uses)
@@ -189,80 +189,7 @@ public partial class GameView : ContentView
     }
 
 
-    private async void CompanyInvestRoter_SelectedIndexChanged(object sender, Syncfusion.Maui.Core.Rotator.SelectedIndexChangedEventArgs e)
-    {
-        ////Change Fundemental data...
-        //SfRotator router = new SfRotator();
-
-
-      
-           
-      
-        try
-        {
-            var appShell = (AppShell)Shell.Current;
-
-            if (appShell.GameViewModel.VisibleIndex==3) 
-            { 
-            //await MainThread.InvokeOnMainThreadAsync(async () =>
-            //{
-           
-
-            if (appShell.GameViewModel.IpoCompaniesVM.RotatorItems == null || appShell.GameViewModel.IpoCompaniesVM.RotatorItems.Count == 0 )
-               {
-                   return; // Boþ koleksiyon hatasýný önler
-               }
-
-               if (e.Rotator.SelectedIndex < 0 || e.Rotator.SelectedIndex >= appShell.GameViewModel.IpoCompaniesVM.RotatorItems.Count)
-               {
-                   return; // Hatalý index eriþimini önler
-               }
-
-               if (e.Rotator.SelectedIndex == null || e.Rotator.SelectedIndex < 0) return;
-
-            // var router = (SfRotator)sender;
-            //SfRotator router = new SfRotator();
-            //router = (SfRotator)sender;
-        
-           
-            SfRotatorItem selectedCompany = appShell.GameViewModel.IpoCompaniesVM.RotatorItems.ElementAtOrDefault((int)e.Rotator.SelectedIndex);
-
-
-            if (selectedCompany != null)
-            {
-                //        var appShell = (AppShell)Shell.Current;
-                // Company SelectedObject = appShell.IPOcompanies.FirstOrDefault(x => selectedCompany.Image.ToLower().Contains(x.Symbol.ToLower()));
-                Company SelectedObject = GameViewModel.IpoCompaniesVM.IPOcompanies.First(x => selectedCompany.ItemText.ToLower().Contains(x.Symbol.ToLower()));
-                ////Bind Fundemental data.. in a better way ...
-                ////BindingContext = SelectedObject.StockFundementalData;
-                //FundementalDataLeftStack.BindingContext = SelectedObject;
-                if (SelectedObject != null)
-                {
-                    await MainThread.InvokeOnMainThreadAsync(() =>
-                    {
-                        FundementalDataTotalCashLB.Text = SelectedObject.StockFundementalData.TotalCash.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
-                        FundementalTotalDebts.Text = SelectedObject.StockFundementalData.TotalDebts.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
-                        CompetetiveAdvantageScoreLB.Text = SelectedObject.StockFundementalData.SustainableCompetitiveAdvantage.ToString();
-                        EPSthisYrLB.Text = SelectedObject.StockFundementalData.EPSthisYr.ToString("P");
-                        EPSpast5yrLB.Text = SelectedObject.StockFundementalData.EPSpast5Y.ToString("P");
-                        EPSnext5yrLB.Text = SelectedObject.StockFundementalData.EPSnext5Y.ToString("P");
-                        DCFvaluetionLB.Text = SelectedObject.StockFundementalData.DCFvaluation.ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
-                        IncomeAnnualCompanyLB.Text = SelectedObject.StockFundementalData.AnnualIncome.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B";
-                        Task.Delay(100);
-                    });
-                }
-            }
-
-                //});
-            }
-        }
-        catch (Exception exep) { await AppShell.Current.DisplayAlert(exep.Message,exep.StackTrace , "RotarIndex erorr catched.."); }
-
-    
-        //appShell.GameViewModel.Market.ChangeSelectedCompany((int)e.Index); //for auto updating the shit DataContext of Fundemental Data... Comment lined for now to fix the bug i't aslo changing Market CurrentCompany as well :D ... in fact i'ts not even changing fundemental data in here :D
-
-        //  await Shell.Current.DisplayAlert("Fundemental data shoud be updated"+e.Index, "called : from GameView.xaml : CompanyInvestRoter_SelectedIndexChanged()", "OK");
-    }
+ 
 
     private void CompanyLogo_Clicked(object sender, EventArgs e)
     {
@@ -289,6 +216,81 @@ public partial class GameView : ContentView
 
         ((MotherView)(appShell).CurrentPage).Show("marketpage");
 
+    }
+
+    private async void CompanyInvestRoter_SelectedIndexChanged(object sender, Syncfusion.Maui.Core.Rotator.SelectedIndexChangedEventArgs e)
+    {
+        ////Change Fundemental data...
+        //SfRotator router = new SfRotator();
+
+
+
+
+
+        try
+        {
+            var appShell = (AppShell)Shell.Current;
+
+            if (appShell.GameViewModel.VisibleIndex == 3)
+            {
+                //await MainThread.InvokeOnMainThreadAsync(async () =>
+                //{
+
+
+                if (appShell.GameViewModel.IpoCompaniesVM.RotatorItems == null || appShell.GameViewModel.IpoCompaniesVM.RotatorItems.Count == 0)
+                {
+                    return; // Boþ koleksiyon hatasýný önler
+                }
+
+                if (e.Rotator.SelectedIndex < 0 || e.Rotator.SelectedIndex >= appShell.GameViewModel.IpoCompaniesVM.RotatorItems.Count)
+                {
+                    return; // Hatalý index eriþimini önler
+                }
+
+                if (e.Rotator.SelectedIndex == null || e.Rotator.SelectedIndex < 0) return;
+
+                // var router = (SfRotator)sender;
+                //SfRotator router = new SfRotator();
+                //router = (SfRotator)sender;
+
+
+                SfRotatorItem selectedCompany = appShell.GameViewModel.IpoCompaniesVM.RotatorItems.ElementAtOrDefault((int)e.Rotator.SelectedIndex);
+
+
+                if (selectedCompany != null)
+                {
+                    //        var appShell = (AppShell)Shell.Current;
+                    // Company SelectedObject = appShell.IPOcompanies.FirstOrDefault(x => selectedCompany.Image.ToLower().Contains(x.Symbol.ToLower()));
+                    Company SelectedObject = GameViewModel.IpoCompaniesVM.IPOcompanies.First(x => selectedCompany.ItemText.ToLower().Contains(x.Symbol.ToLower()));
+                    ////Bind Fundemental data.. in a better way ...
+                    ////BindingContext = SelectedObject.StockFundementalData;
+                    //FundementalDataLeftStack.BindingContext = SelectedObject;
+                    if (SelectedObject != null)
+                    {
+                        await MainThread.InvokeOnMainThreadAsync(() =>
+                        {
+                            FundementalDataTotalCashLB.Text = SelectedObject.StockFundementalData.TotalCash.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
+                            FundementalTotalDebts.Text = SelectedObject.StockFundementalData.TotalDebts.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B USD";
+                            CompetetiveAdvantageScoreLB.Text = SelectedObject.StockFundementalData.SustainableCompetitiveAdvantage.ToString();
+                            EPSthisYrLB.Text = SelectedObject.StockFundementalData.EPSthisYr.ToString("P");
+                            EPSpast5yrLB.Text = SelectedObject.StockFundementalData.EPSpast5Y.ToString("P");
+                            EPSnext5yrLB.Text = SelectedObject.StockFundementalData.EPSnext5Y.ToString("P");
+                            DCFvaluetionLB.Text = SelectedObject.StockFundementalData.DCFvaluation.ToString("C2", CultureInfo.CreateSpecificCulture("en-US"));
+                            IncomeAnnualCompanyLB.Text = SelectedObject.StockFundementalData.AnnualIncome.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " B";
+                            Task.Delay(100);
+                        });
+                    }
+                }
+
+                //});
+            }
+        }
+        catch (Exception exep) { await AppShell.Current.DisplayAlert(exep.Message, exep.StackTrace, "RotarIndex erorr catched.."); }
+
+
+        //appShell.GameViewModel.Market.ChangeSelectedCompany((int)e.Index); //for auto updating the shit DataContext of Fundemental Data... Comment lined for now to fix the bug i't aslo changing Market CurrentCompany as well :D ... in fact i'ts not even changing fundemental data in here :D
+
+        //  await Shell.Current.DisplayAlert("Fundemental data shoud be updated"+e.Index, "called : from GameView.xaml : CompanyInvestRoter_SelectedIndexChanged()", "OK");
     }
     private async void CompanyInvestRoter_ItemTapped(object sender, EventArgs e)
     {
@@ -328,6 +330,8 @@ public partial class GameView : ContentView
        // await Shell.Current.GoToAsync("marketpage");
         ((MotherView)(appShell).CurrentPage).Show("marketpage");
     }
+
+
 
     double IntrestRate = 0.041;//simdilik yuzde 4.1% olsun ilerie belki gazete deki TBon ile baglariz.....
 
@@ -394,7 +398,7 @@ public partial class GameView : ContentView
 
     private async void DebtDetailViewTapped(object sender, Syncfusion.Maui.ListView.ItemDoubleTappedEventArgs e)
     { 
-        var liabilityModel = GameViewModel.Player.Liabilities.Find(x => x.LiabilityName.Contains(((ListViewItemModel)e.DataItem).ItemText));
+        var liabilityModel = GameViewModel.Player.Liabilities.Find(x => x.LiabilityName.ToLower().Contains(((ListViewItemModel)e.DataItem).ItemText.ToLower()));
         GameViewModel.SelectedLiability = liabilityModel;
         DebtPopup.Show();
     }
@@ -477,7 +481,9 @@ public partial class GameView : ContentView
 
     private void TbondOrderBtn_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
     {
-
+        //30 year T-Bond annull C:Coupon Rate is 4.625% i:Yield is 4.556% maturity is 30 yr. F: Face Value = $10,000,000 => annual Copoun = $460,250/yr
+        //Market Price (Purchace Price)= $10,111,656 = for (int t =1; t<=30;t++ ){C/ Math.Pow((1+i),t) + F/ Math.Pow((1+i),30) } = $23,875,000 (Face Value + All Coupons + Tax) ( not Discounted to today )(24% federal Tax applied to Copons only!) 
+        //2 times a year Income of copons + asset of presipal tax applied to copons...
     }
 
     private void CoporateBondsOrderBtn_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
