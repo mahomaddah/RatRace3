@@ -322,8 +322,24 @@ namespace RatRace3.ViewModel
 
             foreach (var income in playerModel.IncomeSources)
             {
-                totalIncomeSum += income.Amount;
-                IncomeListViewItemModel.Add(new ListViewItemModel() { ItemText = income.Name, ItemValue = (income.Amount).ToString("C2", USD_Formant) });
+                if (income.MonthPeriodOfPayment == 1)
+                {
+
+                    totalIncomeSum += income.Amount;
+                    IncomeListViewItemModel.Add(new ListViewItemModel() { ItemText = income.Name, ItemValue = (income.Amount).ToString("C2", USD_Formant) });
+                }
+                else
+                {
+                    AssetModel IncomeRelatedAsset = playerModel.Assets.FirstOrDefault(t => t.AssetIncomeSourseRelatingGUID == income.AssetIncomeSourseRelatingGUID);
+                    if(IncomeRelatedAsset!=null)
+                    {
+                        if ((playerModel.CurrentMonth - IncomeRelatedAsset.AssetOwnedMonth ) % income.MonthPeriodOfPayment==0) // 6 e bolune bilen aylardan birndeysek.... yani bon odeme aylarindan birindeysek.....
+                        {
+                            totalIncomeSum += income.Amount;
+                            IncomeListViewItemModel.Add(new ListViewItemModel() { ItemText = income.Name, ItemValue = (income.Amount).ToString("C2", USD_Formant) });
+                        }
+                    }
+                }
             }
 
             // for each ile tum itemleri topla ve incomeLisview ekle...
@@ -666,7 +682,7 @@ namespace RatRace3.ViewModel
                     IsIncomeCollected = false;//for new turn...
                     updateRDassetsValue();
                     AddNewCandleToStocks();
-
+                    CheckIfBondMaturityRecher();
 
                     //Checking Game Goals:
                     reCalcluteGameGoals();
@@ -682,6 +698,30 @@ namespace RatRace3.ViewModel
                 }
             }
         }
+
+        private void CheckIfBondMaturityRecher()
+        {
+            if(Player.Assets.Any(x => x.IsBankDeposit && x.AssetType.ToString().Equals(AssetTypes.Bond)))
+            {
+                foreach (var bond in Player.Assets.FindAll(x => x.IsBankDeposit && x.AssetType.ToString().Equals(AssetTypes.Bond)))
+                {
+                    if (bond.BondMonthLeftToMaturity > 1)
+                    {
+                        //Every month... 
+                        bond.BondMonthLeftToMaturity--;
+                    }
+                    else if (bond.BondMonthLeftToMaturity == 1)
+                    {//nothing left // On month matured..
+                        //Withdraw it ...
+                        Player.Balance += bond.AssetValue;
+                        Player.Assets.Remove(bond);
+                    }
+                    
+                }
+            }
+
+        }
+
         void updateRDassetsValue()
         {
             //Recursive Deposit settings: 

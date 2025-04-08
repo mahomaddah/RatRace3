@@ -59,6 +59,7 @@ namespace RatRace3.Models
        /// Player.Month when purchesed the asset...
        /// </summary>
         public int AssetOwnedMonth { get; internal set; }
+        public int BondMonthLeftToMaturity { get; internal set; }
 
         public void GrowthBy(double GrouthOrDiscountRate)
         {

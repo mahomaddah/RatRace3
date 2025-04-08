@@ -479,11 +479,54 @@ public partial class GameView : ContentView
 
     }
 
-    private void TbondOrderBtn_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
+    private async void TbondOrderBtn_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
     {
         //30 year T-Bond annull C:Coupon Rate is 4.625% i:Yield is 4.556% maturity is 30 yr. F: Face Value = $10,000,000 => annual Copoun = $460,250/yr
         //Market Price (Purchace Price)= $10,111,656 = for (int t =1; t<=30;t++ ){C/ Math.Pow((1+i),t) + F/ Math.Pow((1+i),30) } = $23,875,000 (Face Value + All Coupons + Tax) ( not Discounted to today )(24% federal Tax applied to Copons only!) 
         //2 times a year Income of copons + asset of presipal tax applied to copons...
+
+        try
+        {
+
+            //    double deposit = Convert.ToDouble(GameViewModel.CurrentBankDepositAmount);
+            bool isValid = double.TryParse(GameViewModel.CurrentBankDepositAmount, out double deposit);
+            //await DisplayAlert("Bank..", "Fixed deposit account addet to asset list!", "OK$$$");
+            if (isValid && deposit > 0.009 && GameViewModel.Player.Balance >= deposit)
+            {
+                GameViewModel.Player.Balance -= deposit;
+                double passiveIncoemAmounth = Math.Round((deposit * (IntrestRate + 0.014) / 2), 2); // i adding 1.14 to Intrest rate to have a little better rate for non felexible Fixed Deposit of FD in T BOND ..
+                var RelatedAssetID = Guid.NewGuid().ToString();
+                var assetsPassiveIncome = new IncomeSourceModel { MonthPeriodOfPayment=6, AssetIncomeSourseRelatingGUID = RelatedAssetID, Amount = passiveIncoemAmounth, Name = "5yr Treasury Bond $" + passiveIncoemAmounth + "@" + (IntrestRate + 0.014).ToString("p") + " Intrest |Passive Income" };
+                GameViewModel.Player.Assets.Add(new AssetModel
+                {
+                    AssetIncomeSourseRelatingGUID = RelatedAssetID,
+                    AssetName = "5-year Tbond " + deposit.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) + " @ " + (IntrestRate + 0.014).ToString("p") + " Intrest Yield |Semiannually Payments",
+                    AssetValue = deposit,
+                    AssetType = AssetTypes
+                    .Bond.ToString(),
+                    BondMonthLeftToMaturity=60, // 60 month for 5 year bond...
+
+                    IntrestRate = (IntrestRate + 0.014),
+                    IsBankDeposit = true,
+                    IsRecursiveDepositRD = false,
+                    AssetOwnedMonth = GameViewModel.Player.CurrentMonth,
+                    PassiveIncome = passiveIncoemAmounth
+                });
+                GameViewModel.Player.IncomeSources.Add(assetsPassiveIncome);
+                GameViewModel.LoadPlayerData(GameViewModel.Player);//fore updating bank listview and statments....
+                BankRadialMenu.IsOpen = false;
+            }
+            else
+            {
+                await AppShell.Current.DisplayAlert("Bank:", "Please Enter a Valid Amounth of fund", "Hony No$");
+            }
+
+        }
+        catch
+        {
+            //await DisplayAlert("Bank:", "Issue With creating New Postion", "Ok");
+        }
+
     }
 
     private void CoporateBondsOrderBtn_ItemTapped(object sender, Syncfusion.Maui.RadialMenu.ItemTappedEventArgs e)
