@@ -47,8 +47,6 @@ namespace RatRace3
             //    {
             //        try
             //        {
-
-
             //        await MainThread.InvokeOnMainThreadAsync(async () =>
             //        {
             //           

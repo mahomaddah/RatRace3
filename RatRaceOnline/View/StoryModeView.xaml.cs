@@ -40,6 +40,7 @@ public partial class StoryModeView : ContentView
              //Load Saved game ... 
              //Note: you can call auto-save function every turn on nextTurn()
              var dal = new DataAccessService();
+            appShell.getAnewGameData();
             var savedPlayer = dal.LoadPlayerData(levelPlayer1.StoryLevelID, levelPlayer1.PlayerModelID);
             var savedNews = dal.LoadNewsPapersData(levelPlayer1.StoryLevelID);
             var savedCompanies = dal.LoadCompaniesData(levelPlayer1.StoryLevelID);
@@ -48,6 +49,7 @@ public partial class StoryModeView : ContentView
             if (savedNews != null) appShell.CurrentNewsPaperViewModel = new NewsPaperViewModel { NewsPaperModels = savedNews, CurrentNewsPaperModel = savedNews.LastOrDefault() };
             if (savedCompanies != null)
             {
+                if(savedCompanies.Count!=0)
                 appShell.IPOcompanies = new ObservableCollection<Company>(savedCompanies);
             }
             //    appShell.CurrentLevelModel.Players[0] = savedPlayer;//if needed (search for appShell.CurrentLevelModel.Players.First() uses)
