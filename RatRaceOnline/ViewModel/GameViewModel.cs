@@ -775,8 +775,8 @@ namespace RatRace3.ViewModel
 
             string randomQuote = ValueInvestorQuotes.GetRandomQuote();
 
-            await Shell.Current.DisplayAlert(appShell.CurrentLevelModel.LearnedByLoseMessage,
-           "\"" + randomQuote + "\"",
+            await Shell.Current.DisplayAlert("\"" + randomQuote + "\"", appShell.CurrentLevelModel.LearnedByLoseMessage,
+          
            "Our greatest glory is not in never falling, but in rising every time we fall!");
 
             //   await Shell.Current.GoToAsync("StoryDetailView");
@@ -848,15 +848,15 @@ namespace RatRace3.ViewModel
                     //    await Shell.Current.GoToAsync("StoryDetailView");
                     //  await Shell.Current.GoToAsync("/storydetailview");
 
-                  
-
-                    ((MotherView)(appShell).CurrentPage).Show("storydetailview");
 
                     string randomQuote = ValueInvestorQuotes.GetRandomQuote();
                     // appShell.CurrentLevelModel.LearnedByWinMessage;
-                    await Shell.Current.DisplayAlert(appShell.CurrentLevelModel.LearnedByWinMessage,
-                   "\""+randomQuote+"\"",
-                   "Show My Progress, I Said!!");
+                    await Shell.Current.DisplayAlert("\"" + randomQuote + "\"", appShell.CurrentLevelModel.LearnedByWinMessage,
+                 
+                   "$$$");
+
+                    ((MotherView)(appShell).CurrentPage).Show("storydetailview");
+
                 }
                 catch { }
             }
