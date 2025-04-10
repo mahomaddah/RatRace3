@@ -15,6 +15,7 @@ using RatRace3.ViewModels;
 using RatRace3.DAL;
 using Syncfusion.Maui.Graphics.Internals;
 using System.Runtime.ExceptionServices;
+using RatRace3.DAL.DbModels;
 
 namespace RatRace3.ViewModel
 {
@@ -637,7 +638,10 @@ namespace RatRace3.ViewModel
                     Player.Expenses.Remove(RelatedExpenceOnject);
 
                 }
-                 DebtListViewItemModel.Remove(DebtListViewItemModel.First(x => x.ItemText.Equals(SelectedLiability.LiabilityName)));
+                    var debtItem = DebtListViewItemModel.FirstOrDefault(x => x.ItemText.ToLower().Contains(SelectedLiability.LiabilityName.ToLower()));
+                    if (debtItem != null) DebtListViewItemModel.Remove(debtItem);
+                 //DebtListViewItemModel.Remove(DebtListViewItemModel.First(x => x.ItemText.Contains(SelectedLiability.LiabilityName)));
+                 
                  Player.Liabilities.Remove(SelectedLiability);
 
 
@@ -648,7 +652,7 @@ namespace RatRace3.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    await Shell.Current.DisplayAlert("Issue Paying Debt", ex.Message, "Ok");
+                    await Shell.Current.DisplayAlert("Issue Paying Debt:"+ex.Message, ex.StackTrace, "Ok");
                 }
 
             }
@@ -701,9 +705,9 @@ namespace RatRace3.ViewModel
 
         private void CheckIfBondMaturityRecher()
         {
-            if(Player.Assets.Any(x => x.IsBankDeposit && x.AssetType.ToString().Equals(AssetTypes.Bond)))
+            if(Player.Assets.Any(x => x.IsBankDeposit && x.AssetType.ToString().Equals(AssetTypes.Bond.ToString())))
             {
-                foreach (var bond in Player.Assets.FindAll(x => x.IsBankDeposit && x.AssetType.ToString().Equals(AssetTypes.Bond)))
+                foreach (var bond in Player.Assets.FindAll(x => x.IsBankDeposit && x.AssetType.ToString().Equals(AssetTypes.Bond.ToString())))
                 {
                     if (bond.BondMonthLeftToMaturity > 1)
                     {
@@ -715,6 +719,7 @@ namespace RatRace3.ViewModel
                         //Withdraw it ...
                         Player.Balance += bond.AssetValue;
                         Player.Assets.Remove(bond);
+
                     }
                     
                 }
@@ -761,13 +766,22 @@ namespace RatRace3.ViewModel
 
         async void LastMonthCame()
         {
+            var appShell = (AppShell)Shell.Current;
             //Check if game finishing ...
+       
+
 
             await Shell.Current.DisplayAlert("Game Over", "Month is " + Player.CurrentMonth + ". Unfortunately, Fund Manager! You couldn’t achieve all the goals needed to win!", "Not Again!");
 
-         //   await Shell.Current.GoToAsync("StoryDetailView");
-        //    await Shell.Current.GoToAsync("/storydetailview");
-            var appShell = (AppShell)Shell.Current;
+            string randomQuote = ValueInvestorQuotes.GetRandomQuote();
+
+            await Shell.Current.DisplayAlert(appShell.CurrentLevelModel.LearnedByLoseMessage,
+           "\"" + randomQuote + "\"",
+           "Our greatest glory is not in never falling, but in rising every time we fall!");
+
+            //   await Shell.Current.GoToAsync("StoryDetailView");
+            //    await Shell.Current.GoToAsync("/storydetailview");
+
             ((MotherView)(appShell).CurrentPage).Show("storydetailview");
 
 
@@ -831,10 +845,18 @@ namespace RatRace3.ViewModel
                     await Shell.Current.DisplayAlert("Let's Review Your Victory!",
                     "\"Before we celebrate, let's check how you played this level! We'll review your achievements, see how well you performed!\"",
                     "Show My Progress!");
-                //    await Shell.Current.GoToAsync("StoryDetailView");
-                  //  await Shell.Current.GoToAsync("/storydetailview");
-              
+                    //    await Shell.Current.GoToAsync("StoryDetailView");
+                    //  await Shell.Current.GoToAsync("/storydetailview");
+
+                  
+
                     ((MotherView)(appShell).CurrentPage).Show("storydetailview");
+
+                    string randomQuote = ValueInvestorQuotes.GetRandomQuote();
+                    // appShell.CurrentLevelModel.LearnedByWinMessage;
+                    await Shell.Current.DisplayAlert(appShell.CurrentLevelModel.LearnedByWinMessage,
+                   "\""+randomQuote+"\"",
+                   "Show My Progress, I Said!!");
                 }
                 catch { }
             }

@@ -81,11 +81,11 @@
         <Button  x:Name="BackToGameButton" Clicked="BackToGameButton_Clicked" Margin="5" Text="Back to the Game" HeightRequest="40" WidthRequest="{OnIdiom Phone=150 , Default=300}"></Button>
         <Button IsVisible="{Binding isStarted ,FallbackValue=true, TargetNullValue=true}"   x:Name="TryAgainGameButton" Clicked="TryAgainGameButton_Clicked"  Margin="5" Text="Restart the Game" HeightRequest="40" WidthRequest="{OnIdiom Phone=150 , Default=300}"></Button>
 
-                <Label IsVisible="{Binding IsGameFinishable,FallbackValue=false, TargetNullValue=false}" Text="{Binding LearnedByLoseMessage}"  Margin="5"
+                <Label IsVisible="False" Text="{Binding LearnedByLoseMessage}"  Margin="5"
                 FontSize="{OnIdiom Phone=12 , Default=17}"
                 MaximumWidthRequest="1000"  />
 
-                <Label IsVisible="{Binding IsGameFinishable,FallbackValue=false, TargetNullValue=false}" Text="{Binding LearnedByWinMessage  }"  Margin="5"
+                <Label IsVisible="False" Text="{Binding LearnedByWinMessage  }"  Margin="5"
                 FontSize="{OnIdiom Phone=12 , Default=17}"
                 MaximumWidthRequest="1000"  />
 

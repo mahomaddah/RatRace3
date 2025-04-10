@@ -390,6 +390,10 @@ public partial class GameView : ContentView
 
             GameViewModel.Player.Assets.Remove(SelectedBankAsset);
 
+            if (SelectedBankAsset.AssetType.Equals(AssetTypes.Bond.ToString()))
+            {
+                await AppShell.Current.DisplayAlert("Bank:", "Your T-Bond has been successfully sold on the secondary market.", "Great!");
+            }
 
             GameViewModel.LoadPlayerData(GameViewModel.Player); //updates ViewModel by Player View 
 
