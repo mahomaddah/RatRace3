@@ -133,7 +133,8 @@ public partial class MarketPage : ContentView
     {
         AppShell appShell = (AppShell)Shell.Current;
        // appShell.GoToAsync("..");
-        ((MotherView)(appShell).CurrentPage).Show("gameview"); 
+        ((MotherView)(appShell).CurrentPage).Show("gameview");
+        appShell.GameViewModel.IPOcompaniesSfCarouselViewModel.VisibleCompanyindex = 5;
     }
 
     private void ContentView_Loaded(object sender, EventArgs e)

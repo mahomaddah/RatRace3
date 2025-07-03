@@ -447,23 +447,71 @@ namespace RatRace3
                     new ExpenseModel{ Name = "Utilities and Food", Amount = 300.00, ExpenseModelID = 4 , RelatedLiabilityID = -1}
                 }
                 ,     StoryLevelID = "7",
+                    }},
+                        StoryLevelID = "7",
+                        Image = "fatihpaintssvg.png",
+                        Header = "Fatih's Dilemma!",
+
+                        LearnedByWinMessage = "Fatih learned that the bigger the fire, the quicker it burns out — unless it’s managed wisely. With $200K and a 10% annual return, he achieved financial freedom, earning $20K per year without depleting his capital. By diversifying across S&P 500 stocks, U.S. Treasury Bonds, and holding some cash, he built a balanced and sustainable portfolio — and didn’t gamble away the fortune he took a decade to earn.",
+                        LearnedByLoseMessage = "Fatih learned the hard way that chasing high returns without understanding the risks can destroy years of hard work. He put too much faith in unstable, high-yield options and ignored the power of long-term, steady investing. Financial freedom isn’t about doubling your money fast — it’s about protecting it, growing it wisely, and staying patient through the storms.",
+
+                        DetailStory = "Fatih is 42 years old and has recently sold his business for 70K. He lives in his father’s small apartment, so he doesn’t have to pay rent. However, he has a deep passion for painting and spends a significant amount each month on painting tools and supplies.\r\n\r\nNow, he faces a critical financial challenge—he must manage his funds wisely to ensure they last for the next 60 years, covering all his expenses for the rest of his life. His ultimate goal is to grow his savings to 200K, which would allow him to generate 10K per year in passive income by investing in U.S. Treasury Bonds—widely considered the Risk-Free Rate of Return in finance.\r\n\r\nFatih must decide how to invest and allocate his capital. Should he:\r\n\r\nInvest a portion in great U.S. stocks, benefiting from long-term growth?\r\nHold part of his money in cash as insurance against market downturns?\r\nConvert his savings to Turkish Lira, earning a tempting 50% interest per year but exposing himself to 68% inflation and extreme risk?\r\nWhich path should he take to secure his future without running out of money too soon?",
+                        isStarted = false,
+                        isUnlocked = false,
+                        HighestMounthScore = 0,
+                        StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 200000, YouHave = 75500 },
+                                                                     new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 720, YouHave = 1 },
+                                                                     new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 2 }
+                        }
+                    });
+
+                    SelectLevelViewModel.ImageCollection.Add(new LevelModel
+                    {
+                        Players = new List<PlayerModel> { new PlayerModel{
+                Balance = 7500.00,
+                NetTotalIncome = 3500,
+                CurrentMonth = 1,
+                MaximumMonth = 40,
+                Liabilities = new List<LiabilityModel>
+                {
+                     new LiabilityModel{LiabilityName ="Harvard Student Loan", TotalAmount = 60000.00, MonthsRemaining = 120, InterestRate = 0.045, LiabilityModelID = 1 , ExpenseModelID =1},
+                    new LiabilityModel{LiabilityName ="MacBook Pro Loan", TotalAmount = 2500.00, MonthsRemaining = 24, InterestRate = 0.07, LiabilityModelID = 2 , ExpenseModelID =2}
+                },
+                IncomeSources = new List<IncomeSourceModel>{
+                    new IncomeSourceModel { Name = "Freelance App Development", Amount = 2000.00 },
+                    new IncomeSourceModel { Name = "Udemy Course Sales", Amount = 3500.00 }
+                },
+                Assets = new List<AssetModel>
+                {
+                    new AssetModel {AssetName = "Leukemia Children Saving Account (LÖSEV)", AssetType = AssetTypes.Other.ToString(), AssetValue = 2000.00, IntrestRate= 10.1, IsBankDeposit= true, PassiveIncome = 0.00, AssetModelID = 1}
+                },
+                Expenses = new List<ExpenseModel>
+                {
+                     new ExpenseModel{ Name = "Harvard Loan Payment", Amount = 600.00, ExpenseModelID = 1 , RelatedLiabilityID=1},
+                    new ExpenseModel{ Name = "MacBook Loan Payment", Amount = 120.00, ExpenseModelID = 2 , RelatedLiabilityID=2},
+                     new ExpenseModel{ Name = "Living Expenses", Amount = 1100.00, ExpenseModelID = 3 , RelatedLiabilityID = -1}
+                },
+                StoryLevelID = "8",
             }},
-                StoryLevelID = "7",
-                Image = "fatihpaintssvg.png",
-                Header = "Fatih's Dilemma!",
-
-                LearnedByWinMessage = "Fatih learned that the bigger the fire, the quicker it burns out — unless it’s managed wisely. With $200K and a 10% annual return, he achieved financial freedom, earning $20K per year without depleting his capital. By diversifying across S&P 500 stocks, U.S. Treasury Bonds, and holding some cash, he built a balanced and sustainable portfolio — and didn’t gamble away the fortune he took a decade to earn.",
-                LearnedByLoseMessage = "Fatih learned the hard way that chasing high returns without understanding the risks can destroy years of hard work. He put too much faith in unstable, high-yield options and ignored the power of long-term, steady investing. Financial freedom isn’t about doubling your money fast — it’s about protecting it, growing it wisely, and staying patient through the storms.",
-
-                DetailStory = "Fatih is 42 years old and has recently sold his business for 70K. He lives in his father’s small apartment, so he doesn’t have to pay rent. However, he has a deep passion for painting and spends a significant amount each month on painting tools and supplies.\r\n\r\nNow, he faces a critical financial challenge—he must manage his funds wisely to ensure they last for the next 60 years, covering all his expenses for the rest of his life. His ultimate goal is to grow his savings to 200K, which would allow him to generate 10K per year in passive income by investing in U.S. Treasury Bonds—widely considered the Risk-Free Rate of Return in finance.\r\n\r\nFatih must decide how to invest and allocate his capital. Should he:\r\n\r\nInvest a portion in great U.S. stocks, benefiting from long-term growth?\r\nHold part of his money in cash as insurance against market downturns?\r\nConvert his savings to Turkish Lira, earning a tempting 50% interest per year but exposing himself to 68% inflation and extreme risk?\r\nWhich path should he take to secure his future without running out of money too soon?",
-                isStarted = false,
-                isUnlocked = false,
-                HighestMounthScore = 0,
-                StoryGoalModels = new List<StoryGoalModel> { new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 200000, YouHave = 75500 },
-                                                             new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 720, YouHave = 1 },
-                                                             new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 2 }
-                }
+                        StoryLevelID = "8",
+                        Image = "atilsamancioglu_level.png",
+                        Header = "No Shortcuts for CEO Atıl Samancıoğlu",
+                        LearnedByWinMessage = "Atıl proved that in a world obsessed with quick wins, real dreams are built on relentless discipline. By working 70–80 hours a week, he turned his passion for teaching and coding into a global impact — without ever chasing shortcuts.",
+                        LearnedByLoseMessage = "Atıl realized that hoping for miracles without sacrificing for them is just fantasy. True freedom demands showing up, grinding, and outlasting the noise. Dreams without sweat are just lies.",
+                        DetailStory = "Atıl is no stranger to hard work. Long before completing his Software Engineering master's at Harvard, he had already taught over 400,000 students worldwide about coding, cybersecurity, and artificial intelligence through his Udemy courses.\r\n\r\nBut success didn’t come easy.\r\n\r\nWhile others dreamt of overnight fame, Atıl chose a different path — working 70 to 80 hours a week, year after year, while constantly updating his courses, replying to every student's question himself, and building new companies like Academy Club and Orphex.\r\n\r\nAtıl believes one simple truth: **\"Dreams are sold cheap, but reality is expensive.\"**\r\n\r\nNow, he's at a crossroads:\r\n- Should he focus entirely on scaling his education platforms?\r\n- Should he pivot into full-time startup building while maintaining his teaching passion?\r\n- Should he invest his hard-earned income into new assets to achieve true financial freedom?\r\n\r\nGuide Atıl to make the smartest moves — balancing relentless hustle with strategic investments — and show the world that dreams are forged, not wished.",
+                        isStarted = false,
+                        isUnlocked = false,
+                        HighestMounthScore = 0,
+                        StoryGoalModels = new List<StoryGoalModel> {
+                new StoryGoalModel { Goal = GameGoalTypes.Balance.ToString(), Target = 120000, YouHave = 7500 },
+                new StoryGoalModel { Goal = GameGoalTypes.Month.ToString(), Target = 40, YouHave = 1 },
+                new StoryGoalModel { Goal = GameGoalTypes.Liabilities.ToString(), Target = 0, YouHave = 1 }
+            }
             });
+
+
+
+
 
             var random = new Random();
 

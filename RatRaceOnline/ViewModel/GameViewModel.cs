@@ -653,6 +653,8 @@ namespace RatRace3.ViewModel
                 catch (Exception ex)
                 {
                     await Shell.Current.DisplayAlert("Issue Paying Debt:"+ex.Message, ex.StackTrace, "Ok");
+                    DebtListViewItemModel.Clear();
+                    Player.Liabilities.RemoveAll(x => x.LiabilityModelID == SelectedLiability.LiabilityModelID);
                 }
 
             }

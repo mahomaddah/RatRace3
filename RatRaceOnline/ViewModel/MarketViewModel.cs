@@ -17,19 +17,19 @@ namespace RatRace3.ViewModels
         //  public List<object> ChartData { get; set; }
 
         public List<Brush> PaletteBrushes { get; private set; } = new List<Brush>
-     {
-                Color.FromArgb("#FF638A2D"),
-                Color.FromArgb("#FFE3AAD6"),
-                Color.FromArgb("#FFFF7D7D"),
-                Color.FromArgb("#FF007C9C"),
-                Color.FromArgb("#FF019FCC"),
-                Color.FromArgb("#FF94652B"),
-                Color.FromArgb("#FF89D9A8"),
-                Color.FromArgb("#FF71CBB1"),
-                Color.FromArgb("#FF4DB7BE"),
-                Color.FromArgb("#FF4EB7BD")
+         {
+                    Color.FromArgb("#FF638A2D"),
+                    Color.FromArgb("#FFE3AAD6"),
+                    Color.FromArgb("#FFFF7D7D"),
+                    Color.FromArgb("#FF007C9C"),
+                    Color.FromArgb("#FF019FCC"),
+                    Color.FromArgb("#FF94652B"),
+                    Color.FromArgb("#FF89D9A8"),
+                    Color.FromArgb("#FF71CBB1"),
+                    Color.FromArgb("#FF4DB7BE"),
+                    Color.FromArgb("#FF4EB7BD")
 
-     };
+         };
 
 
         private Company _selectedCompany;
@@ -286,6 +286,7 @@ namespace RatRace3.ViewModels
              //  // await Shell.Current.GoToAsync("gameview");
               //  await Shell.Current.GoToAsync("..");
                 ((MotherView)(appShell).CurrentPage).Show("gameview");
+                appShell.GameViewModel.IPOcompaniesSfCarouselViewModel.VisibleCompanyindex = 5;
             }
             else
             {
@@ -293,7 +294,7 @@ namespace RatRace3.ViewModels
                     "Insufficient balance! You need at least " + purchaseAmount.ToString("C2", CultureInfo.CreateSpecificCulture("en-US")) +
                     " to complete this purchase.", "Try Again");
             }
-
+            
             //var appShell = (AppShell)Shell.Current;
             //var player = a((AppShell)Shell.Current).GameViewModel.Player;
             //double purchaseAmount = SelectedCompany.StockPrice;
@@ -328,6 +329,7 @@ namespace RatRace3.ViewModels
             //{
             //    await Shell.Current.DisplayAlert("Insufficient Funds", "Not enough money to buy stock.", "OK");
             //}
+
         }
 
         private async void SellStock()
@@ -391,7 +393,7 @@ namespace RatRace3.ViewModels
             //  appShell.CurrentPage = new StoryDetailView();
             //await Shell.Current.GoToAsync("..");
             ((MotherView)(appShell).CurrentPage).Show("gameview");
-
+            appShell.GameViewModel.IPOcompaniesSfCarouselViewModel.VisibleCompanyindex = 5;
             ////Orders System li yapmaliyiz Aslinda ileride Gercek economy gibi...
 
 
